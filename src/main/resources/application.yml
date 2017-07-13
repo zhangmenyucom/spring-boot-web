@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8082
 spring:
   application:
     name: spring-boot-web
@@ -23,6 +23,29 @@ spring:
           max-wait-millis: 60000
           initial-size: 1
           max-total: 20
+  activemq:
+    broker-url: failover:(tcp://192.168.186.130:61616,tcp://192.168.186.129:61616)?initialReconnectDelay=1000
+    user: admin
+    password: admin
+    in-memory: true
+    pool:
+      enabled: false
+      configuration:
+        max-connections: 20
+        idle-timeout: 6000
+        create-connection-on-startup: true
+        reconnect-on-exception: true
+  jms:
+    template:
+      delivery-mode: persistent
+      priority: 5
+      qos-enabled: true
+      default-destination: "default_destination"
+    listener:
+      concurrency: 1
+      max-concurrency: 16
+      acknowledge-mode: auto
+      auto-startup: true
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
@@ -41,4 +64,3 @@ logging:
   level:
     root: info
     #com.taylor.dao: debug
-
