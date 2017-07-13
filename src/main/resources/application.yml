@@ -1,0 +1,44 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: spring-boot-web
+  datasource:
+        name: test
+        url: jdbc:mysql://localhost:3306/log_demo?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf8
+        username: root
+        password: ilovemysql^^^
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        dbcp2:
+          pool-prepared-statements: true
+          max-open-prepared-statements: 20
+          test-on-borrow: false
+          test-on-return: false
+          test-while-idle: true
+          validation-query:  select 'x'
+          min-evictable-idle-time-millis: 300000
+          time-between-eviction-runs-millis: 60000
+          min-idle: 1
+          max-wait-millis: 60000
+          initial-size: 1
+          max-total: 20
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.taylor.entity
+
+pagehelper:
+  params: pageNum=pageHelperStart;pageSize=pageHelperRows;
+  resonable: false
+  returnPageInfo: check
+  dialect: mysql
+  offsetAsPageNum: false
+  rowBoundsWithCount: false
+  pageSizeZero: true
+
+logging:
+  level:
+    root: info
+    #com.taylor.dao: debug
+
