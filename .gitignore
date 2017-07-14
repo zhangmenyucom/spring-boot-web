@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/workspace.xml
+debug.2017-07-13.log.zip
+info.2017-07-13.log.zip
+sql.2017-07-13.log.zip
+target/
+warn.2017-07-13.log.zip
