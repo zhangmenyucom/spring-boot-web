@@ -1,6 +1,21 @@
+<<<<<<< Updated upstream
 2017-07-13 16:55:41 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
 2017-07-13 16:55:41 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
 2017-07-13 16:58:08 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
 2017-07-13 16:58:08 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
 2017-07-13 16:59:10 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
 2017-07-13 16:59:10 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+=======
+2017-07-14 09:56:30 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 09:56:30 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-07-14 10:11:28 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 10:11:28 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-07-14 10:18:42 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 10:18:42 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-07-14 10:22:16 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 10:22:16 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-07-14 10:34:46 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 10:34:47 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-07-14 11:17:08 [WARN ] - No MyBatis mapper was found in '[com.taylor]' package. Please check your configuration.
+2017-07-14 11:17:08 [WARN ] - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+>>>>>>> Stashed changes

@@ -1,6 +1,24 @@
+<<<<<<< Updated upstream
 2017-07-13 16:58:25 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
 2017-07-13 16:58:25 [DEBUG] - ==> Parameters: 2(Integer)
 2017-07-13 16:58:25 [DEBUG] - <==      Total: 1
 2017-07-13 16:59:21 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
 2017-07-13 16:59:21 [DEBUG] - ==> Parameters: 2(Integer)
 2017-07-13 16:59:21 [DEBUG] - <==      Total: 1
+=======
+2017-07-14 09:58:08 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 09:58:08 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
+2017-07-14 09:58:08 [DEBUG] - <==    Updates: 1
+2017-07-14 10:07:25 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 10:07:25 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
+2017-07-14 10:07:25 [DEBUG] - <==    Updates: 1
+2017-07-14 10:11:59 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 10:11:59 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
+2017-07-14 10:11:59 [DEBUG] - <==    Updates: 1
+2017-07-14 10:11:59 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 10:11:59 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
+2017-07-14 10:11:59 [DEBUG] - <==    Updates: 1
+2017-07-14 10:12:01 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 10:12:01 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
+2017-07-14 10:12:01 [DEBUG] - <==    Updates: 1
+>>>>>>> Stashed changes
