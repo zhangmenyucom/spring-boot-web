@@ -103,3 +103,621 @@
 2017-07-13 19:11:57 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
 2017-07-13 19:11:57 [DEBUG] - ==> Parameters: 2(Integer), message11111111111(String)
 2017-07-13 19:11:57 [DEBUG] - <==    Updates: 1
+2017-07-14 18:00:53 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:00:53 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:00:53 [DEBUG] - ==> Parameters: 1(Integer), message11111111111(String)
+2017-07-14 18:00:53 [DEBUG] - ==> Parameters: 1(Integer), message11111111111(String)
+2017-07-14 18:00:53 [DEBUG] - <==    Updates: 1
+2017-07-14 18:00:53 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:14 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:14 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:14 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:14 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:14 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:14 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:14 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:14 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:14 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:14 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:14 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:14 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:22 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:22 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1
+2017-07-14 18:01:42 [DEBUG] - ==>  Preparing: INSERT INTO amq(mq_type,message) VALUES ( ?, ? ) 
+2017-07-14 18:01:42 [DEBUG] - ==> Parameters: 1(Integer), Enter some text here for the message body...(String)
+2017-07-14 18:01:42 [DEBUG] - <==    Updates: 1

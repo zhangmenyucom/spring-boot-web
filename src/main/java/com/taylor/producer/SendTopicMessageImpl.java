@@ -1,8 +1,10 @@
 package com.taylor.producer;
 
+import com.taylor.config.JmsTopicTemplate;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jms.core.JmsTemplate;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
@@ -13,18 +15,17 @@ import javax.jms.Topic;
 
 @Component
 @Qualifier("sendTopicMessage")
+@Data
+@EnableConfigurationProperties(JmsTopicTemplate.class)
 public class SendTopicMessageImpl implements SendMessage {
 
 	@Autowired
-	private JmsTemplate jmsTemplate;
+	@Qualifier("jmsTopicTemplate")
+	private JmsTopicTemplate jmsTemplate;
 
 	@Autowired
 	@Qualifier("taylorTopic")
 	private Topic topic;
-
-	public void setJmsTemplate(JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
-	}
 
 	@Override
 	public void sendMessage(final String message) {

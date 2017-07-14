@@ -37,15 +37,15 @@ spring:
         reconnect-on-exception: true
   jms:
     template:
-      delivery-mode: persistent
+      delivery-mode: 2
       priority: 5
       qos-enabled: true
-      default-destination: "default_destination"
     listener:
       concurrency: 1
       max-concurrency: 16
       acknowledge-mode: auto
       auto-startup: true
+    pub-sub-domain: true
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

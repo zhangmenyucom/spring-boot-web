@@ -1,5 +1,7 @@
 package com.taylor.producer;
 
+import com.taylor.config.JmsQueueTemplate;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
@@ -13,18 +15,16 @@ import javax.jms.Session;
 
 @Component
 @Qualifier("sendQueueMessage")
+@Data
 public class SendQueueMessageImpl implements SendMessage {
 
 	@Autowired
+	@Qualifier("jmsQueueTemplate")
 	private JmsTemplate jmsTemplate;
 
 	@Autowired
 	@Qualifier("taylorQueue")
 	private Queue queue;
-
-	public void setJmsTemplate(JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
-	}
 
 	@Override
 	public void sendMessage(final String message) {
