@@ -19,7 +19,7 @@ public class TaylorTopicEventListener implements MessageListener {
 	private AmqService amqService;
 
 	@Override
-	@JmsListener(destination = "taylorTopic")
+	@JmsListener(destination = "taylorTopic",containerFactory = "jmsListenerContainerTopic")
 	public void onMessage(Message message) {
 		if (message instanceof TextMessage) {
 			try {

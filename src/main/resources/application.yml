@@ -37,12 +37,12 @@ spring:
         reconnect-on-exception: true
   jms:
     template:
-      delivery-mode: 2
+      delivery-mode: persistent
       priority: 5
       qos-enabled: true
     listener:
       concurrency: 1
-      max-concurrency: 16
+      #max-concurrency: 16
       acknowledge-mode: auto
       auto-startup: true
     pub-sub-domain: true

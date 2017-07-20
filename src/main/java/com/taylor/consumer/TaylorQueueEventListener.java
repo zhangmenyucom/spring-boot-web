@@ -4,7 +4,6 @@ import com.taylor.common.MqTypeEnum;
 import com.taylor.entity.AmqEntity;
 import com.taylor.service.AmqService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ public class TaylorQueueEventListener implements MessageListener {
 	private AmqService amqService;
 
 	@Override
-	@JmsListener(destination = "taylorQueue")
+	@JmsListener(destination = "taylorQueue",containerFactory = "jmsListenerContainerQueue")
 	public void onMessage(Message message) {
 		if (message instanceof TextMessage) {
 			try {
