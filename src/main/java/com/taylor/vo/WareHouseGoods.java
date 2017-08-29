@@ -29,4 +29,6 @@ public class WareHouseGoods implements Serializable {
     private Integer status;
 
     private BigDecimal price;
+    // 1:菜品 2:套餐
+    private Integer type;
 }

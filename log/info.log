@@ -539,3 +539,85 @@
 2017-08-15 19:06:22 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
 2017-08-15 19:06:22 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
 2017-08-15 19:06:22 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 26 ms
+2017-08-25 11:20:07 [INFO ] - Starting ApplicationStarter on WIN7-1704102346 with PID 10676 (D:\git\spring-boot-web\target\classes started by taylor in D:\git\spring-boot-web)
+2017-08-25 11:20:07 [INFO ] - No active profile set, falling back to default profiles: default
+2017-08-25 11:20:07 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@50313382: startup date [Fri Aug 25 11:20:07 CST 2017]; root of context hierarchy
+2017-08-25 11:20:07 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2017-08-25 11:20:09 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2017-08-25 11:20:09 [INFO ] - Starting service Tomcat
+2017-08-25 11:20:09 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2017-08-25 11:20:09 [INFO ] - Initializing Spring embedded WebApplicationContext
+2017-08-25 11:20:09 [INFO ] - Root WebApplicationContext: initialization completed in 2799 ms
+2017-08-25 11:20:10 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-25 11:20:10 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-25 11:20:10 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-25 11:20:10 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-25 11:20:10 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-25 11:20:10 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@50313382: startup date [Fri Aug 25 11:20:07 CST 2017]; root of context hierarchy
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/sku/add],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.SkuUnitController.add(com.taylor.dto.GoodsSkuUnitQueryBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/sku/list]}" onto public com.taylor.common.CommonResponse<com.taylor.common.PageResultBean<com.taylor.vo.GoodsSkuUnitVo>> com.taylor.controller.SkuUnitController.listGoodsSkuUnit(com.taylor.dto.GoodsSkuUnitQueryBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/taste/list],methods=[POST]}" onto public com.taylor.common.PageResultBean<com.taylor.vo.GoodsTastesUnit> com.taylor.controller.TasteUnitController.list(com.taylor.dto.GoodsTastesUnitQueryBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/taste/add],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.TasteUnitController.addTaste(com.taylor.dto.GoodsTastesUnitQueryBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/warehouse/detail],methods=[POST]}" onto public com.taylor.common.CommonResponse<com.taylor.vo.HouseGoodsDetail> com.taylor.controller.WareHouseController.detail(com.taylor.dto.WareHouseGoodsDetailSearchBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/warehouse/save],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.WareHouseController.saveHouseGoods(com.taylor.dto.HouseGoodsItemBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/warehouse/list],methods=[POST]}" onto public com.github.pagehelper.PageInfo<com.taylor.vo.WareHouseGoods> com.taylor.controller.WareHouseController.getWareHouseGoodsPage(com.taylor.dto.WareHoseGoodsRequestBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/warehouse/batchDelete],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.WareHouseController.handleBatchHouseGoods(com.taylor.dto.WareHouseGoodsDeleteBean)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/warehouse/selectData],methods=[POST]}" onto public com.taylor.common.CommonResponse<com.taylor.common.PageResultBean<com.taylor.dto.SelectedGoodsDto>> com.taylor.controller.WareHouseController.selectWarehouseGoods(com.taylor.vo.SelectGoodsRequestVo)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-25 11:20:11 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-25 11:20:11 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:20:11 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:20:11 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:20:11 [INFO ] - Registering beans for JMX exposure on startup
+2017-08-25 11:20:11 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-08-25 11:20:11 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2017-08-25 11:20:11 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2017-08-25 11:20:11 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2017-08-25 11:20:11 [INFO ] - Using a shared selector for servlet write/read
+2017-08-25 11:20:11 [INFO ] - Tomcat started on port(s): 8080 (http)
+2017-08-25 11:20:11 [INFO ] - Started ApplicationStarter in 4.876 seconds (JVM running for 5.7)
+2017-08-25 11:24:29 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-08-25 11:24:29 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2017-08-25 11:24:29 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 23 ms
+2017-08-25 11:25:02 [INFO ] - Starting ApplicationStarter on WIN7-1704102346 with PID 12048 (D:\git\spring-boot-web\target\classes started by taylor in D:\git\spring-boot-web)
+2017-08-25 11:25:02 [INFO ] - No active profile set, falling back to default profiles: default
+2017-08-25 11:25:02 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@50313382: startup date [Fri Aug 25 11:25:02 CST 2017]; root of context hierarchy
+2017-08-25 11:25:03 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2017-08-25 11:25:05 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2017-08-25 11:25:05 [INFO ] - Starting service Tomcat
+2017-08-25 11:25:05 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2017-08-25 11:25:05 [INFO ] - Initializing Spring embedded WebApplicationContext
+2017-08-25 11:25:05 [INFO ] - Root WebApplicationContext: initialization completed in 2472 ms
+2017-08-25 11:25:05 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-25 11:25:05 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-25 11:25:05 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-25 11:25:05 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-25 11:25:05 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-25 11:25:06 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@50313382: startup date [Fri Aug 25 11:25:02 CST 2017]; root of context hierarchy
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/sku/add],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.SkuUnitController.add(com.taylor.dto.GoodsSkuUnitQueryBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/sku/list]}" onto public com.taylor.common.CommonResponse<com.taylor.common.PageResultBean<com.taylor.vo.GoodsSkuUnitVo>> com.taylor.controller.SkuUnitController.listGoodsSkuUnit(com.taylor.dto.GoodsSkuUnitQueryBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/taste/list],methods=[POST]}" onto public com.taylor.common.PageResultBean<com.taylor.vo.GoodsTastesUnit> com.taylor.controller.TasteUnitController.list(com.taylor.dto.GoodsTastesUnitQueryBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/taste/add],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.TasteUnitController.addTaste(com.taylor.dto.GoodsTastesUnitQueryBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/goods/house/detail],methods=[POST]}" onto public com.taylor.common.CommonResponse<com.taylor.vo.HouseGoodsDetail> com.taylor.controller.WareHouseController.detail(com.taylor.dto.WareHouseGoodsDetailSearchBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/goods/house/save],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.WareHouseController.saveHouseGoods(com.taylor.dto.HouseGoodsItemBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/goods/house/list],methods=[POST]}" onto public com.github.pagehelper.PageInfo<com.taylor.vo.WareHouseGoods> com.taylor.controller.WareHouseController.getWareHouseGoodsPage(com.taylor.dto.WareHoseGoodsRequestBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/goods/house/batchDelete],methods=[POST]}" onto public com.taylor.common.CommonResponse<java.lang.Void> com.taylor.controller.WareHouseController.handleBatchHouseGoods(com.taylor.dto.WareHouseGoodsDeleteBean)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/goods/house/selectData],methods=[POST]}" onto public com.taylor.common.CommonResponse<com.taylor.common.PageResultBean<com.taylor.dto.SelectedGoodsDto>> com.taylor.controller.WareHouseController.selectWarehouseGoods(com.taylor.vo.SelectGoodsRequestVo)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-25 11:25:06 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-25 11:25:06 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:25:06 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:25:06 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-25 11:25:06 [INFO ] - Registering beans for JMX exposure on startup
+2017-08-25 11:25:06 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-08-25 11:25:06 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2017-08-25 11:25:06 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2017-08-25 11:25:06 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2017-08-25 11:25:06 [INFO ] - Using a shared selector for servlet write/read
+2017-08-25 11:25:06 [INFO ] - Tomcat started on port(s): 8080 (http)
+2017-08-25 11:25:06 [INFO ] - Started ApplicationStarter in 4.419 seconds (JVM running for 5.318)
+2017-08-25 11:25:39 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-08-25 11:25:39 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2017-08-25 11:25:39 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 29 ms
