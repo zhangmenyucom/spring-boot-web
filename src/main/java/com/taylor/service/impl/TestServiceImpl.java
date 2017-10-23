@@ -6,6 +6,9 @@ import com.taylor.entity.TestEntity;
 import com.taylor.service.TestService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author taylor
+ */
 @Service
 public class TestServiceImpl extends  AbstractCrudService<TestEntity, TestEntity, TestDao> implements TestService{
 

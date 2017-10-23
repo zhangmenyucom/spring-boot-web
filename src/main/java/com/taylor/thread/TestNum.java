@@ -2,11 +2,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 public class TestNum {
-    // ①通过匿名内部类覆盖ThreadLocal的initialValue()方法，指定初始值
+    /** ①通过匿名内部类覆盖ThreadLocal的initialValue()方法，指定初始值**/
     private   ThreadLocal<Number> seqNum = new ThreadLocal<>();
 
 
-    // ②获取下一个序列值
+    /**②获取下一个序列值**/
     public Number getNextNum() {
         seqNum.get().setA(seqNum.get().getA()+1);
         return seqNum.get();

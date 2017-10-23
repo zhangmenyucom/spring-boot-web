@@ -2,6 +2,9 @@ package com.taylor.thread;
 
 import lombok.Data;
 
+/**
+ * @author taylor
+ */
 public class ThreadLocalTest {
     public static void main(String... args) {
         Account account = new Account("初始名");
@@ -26,6 +29,7 @@ class Account {
     public Account(String str) {
         this.name.set(str);
         System.out.println("---" + this.name.get());
+        name.remove();
     }
 }
 
@@ -41,11 +45,16 @@ class MyTest extends Thread {
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
-            if (i == 6) {
-                account.setName(getName());
+        try {
+            int j=10;
+            for (int i = 0; i < j; i++) {
+                if (i == 6) {
+                    account.setName(getName());
+                }
+                System.out.println(account.getName() + "账户i的值为:" + i);
             }
-            System.out.println(account.getName() + "账户i的值为:" + i);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -2,6 +2,9 @@ package com.taylor.common;
 
 public enum MqTypeEnum {
 
+	/**
+	 *发布订阅
+	 */
 	TOPIC(1, "发布订阅"), QUEUE(2, "消息队列");
 
 	private Integer key;

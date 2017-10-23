@@ -21,7 +21,7 @@ public class MenuHolder {
     }
 
     public static void main(String... args) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             Consumer consumer = new Consumer(new MenuHolder());
             consumer.start();
         }

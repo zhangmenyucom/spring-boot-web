@@ -30,6 +30,7 @@ public class TestSynchronized {
     public static void main(String... args) {
         final TestSynchronized myt2 = new TestSynchronized();
         Thread test1 = new Thread(new Runnable() {
+            @Override
             public void run() {
                 myt2.test1();
             }

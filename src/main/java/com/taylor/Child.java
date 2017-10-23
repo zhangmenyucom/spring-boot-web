@@ -1,7 +1,6 @@
 package com.taylor;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author xiaolu.zhang

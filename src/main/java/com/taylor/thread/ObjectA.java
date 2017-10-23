@@ -1,7 +1,6 @@
 package com.taylor.thread;
 
 import lombok.Data;
-import sun.applet.Main;
 
 /**
  * @author xiaolu.zhang
