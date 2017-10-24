@@ -9,8 +9,8 @@
         <module name="spring-boot-web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="spring-boot-web" target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="spring-boot-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

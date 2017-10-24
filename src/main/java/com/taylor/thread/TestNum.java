@@ -1,19 +1,34 @@
+package com.taylor.thread;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author taylor
+ */
 public class TestNum {
-    /** ①通过匿名内部类覆盖ThreadLocal的initialValue()方法，指定初始值**/
-    private   ThreadLocal<Number> seqNum = new ThreadLocal<>();
+    /**
+     * ①通过匿名内部类覆盖ThreadLocal的initialValue()方法，指定初始值
+     **/
+    private ThreadLocal<Number> seqNum = new ThreadLocal<>();
 
 
-    /**②获取下一个序列值**/
+    /**
+     * ②获取下一个序列值
+     **/
     public Number getNextNum() {
-        seqNum.get().setA(seqNum.get().getA()+1);
+        try {
+            seqNum.get().setA(seqNum.get().getA() + 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            seqNum.remove();
+        }
         return seqNum.get();
     }
 
-    public TestNum(){
-        Number number=new Number(1,"z");
+    public TestNum() {
+        Number number = new Number(1, "z");
         this.seqNum.set(number);
 
     }
@@ -50,7 +65,7 @@ public class TestNum {
 
     @Data
     @AllArgsConstructor
-    static class Number{
+    static class Number {
         private int a;
         private String name;
     }
