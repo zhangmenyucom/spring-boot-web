@@ -56,7 +56,7 @@ public class WareHouseController {
     @PostMapping("/batchDelete")
     public CommonResponse<Void> handleBatchHouseGoods(@RequestBody WareHouseGoodsDeleteBean wareHouseGoodsDeleteBean) {
         CommonResponse<Void> booleanCommonResponse = new CommonResponse<>();
-        booleanCommonResponse.setMessage("批量删除成功");
+        booleanCommonResponse.setErrormsg("批量删除成功");
         return booleanCommonResponse;
     }
 
@@ -156,7 +156,7 @@ public class WareHouseController {
     @PostMapping("/save")
     public CommonResponse<Void> saveHouseGoods(@RequestBody HouseGoodsItemBean bean) {
         CommonResponse<Void> booleanCommonResponse = new CommonResponse<>();
-        booleanCommonResponse.setMessage("菜品保存成功");
+        booleanCommonResponse.setErrormsg("菜品保存成功");
         return booleanCommonResponse;
     }
 

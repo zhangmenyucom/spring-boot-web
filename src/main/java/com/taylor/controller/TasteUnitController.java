@@ -49,7 +49,7 @@ public class TasteUnitController {
     @PostMapping("/add")
     public CommonResponse<Void> addTaste(@RequestBody GoodsTastesUnitQueryBean goodsTastesUnitQueryBean){
         CommonResponse<Void> booleanCommonResponse=new CommonResponse<>();
-        booleanCommonResponse.setMessage("添加口味成功");
+        booleanCommonResponse.setErrormsg("添加口味成功");
         return booleanCommonResponse;
     }
 

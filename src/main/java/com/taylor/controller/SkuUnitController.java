@@ -43,7 +43,7 @@ public class SkuUnitController {
     @PostMapping("/add")
     public CommonResponse<Void> add(@RequestBody GoodsSkuUnitQueryBean queryBean) {
         CommonResponse<Void> goodsSkuUnitCommonResponse=new CommonResponse<>();
-        goodsSkuUnitCommonResponse.setMessage("添加规格成功");
+        goodsSkuUnitCommonResponse.setErrormsg("添加规格成功");
         return goodsSkuUnitCommonResponse;
     }
 }
