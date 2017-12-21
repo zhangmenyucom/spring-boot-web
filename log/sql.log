@@ -1,3 +1,7 @@
-2017-08-14 11:00:51 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
-2017-08-14 11:00:52 [DEBUG] - ==> Parameters: 1(Integer)
-2017-08-14 11:00:52 [DEBUG] - <==      Total: 1
+2017-12-21 17:29:49 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2017-12-21 17:29:49 [DEBUG] - ==> Parameters: 
+2017-12-21 17:29:57 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2017-12-21 17:29:57 [DEBUG] - ==> Parameters: 1(Integer)
+2017-12-21 17:31:06 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2017-12-21 17:31:06 [DEBUG] - ==> Parameters: 1(Integer)
+2017-12-21 17:31:06 [DEBUG] - <==      Total: 1
