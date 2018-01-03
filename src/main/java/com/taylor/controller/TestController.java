@@ -30,7 +30,7 @@ public class TestController extends BaseAction {
 	@ResponseBody
 	@RequestMapping("/get")
 	public String get(HttpServletRequest request, HttpServletResponse response) {
-		log.debug("这只是一个测试");
-		return "hello tencent yun ";
+		log.debug("这只是一个测试1123121");
+		return "hello tencent yun 122312";
 	}
 }
