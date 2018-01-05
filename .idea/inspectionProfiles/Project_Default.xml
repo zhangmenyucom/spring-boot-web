@@ -23,6 +23,7 @@
       <option name="nonThreadSafeTypes" value="" />
     </inspection_tool>
     <inspection_tool class="AccessToStaticFieldLockedOnInstance" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AlibabaAvoidNewDateGetTime" enabled="false" level="BLOCKER" enabled_by_default="false" />
     <inspection_tool class="AlphaUnsortedPropertiesFile" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AmbiguousFieldAccess" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AmbiguousMethodCall" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -1290,7 +1291,7 @@
     <inspection_tool class="MapReplaceableByEnumMap" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MarkerInterface" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MathRandomCastToInt" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="MavenDuplicateDependenciesInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="MavenDuplicateDependenciesInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="MavenDuplicatePluginInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="MavenModelInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="MavenRedundantGroupId" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -1417,7 +1418,7 @@
     </inspection_tool>
     <inspection_tool class="NegatedIfStatementJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="NegativelyNamedBooleanVariable" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="NestedAssignment" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NestedAssignment" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="NestedAssignmentJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="NestedConditionalExpression" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="NestedConditionalExpressionJS" enabled="true" level="ERROR" enabled_by_default="true" />

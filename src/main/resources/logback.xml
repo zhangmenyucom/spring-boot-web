@@ -22,12 +22,12 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			&lt;!&ndash; daily rollover &ndash;&gt;
 			<fileNamePattern>error.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;
 			<maxHistory>30</maxHistory>
-		</rollingPolicy>
+		</rollingPolicy>-->
 	</appender>
 
 	<!-- info -->
@@ -41,12 +41,12 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			&lt;!&ndash; daily rollover &ndash;&gt;
 			<fileNamePattern>info.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;
 			<maxHistory>30</maxHistory>
-		</rollingPolicy>
+		</rollingPolicy>-->
 	</appender>
 
 	<!-- debug -->
@@ -61,12 +61,12 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			&lt;!&ndash; daily rollover &ndash;&gt;
 			<fileNamePattern>debug.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;
 			<maxHistory>30</maxHistory>
-		</rollingPolicy>
+		</rollingPolicy>-->
 	</appender>
 
 	<!-- warn -->
@@ -80,12 +80,12 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			&lt;!&ndash; daily rollover &ndash;&gt;
 			<fileNamePattern>warn.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;
 			<maxHistory>30</maxHistory>
-		</rollingPolicy>
+		</rollingPolicy>-->
 	</appender>
 
 	<!-- sql -->
@@ -99,12 +99,12 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			&lt;!&ndash; daily rollover &ndash;&gt;
 			<fileNamePattern>sql.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;
 			<maxHistory>30</maxHistory>
-		</rollingPolicy>
+		</rollingPolicy>-->
 	</appender>
 	<logger name="com.taylor.dao" addtivity="false" level="DEBUG">
 		<appender-ref ref="SQL" />
