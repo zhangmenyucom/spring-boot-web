@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.taylor.dao.StockDataDao">
+    <resultMap id="BaseResultMap" type="com.taylor.entity.StockData">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id,
+        t.stock_code,
+        t.stock_name
+    </sql>
+    <select id="findByCondition" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_data t
+        <where>
+            <if test="query.id !=null">
+                and id=#{query.id,jdbcType=BIGINT}
+            </if>
+            <if test="query.stockCode !=null">
+                and name=#{query.stockCode,jdbcType=VARCHAR}
+            </if>
+            <if test="query.stockName !=null">
+                and name=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="findTotalCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM stock_data t
+        <where>
+            <if test="query.id !=null">
+                and id=#{query.id,jdbcType=BIGINT}
+            </if>
+            <if test="query.stockCode !=null">
+                and name=#{query.stockCode,jdbcType=VARCHAR}
+            </if>
+            <if test="query.stockName !=null">
+                and name=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO stock_data(stock_code,stock_name)
+        VALUES (
+        #{entity.stockCode,jdbcType=VARCHAR},
+        #{entity.stockName,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE stock_data
+        SET
+        stock_code=#{entity.stockCode,jdbcType=VARCHAR}
+        stock_name=#{entity.stockName,jdbcType=VARCHAR}
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_data t
+        WHERE t.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_data t
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delByPrimaryKey">
+        DELETE FROM stock_data
+        WHERE id = #{id ,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="del">
+        DELETE FROM stock_data
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </delete>
+</mapper>

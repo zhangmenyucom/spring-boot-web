@@ -5,6 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Administrator
+ */
 public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Entity, Query>> extends BaseService<Entity, Query, Dao> implements CrudService<Entity, Query> {
 
 
