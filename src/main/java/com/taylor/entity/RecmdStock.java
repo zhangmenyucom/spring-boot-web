@@ -2,6 +2,8 @@ package com.taylor.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -9,9 +11,14 @@ import lombok.Data;
  */
 @Data
 public class RecmdStock {
+
     private Long id;
 
     private String stockCode;
 
     private double macd;
+
+    private String kdj;
+
+    private Date createTime;
 }

@@ -6,11 +6,15 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
+        <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         t.id,
         t.stock_code,
-        t.macd
+        t.macd,
+        t.kdj,
+        t.create_time
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
@@ -21,34 +25,23 @@
                 and id=#{query.id,jdbcType=BIGINT}
             </if>
             <if test="query.stockCode !=null">
-                and name=#{query.stockCode,jdbcType=VARCHAR}
+                and stockCode=#{query.stockCode,jdbcType=VARCHAR}
             </if>
             <if test="query.macd !=null">
-                and name=#{query.macd,jdbcType=DOUBLE}
+                and macd=#{query.macd,jdbcType=DOUBLE}
+            </if>
+            <if test="query.kdj !=null">
+                and kdj=#{query.kdj,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
-
-    <select id="findTotalCount" resultType="java.lang.Integer">
-        SELECT count(1) FROM recmd_stock t
-        <where>
-            <if test="query.id !=null">
-                and id=#{query.id,jdbcType=BIGINT}
-            </if>
-            <if test="query.stockCode !=null">
-                and name=#{query.stockCode,jdbcType=VARCHAR}
-            </if>
-            <if test="query.macd !=null">
-                and name=#{query.macd,jdbcType=DOUBLE}
-            </if>
-        </where>
-    </select>
-
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,macd)
+        INSERT INTO recmd_stock(stock_code,macd,kdj,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
-        #{entity.macd,jdbcType=DOUBLE}
+        #{entity.macd,jdbcType=DOUBLE},
+        #{entity.kdj,jdbcType=VARCHAR},
+        NOW()
         )
     </insert>
 

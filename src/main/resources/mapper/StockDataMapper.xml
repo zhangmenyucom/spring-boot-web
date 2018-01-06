@@ -29,21 +29,6 @@
         </where>
     </select>
 
-    <select id="findTotalCount" resultType="java.lang.Integer">
-        SELECT count(1) FROM stock_data t
-        <where>
-            <if test="query.id !=null">
-                and id=#{query.id,jdbcType=BIGINT}
-            </if>
-            <if test="query.stockCode !=null">
-                and name=#{query.stockCode,jdbcType=VARCHAR}
-            </if>
-            <if test="query.stockName !=null">
-                and name=#{query.stockName,jdbcType=VARCHAR}
-            </if>
-        </where>
-    </select>
-
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
         INSERT INTO stock_data(stock_code,stock_name)
         VALUES (
