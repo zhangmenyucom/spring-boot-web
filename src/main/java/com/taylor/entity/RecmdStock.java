@@ -2,6 +2,7 @@ package com.taylor.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -16,9 +17,15 @@ public class RecmdStock {
 
     private String stockCode;
 
+    private String stockName;
+
+    private Double currentPrice;
+
     private double macd;
 
     private String kdj;
+
+    private String recmdOperate;
 
     private Date createTime;
 }

@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedisServiceImpl<T> extends RedisService<T> {
+    private static final String BLOCK_REDIS_KEY = "block_data";
 
     @Override
     protected String getRedisKey() {
-        return null;
+        return BLOCK_REDIS_KEY;
     }
 }
