@@ -2,6 +2,7 @@ package com.taylor.service;
 
 import com.taylor.common.CrudService;
 import com.taylor.entity.StockData;
+import com.taylor.stock.strategy.IStrategy;
 
 /**
  * @author xiaolu.zhang
@@ -10,5 +11,5 @@ import com.taylor.entity.StockData;
  */
 public interface StockDataService extends CrudService<StockData,StockData> {
 
-
+    void processData(IStrategy strategy);
 }

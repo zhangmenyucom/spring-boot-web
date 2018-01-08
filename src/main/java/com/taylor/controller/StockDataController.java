@@ -1,11 +1,10 @@
 package com.taylor.controller;
 
 import com.taylor.entity.StockData;
-import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.impl.RedisServiceImpl;
-import com.taylor.stock.request.ProcessCountor;
-import com.taylor.stock.request.QueryStockDataWithGet;
+import com.taylor.stock.strategy.KdjStrategy;
+import com.taylor.stock.strategy.MacdStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SH;
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SZ;
-
 /**
  * @author Administrator
  */
@@ -32,9 +28,6 @@ public class StockDataController extends BaseAction {
 
     @Autowired
     private StockDataService stockDataService;
-
-    @Autowired
-    private RecmdStockService recmdStockService;
 
     @Autowired
     private RedisServiceImpl<String> redisService;
@@ -50,36 +43,34 @@ public class StockDataController extends BaseAction {
 
     @ResponseBody
     @RequestMapping("/redis_keys")
-    public Set<String> getRedisKeys( HttpServletRequest request, HttpServletResponse response) {
+    public Set<String> getRedisKeys(HttpServletRequest request, HttpServletResponse response) {
         return redisService.getKeys();
     }
+
     @ResponseBody
     @RequestMapping("redis_value")
-    public String getRedisKeys(@RequestParam(name="stockCode") String stockCode, HttpServletRequest request, HttpServletResponse response) {
+    public String getRedisKeys(@RequestParam(name = "stockCode") String stockCode, HttpServletRequest request, HttpServletResponse response) {
         return redisService.get(stockCode);
     }
 
     @ResponseBody
-    @RequestMapping("/start")
-    public String queryStockData(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SH.subList(0, STOCK_CODE_LIST_SH.size() / 4)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SH.subList(STOCK_CODE_LIST_SH.size() / 4 + 1, STOCK_CODE_LIST_SH.size()/2)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SH.subList(STOCK_CODE_LIST_SH.size()/2+1,STOCK_CODE_LIST_SH.size()*3 / 4)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SH.subList(STOCK_CODE_LIST_SH.size()*3/4+1 , STOCK_CODE_LIST_SH.size())).start();
+    @RequestMapping("/macd/start")
+    public String queryStockDataWithMacd(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        stockDataService.processData(new MacdStrategy("macd指标算法"));
+        return "正在分析，请耐心等待";
+    }
 
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SZ.subList(0, STOCK_CODE_LIST_SZ.size() / 4)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size() / 4 + 1, STOCK_CODE_LIST_SZ.size()/2)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size()/2+1,STOCK_CODE_LIST_SZ.size()*3 / 4)).start();
-        new QueryStockDataWithGet(redisService,recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size()*3/4+1 , STOCK_CODE_LIST_SZ.size())).start();
-
-        new ProcessCountor().start();
+    @ResponseBody
+    @RequestMapping("/kdj/start")
+    public String queryStockDataByKdj(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        stockDataService.processData(new KdjStrategy("kdj指标算法"));
         return "正在分析，请耐心等待";
     }
 
     public void catchStock(List<StockData> result) {
         for (StockData stockData : result) {
             System.out.println(stockData.getStockCode());
-            redisService.put(stockData.getStockCode(),stockData.getStockName(),-1);
+            redisService.put(stockData.getStockCode(), stockData.getStockName(), -1);
         }
     }
 }

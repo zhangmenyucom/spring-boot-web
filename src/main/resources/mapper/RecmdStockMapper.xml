@@ -8,6 +8,8 @@
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
+        <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
+        <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -43,10 +45,13 @@
             <if test="query.recmdOperate !=null">
                 and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
             </if>
+            <if test="query.strategy !=null">
+                and strategy=#{query.strategy,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,recmd_operate,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,recmd_operate,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -54,6 +59,7 @@
         #{entity.macd,jdbcType=DOUBLE},
         #{entity.kdj,jdbcType=VARCHAR},
         #{entity.recmdOperate,jdbcType=VARCHAR},
+        #{entity.strategy,jdbcType=VARCHAR},
         NOW()
         )
     </insert>
@@ -88,6 +94,9 @@
 
     <delete id="del">
         DELETE FROM recmd_stock
-        WHERE id = #{entity.id,jdbcType=BIGINT}
+        WHERE 1=1 or strategy=null
+        <if test="entity.strategy!=null">
+            and strategy = #{entity.strategy,jdbcType=VARCHAR}
+        </if>
     </delete>
 </mapper>

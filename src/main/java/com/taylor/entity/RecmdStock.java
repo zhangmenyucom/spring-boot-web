@@ -27,5 +27,7 @@ public class RecmdStock {
 
     private String recmdOperate;
 
+    private String strategy;
+
     private Date createTime;
 }
