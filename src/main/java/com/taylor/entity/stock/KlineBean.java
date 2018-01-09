@@ -1,10 +1,13 @@
 package com.taylor.entity.stock;
 
+import lombok.Data;
+
 /**
  * @author xiaolu.zhang
  * @desc:
  * @date: 2018/1/5 16:54
  */
+@Data
 public class KlineBean {
     /**
      * 开盘价

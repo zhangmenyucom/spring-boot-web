@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.taylor.dao.RecmdStockDao">
+    <resultMap id="BaseResultMap" type="com.taylor.entity.RecmdStock">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+        <result column="macd" property="macd" jdbcType="DOUBLE"/>
+        <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
+        <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
+        <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id,
+        t.stock_code,
+        t.stock_name,
+        t.current_price,
+        t.macd,
+        t.kdj,
+        t.recmd_operate,
+        t.create_time
+    </sql>
+    <select id="findByCondition" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM recmd_stock t
+        <where>
+            <if test="query.id !=null">
+                and id=#{query.id,jdbcType=BIGINT}
+            </if>
+            <if test="query.stockCode !=null">
+                and stockCode=#{query.stockCode,jdbcType=VARCHAR}
+            </if>
+            <if test="query.stockName !=null">
+                and stockName=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+            <if test="query.macd !=null">
+                and macd=#{query.macd,jdbcType=DOUBLE}
+            </if>
+            <if test="query.kdj !=null">
+                and kdj=#{query.kdj,jdbcType=VARCHAR}
+            </if>
+            <if test="query.recmdOperate !=null">
+                and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
+            </if>
+            <if test="query.strategy !=null">
+                and strategy=#{query.strategy,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,recmd_operate,strategy,create_time)
+        VALUES (
+        #{entity.stockCode,jdbcType=VARCHAR},
+        #{entity.stockName,jdbcType=VARCHAR},
+        #{entity.currentPrice,jdbcType=DOUBLE},
+        #{entity.macd,jdbcType=DOUBLE},
+        #{entity.kdj,jdbcType=VARCHAR},
+        #{entity.recmdOperate,jdbcType=VARCHAR},
+        #{entity.strategy,jdbcType=VARCHAR},
+        NOW()
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE recmd_stock
+        SET
+        stock_code=#{entity.stockCode,jdbcType=VARCHAR}
+        stock_name=#{entity.stockName,jdbcType=VARCHAR}
+        macd=#{entity.macd,jdbcType=DOUBLE}
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM recmd_stock t
+        WHERE t.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM recmd_stock t
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delByPrimaryKey">
+        DELETE FROM recmd_stock
+        WHERE id = #{id ,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="del">
+        DELETE FROM recmd_stock
+        WHERE 1=1 or strategy=null
+        <if test="entity.strategy!=null">
+            and strategy = #{entity.strategy,jdbcType=VARCHAR}
+        </if>
+    </delete>
+</mapper>
