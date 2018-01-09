@@ -1,7 +1,7 @@
 package com.taylor.stock.request;
 
-import com.taylor.common.CommonResponse;
 import com.taylor.common.JsonUtil;
+import com.taylor.common.MashDataResponse;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockQueryBean;
@@ -32,7 +32,7 @@ import static com.taylor.stock.request.ProcessCountor.CURRENT;
  * @author taylor
  */
 @Slf4j
-public class QueryStockDataWithGet extends Thread {
+public class QueryStockCurrentDataRequest extends Thread {
 
     private RecmdStockService recmdStockService;
 
@@ -42,7 +42,7 @@ public class QueryStockDataWithGet extends Thread {
 
     private IStrategy strategy;
 
-    public QueryStockDataWithGet(IStrategy strategy, RedisServiceImpl<String> redisService, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
+    public QueryStockCurrentDataRequest(IStrategy strategy, RedisServiceImpl<String> redisService, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
         super(taskName);
         this.recmdStockService = recmdStockService;
         this.stockCodeList = stockCodeList;
@@ -50,7 +50,7 @@ public class QueryStockDataWithGet extends Thread {
         this.strategy = strategy;
     }
 
-    public static CommonResponse queryLatestResult(StockQueryBean stockQueryBean, GetMethod method) throws IOException {
+    public static MashDataResponse queryLatestResult(StockQueryBean stockQueryBean, GetMethod method) throws IOException {
         HttpClient client = new HttpClient();
         NameValuePair[] data = {
                 new NameValuePair("from", "pc"),
@@ -58,7 +58,7 @@ public class QueryStockDataWithGet extends Thread {
                 new NameValuePair("cuid", stockQueryBean.getCuid()),
                 new NameValuePair("vv", "100"),
                 new NameValuePair("format", "json"),
-                new NameValuePair("stock_code", stockQueryBean.getStock_code()),
+                new NameValuePair("stock_code", stockQueryBean.getStockCode()),
                 new NameValuePair("step", stockQueryBean.getStep()),
                 new NameValuePair("start", stockQueryBean.getStart()),
                 new NameValuePair("count", stockQueryBean.getCount()),
@@ -78,7 +78,7 @@ public class QueryStockDataWithGet extends Thread {
             stringBuider.append(str);
         }
         if (!StringUtil.isEmpty(stringBuider.toString())) {
-            return JsonUtil.transferToObj(stringBuider.toString(), CommonResponse.class);
+            return JsonUtil.transferToObj(stringBuider.toString(), MashDataResponse.class);
         }
         return null;
     }
@@ -97,9 +97,9 @@ public class QueryStockDataWithGet extends Thread {
         GetMethod method = new GetMethod("https://gupiao.baidu.com/api/stocks/stockdaybar");
         for (String s : stockCodeList) {
             CURRENT.incrementAndGet();
-            stockQueryBean.setStock_code(s.toLowerCase());
+            stockQueryBean.setStockCode(s.toLowerCase());
             System.out.println("正在检测股票代码：" + s);
-            CommonResponse stockDailyDataCommonResponse = null;
+            MashDataResponse stockDailyDataCommonResponse = null;
             try {
                 stockDailyDataCommonResponse = queryLatestResult(stockQueryBean, method);
                 if (stockDailyDataCommonResponse == null || stockDailyDataCommonResponse.getErrorNo() != 0 || stockDailyDataCommonResponse.getMashData() == null || stockDailyDataCommonResponse.getMashData().size() < 2) {
