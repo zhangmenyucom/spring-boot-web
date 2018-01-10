@@ -12,5 +12,4 @@ import java.util.List;
 public class CommonResponse {
 	private Integer errorNo;
 	private String errorMsg;
-	private List<MashData> mashData;
 }

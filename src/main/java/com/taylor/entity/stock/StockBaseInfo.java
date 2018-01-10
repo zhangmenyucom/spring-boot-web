@@ -86,4 +86,10 @@ public class StockBaseInfo implements Serializable {
      * 开盘价
      **/
     private double open;
+
+
+    private Integer asset;
+
+    private String followNum;
+
 }

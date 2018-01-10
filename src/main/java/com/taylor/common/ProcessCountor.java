@@ -1,4 +1,4 @@
-package com.taylor.stock.request;
+package com.taylor.common;
 
 
 import org.springframework.util.StopWatch;
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author xiaolu.zhang
- * @desc:
+ * @desc:计时器
  * @date: 2018/1/6 12:08
  */
 public class ProcessCountor extends Thread {

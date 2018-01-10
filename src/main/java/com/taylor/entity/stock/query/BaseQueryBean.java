@@ -1,4 +1,4 @@
-package com.taylor.entity.stock;
+package com.taylor.entity.stock.query;
 
 import lombok.Data;
 
@@ -12,16 +12,16 @@ public class BaseQueryBean {
     /**
      * 请求来源
      **/
-    private String from;
+    private String from="pc";
     /**
      * 请求系统版本
      **/
-    private String os_ver;
+    private String os_ver="100";
 
     /**
      * 操作类型
      **/
-    private String cuid;
+    private String cuid="";
 
     private String vv;
     /**
@@ -32,7 +32,7 @@ public class BaseQueryBean {
     /**
      * 股票代码
      **/
-    private String stockCode;
+    private String stock_code;
 
     private String timestamp;
 }
