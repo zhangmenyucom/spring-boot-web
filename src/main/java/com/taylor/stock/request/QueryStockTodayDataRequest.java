@@ -57,11 +57,13 @@ public class QueryStockTodayDataRequest extends Thread {
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
         stockQueryBean.setStep(2 + "");
+        stockQueryBean.setOs_ver("1");
+        stockQueryBean.setVv("100");
         DecimalFormat df = new DecimalFormat("######0.000");
 
         GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_DAY_INFO);
         for (String s : stockCodeList) {
-            CURRENT.incrementAndGet();
+            //CURRENT.incrementAndGet();
             stockQueryBean.setStock_code(s.toLowerCase());
             System.out.println("正在检测股票代码：" + s);
             String responseStr = queryLatestResult(stockQueryBean, method);
@@ -96,5 +98,22 @@ public class QueryStockTodayDataRequest extends Thread {
         if (!method.isAborted()) {
             method.releaseConnection();
         }
+    }
+
+    public static void main(String... args) {
+        StockQueryBean stockQueryBean = new StockQueryBean();
+        stockQueryBean.setFrom("pc");
+        stockQueryBean.setCount(2 + "");
+        stockQueryBean.setCuid("xxx");
+        stockQueryBean.setFormat("json");
+        stockQueryBean.setFq_type("no");
+        stockQueryBean.setStep(2 + "");
+        stockQueryBean.setOs_ver("1");
+        stockQueryBean.setVv("100");
+        DecimalFormat df = new DecimalFormat("######0.000");
+        stockQueryBean.setStock_code("sz002131");
+        GetMethod method=new GetMethod(Constants.METHOD_URL_STOCK_DAY_INFO);
+        System.out.println( queryLatestResult(stockQueryBean,method));
+
     }
 }

@@ -31,7 +31,7 @@ public class QueryStockTimeDataRequest {
     public static void main(String... args) {
         GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_TIME_INFO);
         TimeStockDataQueryBean timeStockDataQueryBean = new TimeStockDataQueryBean();
-        timeStockDataQueryBean.setStock_code("SH600004".toLowerCase());
+        timeStockDataQueryBean.setStock_code("sz002839".toLowerCase());
         System.out.println(JsonUtil.transfer2JsonString(queryStockBaseInfo(timeStockDataQueryBean, method)));
     }
 }
