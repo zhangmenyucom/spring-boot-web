@@ -26,71 +26,23 @@ import java.util.Set;
 /**
  * @author Administrator
  */
-@RequestMapping("/stock")
+@RequestMapping("/stock/macd")
 @Controller
 @Slf4j
-public class StockDataController extends BaseAction {
-
-    @Autowired
-    private StockDataService stockDataService;
-
-    @Autowired
-    private RedisServiceImpl<String> redisService;
+public class StockDataMacdController extends BaseAction {
 
     @Autowired
     private StockBaseInfoService stockBaseInfoService;
 
-    @ResponseBody
-    @RequestMapping("/query")
-    public List<StockData> queryStockData(StockData stockData, HttpServletRequest request, HttpServletResponse response) {
-        log.debug("这只是一个测试");
-        List<StockData> result = stockDataService.find(stockData);
-        catchStock(result);
-        return result;
-    }
+    @Autowired
+    private StockDataService stockDataService;
+
 
     @ResponseBody
-    @RequestMapping("/redis_keys")
-    public Set<String> getRedisKeys(HttpServletRequest request, HttpServletResponse response) {
-        return redisService.getKeys();
-    }
-
-    @ResponseBody
-    @RequestMapping("redis_value")
-    public String getRedisKeys(@RequestParam(name = "stockCode") String stockCode, HttpServletRequest request, HttpServletResponse response) {
-        return redisService.get(stockCode);
-    }
-
-    @ResponseBody
-    @RequestMapping("/macd/start")
+    @RequestMapping("/start")
     public String queryStockDataWithMacd(HttpServletRequest request, HttpServletResponse response) throws IOException {
         stockDataService.processData(new MacdStrategy("macd指标算法"));
         return "正在分析，请耐心等待";
     }
 
-    @ResponseBody
-    @RequestMapping("/kdj5/start")
-    public String queryStockDataByKdj5(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj5Strategy("kdj5指标算法"));
-        return "正在分析，请耐心等待";
-    }
-    @ResponseBody
-    @RequestMapping("/kdj10/start")
-    public String queryStockDataByKdj10(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj10Strategy("kdj10指标算法"));
-        return "正在分析，请耐心等待";
-    }
-
-    public void catchStock(List<StockData> result) {
-        for (StockData stockData : result) {
-            System.out.println(stockData.getStockCode());
-            redisService.put(stockData.getStockCode(), stockData.getStockName(), -1);
-        }
-    }
-
-    @ResponseBody
-    @RequestMapping("/info")
-    public List<StockBaseInfo> queryStockBaseInfo(ServletRequest request, HttpServletResponse response, StockBaseQueryBean stockBaseQueryBean) throws IOException {
-        return stockBaseInfoService.getStockBaseInfo(stockBaseQueryBean);
-    }
 }

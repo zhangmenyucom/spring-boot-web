@@ -1,4 +1,4 @@
-package com.taylor.entity.stock;
+package com.taylor.entity.stock.query;
 
 import lombok.Data;
 
