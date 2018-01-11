@@ -1,7 +1,6 @@
 package com.taylor.service;
 
-import com.taylor.entity.stock.StockBaseInfo;
-import com.taylor.entity.stock.query.StockBaseQueryBean;
+import com.taylor.entity.StockBaseInfo;
 
 import java.util.List;
 
@@ -12,5 +11,5 @@ import java.util.List;
  */
 public interface StockBaseInfoService {
 
-    List<StockBaseInfo> getStockBaseInfo(StockBaseQueryBean stockBaseQueryBean);
+    List<StockBaseInfo> getStockBaseInfo(String stockCode);
 }

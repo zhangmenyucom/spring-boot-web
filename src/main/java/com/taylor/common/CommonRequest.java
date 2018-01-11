@@ -1,6 +1,5 @@
 package com.taylor.common;
 
-import com.taylor.common.ObjectToNameValuePairUtil;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.NameValuePair;
@@ -21,11 +20,10 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    static {
-        retryCount.set(0);
-    }
-
     public String  executeRequest(T in, HttpMethodBase method) {
+        if(retryCount.get()==null){
+            retryCount.set(0);
+        }
         if (in == null) {
             return null;
         }
@@ -51,6 +49,7 @@ public class CommonRequest<T> {
                 return executeRequest(in, method);
             }
         }
+        retryCount.set(0);
         if (!StringUtil.isEmpty(stringBuider.toString())) {
             return stringBuider.toString();
         }

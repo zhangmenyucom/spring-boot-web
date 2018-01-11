@@ -1,7 +1,6 @@
 package com.taylor.service.impl;
 
-import com.taylor.entity.stock.StockBaseInfo;
-import com.taylor.entity.stock.query.StockBaseQueryBean;
+import com.taylor.entity.StockBaseInfo;
 import com.taylor.service.StockBaseInfoService;
 import com.taylor.stock.request.QueryStockBaseDataRequest;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -18,8 +17,9 @@ import java.util.List;
 public class StockBaseInfoServiceImpl implements StockBaseInfoService {
 
     @Override
-    public List<StockBaseInfo> getStockBaseInfo(StockBaseQueryBean stockBaseQueryBean) {
+    public List<StockBaseInfo> getStockBaseInfo(String stockCode) {
         GetMethod method = new GetMethod("https://gupiao.baidu.com/api/rails/stockbasicbatch");
-        return QueryStockBaseDataRequest.queryStockBaseInfo(stockBaseQueryBean, method);
+        return QueryStockBaseDataRequest.queryStockBaseInfo(stockCode, method);
     }
+
 }

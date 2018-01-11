@@ -5,8 +5,7 @@ import com.taylor.common.Constants;
 import com.taylor.dao.RecmdStockWithRatioDao;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.RecmdWithRatioStock;
-import com.taylor.entity.stock.StockBaseInfo;
-import com.taylor.entity.stock.query.StockBaseQueryBean;
+import com.taylor.entity.StockBaseInfo;
 import com.taylor.service.RecmdStockWithRatioService;
 import com.taylor.stock.request.QueryStockBaseDataRequest;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -25,9 +24,7 @@ public class RecmdStockWithRatioServiceImpl extends  AbstractCrudService<RecmdWi
         double redioOver=1.0;
         GetMethod method=new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
         for (RecmdStock recmdStock : recmdStocks) {
-            StockBaseQueryBean stockQueryBean=new StockBaseQueryBean();
-            stockQueryBean.setStock_code(recmdStock.getStockCode().toLowerCase());
-            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(stockQueryBean, method);
+            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(recmdStock.getStockCode().toLowerCase(), method);
             if(stockBaseInfos!=null && !stockBaseInfos.isEmpty()){
                 double turnoverRatio = stockBaseInfos.get(0).getTurnoverRatio();
                 if(turnoverRatio>=redioOver){

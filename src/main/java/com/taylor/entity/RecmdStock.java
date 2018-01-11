@@ -31,6 +31,9 @@ public class RecmdStock {
     /**kdj数据**/
     private String kdj;
 
+    /*** 换手率**/
+    private double turnoverRatio;
+
     /**操作意见**/
     private String recmdOperate;
 

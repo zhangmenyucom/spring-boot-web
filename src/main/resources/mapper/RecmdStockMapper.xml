@@ -8,6 +8,7 @@
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
+        <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -19,6 +20,7 @@
         t.current_price,
         t.macd,
         t.kdj,
+        t.turnover_ratio,
         t.recmd_operate,
         t.create_time
     </sql>
@@ -39,6 +41,9 @@
             <if test="query.macd !=null">
                 and macd=#{query.macd,jdbcType=DOUBLE}
             </if>
+            <if test="query.turnoverRatio !=null">
+                and turnover_ratio=#{query.turnoverRatio,jdbcType=DOUBLE}
+            </if>
             <if test="query.kdj !=null">
                 and kdj=#{query.kdj,jdbcType=VARCHAR}
             </if>
@@ -51,13 +56,14 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,recmd_operate,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,recmd_operate,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
         #{entity.currentPrice,jdbcType=DOUBLE},
         #{entity.macd,jdbcType=DOUBLE},
         #{entity.kdj,jdbcType=VARCHAR},
+        #{entity.turnoverRatio,jdbcType=DOUBLE},
         #{entity.recmdOperate,jdbcType=VARCHAR},
         #{entity.strategy,jdbcType=VARCHAR},
         NOW()
@@ -93,10 +99,8 @@
     </delete>
 
     <delete id="del">
-        DELETE FROM recmd_stock
-        WHERE 1=1 or strategy=null
         <if test="entity.strategy!=null">
-            and strategy = #{entity.strategy,jdbcType=VARCHAR}
+            DELETE FROM recmd_stock where strategy=null or strategy = #{entity.strategy}
         </if>
     </delete>
 </mapper>

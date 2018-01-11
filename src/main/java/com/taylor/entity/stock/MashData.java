@@ -9,6 +9,9 @@ import lombok.Data;
  */
 @Data
 public class MashData {
+
+    private String blockCode;
+
     private String date;
 
     private KlineBean kline;

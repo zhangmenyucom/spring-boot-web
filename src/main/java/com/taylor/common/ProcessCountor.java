@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProcessCountor extends Thread {
     public static AtomicInteger CURRENT = new AtomicInteger(0);
 
-    public static Long TOTAL = 3747L;
+    public static Long TOTAL = 3448L;
 
     @Override
     public void run() {

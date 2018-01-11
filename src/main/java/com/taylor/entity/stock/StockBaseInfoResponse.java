@@ -1,8 +1,7 @@
 package com.taylor.entity.stock;
 
 import com.taylor.common.CommonResponse;
-import com.taylor.entity.stock.MashData;
-import com.taylor.entity.stock.StockBaseInfo;
+import com.taylor.entity.StockBaseInfo;
 import lombok.Data;
 
 import java.util.List;

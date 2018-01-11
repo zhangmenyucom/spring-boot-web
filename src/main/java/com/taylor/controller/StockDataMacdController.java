@@ -1,27 +1,17 @@
 package com.taylor.controller;
 
-import com.taylor.entity.StockData;
-import com.taylor.entity.stock.StockBaseInfo;
-import com.taylor.entity.stock.query.StockBaseQueryBean;
 import com.taylor.service.StockBaseInfoService;
 import com.taylor.service.StockDataService;
-import com.taylor.service.impl.RedisServiceImpl;
-import com.taylor.stock.strategy.Kdj10Strategy;
-import com.taylor.stock.strategy.Kdj5Strategy;
 import com.taylor.stock.strategy.MacdStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Administrator

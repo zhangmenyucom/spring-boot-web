@@ -14,6 +14,7 @@ public class StockQueryBean extends BaseQueryBean implements Serializable {
 
     private  static final long serialVersionUID = 3930601888186903572L;
 
+    /**配合start使用 front：在start之前的count个数据，step:间隔** ,back,no**/
     private  String step;
 
     private String start;
