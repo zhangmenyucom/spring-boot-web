@@ -30,7 +30,7 @@ public class StockDataKdjController extends BaseAction {
      * 两天kdj差为5
      **/
     @ResponseBody
-    @RequestMapping("/start/5")
+    @RequestMapping("/start/kdiff/5")
     public String queryStockDataByKdj5(HttpServletRequest request, HttpServletResponse response) throws IOException {
         stockDataService.processData(new Kdj5Strategy("kdj5指标算法"));
         return "正在分析，请耐心等待";
@@ -40,7 +40,7 @@ public class StockDataKdjController extends BaseAction {
      * 两天kdj差为10
      **/
     @ResponseBody
-    @RequestMapping("/start/10")
+    @RequestMapping("/start/kdiff/10")
     public String queryStockDataByKdj10(HttpServletRequest request, HttpServletResponse response) throws IOException {
         stockDataService.processData(new Kdj10Strategy("kdj10指标算法"));
         return "正在分析，请耐心等待";
@@ -50,7 +50,7 @@ public class StockDataKdjController extends BaseAction {
      * 两天kdj差为510
      **/
     @ResponseBody
-    @RequestMapping("/start/510")
+    @RequestMapping("/start/kdiff/510")
     public String queryStockDataByKdj510(HttpServletRequest request, HttpServletResponse response) throws IOException {
         stockDataService.processData(new Kdj510Strategy("kdj510指标算法"));
         return "正在分析，请耐心等待";
