@@ -32,7 +32,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/kdiff/5")
     public String queryStockDataByKdj5(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj5Strategy("kdj5指标算法"));
+        stockDataService.processData(new Kdj5Strategy());
         return "正在分析，请耐心等待";
     }
 
@@ -42,7 +42,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/kdiff/10")
     public String queryStockDataByKdj10(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj10Strategy("kdj10指标算法"));
+        stockDataService.processData(new Kdj10Strategy());
         return "正在分析，请耐心等待";
     }
 
@@ -52,7 +52,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/kdiff/510")
     public String queryStockDataByKdj510(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj510Strategy("kdj510指标算法"));
+        stockDataService.processData(new Kdj510Strategy());
         return "正在分析，请耐心等待";
     }
     /**
@@ -61,7 +61,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/betwenn/{kdiff}/{ratio}")
     public String queryStockDataByKdj5_1(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjWithRatioStrategy("kdj小于"+kdiff+",ratio大于"+ratio,kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjWithRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
         return "正在分析，请耐心等待";
     }
     /**
@@ -70,7 +70,16 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/over/{kdiff}/{ratio}")
     public String queryStockDataByKdjOver(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjOverWithRatioStrategy("今天kdj差大于"+kdiff+",ratio大于"+ratio,kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjOverWithRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        return "正在分析，请耐心等待";
+    }
+    /**
+     * 两天kdj比大于1
+     **/
+    @ResponseBody
+    @RequestMapping("/start/over45/{kdiff}/{ratio}")
+    public String queryStockDataByKdjOver45(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
+        stockDataService.processData(new KdjOver45duRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
         return "正在分析，请耐心等待";
     }
 }

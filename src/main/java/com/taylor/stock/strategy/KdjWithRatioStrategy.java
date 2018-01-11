@@ -1,5 +1,6 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.Constants;
 import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.stock.MashData;
 import com.taylor.stock.request.QueryStockBaseDataRequest;
@@ -18,8 +19,8 @@ public class KdjWithRatioStrategy extends IStrategy {
     private Float kdiff;
     private Float ratio;
 
-    public KdjWithRatioStrategy(String name, Float kdiff, Float ratio, HttpMethodBase method) {
-        super(name);
+    public KdjWithRatioStrategy(Float kdiff, Float ratio, HttpMethodBase method) {
+        super("kdj差值小于"+kdiff+"换手率大于"+ratio);
         this.method = method;
         this.kdiff=kdiff;
         this.ratio=ratio;
@@ -28,6 +29,9 @@ public class KdjWithRatioStrategy extends IStrategy {
     @Override
     public int doCheck(List<MashData> mashDataList) {
         MashData today = mashDataList.get(0);
+        if(today.getKline().getClose()> Constants.CURRENT_PRICE_LIMIT){
+            return 0;
+        }
         MashData yestoday = mashDataList.get(1);
         /**
          * 今日：0<=k-d<=5,昨天0<=d-k<=5,macd<0

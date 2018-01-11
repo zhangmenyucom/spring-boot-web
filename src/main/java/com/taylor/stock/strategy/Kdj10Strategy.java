@@ -1,5 +1,6 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 
 import java.util.List;
@@ -11,14 +12,17 @@ import java.util.List;
  */
 public class Kdj10Strategy extends IStrategy {
 
-    public Kdj10Strategy(String name) {
-        super(name);
+    public Kdj10Strategy() {
+        super("kdj差值小于10");
     }
 
     @Override
     public int doCheck(List<MashData> mashDataList) {
         int kdDiff = 10;
         MashData today = mashDataList.get(0);
+        if (today.getKline().getClose() > Constants.CURRENT_PRICE_LIMIT) {
+            return 0;
+        }
         MashData yestoday = mashDataList.get(1);
         /**
          * 今日：0<=k-d<=10,昨天0<=d-k<=10,macd<0

@@ -31,7 +31,7 @@ public class StockDataMacdController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start")
     public String queryStockDataWithMacd(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new MacdStrategy("macd指标算法"));
+        stockDataService.processData(new MacdStrategy());
         return "正在分析，请耐心等待";
     }
 
