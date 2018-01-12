@@ -14,6 +14,8 @@ public class StockBaseInfo implements Serializable {
 
     private static final long serialVersionUID = 4413621543793129829L;
 
+    private Long id;
+
     /**
      * 股票代码
      **/

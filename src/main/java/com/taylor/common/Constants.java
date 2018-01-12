@@ -16,6 +16,9 @@ public class Constants {
     /***查询股票日K信息**/
     public static final String METHOD_URL_STOCK_DAY_INFO = "https://gupiao.baidu.com/api/stocks/stockdaybar";
 
+    /***查询股票周K信息**/
+    public static final String METHOD_URL_STOCK_WEEK_INFO = "https://gupiao.baidu.com/api/stocks/stockweekbar";
+
     public static final Double CURRENT_PRICE_LIMIT = 30.0;
 
 

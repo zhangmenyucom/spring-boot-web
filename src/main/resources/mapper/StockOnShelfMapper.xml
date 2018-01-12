@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.taylor.dao.StockOnShelfDao">
+    <resultMap id="BaseResultMap" type="com.taylor.entity.StockOnShelf">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="INTEGER"/>
+        <result column="buy_price" property="buyPrice" jdbcType="DOUBLE"/>
+        <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
+        <result column="net_ratio" property="netRatio" jdbcType="DOUBLE"/>
+        <result column="sold_price" property="soldPrice" jdbcType="DOUBLE"/>
+        <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id,
+        t.stock_code,
+        t.amount,
+        t.stock_name,
+        t.buy_price,
+        t.current_price,
+        t.sold_price,
+        t.net_ratio,
+        t.recmd_operate,
+        t.status
+    </sql>
+    <select id="findByCondition" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_on_shelf t
+        <where>
+            <if test="query.id !=null">
+                and id=#{query.id,jdbcType=BIGINT}
+            </if>
+            <if test="query.stockCode !=null">
+                and stockCode=#{query.stockCode,jdbcType=VARCHAR}
+            </if>
+            <if test="query.stockName !=null">
+                and stockName=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+            <if test="query.recmdOperate !=null">
+                and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
+            </if>
+            <if test="query.status !=null">
+                and status=#{query.status,jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        UPDATE stock_on_shelf
+        SET
+        id=#{entity.id,jdbcType=BIGINT},
+        <if test="entity.currentPrice!=null">
+            current_price=#{entity.currentPrice,jdbcType=DOUBLE}
+        </if>
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="getByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_on_shelf t
+        WHERE t.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_on_shelf t
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delByPrimaryKey">
+        DELETE FROM stock_on_shelf
+        WHERE id = #{id ,jdbcType=BIGINT}
+    </delete>
+</mapper>

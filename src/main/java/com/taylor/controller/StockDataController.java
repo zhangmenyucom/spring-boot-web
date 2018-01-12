@@ -1,9 +1,10 @@
 package com.taylor.controller;
 
 import com.taylor.entity.StockData;
+import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
+import com.taylor.service.StockOnShelfService;
 import com.taylor.service.impl.RedisServiceImpl;
-import com.taylor.stock.strategy.MacdStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +31,14 @@ public class StockDataController extends BaseAction {
     @Autowired
     private RedisServiceImpl<String> redisService;
 
+    @Autowired
+    private RecmdStockService recmdStockService;
+
+    @Autowired
+    private StockOnShelfService stockOnShelfService;
+
+
+
     @ResponseBody
     @RequestMapping("/cache")
     public List<StockData> queryStockData(StockData stockData, HttpServletRequest request, HttpServletResponse response) {
@@ -47,10 +55,24 @@ public class StockDataController extends BaseAction {
     }
 
     @ResponseBody
-    @RequestMapping("redis_value")
-    public String getRedisKeys(@RequestParam(name = "stockCode") String stockCode, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping("/redis_value")
+    public String getRedisValue(@RequestParam(name = "stockCode") String stockCode, HttpServletRequest request, HttpServletResponse response) {
         return redisService.get(stockCode);
     }
+
+    @ResponseBody
+    @RequestMapping("/check_result")
+    public String checkResult(HttpServletRequest request, HttpServletResponse response) {
+        recmdStockService.checkResult();
+        return "正在提取数据，请耐心等待";
+    }
+    @ResponseBody
+    @RequestMapping("/listen_shelf")
+    public String listenShelf(HttpServletRequest request, HttpServletResponse response) {
+        stockOnShelfService.listen();
+        return "监听中。。。。";
+    }
+
 
     public void catchStock(List<StockData> result) {
         for (StockData stockData : result) {
@@ -58,4 +80,7 @@ public class StockDataController extends BaseAction {
             redisService.put(stockData.getStockCode(), stockData.getStockName(), -1);
         }
     }
+
+
+
 }

@@ -82,4 +82,14 @@ public class StockDataKdjController extends BaseAction {
         stockDataService.processData(new KdjOver45duRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
         return "正在分析，请耐心等待";
     }
+
+    /**
+     * 两天kdj比大于1
+     **/
+    @ResponseBody
+    @RequestMapping("/start/week/{ratio}")
+    public String queryStockDataByKdjWeek(HttpServletRequest request,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
+        stockDataService.processData(new KdjWeekRatioStrategy(ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        return "正在分析，请耐心等待";
+    }
 }

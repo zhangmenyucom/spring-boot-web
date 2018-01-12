@@ -23,12 +23,12 @@ import java.util.List;
 import static com.taylor.common.ProcessCountor.CURRENT;
 
 /**
- * 获取股票数据
+ * 获取股票日K数据
  *
  * @author taylor
  */
 @Slf4j
-public class QueryStockTodayDataRequest extends Thread {
+public class QueryStockDayDataRequest extends Thread {
 
     private RecmdStockService recmdStockService;
 
@@ -38,7 +38,7 @@ public class QueryStockTodayDataRequest extends Thread {
 
     private IStrategy strategy;
 
-    public QueryStockTodayDataRequest(IStrategy strategy, RedisServiceImpl<String> redisService, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
+    public QueryStockDayDataRequest(IStrategy strategy, RedisServiceImpl<String> redisService, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
         super(taskName);
         this.recmdStockService = recmdStockService;
         this.stockCodeList = stockCodeList;
@@ -102,6 +102,7 @@ public class QueryStockTodayDataRequest extends Thread {
                 recmdStock.setStrategy(strategy.getName());
                 recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                 recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
+                recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());
                 recmdStockService.save(recmdStock);
                 log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
                 System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());

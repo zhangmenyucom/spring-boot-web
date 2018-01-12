@@ -16,22 +16,26 @@ import java.util.Date;
  */
 public class QueryStockTimeDataRequest {
 
-    public static TimeStockDataResponse queryStockBaseInfo(TimeStockDataQueryBean timeStockDataQueryBean, GetMethod method) {
+    public static TimeStockDataResponse queryStockBaseInfo(String stockCode, GetMethod method) {
+        TimeStockDataQueryBean timeStockDataQueryBean = new TimeStockDataQueryBean();
         timeStockDataQueryBean.setFrom("pc");
         timeStockDataQueryBean.setCuid("xxx");
         timeStockDataQueryBean.setFormat("json");
         timeStockDataQueryBean.setOs_ver("1");
         timeStockDataQueryBean.setVv("100");
         timeStockDataQueryBean.setFrom("pc");
-        timeStockDataQueryBean.setTimestamp(new Date().getTime()+"");
+        timeStockDataQueryBean.setStock_code(stockCode);
+        timeStockDataQueryBean.setTimestamp(new Date().getTime() + "");
         String responseStr = new CommonRequest<TimeStockDataQueryBean>().executeRequest(timeStockDataQueryBean, method);
-        return JsonUtil.readJson2Collection(responseStr, TimeStockDataResponse.class);
+        TimeStockDataResponse timeStockDataResponse = JsonUtil.readJson2Collection(responseStr, TimeStockDataResponse.class);
+        if(timeStockDataResponse.getErrorNo()==0){
+            return timeStockDataResponse;
+        }
+        return null;
     }
 
     public static void main(String... args) {
         GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_TIME_INFO);
-        TimeStockDataQueryBean timeStockDataQueryBean = new TimeStockDataQueryBean();
-        timeStockDataQueryBean.setStock_code("sz002839".toLowerCase());
-        System.out.println(JsonUtil.transfer2JsonString(queryStockBaseInfo(timeStockDataQueryBean, method)));
+        System.out.println(JsonUtil.transfer2JsonString(queryStockBaseInfo("sz002839".toLowerCase(), method)));
     }
 }

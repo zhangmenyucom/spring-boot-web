@@ -9,6 +9,8 @@
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
         <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
+        <result column="change_ratio_yestoday" property="changeRatioYestoday" jdbcType="DOUBLE"/>
+        <result column="change_ratio_today" property="changeRatioToday" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -21,6 +23,8 @@
         t.macd,
         t.kdj,
         t.turnover_ratio,
+        t.change_ratio_yestoday,
+        t.change_ratio_today,
         t.recmd_operate,
         t.create_time
     </sql>
@@ -56,7 +60,7 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,recmd_operate,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,change_ratio_yestoday,change_ratio_today,recmd_operate,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -64,6 +68,8 @@
         #{entity.macd,jdbcType=DOUBLE},
         #{entity.kdj,jdbcType=VARCHAR},
         #{entity.turnoverRatio,jdbcType=DOUBLE},
+        #{entity.changeRatioYestoday,jdbcType=DOUBLE},
+        #{entity.changeRatioToday,jdbcType=DOUBLE},
         #{entity.recmdOperate,jdbcType=VARCHAR},
         #{entity.strategy,jdbcType=VARCHAR},
         NOW()
@@ -77,6 +83,13 @@
         stock_name=#{entity.stockName,jdbcType=VARCHAR}
         macd=#{entity.macd,jdbcType=DOUBLE}
         WHERE id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateRecmdTodayUpDownRatio">
+        UPDATE recmd_stock
+        SET
+        change_ratio_today=#{stockBaseInfo.netChangeRatio,jdbcType=DOUBLE}
+        WHERE id = #{stockBaseInfo.id,jdbcType=BIGINT}
     </update>
 
     <select id="getByPrimaryKey" resultMap="BaseResultMap">

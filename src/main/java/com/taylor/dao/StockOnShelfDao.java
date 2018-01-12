@@ -3,6 +3,7 @@ package com.taylor.dao;
 import com.taylor.common.BaseDao;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.StockOnShelf;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -10,10 +11,6 @@ import org.apache.ibatis.annotations.Param;
  * @desc:
  * @date: 2018/1/6 0:27
  */
-public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
-    /**
-     * @param stockBaseInfo
-     * @desc
-     */
-    int updateRecmdTodayUpDownRatio(@Param("stockBaseInfo") StockBaseInfo stockBaseInfo);
+public interface StockOnShelfDao extends BaseDao<StockOnShelf,StockOnShelf> {
+
 }
