@@ -1,9 +1,9 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.stock.MashData;
-import com.taylor.stock.request.QueryStockBaseDataRequest;
+import com.taylor.entity.stock.StockPanKouData;
 import org.apache.commons.httpclient.HttpMethodBase;
 
 import java.util.List;
@@ -15,13 +15,11 @@ import java.util.List;
  */
 public class KdjWithRatioStrategy extends IStrategy {
 
-    private HttpMethodBase method;
     private Float kdiff;
     private Float ratio;
 
-    public KdjWithRatioStrategy(Float kdiff, Float ratio, HttpMethodBase method) {
+    public KdjWithRatioStrategy(Float kdiff, Float ratio) {
         super("kdj差值小于"+kdiff+"换手率大于"+ratio);
-        this.method = method;
         this.kdiff=kdiff;
         this.ratio=ratio;
     }
@@ -37,9 +35,9 @@ public class KdjWithRatioStrategy extends IStrategy {
          * 今日：0<=k-d<=5,昨天0<=d-k<=5,macd<0
          */
         if (today.getKdj().getK() - today.getKdj().getD() >=0 && today.getKdj().getK() - today.getKdj().getD() <= kdiff && yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0 && yestoday.getKdj().getD() - yestoday.getKdj().getK() <= kdiff && today.getMacd().getMacd() <= 0) {
-            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(today.getBlockCode(), method);
-            if (!stockBaseInfos.isEmpty()) {
-                if (stockBaseInfos.get(0).getTurnoverRatio() >= ratio) {
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            if (stockPanKouData!=null) {
+                if (stockPanKouData.getExchangeRatio() >= ratio) {
                     return 1;
                 }
             }

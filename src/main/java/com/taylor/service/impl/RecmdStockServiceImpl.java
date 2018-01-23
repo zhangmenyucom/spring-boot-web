@@ -27,12 +27,14 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
         List<RecmdStock> recmdStocks = this.find(new RecmdStock());
         for (RecmdStock recmdStock : recmdStocks) {
             List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(recmdStock.getStockCode(), method);
-            stockBaseInfos.get(0).setId(recmdStock.getId());
-            this.updateUpDownRatio(stockBaseInfos.get(0));
+            if (!stockBaseInfos.isEmpty()) {
+                stockBaseInfos.get(0).setId(recmdStock.getId());
+                this.updateUpDownRatio(stockBaseInfos.get(0));
+            }
         }
     }
 
     public int updateUpDownRatio(StockBaseInfo stockBaseInfo) {
-       return  this.getDao().updateRecmdTodayUpDownRatio(stockBaseInfo);
+        return this.getDao().updateRecmdTodayUpDownRatio(stockBaseInfo);
     }
 }

@@ -1,9 +1,9 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.stock.MashData;
-import com.taylor.stock.request.QueryStockBaseDataRequest;
+import com.taylor.entity.stock.StockPanKouData;
 import org.apache.commons.httpclient.HttpMethodBase;
 
 import java.util.List;
@@ -15,13 +15,11 @@ import java.util.List;
  */
 public class KdjOver45duRatioStrategy extends IStrategy {
 
-    private HttpMethodBase method;
     private Float kdiff;
     private Float ratio;
 
-    public KdjOver45duRatioStrategy(Float kdiff, Float ratio, HttpMethodBase method) {
+    public KdjOver45duRatioStrategy(Float kdiff, Float ratio) {
         super("今天kdj差/昨天kdj差>1,今天kdiff大于"+kdiff+",ratio大于"+ratio);
-        this.method = method;
         this.kdiff = kdiff;
         this.ratio = ratio;
     }
@@ -36,9 +34,9 @@ public class KdjOver45duRatioStrategy extends IStrategy {
 
         if (today.getKdj().getK() - today.getKdj().getD() >= kdiff  && today.getMacd().getMacd() <= 0) {
             if (((today.getKdj().getK() - today.getKdj().getD()) / Math.abs(yestoday.getKdj().getD() - yestoday.getKdj().getK())) >= 1) {
-                List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(today.getBlockCode(), method);
-                if (!stockBaseInfos.isEmpty()) {
-                    if (stockBaseInfos.get(0).getTurnoverRatio() >= ratio) {
+                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+                if (stockPanKouData!=null) {
+                    if (stockPanKouData.getExchangeRatio() >= ratio) {
                         return 1;
                     }
                 }

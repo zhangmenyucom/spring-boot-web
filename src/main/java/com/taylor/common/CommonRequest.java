@@ -1,5 +1,6 @@
 package com.taylor.common;
 
+import com.taylor.entity.stock.StockPanKouData;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.NameValuePair;
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 
 /**
@@ -20,8 +22,8 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    public String  executeRequest(T in, HttpMethodBase method) {
-        if(retryCount.get()==null){
+    public String executeRequest(T in, HttpMethodBase method) {
+        if (retryCount.get() == null) {
             retryCount.set(0);
         }
         if (in == null) {
@@ -54,5 +56,78 @@ public class CommonRequest<T> {
             return stringBuider.toString();
         }
         return null;
+    }
+
+    public static StockPanKouData getStockPanKouData(String stockCode) {
+        StockPanKouData stockPanKouData = null;
+        InputStreamReader isr = null;
+        try {
+            String url = "http://qt.gtimg.cn/q=" + stockCode.toLowerCase();
+            URL u = new URL(url);
+            isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[1024];
+            int len = isr.read(cha);
+            String result = new String(cha, 0, len);
+            result = result.substring(result.indexOf("=") + 2, result.indexOf(";") - 1);
+            String[] stocks = result.split(";");
+            for (String stock : stocks) {
+                String[] datas = stock.split("~");
+                stockPanKouData = new StockPanKouData();
+                stockPanKouData.setStockCode(datas[2]);
+                stockPanKouData.setStockName(datas[1]);
+                stockPanKouData.setCurrentPrice(Double.valueOf(datas[3]));
+                stockPanKouData.setYesPrice(Double.valueOf(datas[4]));
+                stockPanKouData.setOpenPrice(Double.valueOf(datas[5]));
+                stockPanKouData.setExchangeTotal(Double.valueOf(datas[6]) / 10000);
+                stockPanKouData.setUpDownMount(Double.valueOf(datas[31]));
+                stockPanKouData.setUpDownMountPercent(Double.valueOf(datas[32]));
+
+                stockPanKouData.setLiangBi(Double.valueOf(datas[49]));
+                stockPanKouData.setAmplitude(datas[43] + "%");
+                stockPanKouData.setB1Price(Double.valueOf(datas[9]));
+                stockPanKouData.setB1Number(Double.valueOf(datas[10]));
+                stockPanKouData.setB2Price(Double.valueOf(datas[11]));
+                stockPanKouData.setB2Number(Double.valueOf(datas[12]));
+                stockPanKouData.setB3Price(Double.valueOf(datas[13]));
+                stockPanKouData.setB3Number(Double.valueOf(datas[14]));
+                stockPanKouData.setB4Price(Double.valueOf(datas[15]));
+                stockPanKouData.setB4Number(Double.valueOf(datas[16]));
+                stockPanKouData.setB5Price(Double.valueOf(datas[17]));
+                stockPanKouData.setB5Number(Double.valueOf(datas[18]));
+                stockPanKouData.setS1Price(Double.valueOf(datas[19]));
+                stockPanKouData.setS1Number(Double.valueOf(datas[20]));
+                stockPanKouData.setS2Price(Double.valueOf(datas[21]));
+                stockPanKouData.setS2Number(Double.valueOf(datas[22]));
+                stockPanKouData.setS3Price(Double.valueOf(datas[23]));
+                stockPanKouData.setS3Number(Double.valueOf(datas[24]));
+                stockPanKouData.setS4Price(Double.valueOf(datas[25]));
+                stockPanKouData.setS4Number(Double.valueOf(datas[26]));
+                stockPanKouData.setS5Price(Double.valueOf(datas[27]));
+                stockPanKouData.setS5Number(Double.valueOf(datas[28]));
+
+                stockPanKouData.setBowtomPrice(Double.valueOf(datas[48]));
+                stockPanKouData.setTopPrice(Double.valueOf(datas[47]));
+                stockPanKouData.setMaxPrice(Double.valueOf(datas[33]));
+                stockPanKouData.setMiniPrice(Double.valueOf(datas[34]));
+                stockPanKouData.setExchangeRatio(Double.valueOf(datas[38]));
+                stockPanKouData.setMarketEarnActive(Double.valueOf(datas[39]));
+                stockPanKouData.setOuter(Double.valueOf(datas[8]) / 10000);
+                stockPanKouData.setInner(Double.valueOf(datas[7]) / 10000);
+                stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
+                stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
+                stockPanKouData.setExchangeValue(Double.valueOf(datas[37]) / 10000);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return stockPanKouData;
     }
 }

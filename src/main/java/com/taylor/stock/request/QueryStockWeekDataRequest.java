@@ -9,7 +9,6 @@ import com.taylor.entity.stock.query.StockQueryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 /**

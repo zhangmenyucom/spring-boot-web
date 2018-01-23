@@ -1,10 +1,8 @@
 package com.taylor.controller;
 
-import com.taylor.common.Constants;
 import com.taylor.service.StockDataService;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,7 +59,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/betwenn/{kdiff}/{ratio}")
     public String queryStockDataByKdj5_1(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjWithRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjWithRatioStrategy(kdiff,ratio));
         return "正在分析，请耐心等待";
     }
     /**
@@ -70,7 +68,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/over/{kdiff}/{ratio}")
     public String queryStockDataByKdjOver(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjOverWithRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjOverWithRatioStrategy(kdiff,ratio));
         return "正在分析，请耐心等待";
     }
     /**
@@ -79,7 +77,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/over45/{kdiff}/{ratio}")
     public String queryStockDataByKdjOver45(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjOver45duRatioStrategy(kdiff,ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjOver45duRatioStrategy(kdiff,ratio));
         return "正在分析，请耐心等待";
     }
 
@@ -89,7 +87,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/week/{ratio}")
     public String queryStockDataByKdjWeek(HttpServletRequest request,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjWeekRatioStrategy(ratio,new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO)));
+        stockDataService.processData(new KdjWeekRatioStrategy(ratio));
         return "正在分析，请耐心等待";
     }
 }

@@ -6,12 +6,10 @@ import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.MashDataResponse;
-import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.query.StockQueryBean;
 import com.taylor.service.RecmdStockService;
-import com.taylor.service.impl.RedisServiceImpl;
 import com.taylor.stock.common.OperatorEnum;
-import com.taylor.stock.common.StockStatusEnum;
 import com.taylor.stock.strategy.IStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -34,15 +32,12 @@ public class QueryStockDayDataRequest extends Thread {
 
     private List<String> stockCodeList;
 
-    private RedisServiceImpl<String> redisService;
-
     private IStrategy strategy;
 
-    public QueryStockDayDataRequest(IStrategy strategy, RedisServiceImpl<String> redisService, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
+    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
         super(taskName);
         this.recmdStockService = recmdStockService;
         this.stockCodeList = stockCodeList;
-        this.redisService = redisService;
         this.strategy = strategy;
     }
 
@@ -87,22 +82,16 @@ public class QueryStockDayDataRequest extends Thread {
             /**只查买入意见的股票**/
             if (checkResult == 1) {
                 RecmdStock recmdStock = new RecmdStock();
-                List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(stockCode, methodBase);
-                if(!stockBaseInfos.isEmpty()){
-                    /**忽略停牌**/
-                    if(stockBaseInfos.get(0).getStockStatus().equals(StockStatusEnum.STOP.getCode().toString())){
-                        continue;
-                    }
-                    recmdStock.setTurnoverRatio(Double.valueOf(df.format(stockBaseInfos.get(0).getTurnoverRatio())));
-                }
+                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                 recmdStock.setStockCode(stockCode);
-                recmdStock.setStockName(redisService.get(stockCode));
+                recmdStock.setStockName(stockPanKouData.getStockName());
                 recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                 recmdStock.setStrategy(strategy.getName());
                 recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                 recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                 recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());
+                recmdStock.setLiangbi(stockPanKouData.getLiangBi());
                 recmdStockService.save(recmdStock);
                 log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
                 System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());

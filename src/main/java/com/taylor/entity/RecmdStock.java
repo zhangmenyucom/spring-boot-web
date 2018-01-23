@@ -34,6 +34,9 @@ public class RecmdStock {
     /*** 换手率**/
     private Double turnoverRatio;
 
+    /**量比**/
+    private Double liangbi;
+
     /*** 昨日涨幅**/
     private Double changeRatioYestoday;
 

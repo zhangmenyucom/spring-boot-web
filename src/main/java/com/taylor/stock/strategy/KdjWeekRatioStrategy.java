@@ -1,9 +1,9 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.stock.MashData;
-import com.taylor.stock.request.QueryStockBaseDataRequest;
+import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.stock.request.QueryStockWeekDataRequest;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -17,13 +17,11 @@ import java.util.List;
  */
 public class KdjWeekRatioStrategy extends IStrategy {
 
-    private HttpMethodBase method;
     private Float ratio;
     private GetMethod methodWeek = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
 
-    public KdjWeekRatioStrategy(Float ratio, HttpMethodBase method) {
+    public KdjWeekRatioStrategy(Float ratio) {
         super("日kdj金叉，周kdj上翘，macd不限ratio大于" + ratio);
-        this.method = method;
         this.ratio = ratio;
     }
 
@@ -35,9 +33,9 @@ public class KdjWeekRatioStrategy extends IStrategy {
         }
         MashData yestoday = mashDataList.get(1);
         if (today.getKdj().getK() - today.getKdj().getD() >= 0 && yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0) {
-            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(today.getBlockCode(), method);
-            if (!stockBaseInfos.isEmpty()) {
-                if (stockBaseInfos.get(0).getTurnoverRatio() >= ratio) {
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            if (stockPanKouData!=null) {
+                if (stockPanKouData.getExchangeRatio()>= ratio) {
                     List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodWeek);
                     if (mashDataList2.size() < 2) {
                         return 1;
