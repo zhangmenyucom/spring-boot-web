@@ -37,6 +37,12 @@ public class RecmdStock {
     /**量比**/
     private Double liangbi;
 
+    /**外盘**/
+    private Double outerPan;
+
+    /**内盘**/
+    private Double innerPan;
+
     /*** 昨日涨幅**/
     private Double changeRatioYestoday;
 

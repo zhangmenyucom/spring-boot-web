@@ -10,6 +10,8 @@
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
         <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
         <result column="liangbi" property="liangbi" jdbcType="DOUBLE"/>
+        <result column="outer_pan" property="outerPan" jdbcType="DOUBLE"/>
+        <result column="inner_pan" property="innerPan" jdbcType="DOUBLE"/>
         <result column="change_ratio_yestoday" property="changeRatioYestoday" jdbcType="DOUBLE"/>
         <result column="change_ratio_today" property="changeRatioToday" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
@@ -25,6 +27,8 @@
         t.kdj,
         t.turnover_ratio,
         t.liang_bi,
+        t.outer_pan,
+        t.inner_pan,
         t.change_ratio_yestoday,
         t.change_ratio_today,
         t.recmd_operate,
@@ -62,7 +66,7 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,change_ratio_yestoday,change_ratio_today,recmd_operate,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -71,6 +75,8 @@
         #{entity.kdj,jdbcType=VARCHAR},
         #{entity.turnoverRatio,jdbcType=DOUBLE},
         #{entity.liangbi,jdbcType=DOUBLE},
+        #{entity.outerPan,jdbcType=DOUBLE},
+        #{entity.innerPan,jdbcType=DOUBLE},
         #{entity.changeRatioYestoday,jdbcType=DOUBLE},
         #{entity.changeRatioToday,jdbcType=DOUBLE},
         #{entity.recmdOperate,jdbcType=VARCHAR},

@@ -85,6 +85,7 @@ public class QueryStockDayDataRequest extends Thread {
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                 recmdStock.setStockCode(stockCode);
+                recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                 recmdStock.setStockName(stockPanKouData.getStockName());
                 recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                 recmdStock.setStrategy(strategy.getName());
@@ -92,6 +93,8 @@ public class QueryStockDayDataRequest extends Thread {
                 recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                 recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());
                 recmdStock.setLiangbi(stockPanKouData.getLiangBi());
+                recmdStock.setOuterPan(stockPanKouData.getOuter());
+                recmdStock.setInnerPan(stockPanKouData.getInner());
                 recmdStockService.save(recmdStock);
                 log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
                 System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());

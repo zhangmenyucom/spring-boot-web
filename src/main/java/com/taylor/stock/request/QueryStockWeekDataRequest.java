@@ -7,6 +7,7 @@ import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.MashDataResponse;
 import com.taylor.entity.stock.query.StockQueryBean;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class QueryStockWeekDataRequest {
 
-    public static List<MashData> queryLatestResult(String stockCode, GetMethod method) {
+    public static List<MashData> queryLatestResult(String stockCode, HttpMethodBase method) {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
         stockQueryBean.setCount(2 + "");
@@ -30,7 +31,16 @@ public class QueryStockWeekDataRequest {
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
         stockQueryBean.setStock_code(stockCode);
-        String respStr = new CommonRequest<>().executeRequest(stockQueryBean, method);
+        String respStr = null;
+        try {
+            respStr = new CommonRequest<>().executeRequest(stockQueryBean, method);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("respStr:"+respStr);
+        }
+        if(respStr==null){
+            return null;
+        }
         MashDataResponse mashDataResponse = JsonUtil.transferToObj(respStr, MashDataResponse.class);
         if (mashDataResponse.getErrorNo() == 0) {
             return mashDataResponse.getMashData();

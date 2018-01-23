@@ -18,7 +18,7 @@ import java.util.List;
 public class KdjWeekRatioStrategy extends IStrategy {
 
     private Float ratio;
-    private GetMethod methodWeek = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
+    private static HttpMethodBase methodWeek = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
 
     public KdjWeekRatioStrategy(Float ratio) {
         super("日kdj金叉，周kdj上翘，macd不限ratio大于" + ratio);
@@ -37,8 +37,8 @@ public class KdjWeekRatioStrategy extends IStrategy {
             if (stockPanKouData!=null) {
                 if (stockPanKouData.getExchangeRatio()>= ratio) {
                     List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodWeek);
-                    if (mashDataList2.size() < 2) {
-                        return 1;
+                    if (mashDataList2==null || mashDataList2.size() < 2) {
+                        return 0;
                     } else {
                         MashData mashDataLastOneWeek = mashDataList2.get(0);
                         MashData mashDataLastTwoWeek = mashDataList2.get(1);

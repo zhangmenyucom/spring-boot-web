@@ -44,7 +44,7 @@ public class CommonRequest<T> {
             while ((str = br.readLine()) != null) {
                 stringBuider.append(str);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             /**重试两次**/
             if (retryCount.get() <= 2) {
                 retryCount.set(retryCount.get() + 1);

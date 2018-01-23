@@ -85,7 +85,7 @@ public class StockDataKdjController extends BaseAction {
      * 两天kdj比大于1
      **/
     @ResponseBody
-    @RequestMapping("/start/week/{ratio}")
+    @RequestMapping("/start/week/{ratio}/do")
     public String queryStockDataByKdjWeek(HttpServletRequest request,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
         stockDataService.processData(new KdjWeekRatioStrategy(ratio));
         return "正在分析，请耐心等待";
