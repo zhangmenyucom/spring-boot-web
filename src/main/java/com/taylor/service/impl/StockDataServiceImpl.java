@@ -39,6 +39,6 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
         new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size() / 4 + 1, STOCK_CODE_LIST_SZ.size() / 2), "stock_sz_4-2").start();
         new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size() / 2 + 1, STOCK_CODE_LIST_SZ.size() * 3 / 4), "stock_sz_4-3").start();
         new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(STOCK_CODE_LIST_SZ.size() * 3 / 4 + 1, STOCK_CODE_LIST_SZ.size()), "stock_sz_4-4").start();
-        // new ProcessCountor().start();
+        new ProcessCountor().start();
     }
 }

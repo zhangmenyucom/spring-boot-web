@@ -111,8 +111,8 @@ public class CommonRequest<T> {
                 stockPanKouData.setMiniPrice(Double.valueOf(datas[34]));
                 stockPanKouData.setExchangeRatio(Double.valueOf(datas[38]));
                 stockPanKouData.setMarketEarnActive(Double.valueOf(datas[39]));
-                stockPanKouData.setOuter(Double.valueOf(datas[8]) / 10000);
-                stockPanKouData.setInner(Double.valueOf(datas[7]) / 10000);
+                stockPanKouData.setOuter(Double.valueOf(datas[7]) / 10000);
+                stockPanKouData.setInner(Double.valueOf(datas[8]) / 10000);
                 stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
                 stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
                 stockPanKouData.setExchangeValue(Double.valueOf(datas[37]) / 10000);
