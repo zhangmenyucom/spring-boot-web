@@ -200,7 +200,7 @@ public class StockPanKouData {
     private Double liangBi;
 
     public static void main(String... args) {
-        StockPanKouData sh600116 = CommonRequest.getStockPanKouData("sh600116");
+        StockPanKouData sh600116 = CommonRequest.getStockPanKouData("SH603188");
         System.out.println(JsonUtil.transfer2JsonString(sh600116));
     }
 }
