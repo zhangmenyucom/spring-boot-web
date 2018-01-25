@@ -22,6 +22,9 @@ public class RecmdStock {
     /**股票名称**/
     private String stockName;
 
+    /**股票名称**/
+    private String authorOpinion;
+
     /**当前价**/
     private Double currentPrice;
 

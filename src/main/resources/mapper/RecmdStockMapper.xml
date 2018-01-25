@@ -6,10 +6,11 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+        <result column="author_opinion" property="authorOpinion" jdbcType="VARCHAR"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
         <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
-        <result column="liangbi" property="liangbi" jdbcType="DOUBLE"/>
+        <result column="liang_bi" property="liangbi" jdbcType="DOUBLE"/>
         <result column="main_in" property="mainIn" jdbcType="DOUBLE"/>
         <result column="main_in_bi" property="mainInBi" jdbcType="DOUBLE"/>
         <result column="outer_pan" property="outerPan" jdbcType="DOUBLE"/>
@@ -24,6 +25,7 @@
         t.id,
         t.stock_code,
         t.stock_name,
+        t.author_opinion,
         t.current_price,
         t.macd,
         t.kdj,

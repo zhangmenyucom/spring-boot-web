@@ -3,10 +3,11 @@ server:
 spring:
   application:
     name: spring-boot-web
-  mvc:
-    view:
-      suffix: .jsp
-
+  thymeleaf:
+    prefix: classpath:/html/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
   datasource:
         name: test
         url: jdbc:mysql://111.231.140.42:3306/stock_analysis?createDatabaseIfNotExist=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
