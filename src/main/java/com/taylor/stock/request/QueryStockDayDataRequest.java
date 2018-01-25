@@ -6,6 +6,7 @@ import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.MashDataResponse;
+import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.query.StockQueryBean;
 import com.taylor.service.RecmdStockService;
@@ -49,7 +50,7 @@ public class QueryStockDayDataRequest extends Thread {
     public void run() {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(2 + "");
+        stockQueryBean.setCount(3 + "");
         stockQueryBean.setCuid("xxx");
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
@@ -83,12 +84,15 @@ public class QueryStockDayDataRequest extends Thread {
             if (checkResult == 1) {
                 RecmdStock recmdStock = new RecmdStock();
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                 recmdStock.setStockCode(stockCode);
                 recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                 recmdStock.setStockName(stockPanKouData.getStockName());
                 recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                 recmdStock.setStrategy(strategy.getName());
+                recmdStock.setMainIn(stockFundInOutData.getMainTotalIn());
+                recmdStock.setMainInBi(stockFundInOutData.getMainInBi());
                 recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                 recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                 recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());

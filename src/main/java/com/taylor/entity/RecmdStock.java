@@ -43,6 +43,12 @@ public class RecmdStock {
     /**内盘**/
     private Double innerPan;
 
+    /**主力净流入（万）**/
+    private Double mainIn;
+
+    /**主力净入比**/
+    private Double mainInBi;
+
     /*** 昨日涨幅**/
     private Double changeRatioYestoday;
 
