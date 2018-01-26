@@ -4,6 +4,10 @@
     <meta charset="UTF-8"/>
     <title>springboot-thymeleaf demo</title>
     <style type="text/css">
+        body {
+            text-align: center;
+        }
+
         table {
             border-collapse: collapse;
             margin: 0 auto;
@@ -28,46 +32,52 @@
         table tr:nth-child(even) {
             background: #F5FAFA;
         }
+
+        #container {
+            position: relative;
+        }
     </style>
 </head>
 <body>
-<table>
-    <tr>
-        <th>id</th>
-        <th>股票代码</th>
-        <th>股票名称</th>
-        <th>主人推荐</th>
-        <th>当前价</th>
-        <th>MACD</th>
-        <th>KDJ</th>
-        <th>换手率</th>
-        <th>主力净流入(万元)</th>
-        <th>主力净流入比</th>
-        <th>量比</th>
-        <th>外盘</th>
-        <th>内盘</th>
-        <th>昨日涨跌</th>
-        <th>今日涨跌</th>
-        <th>操作意见</th>
-    </tr>
-    <tr th:each="stock: ${recmdList}">
-        <td th:text="${stock.id}">Onions</td>
-        <td th:text="${stock.stockCode}">Onions</td>
-        <td th:text="${stock.stockName}">Onions</td>
-        <td th:text="${stock.authorOpinion}">Onions</td>
-        <td th:text="${stock.currentPrice}">Onions</td>
-        <td th:text="${stock.macd}">Onions</td>
-        <td th:text="${stock.kdj}">Onions</td>
-        <td th:text="${stock.mainIn}">Onions</td>
-        <td th:text="${stock.mainInBi}">Onions</td>
-        <td th:text="${stock.turnoverRatio}">Onions</td>
-        <td th:text="${stock.liangbi}">Onions</td>
-        <td th:text="${stock.outerPan}">Onions</td>
-        <td th:text="${stock.innerPan}">Onions</td>
-        <td th:text="${stock.changeRatioYestoday}">Onions</td>
-        <td th:text="${stock.changeRatioToday}">Onions</td>
-        <td th:text="${stock.recmdOperate}">Onions</td>
-    </tr>
-</table>
+<div id="container">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>股票代码</th>
+            <th>股票名称</th>
+            <th>主人推荐</th>
+            <th>当前价</th>
+            <th>MACD</th>
+            <th>KDJ</th>
+            <th>换手率</th>
+            <th>主力净流入(万元)</th>
+            <th>主力净流入比</th>
+            <th>量比</th>
+            <th>外盘</th>
+            <th>内盘</th>
+            <th>昨日涨跌</th>
+            <th>今日涨跌</th>
+            <th>操作意见</th>
+        </tr>
+        <tr th:each="stock: ${recmdList}">
+            <td th:text="${stock.id}">Onions</td>
+            <td th:text="${stock.stockCode}">Onions</td>
+            <td th:text="${stock.stockName}">Onions</td>
+            <td th:text="${stock.authorOpinion}">Onions</td>
+            <td th:text="${stock.currentPrice}">Onions</td>
+            <td th:text="${stock.macd}">Onions</td>
+            <td th:text="${stock.kdj}">Onions</td>
+            <td th:text="${stock.mainIn}">Onions</td>
+            <td th:text="${stock.mainInBi}">Onions</td>
+            <td th:text="${stock.turnoverRatio}">Onions</td>
+            <td th:text="${stock.liangbi}">Onions</td>
+            <td th:text="${stock.outerPan}">Onions</td>
+            <td th:text="${stock.innerPan}">Onions</td>
+            <td th:text="${stock.changeRatioYestoday}">Onions</td>
+            <td th:text="${stock.changeRatioToday}">Onions</td>
+            <td th:text="${stock.recmdOperate}">Onions</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
