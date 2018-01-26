@@ -14,6 +14,10 @@
             text-align: center;
         }
 
+        table tr {
+            word-break: keep-all; /*缩小不换行*/
+        }
+
         table td, table th {
             border: 1px solid #cad9ea;
             color: black;
@@ -50,7 +54,7 @@
             <th>MACD</th>
             <th>KDJ</th>
             <th>换手率</th>
-            <th>主力净流入(万元)</th>
+            <th>主力净流入(万)</th>
             <th>主力净流入比</th>
             <th>量比</th>
             <th>外盘</th>
@@ -61,7 +65,7 @@
         </tr>
         <tr th:each="stock: ${recmdList}">
             <td th:text="${stock.stockCode}"></td>
-            <td th:text="${stock.stockName}"></td>
+            <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td><input type="checkbox" th:checked="${stock.authorOpinion=='1'}"/></td>
             <td th:text="${stock.currentPrice}"></td>
             <td th:text="${stock.macd}"></td>
@@ -72,8 +76,8 @@
             <td th:text="${stock.liangbi}"></td>
             <td th:text="${stock.outerPan}"></td>
             <td th:text="${stock.innerPan}"></td>
-            <td th:text="${#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
-            <td th:text="${#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
+            <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
+            <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td th:text="${stock.recmdOperate}"></td>
         </tr>
     </table>
