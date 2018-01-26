@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>springboot-thymeleaf demo</title>
+    <title>每日推荐</title>
     <script src="/js/jquery-3.3.1.min.js"></script>
     <style type="text/css">
         body {
             text-align: center;
         }
+
         table {
-            border-collapse: collapse;
+            border-collapse: separate;
             margin: 0 auto;
             text-align: center;
         }
 
         table td, table th {
             border: 1px solid #cad9ea;
-            color: #666;
+            color: black;
             height: 30px;
         }
 
@@ -33,11 +33,8 @@
             background: #F5FAFA;
         }
 
-        #container {
-            position: relative;
-        }
         .divOver {
-            background: black !important;
+            background: burlywood !important;
             border: solid 1px #d2dce3 !important;
         }
     </style>
@@ -46,7 +43,6 @@
 <div id="container">
     <table>
         <tr>
-            <th>id</th>
             <th>股票代码</th>
             <th>股票名称</th>
             <th>批阅</th>
@@ -64,10 +60,9 @@
             <th>操作</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
-            <td th:text="${stock.id}"></td>
             <td th:text="${stock.stockCode}"></td>
             <td th:text="${stock.stockName}"></td>
-            <td th:text="${stock.authorOpinion}"></td>
+            <td><input type="checkbox" th:checked="${stock.authorOpinion=='1'}"/></td>
             <td th:text="${stock.currentPrice}"></td>
             <td th:text="${stock.macd}"></td>
             <td th:text="${stock.kdj}"></td>

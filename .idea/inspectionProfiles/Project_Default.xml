@@ -506,7 +506,7 @@
     <inspection_tool class="DisjointPackage" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="DivideByZero" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="DivideByZeroJS" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="DocumentWriteJS" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="DocumentWriteJS" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="DollarSignInName" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DoubleBraceInitialization" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="DoubleCheckedLocking" enabled="true" level="WARNING" enabled_by_default="true">
@@ -1611,7 +1611,7 @@
       <option name="CHECK_NON_CONSTANT_VALUES" value="true" />
     </inspection_tool>
     <inspection_tool class="PlaceholderCountMatchesArgumentCount" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="PlatformDetectionJS" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PlatformDetectionJS" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="PlayCustomTagNameInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PlayPropertyInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PointcutMethodStyleInspection" enabled="true" level="ERROR" enabled_by_default="true" />
