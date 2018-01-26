@@ -16,10 +16,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-devtools:1.5.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.3.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.3.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.5.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:log4j-over-slf4j:1.7.25" level="project" />
@@ -38,7 +40,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.8.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:1.5.3.RELEASE" level="project" />

@@ -23,6 +23,7 @@ public class StockViewController {
 
     @RequestMapping("/recmd")
     public String Recomand(Map<String, Object> map) {
+        System.out.println(123123);
         List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
         map.put("recmdList", recmdStocks);
         return "/recmd";

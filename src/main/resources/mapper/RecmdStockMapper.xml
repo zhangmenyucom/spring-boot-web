@@ -6,6 +6,7 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+        <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
         <result column="author_opinion" property="authorOpinion" jdbcType="VARCHAR"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
