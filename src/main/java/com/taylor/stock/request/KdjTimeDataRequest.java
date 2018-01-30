@@ -50,7 +50,7 @@ public class KdjTimeDataRequest {
     }
 
     public static List<KdjTimeBean> getKdjTimeList(String stockCode) {
-        String result = postOrder("sh510900");
+        String result = postOrder(stockCode);
         String suResult = result.substring(result.indexOf("candle") + 8, result.indexOf("hq_type_code") - 3);
         String finalResult = suResult.substring(suResult.lastIndexOf(":") + 2, suResult.length() - 2).replace("[", "{").replace("]", "}");
         String firstBeanStr = finalResult.substring(finalResult.indexOf("{") + 1, finalResult.lastIndexOf("{") - 2).replace("\"", "");
