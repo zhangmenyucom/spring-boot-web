@@ -120,7 +120,7 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
         stockQueryBean.setStock_code("SZ002186".toLowerCase());
-        GetMethod method=new GetMethod(Constants.METHOD_URL_STOCK_DAY_INFO);
+        GetMethod method=new GetMethod("https://gupiao.baidu.com/api/stocks/stockMini5bar");
         System.out.println( queryLatestResult(stockQueryBean,method));
 
     }
