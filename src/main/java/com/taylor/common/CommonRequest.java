@@ -23,7 +23,7 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    public String executeRequest(T in, HttpMethodBase method) {
+    public synchronized  String  executeRequest(T in, HttpMethodBase method) {
         if (retryCount.get() == null) {
             retryCount.set(0);
         }

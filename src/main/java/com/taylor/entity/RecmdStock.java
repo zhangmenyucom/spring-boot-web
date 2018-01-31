@@ -57,6 +57,9 @@ public class RecmdStock {
     /*** 今日涨幅**/
     private Double changeRatioToday;
 
+    /**最近kdj黄金交叉个数**/
+    private int kdjCount;
+
     /**操作意见**/
     private String recmdOperate;
 
@@ -65,4 +68,5 @@ public class RecmdStock {
 
     /**创建时间**/
     private Date createTime;
+
 }

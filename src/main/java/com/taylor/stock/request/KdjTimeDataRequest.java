@@ -36,6 +36,7 @@ public class KdjTimeDataRequest {
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
             method.setRequestHeader("Connection", "keep-alive");
+            method.setContentChunked(true);
             method.getParams().setParameter("http.protocol.cookie-policy", CookiePolicy.BROWSER_COMPATIBILITY);
             // 提交表单
             client.executeMethod(method);

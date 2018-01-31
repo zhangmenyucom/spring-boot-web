@@ -110,4 +110,13 @@ public class StockDataKdjController extends BaseAction {
         stockDataService.processData(new KdjWeekRatioStrategyLiangBiMianInOut(ratio));
         return "正在分析，请耐心等待";
     }
+    /**
+     * 100天内kdj黄金叉大于10
+     **/
+    @ResponseBody
+    @RequestMapping("/start/kdj_count")
+    public String queryStockDataByKdjWeekMain() throws IOException {
+        stockDataService.processDataWithKDJCount(new GodenKdjCountStrategy());
+        return "正在分析，请耐心等待";
+    }
 }

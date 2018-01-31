@@ -53,6 +53,7 @@
             <th>当前价</th>
             <th>MACD</th>
             <th>KDJ</th>
+            <th>金叉</th>
             <th>换手率</th>
             <th>主力净流入(万)</th>
             <th>主力净流入比</th>
@@ -70,6 +71,7 @@
             <td th:text="${stock.currentPrice}"></td>
             <td th:text="${stock.macd}"></td>
             <td th:text="${stock.kdj}"></td>
+            <td th:text="${stock.kdjCount}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.mainIn}"></td>
             <td th:text="${stock.mainInBi}"></td>

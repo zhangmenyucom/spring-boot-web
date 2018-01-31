@@ -19,6 +19,7 @@
         <result column="change_ratio_yestoday" property="changeRatioYestoday" jdbcType="DOUBLE"/>
         <result column="change_ratio_today" property="changeRatioToday" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
+        <result column="kdj_count" property="kdjCount" jdbcType="INTEGER"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -39,6 +40,7 @@
         t.change_ratio_yestoday,
         t.change_ratio_today,
         t.recmd_operate,
+        t.kdj_count,
         t.create_time
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
@@ -73,7 +75,7 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -89,6 +91,7 @@
         #{entity.changeRatioYestoday,jdbcType=DOUBLE},
         #{entity.changeRatioToday,jdbcType=DOUBLE},
         #{entity.recmdOperate,jdbcType=VARCHAR},
+        #{entity.kdjCount,jdbcType=INTEGER},
         #{entity.strategy,jdbcType=VARCHAR},
         NOW()
         )

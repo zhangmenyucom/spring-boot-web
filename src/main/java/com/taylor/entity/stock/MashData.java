@@ -27,4 +27,6 @@ public class MashData {
     private KdjBean kdj;
 
     private RSIBean rsi;
+
+    private int kdjCount;
 }
