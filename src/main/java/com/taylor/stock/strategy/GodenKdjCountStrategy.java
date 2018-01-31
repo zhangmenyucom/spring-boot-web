@@ -28,7 +28,7 @@ public class GodenKdjCountStrategy extends IStrategy {
         }
         mashDataList.get(0).setKdjCount(result);
 
-        if(result<7){
+        if(result<6){
             return 1;
         }
 
