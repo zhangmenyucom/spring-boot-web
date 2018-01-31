@@ -1012,7 +1012,7 @@
     <inspection_tool class="IndexOfReplaceableByContains" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IndexZeroUsage" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="InfiniteLoopJS" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="InfiniteLoopStatement" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InfiniteLoopStatement" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="InfiniteRecursion" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="InfiniteRecursionJS" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="InjectedReferences" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -2264,7 +2264,7 @@
     <inspection_tool class="UseOfObsoleteDateTimeApi" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="UseOfProcessBuilder" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UseOfPropertiesAsHashtable" enabled="false" level="ERROR" enabled_by_default="false" />
-    <inspection_tool class="UseOfSunClasses" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UseOfSunClasses" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="UtilSchemaInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UtilityClass" enabled="false" level="ERROR" enabled_by_default="false">
       <option name="ignorableAnnotations">

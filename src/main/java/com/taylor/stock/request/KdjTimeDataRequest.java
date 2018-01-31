@@ -1,7 +1,8 @@
 package com.taylor.stock.request;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
-import com.taylor.common.JsonUtil;
+import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.kdj.KdjTimeBean;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
@@ -16,13 +17,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.taylor.common.SoundUtil.paly;
+
 /**
  * @author taylor
  */
 public class KdjTimeDataRequest {
     private static PostMethod method = new PostMethod("https://gupiao.nicaifu.com/Stock_router.php");
 
-    public static String postOrder(String stockCode) {
+    public static synchronized String postOrder(String stockCode) {
         StringBuilder stringBuffer = null;
         try {
             HttpClient client = new HttpClient();
@@ -32,6 +35,7 @@ public class KdjTimeDataRequest {
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
+            method.setRequestHeader("Connection", "keep-alive");
             method.getParams().setParameter("http.protocol.cookie-policy", CookiePolicy.BROWSER_COMPATIBILITY);
             // 提交表单
             client.executeMethod(method);
@@ -81,21 +85,49 @@ public class KdjTimeDataRequest {
         return kdjTimeBean;
     }
 
-    public static boolean check(String stockCode) {
+    public static int check(String stockCode) {
         List<KdjTimeBean> kdjTimeList = getKdjTimeList(stockCode);
         KdjTimeBean fisrt = kdjTimeList.get(0);
         KdjTimeBean second = kdjTimeList.get(1);
 
-        if (second.getKdj_k() - second.getKdj_d() > 0 && fisrt.getKdj_k() - fisrt.getKdj_d() <= 0) {
-            return true;
+        if (second.getKdj_k() - second.getKdj_d() >= 0 && fisrt.getKdj_k() - fisrt.getKdj_d() <= 0) {
+            return 1;
         }
-        return false;
+        if (second.getKdj_k() - second.getKdj_d() <= 0 && fisrt.getKdj_k() - fisrt.getKdj_d() >= 0) {
+            return -1;
+        }
+        if(Math.abs(second.getKdj_k() - second.getKdj_d()) <= 3){
+            return 2;
+        }
+        return 0;
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) throws InterruptedException {
         for (String s : Constants.STOCK_CODE_SH.split(",")) {
-            if(check(s)){
-                System.out.println(s+"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            int check = check(s);
+            if (check == 1) {
+                paly("audio/dog.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "快抄底呀呀。。。。");
+                    Thread.sleep(5000);
+                }
+            }
+            if (check == -1) {
+                paly("audio/daolaAmen.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "快抛呀呀。。。。");
+                    Thread.sleep(5000);
+                }
+            }
+            if (check == 2) {
+                paly("audio/timeCount.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "预警,立马过来关注。。。。");
+                    Thread.sleep(5000);
+                }
             }
         }
     }
