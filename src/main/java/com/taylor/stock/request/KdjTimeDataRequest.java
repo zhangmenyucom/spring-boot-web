@@ -35,7 +35,6 @@ public class KdjTimeDataRequest {
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
-            method.setRequestHeader("Connection", "keep-alive");
             method.setContentChunked(true);
             method.getParams().setParameter("http.protocol.cookie-policy", CookiePolicy.BROWSER_COMPATIBILITY);
             // 提交表单
@@ -48,6 +47,7 @@ public class KdjTimeDataRequest {
             while ((str = br.readLine()) != null) {
                 stringBuffer.append(str);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,8 +2,10 @@ package com.taylor.stock.request;
 
 import com.taylor.common.CommonRequest;
 import com.taylor.entity.stock.StockFundInOut;
+import com.taylor.entity.stock.StockPanKouData;
 import lombok.Data;
 
+import static com.taylor.common.MailUtils.sendMail;
 import static com.taylor.common.SoundUtil.paly;
 
 /**
@@ -14,6 +16,8 @@ import static com.taylor.common.SoundUtil.paly;
 @Data
 public class KdjMonitor extends Thread {
 
+    public static volatile int a=0;
+
     private String stockCode;
 
     public  KdjMonitor(String stockCode){
@@ -22,13 +26,13 @@ public class KdjMonitor extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (a==0) {
             int check = KdjTimeDataRequest.check(stockCode);
             if(check==1){
                 paly("audio/goodNew.wav");
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "快抄底呀呀。。。。");
+                    sendMail(stockFundInOutData.getStockName()+"-->立即买进","股票("+stockFundInOutData.getStockName()+")出现临界值，请立即买进手上的股票");
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -40,7 +44,7 @@ public class KdjMonitor extends Thread {
                 paly("audio/alarm.wav");
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "快抛呀呀。。。。");
+                    sendMail(stockFundInOutData.getStockName()+"-->立即抛售","股票("+stockFundInOutData.getStockName()+")出现临界值，请立即抛售手上的股票");
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -50,9 +54,9 @@ public class KdjMonitor extends Thread {
             }
             if(check==2){
                 paly("audio/timeCount.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+                StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
                 if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "预警,立马过来关注。。。。");
+                    sendMail(stockFundInOutData.getStockName()+"-->预警","股票("+stockFundInOutData.getStockName()+")出现临界值，请留意");
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
