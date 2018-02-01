@@ -65,7 +65,7 @@ public class KdjMonitor extends Thread {
                 System.out.println(stockFundInOutData.getStockName()+"一切正常，正在密切监视");
             }
             try {
-                Thread.sleep(10000);
+                Thread.sleep(60000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
