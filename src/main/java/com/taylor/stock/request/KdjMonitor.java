@@ -1,7 +1,6 @@
 package com.taylor.stock.request;
 
 import com.taylor.common.CommonRequest;
-import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
 import lombok.Data;
 
@@ -28,9 +27,9 @@ public class KdjMonitor extends Thread {
     public void run() {
         while (a==0) {
             int check = KdjTimeDataRequest.check(stockCode);
+            StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
             if(check==1){
                 paly("audio/goodNew.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 if(stockFundInOutData!=null) {
                     sendMail(stockFundInOutData.getStockName()+"-->立即买进","股票("+stockFundInOutData.getStockName()+")出现临界值，请立即买进手上的股票");
                     try {
@@ -42,7 +41,6 @@ public class KdjMonitor extends Thread {
             }
             if(check==-1){
                 paly("audio/alarm.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 if(stockFundInOutData!=null) {
                     sendMail(stockFundInOutData.getStockName()+"-->立即抛售","股票("+stockFundInOutData.getStockName()+")出现临界值，请立即抛售手上的股票");
                     try {
@@ -54,7 +52,6 @@ public class KdjMonitor extends Thread {
             }
             if(check==2){
                 paly("audio/timeCount.wav");
-                StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
                 if(stockFundInOutData!=null) {
                     sendMail(stockFundInOutData.getStockName()+"-->预警","股票("+stockFundInOutData.getStockName()+")出现临界值，请留意");
                     try {
@@ -63,6 +60,9 @@ public class KdjMonitor extends Thread {
                         e.printStackTrace();
                     }
                 }
+            }
+            if(check==0){
+                System.out.println(stockFundInOutData.getStockName()+"一切正常，正在密切监视");
             }
             try {
                 Thread.sleep(10000);
