@@ -86,9 +86,7 @@ public class KdjMonitor extends Thread {
         try {
             SimpleDateFormat format = new SimpleDateFormat(type);
             Date sourcedate = format.parse(source);
-            System.out.println(sourcedate);
             Date tragetdate = format.parse(traget);
-            System.out.println(tragetdate);
             ret = sourcedate.compareTo(tragetdate);
         } catch (ParseException e) {
             e.printStackTrace();
