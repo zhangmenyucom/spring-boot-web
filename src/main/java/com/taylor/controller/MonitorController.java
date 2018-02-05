@@ -28,7 +28,9 @@ public class MonitorController {
     @RequestMapping("/start")
     public String startMonitor() {
         KdjMonitor.a = 0;
-        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
+        StockOnShelf stockOnShelfQuery = new StockOnShelf();
+        stockOnShelfQuery.setStatus(1);
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         String stockStr="";
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             new KdjMonitor(stockOnShelf.getStockCode()).start();
