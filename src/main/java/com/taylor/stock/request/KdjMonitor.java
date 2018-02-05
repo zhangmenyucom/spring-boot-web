@@ -30,6 +30,15 @@ public class KdjMonitor extends Thread {
     @Override
     public void run() {
         while (a == 0) {
+            if(DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "15:00", "HH:mm")>=0 || DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "9:30", "HH:mm")<=0 ||(DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "11:30", "HH:mm")>0 && DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "13:00", "HH:mm")<=0)){
+                System.out.println("提示：非交易时间，不执行监控");
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }
             /**如果超过14：40则逢高抛出所有股票**/
             if(DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "14:40", "HH:mm")>=0){
                 paly("audio/alarm.wav");
@@ -49,7 +58,7 @@ public class KdjMonitor extends Thread {
                 }
             }
             if (check == -1) {
-                paly("audio/alarm.wav");
+                paly("audio/pur-water.wav");
                 if (stockFundInOutData != null) {
                     sendMail(stockFundInOutData.getStockName() + "-->立即抛售", "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请立即抛售手上的股票");
                     try {
