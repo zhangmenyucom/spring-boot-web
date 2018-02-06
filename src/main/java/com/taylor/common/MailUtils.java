@@ -40,7 +40,7 @@ public class MailUtils {
     /**
      * 授权密码 通过QQ邮箱设置->账户->POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务->开启POP3/SMTP服务获取
      **/
-    private static final String PWD = "poxjhtixdejwcage";
+    private static final String PWD = "vzsyoelpnzbsbghj";
 
     private String[] to;
     /**
@@ -183,5 +183,9 @@ public class MailUtils {
             System.out.println("发送邮件失败！");
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        sendMail("test","test");
     }
 }

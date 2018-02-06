@@ -2,6 +2,7 @@ package com.taylor.stock.request;
 
 import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
+import com.taylor.common.KLineTypeEnum;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.kdj.KdjTimeBean;
 import org.apache.commons.httpclient.HttpClient;
@@ -27,13 +28,21 @@ import static com.taylor.common.SoundUtil.paly;
 public class KdjTimeDataRequest {
     private static PostMethod method = new PostMethod("https://gupiao.nicaifu.com/Stock_router.php");
 
-    public static synchronized String postOrder(String stockCode) {
+    public static synchronized String postOrder(String stockCode,KLineTypeEnum kLineTypeEnum) {
         StringBuilder stringBuffer = null;
         try {
             HttpClient client = new HttpClient();
             // 表单域的值,既post传入的key=value
             String code = stockCode.substring(2, stockCode.length()) + "." + stockCode.substring(0, 2).toUpperCase();
-            NameValuePair[] data = {new NameValuePair("path", "/stock/stock/k_line"), new NameValuePair("data[prod_code]", code), new NameValuePair("data[candle_period]", "2"), new NameValuePair("data[candle_mode]", "1"), new NameValuePair("data[data_count]", "2"), new NameValuePair("data[exFieldArr]", "kdj"), new NameValuePair("ts", new Date().getTime() + "")};
+            NameValuePair[] data = {
+                    new NameValuePair("path", "/stock/stock/k_line"),
+                    new NameValuePair("data[prod_code]", code),
+                    new NameValuePair("data[candle_period]", kLineTypeEnum.getKey()+""),
+                    new NameValuePair("data[candle_mode]", "1"),
+                    new NameValuePair("data[data_count]", "2"),
+                    new NameValuePair("data[exFieldArr]", "kdj"),
+                    new NameValuePair("ts", new Date().getTime() + "")
+            };
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
@@ -56,8 +65,8 @@ public class KdjTimeDataRequest {
         return stringBuffer.toString();
     }
 
-    public static List<KdjTimeBean> getKdjTimeList(String stockCode) {
-        String result = postOrder(stockCode);
+    public static List<KdjTimeBean> getKdjTimeList(String stockCode,KLineTypeEnum kLineTypeEnum) {
+        String result = postOrder(stockCode,kLineTypeEnum);
         String suResult = result.substring(result.indexOf("candle") + 8, result.indexOf("hq_type_code") - 3);
         String finalResult = suResult.substring(suResult.lastIndexOf(":") + 2, suResult.length() - 2).replace("[", "{").replace("]", "}");
         String firstBeanStr = finalResult.substring(finalResult.indexOf("{") + 1, finalResult.lastIndexOf("{") - 2).replace("\"", "");
@@ -88,8 +97,8 @@ public class KdjTimeDataRequest {
         return kdjTimeBean;
     }
 
-    public static int check(String stockCode) {
-        List<KdjTimeBean> kdjTimeList = getKdjTimeList(stockCode);
+    public static int check(String stockCode,KLineTypeEnum kLineTypeEnum) {
+        List<KdjTimeBean> kdjTimeList = getKdjTimeList(stockCode,kLineTypeEnum);
         KdjTimeBean fisrt = kdjTimeList.get(0);
         KdjTimeBean second = kdjTimeList.get(1);
 
@@ -99,14 +108,39 @@ public class KdjTimeDataRequest {
         if (second.getKdj_k() - second.getKdj_d() <= 0 && fisrt.getKdj_k() - fisrt.getKdj_d() >= 0) {
             return -1;
         }
-        if (Math.abs(second.getKdj_k() - second.getKdj_d()) <= 3) {
+        if(Math.abs(second.getKdj_k() - second.getKdj_d()) <= 5){
             return 2;
         }
         return 0;
     }
 
-    public static void main(String... args) {
-
-        postOrder("HKHSI");
+    public static void main(String... args) throws InterruptedException {
+        for (String s : Constants.STOCK_CODE_SH.split(",")) {
+            int check = check(s,KLineTypeEnum.FIVE_MINI);
+            if (check == 1) {
+                paly("audio/dog.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "快抄底呀呀。。。。");
+                    Thread.sleep(5000);
+                }
+            }
+            if (check == -1) {
+                paly("audio/daolaAmen.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "快抛呀呀。。。。");
+                    Thread.sleep(5000);
+                }
+            }
+            if (check == 2) {
+                paly("audio/timeCount.wav");
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
+                if(stockFundInOutData!=null) {
+                    System.out.println(stockFundInOutData.getStockName() + "预警,立马过来关注。。。。");
+                    Thread.sleep(5000);
+                }
+            }
+        }
     }
 }

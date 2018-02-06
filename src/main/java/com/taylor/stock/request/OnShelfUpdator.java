@@ -1,6 +1,7 @@
 package com.taylor.stock.request;
 
 import com.taylor.common.CommonRequest;
+import com.taylor.common.KLineTypeEnum;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.kdj.KdjTimeBean;
@@ -33,7 +34,7 @@ public class OnShelfUpdator extends Thread {
         while (a == 0) {
             List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
             for (StockOnShelf stockOnShelf : stockOnShelves) {
-                List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode());
+                List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI);
                 KdjTimeBean kdjTimeBean = kdjTimeList.get(kdjTimeList.size() - 1);
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
                 stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
