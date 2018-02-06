@@ -7,6 +7,7 @@ import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.TimeLineBean;
 import com.taylor.entity.stock.TimeStockDataResponse;
 import com.taylor.service.StockOnShelfService;
+import com.taylor.stock.request.OnShelfUpdator;
 import com.taylor.stock.request.QueryStockTimeDataRequest;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,11 @@ public class StockOnShelfServiceImpl extends AbstractCrudService<StockOnShelf, S
                 this.update(onShelf);
             }
         }
+    }
+
+    @Override
+    public void updateSelf(StockOnShelf stockOnShelfQuery) {
+        OnShelfUpdator.a = 0;
+        new OnShelfUpdator(stockOnShelfQuery, this).start();
     }
 }

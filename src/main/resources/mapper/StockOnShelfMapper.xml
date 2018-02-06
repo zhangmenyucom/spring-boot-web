@@ -10,6 +10,7 @@
         <result column="buy_price" property="buyPrice" jdbcType="DOUBLE"/>
         <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
         <result column="net_ratio" property="netRatio" jdbcType="DOUBLE"/>
+        <result column="five_mini_ratio" property="fiveMiniRatio" jdbcType="DOUBLE"/>
         <result column="sold_price" property="soldPrice" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
@@ -23,6 +24,7 @@
         t.current_price,
         t.sold_price,
         t.net_ratio,
+        t.five_mini_ratio,
         t.recmd_operate,
         t.status
     </sql>
@@ -52,9 +54,15 @@
     <update id="update">
         UPDATE stock_on_shelf
         SET
-        id=#{entity.id,jdbcType=BIGINT},
+        id=#{entity.id,jdbcType=BIGINT}
         <if test="entity.currentPrice!=null">
-            current_price=#{entity.currentPrice,jdbcType=DOUBLE}
+            ,current_price=#{entity.currentPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="entity.netRatio!=null">
+            ,net_ratio=#{entity.netRatio,jdbcType=DOUBLE}
+        </if>
+        <if test="entity.fiveMiniRatio!=null">
+           , five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
         </if>
         WHERE id = #{entity.id,jdbcType=BIGINT}
     </update>

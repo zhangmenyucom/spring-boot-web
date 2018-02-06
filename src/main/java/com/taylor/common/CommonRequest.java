@@ -2,6 +2,7 @@ package com.taylor.common;
 
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.NameValuePair;
@@ -19,6 +20,7 @@ import java.net.URL;
  * @desc:
  * @date: 2018/1/10 1:37
  */
+@Slf4j
 public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
@@ -51,8 +53,8 @@ public class CommonRequest<T> {
                 retryCount.set(retryCount.get() + 1);
                 return executeRequest(in, method);
             }
-            e.printStackTrace();
             ProcessCountor.FAIL_COUNT.incrementAndGet();
+           log.info("错误e{}",e.getMessage());
         }
         retryCount.set(0);
         if (!StringUtil.isEmpty(stringBuider.toString())) {
@@ -158,13 +160,13 @@ public class CommonRequest<T> {
             stockPanKouData.setTopPrice(Double.valueOf(datas[47]));
             stockPanKouData.setMaxPrice(Double.valueOf(datas[33]));
             stockPanKouData.setMiniPrice(Double.valueOf(datas[34]));
+            stockPanKouData.setExchangeValue(Double.valueOf(datas[37]) / 10000);
             stockPanKouData.setExchangeRatio(Double.valueOf(datas[38]));
             stockPanKouData.setMarketEarnActive(Double.valueOf(datas[39]));
             stockPanKouData.setOuter(Double.valueOf(datas[7]) / 10000);
             stockPanKouData.setInner(Double.valueOf(datas[8]) / 10000);
             stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
             stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
-            stockPanKouData.setExchangeValue(Double.valueOf(datas[37]) / 10000);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>股票货架</title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: separate;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        table tr {
+            word-break: keep-all; /*缩小不换行*/
+        }
+
+        table td, table th {
+            border: 1px solid #cad9ea;
+            color: black;
+            height: 30px;
+        }
+
+        table thead th {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+        table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        table tr:nth-child(even) {
+            background: #F5FAFA;
+        }
+
+        .divOver {
+            background: burlywood !important;
+            border: solid 1px #d2dce3 !important;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <table>
+        <tr>
+            <th>股票代码</th>
+            <th>股票名称</th>
+            <th>当前价</th>
+            <th>5分钟涨幅</th>
+            <th>总涨幅</th>
+   </tr>
+        <tr th:each="stock: ${stockOnShelves}">
+            <td th:text="${stock.stockCode}"></td>
+            <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
+            <td th:text="${stock.currentPrice}"></td>
+            <td th:text="${stock.fiveMiniRatio!=null?#numbers.formatDecimal(stock.fiveMiniRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.fiveMiniRatio>0?'red':'green'}"></td>
+            <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
+        </tr>
+    </table>
+</div>
+<script language="javascript">
+    $(function () {
+        //当鼠标滑入时将div的class换成divOver
+        $('tr').hover(function () {
+                $(this).addClass('divOver');
+            }, function () {
+                //鼠标离开时移除divOver样式
+                $(this).removeClass('divOver');
+            }
+        );
+    });
+</script>
+</body>
+</html>

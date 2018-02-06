@@ -13,23 +13,37 @@ import java.io.Serializable;
 public class StockOnShelf implements Serializable{
 
     private static final long serialVersionUID = 3043197316971800509L;
+
     private Long id;
 
+    /**股票代码**/
     private String stockCode;
 
+    /**股票名称**/
     private String stockName;
 
+    /**买入数量**/
     private Integer amount;
 
+    /**成本价**/
     private Double buyPrice;
 
+    /**当前价**/
     private Double currentPrice;
 
+    /**售价**/
     private Double soldPrice;
 
-    private Double netRation;
+    /**涨跌**/
+    private Double netRatio;
 
+    /**5分钟涨跌**/
+    private Double fiveMiniRatio;
+
+
+    /**操作意见**/
     private String recmdOperate;
 
+    /**状态**/
     private Integer status;
 }

@@ -99,39 +99,14 @@ public class KdjTimeDataRequest {
         if (second.getKdj_k() - second.getKdj_d() <= 0 && fisrt.getKdj_k() - fisrt.getKdj_d() >= 0) {
             return -1;
         }
-        if(Math.abs(second.getKdj_k() - second.getKdj_d()) <= 3){
+        if (Math.abs(second.getKdj_k() - second.getKdj_d()) <= 3) {
             return 2;
         }
         return 0;
     }
 
-    public static void main(String... args) throws InterruptedException {
-        for (String s : Constants.STOCK_CODE_SH.split(",")) {
-            int check = check(s);
-            if (check == 1) {
-                paly("audio/dog.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
-                if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "快抄底呀呀。。。。");
-                    Thread.sleep(5000);
-                }
-            }
-            if (check == -1) {
-                paly("audio/daolaAmen.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
-                if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "快抛呀呀。。。。");
-                    Thread.sleep(5000);
-                }
-            }
-            if (check == 2) {
-                paly("audio/timeCount.wav");
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(s);
-                if(stockFundInOutData!=null) {
-                    System.out.println(stockFundInOutData.getStockName() + "预警,立马过来关注。。。。");
-                    Thread.sleep(5000);
-                }
-            }
-        }
+    public static void main(String... args) {
+
+        postOrder("HKHSI");
     }
 }

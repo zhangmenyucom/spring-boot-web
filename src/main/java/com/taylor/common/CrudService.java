@@ -2,6 +2,9 @@ package com.taylor.common;
 
 import java.util.List;
 
+/**
+ * @author taylor
+ */
 public interface CrudService<Entity,Query> {
 	
 	  Entity save(Entity entity);

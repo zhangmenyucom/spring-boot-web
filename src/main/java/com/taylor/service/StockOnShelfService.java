@@ -11,4 +11,5 @@ import com.taylor.entity.StockOnShelf;
  */
 public interface StockOnShelfService extends CrudService<StockOnShelf, StockOnShelf> {
     void listen();
+    void updateSelf(StockOnShelf stockOnShelf);
 }

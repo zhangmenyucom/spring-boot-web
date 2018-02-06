@@ -2,6 +2,7 @@ package com.taylor.service;
 
 import com.taylor.common.CrudService;
 import com.taylor.entity.RecmdStock;
+import com.taylor.entity.StockBaseInfo;
 
 /**
  * @author xiaolu.zhang
@@ -12,4 +13,6 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
 
 
     void checkResult();
+
+    int updateUpDownRatio(StockBaseInfo stockBaseInfo);
 }
