@@ -19,24 +19,34 @@ public class HelloController {
     public String index(Map<String, Object> map) {
         return "/index";
     }
+
     @RequestMapping("/top")
     public String top(Map<String, Object> map) {
         return "/top";
     }
+
     @RequestMapping("/bottom")
     public String bottom(Map<String, Object> map) {
         return "/bottom";
     }
+
     @RequestMapping("/main")
     public String main(Map<String, Object> map) {
         return "/main";
     }
+
     @RequestMapping("/left")
     public String left(Map<String, Object> map) {
         return "/left";
     }
+
     @RequestMapping("/swich")
     public String swich(Map<String, Object> map) {
         return "/swich";
+    }
+
+    @RequestMapping("/login")
+    public String login(Map<String, Object> map) {
+        return "/login";
     }
 }
