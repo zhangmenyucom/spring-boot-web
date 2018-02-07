@@ -17,7 +17,7 @@ import static com.taylor.common.SoundUtil.paly;
 @Data
 public class KdjFiveMiniMonitor extends Thread {
 
-    public static volatile int a=0;
+    public static volatile int a = 0;
 
     private String stockCode;
 
@@ -48,7 +48,7 @@ public class KdjFiveMiniMonitor extends Thread {
             int check = KdjTimeDataRequest.check(stockCode, kLineTypeEnum);
 
             /**关闭1分钟kdj监视**/
-            if (check != 2) {
+            if (check != 2 && check != 3) {
                 KdjOneMiniMonitor.a = 1;
             }
             StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
@@ -67,7 +67,16 @@ public class KdjFiveMiniMonitor extends Thread {
             if (check == 2) {
                 paly("audio/timeCount.wav");
                 if (stockFundInOutData != null) {
-                    sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请留意");
+                    sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有下跌趋势，请留意");
+                    /**同时启动1分钟kdj监视**/
+                    KdjOneMiniMonitor.a = 0;
+                    new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);
+                }
+            }
+            if (check == 3) {
+                paly("audio/timeCount.wav");
+                if (stockFundInOutData != null) {
+                    sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有上涨趋势，请留意");
                     /**同时启动1分钟kdj监视**/
                     KdjOneMiniMonitor.a = 0;
                     new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);

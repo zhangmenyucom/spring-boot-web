@@ -66,7 +66,19 @@ public class KdjOneMiniMonitor extends Thread {
             if (check == 2) {
                 paly("audio/timeCount.wav");
                 if (stockFundInOutData != null) {
-                    sendMail(kLineTypeEnum.getDescription()+stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请留意");
+                    sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有下跌趋势，请留意");
+                    /**同时启动1分钟kdj监视**/
+                    a = 0;
+                    new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);
+                }
+            }
+            if (check == 3) {
+                paly("audio/timeCount.wav");
+                if (stockFundInOutData != null) {
+                    sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有上涨趋势，请留意");
+                    /**同时启动1分钟kdj监视**/
+                    a = 0;
+                    new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);
                 }
             }
             if (check == 0) {

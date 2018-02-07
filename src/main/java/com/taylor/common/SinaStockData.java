@@ -15,7 +15,7 @@ public class SinaStockData {
     public static void main(String... args) {
         InputStreamReader isr = null;
         try {
-            String url = "http://hq.sinajs.cn/list=sz002721";
+            String url = "http://hq.sinajs.cn/list=sz002043";
             URL u = new URL(url);
             isr = new InputStreamReader(u.openStream(), "GBK");
             char[] cha = new char[1024];
