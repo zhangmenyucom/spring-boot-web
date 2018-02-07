@@ -46,7 +46,7 @@
       <option name="m_limit" value="1" />
     </inspection_tool>
     <inspection_tool class="AnonymousClassVariableHidesContainingMethodVariable" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="AnonymousFunctionJS" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="AnonymousFunctionJS" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AnonymousInnerClass" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AnonymousInnerClassMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Tests" level="WARNING" enabled="false" />
@@ -263,7 +263,7 @@
     <inspection_tool class="CheckImageSize" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CheckNodeTest" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CheckStyle" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="CheckTagEmptyBody" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="CheckTagEmptyBody" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="CheckValidXmlInScriptTagBody" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CheckXmlFileWithXercesValidator" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CheckedExceptionClass" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -918,7 +918,7 @@
     <inspection_tool class="HibernateResource" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="insideTryAllowed" value="false" />
     </inspection_tool>
-    <inspection_tool class="HtmlDeprecatedTag" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="HtmlDeprecatedTag" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="HtmlFormInputWithoutLabel" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="HtmlNonExistentInternetResource" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="HtmlPresentationalElement" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -927,7 +927,18 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="0" />
+          <list size="10">
+            <item index="0" class="java.lang.String" itemvalue="frameborder" />
+            <item index="1" class="java.lang.String" itemvalue="cols" />
+            <item index="2" class="java.lang.String" itemvalue="border" />
+            <item index="3" class="java.lang.String" itemvalue="framespacing" />
+            <item index="4" class="java.lang.String" itemvalue="onselectstart" />
+            <item index="5" class="java.lang.String" itemvalue="scr" />
+            <item index="6" class="java.lang.String" itemvalue="ondragstart" />
+            <item index="7" class="java.lang.String" itemvalue="oncontextmenu" />
+            <item index="8" class="java.lang.String" itemvalue="topmargin" />
+            <item index="9" class="java.lang.String" itemvalue="leftmargin" />
+          </list>
         </value>
       </option>
       <option name="myCustomValuesEnabled" value="true" />
