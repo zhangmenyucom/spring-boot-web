@@ -1,8 +1,10 @@
 package com.taylor.controller;
 
+import com.taylor.entity.StockUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -12,8 +14,8 @@ import java.util.Map;
  * @version v.0.1
  */
 @Controller
-@RequestMapping("/test/")
-public class HelloController {
+@RequestMapping("/")
+public class PageController {
 
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
@@ -31,8 +33,13 @@ public class HelloController {
     }
 
     @RequestMapping("/main")
-    public String main(Map<String, Object> map) {
-        return "/main";
+    public String main(Map<String, Object> map, HttpServletRequest request) {
+        if(request.getSession().getAttribute("user")!=null) {
+            StockUser stockUser = (StockUser) request.getSession().getAttribute("user");
+            map.put("user",stockUser);
+            return "/main";
+        }
+        return "/login";
     }
 
     @RequestMapping("/left")
@@ -43,10 +50,5 @@ public class HelloController {
     @RequestMapping("/swich")
     public String swich(Map<String, Object> map) {
         return "/swich";
-    }
-
-    @RequestMapping("/login")
-    public String login(Map<String, Object> map) {
-        return "/login";
     }
 }

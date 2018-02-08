@@ -22,14 +22,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/monitor/")
 public class MonitorController {
-    private static volatile int a = 0;
 
     @Autowired
     private StockOnShelfService stockOnShelfService;
 
     @RequestMapping("/start")
     public String startMonitor() {
-        KdjFiveMiniMonitor.a = 0;
+        if(KdjFiveMiniMonitor.a == 1){
+            return "已经开启，无需再次开启监控";
+        }
+        KdjFiveMiniMonitor.a=1;
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
@@ -38,20 +40,42 @@ public class MonitorController {
             new KdjFiveMiniMonitor(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI).start();
             stockStr += " " + stockOnShelf.getStockName();
         }
-        return "正在监控下列股票" + stockStr;
+        return "kdj 5分钟线，每90秒执行一次,正在监控下列股票" + stockStr;
+    }
+
+    @RequestMapping("/startOne")
+    public String startOneMonitor() {
+        if(KdjOneMiniMonitor.a ==1){
+            return "已经开启，无需再次开启监控";
+        }
+        KdjOneMiniMonitor.a=1;
+        StockOnShelf stockOnShelfQuery = new StockOnShelf();
+        stockOnShelfQuery.setStatus(1);
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
+        String stockStr = "";
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            new KdjOneMiniMonitor(stockOnShelf.getStockCode(), KLineTypeEnum.ONE_MINI).start();
+            stockStr += " " + stockOnShelf.getStockName();
+        }
+        return "kdj 1分钟线，每30秒执行一次,正在监控下列股票" + stockStr;
     }
 
     @RequestMapping("/stop")
     public String helloJsp(Map<String, Object> map) {
-        KdjFiveMiniMonitor.a = 1;
-        KdjOneMiniMonitor.a = 1;
-        return "已停止";
+        KdjFiveMiniMonitor.a = 0;
+        KdjOneMiniMonitor.a = 0;
+        return "5分钟kjd已停止监控";
+    }
+
+    @RequestMapping("/stopOne")
+    public String stopOne(Map<String, Object> map) {
+        KdjOneMiniMonitor.a = 0;
+        return "1分钟kjd已停止监控";
     }
 
     @RequestMapping("/onshelf/update")
     public String updateStart(Map<String, Object> map) {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
-        stockOnShelfQuery.setStatus(1);
         stockOnShelfService.updateSelf(stockOnShelfQuery);
         return "正在更新中....";
     }

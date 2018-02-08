@@ -39,7 +39,7 @@ public class StockOnShelfServiceImpl extends AbstractCrudService<StockOnShelf, S
 
     @Override
     public void updateSelf(StockOnShelf stockOnShelfQuery) {
-        OnShelfUpdator.a = 0;
+        OnShelfUpdator.a = 1;
         new OnShelfUpdator(stockOnShelfQuery, this).start();
     }
 }

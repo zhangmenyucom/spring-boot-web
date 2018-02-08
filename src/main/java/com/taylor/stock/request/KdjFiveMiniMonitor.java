@@ -6,6 +6,9 @@ import com.taylor.common.StockUtils;
 import com.taylor.entity.stock.StockPanKouData;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static com.taylor.common.MailUtils.sendMail;
 import static com.taylor.common.SoundUtil.paly;
 
@@ -30,9 +33,9 @@ public class KdjFiveMiniMonitor extends Thread {
 
     @Override
     public void run() {
-        while (a == 0) {
+        while (a == 1) {
             if (StockUtils.noNeedMonotorTime()) {
-                System.out.println("提示：非交易时间，不执行监控");
+                System.out.println(kLineTypeEnum.getDescription()+" 提示：非交易时间，不执行监控，当前时间   " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
                 try {
                     Thread.sleep(60000);
                 } catch (InterruptedException e) {
@@ -47,19 +50,15 @@ public class KdjFiveMiniMonitor extends Thread {
             }
             int check = KdjTimeDataRequest.check(stockCode, kLineTypeEnum);
 
-            /**关闭1分钟kdj监视**/
-            if (check != 2 && check != 3) {
-                KdjOneMiniMonitor.a = 1;
-            }
             StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
             if (check == 1) {
-                paly("audio/goodNew.wav");
+                paly("audio/chongfenghao.wav");
                 if (stockFundInOutData != null) {
                     sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->立即买进", "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请立即买进手上的股票");
                 }
             }
             if (check == -1) {
-                paly("audio/alarm.wav");
+                paly("audio/pur-water.wav");
                 if (stockFundInOutData != null) {
                     sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->立即抛售", "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请立即抛售手上的股票");
                 }
@@ -69,7 +68,7 @@ public class KdjFiveMiniMonitor extends Thread {
                 if (stockFundInOutData != null) {
                     sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有下跌趋势，请留意");
                     /**同时启动1分钟kdj监视**/
-                    KdjOneMiniMonitor.a = 0;
+                    KdjOneMiniMonitor.a = 1;
                     new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);
                 }
             }
@@ -78,7 +77,7 @@ public class KdjFiveMiniMonitor extends Thread {
                 if (stockFundInOutData != null) {
                     sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警", "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有上涨趋势，请留意");
                     /**同时启动1分钟kdj监视**/
-                    KdjOneMiniMonitor.a = 0;
+                    KdjOneMiniMonitor.a = 1;
                     new KdjOneMiniMonitor(stockCode, KLineTypeEnum.ONE_MINI);
                 }
             }

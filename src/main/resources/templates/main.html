@@ -1,7 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>主要内容区main</title>
+    <title>主要内容区</title>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <link href="/css/main.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="/images/main/favicon.ico"/>
@@ -38,6 +38,16 @@
             padding: 0 0 0 15px;
             line-height: 35px;
             float: left;
+        }
+
+        #main .main-order .sec {
+            width: 100%;
+            background: url(/images/main/main_r2_c2.jpg) no-repeat 0 15px;
+            padding: 0 0 0 15px;
+            line-height: 35px;
+            float: left;
+            color:red;
+            font-weight: bold;
         }
 
         .left {
@@ -77,8 +87,8 @@
 
         div.main-corpy {
             font-size: 14px;
-            font-weight: bold;
-            color: #4e4e4e;
+            font-weight: bolder;
+            color: red;
             background: url(/images/main/main_r6_c2.jpg) no-repeat 0 33px;
             width: 100%;
             padding: 30px 0 0 20px;
@@ -96,9 +106,23 @@
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">
     <tr>
         <td colspan="2" align="left" valign="top">
-            <span class="time"><strong>上午好！admin</strong><u>[超级管理员]</u></span>
+            <span class="time"><strong>上午好！<span th:text="${user.userName}"></span></strong><u>[超级管理员]</u></span>
             <div class="top"><span class="left">您上次的登灵时间：2012-05-03  12:00   登录IP：127.0.0.1 &nbsp;&nbsp;&nbsp;&nbsp;如非您本人操作，请及时</span><a href="index.html" target="mainFrame" onFocus="this.blur()">更改密码</a></div>
             <div class="sec">这是您第<span class="num">80</span>次,登录！</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="left" valign="top">
+            <div class="main-corpy">铁的纪律，血的教训</div>
+            <div class="main-order">
+                <ol>
+                    <li class="sec">1.严格遵守策略纪律！</li>
+                    <li class="sec">2.不要妄想把握住每次机会，错了要及时止错</li>
+                    <li class="sec">3.只在上次抛点之下买进，否则收手</li>
+                    <li class="sec">4.14：40后不进行交易</li>
+                    <li class="sec">5.开市后，形式不明朗，见好就收，切记！</li>
+                </ol>
+            </div>
         </td>
     </tr>
     <tr>
@@ -120,14 +144,6 @@
                 MYSQL版本：5.0.45-community-nt<br/>
                 魔术引用：开启 (建议开启)<br/>
                 使用域名：192.168.1.124 <br/>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" align="left" valign="top">
-            <div class="main-corpy">系统提示</div>
-            <div class="main-order">1=>如您在使用过程有发现出错请及时与我们取得联系；为保证您得到我们的后续服务，强烈建议您购买我们的正版系统或向我们定制系统！<br/>
-                2=>强烈建议您将IE7以上版本或其他的浏览器
             </div>
         </td>
     </tr>

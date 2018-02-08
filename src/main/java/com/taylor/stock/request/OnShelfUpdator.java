@@ -31,7 +31,7 @@ public class OnShelfUpdator extends Thread {
 
     @Override
     public void run() {
-        while (a == 0) {
+        while (a == 1) {
             List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
             for (StockOnShelf stockOnShelf : stockOnShelves) {
                 List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI);

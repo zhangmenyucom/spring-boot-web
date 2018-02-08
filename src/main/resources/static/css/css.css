@@ -11,7 +11,7 @@ body {
     margin-right: auto;
     margin-top: auto;
     width: 100%;
-    color: #656565;
+    color: #000;
 }
 
 img {
@@ -66,7 +66,7 @@ ul, li {
     padding: 5px 4px 0 4px;
     height: 24px;
     color: #bb1414;
-    background: #656565;
+    background: #000;
 }
 
 .inp2 {
@@ -76,7 +76,7 @@ ul, li {
     padding: 5px 4px 0 4px;
     height: 24px;
     color: #bb1414;
-    background: #656565;
+    background: #000;
 }
 
 .cor1 {
@@ -94,7 +94,7 @@ ul, li {
 
 a:link, a:visited {
     font-size: 12px;
-    color: #656565;
+    color: #000;
     font-weight: normal;
     text-decoration: none;
     font-family: "Microsoft YaHei", "Tahoma", "Arial", '宋体', serif;
@@ -147,7 +147,7 @@ a.black:hover, a.black:active {
     font-size: 14px;
     padding: 0 0 25px 0;
     width: 112px;
-    color: #999;
+    color: #000;
 }
 
 #header-right {
@@ -282,7 +282,7 @@ div.sdmenu div a {
     display: block;
     height: 25px;
     line-height: 25px;
-    color: #656565;
+    color: #000;
     background: url(/images/main/line.jpg) no-repeat 25px 15px #f2f0f5;
 }
 

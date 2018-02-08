@@ -51,7 +51,7 @@ public class QueryStockDayDataRequestWithGodenKdjCount extends Thread {
     public void run() {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(100 + "");
+        stockQueryBean.setCount(60 + "");
         stockQueryBean.setCuid("xxx");
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
