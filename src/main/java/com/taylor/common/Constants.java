@@ -19,6 +19,9 @@ public class Constants {
     /***查询股票周K信息**/
     public static final String METHOD_URL_STOCK_WEEK_INFO = "https://gupiao.baidu.com/api/stocks/stockweekbar";
 
+    /***查询股票月K信息**/
+    public static final String METHOD_URL_STOCK_MONTH_INFO = "https://gupiao.baidu.com/api/stocks/stockmonthbar";
+
     /***查询股票资金流入情况信息**/
     public static final String METHOD_URL_STOCK_FOUNDS_IN_OUT = "https://gupiao.baidu.com/api/stocks/stockfunds";
 

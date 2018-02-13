@@ -18,7 +18,7 @@ import java.util.List;
  * @author taylor
  */
 @Slf4j
-public class QueryStockWeekDataRequest {
+public class QueryStockMonthDataRequest {
 
     public static List<MashData> queryLatestResult(String stockCode, HttpMethodBase method) {
         StockQueryBean stockQueryBean = new StockQueryBean();
@@ -49,7 +49,7 @@ public class QueryStockWeekDataRequest {
     }
 
     public static void main(String... args) {
-        GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
+        GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_MONTH_INFO);
         System.out.println(queryLatestResult("SZ002186".toLowerCase(), method));
 
     }

@@ -1,9 +1,6 @@
 package com.taylor.common;
 
 
-import org.springframework.util.StopWatch;
-
-import java.text.DecimalFormat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -14,13 +11,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProcessCountor extends Thread {
     public static AtomicInteger CURRENT = new AtomicInteger(0);
 
-    public static AtomicInteger  TOTAL = new AtomicInteger(3448);
+    public static AtomicInteger TOTAL = new AtomicInteger(3448);
 
-    public static AtomicInteger  FAIL_COUNT = new AtomicInteger(0);
+    public static AtomicInteger FAIL_COUNT = new AtomicInteger(0);
 
     @Override
     public void run() {
-        StopWatch stopWatch=new StopWatch();
+       /* StopWatch stopWatch=new StopWatch();
         stopWatch.start();
         DecimalFormat df   = new DecimalFormat("######0.00");
         while (CURRENT.intValue() < (TOTAL.get()-FAIL_COUNT.get())) {
@@ -33,6 +30,7 @@ public class ProcessCountor extends Thread {
         }
         stopWatch.stop();
         System.out.println("处理完毕，总用时："+(int)stopWatch.getTotalTimeSeconds()/60+"分钟"+(int)stopWatch.getTotalTimeSeconds()%60+"秒");
+    }*/
     }
 }
 

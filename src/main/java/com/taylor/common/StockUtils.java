@@ -1,8 +1,16 @@
 package com.taylor.common;
 
+import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.entity.stock.kdj.CheckResultBean;
+import com.taylor.stock.request.KdjTimeDataRequest;
+import com.taylor.stock.request.MacdTimeDataRequest;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.taylor.common.MailUtils.sendMail;
+import static com.taylor.common.SoundUtil.paly;
 
 /**
  * @author xiaolu.zhang
@@ -41,6 +49,42 @@ public class StockUtils {
      * @return
      */
     public static boolean dangerTime() {
-        return DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "14:40", "HH:mm") >= 0;
+        return DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "14:40", "HH:mm") >= 0;
+    }
+
+
+    /**数据监控，邮件预警**/
+    public static void processStock(String stockCode,KLineTypeEnum kLineTypeEnum){
+        CheckResultBean kdjCheck = KdjTimeDataRequest.check(stockCode, kLineTypeEnum);
+        CheckResultBean macdCheck = MacdTimeDataRequest.check(stockCode, kLineTypeEnum);
+
+        StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
+        if (kdjCheck.getCode() == 1) {
+            paly("audio/chongfenghao.wav");
+            if (stockFundInOutData != null) {
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->建议买进("+macdCheck.getMessage()+")"+"股票(" + stockFundInOutData.getStockName() + ")出现临界值，请立即买进手上的股票","");
+            }
+        }
+        if (kdjCheck.getCode() == -1) {
+            paly("audio/pur-water.wav");
+            if (stockFundInOutData != null) {
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->建议抛售("+macdCheck.getMessage()+")"+ "股票(" + stockFundInOutData.getStockName() + ")出现临界值，请立即抛售手上的股票","");
+            }
+        }
+        if (kdjCheck.getCode() == 2) {
+            paly("audio/timeCount.wav");
+            if (stockFundInOutData != null) {
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警("+macdCheck.getMessage()+")"+"股票(" + stockFundInOutData.getStockName() + ")出现临界值,有下跌趋势，请留意","");
+            }
+        }
+        if (kdjCheck.getCode() == 3) {
+            paly("audio/timeCount.wav");
+            if (stockFundInOutData != null) {
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警("+macdCheck.getMessage()+")"+ "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有上涨趋势，请留意","");
+            }
+        }
+        if (kdjCheck.getCode() == 0) {
+            System.out.println(stockFundInOutData.getStockName() + "一切正常，正在密切监视");
+        }
     }
 }

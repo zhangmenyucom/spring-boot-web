@@ -119,4 +119,14 @@ public class StockDataKdjController extends BaseAction {
         stockDataService.processDataWithKDJCount(new GodenKdjCountStrategy());
         return "正在分析，请耐心等待";
     }
+
+    /**
+     * kdj日周月上翘
+     **/
+    @ResponseBody
+    @RequestMapping("/start/day_week_month_up")
+    public String dayWeekMonthUp() throws IOException {
+        stockDataService.processData(new KdjDayWeekMonthXStrategy());
+        return "正在分析，请耐心等待";
+    }
 }
