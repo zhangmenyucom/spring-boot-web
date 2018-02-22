@@ -1,6 +1,7 @@
 package com.taylor.controller;
 
 import com.taylor.entity.StockUser;
+import com.taylor.stock.common.StrategyEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,6 +45,7 @@ public class PageController {
 
     @RequestMapping("/left")
     public String left(Map<String, Object> map) {
+        map.put("strategyEnumMap", StrategyEnum.map);
         return "/left";
     }
 

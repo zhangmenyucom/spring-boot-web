@@ -4,7 +4,9 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -14,9 +16,10 @@ import java.util.List;
  * @date: 2018/1/9 0:21
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TMacdStrategy extends IStrategy {
     public TMacdStrategy() {
-        super("T型结构，且macd<=0，kdj>=0,换手率大于1");
+        super(StrategyEnum.TYPE14);
     }
 
     @Override

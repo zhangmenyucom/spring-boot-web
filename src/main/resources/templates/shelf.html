@@ -52,6 +52,8 @@
             <th>当前价</th>
             <th>5分钟涨幅</th>
             <th>总涨幅</th>
+            <th>K线</th>
+            <th>股诊</th>
    </tr>
         <tr th:each="stock: ${stockOnShelves}">
             <td th:text="${stock.stockCode}"></td>
@@ -59,6 +61,8 @@
             <td th:text="${stock.currentPrice}"></td>
             <td th:text="${stock.fiveMiniRatio!=null?#numbers.formatDecimal(stock.fiveMiniRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.fiveMiniRatio>0?'red':'green'}"></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
+            <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
+            <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
         </tr>
     </table>
 </div>

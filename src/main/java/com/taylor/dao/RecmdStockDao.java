@@ -5,6 +5,8 @@ import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -16,4 +18,6 @@ public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
      * @desc
      */
     int updateRecmdTodayUpDownRatio(@Param("stockBaseInfo") StockBaseInfo stockBaseInfo);
+
+    List<RecmdStock> getRecmdStockByCountTime();
 }

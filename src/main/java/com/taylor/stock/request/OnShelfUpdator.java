@@ -25,28 +25,26 @@ public class OnShelfUpdator extends Thread {
     private StockOnShelf stockOnShelfQuery;
 
     public OnShelfUpdator(StockOnShelf stockOnShelfQuery, StockOnShelfService stockOnShelfService) {
-        this.stockOnShelfService=stockOnShelfService;
-        this.stockOnShelfQuery=stockOnShelfQuery;
+        this.stockOnShelfService = stockOnShelfService;
+        this.stockOnShelfQuery = stockOnShelfQuery;
     }
 
     @Override
     public void run() {
-        while (a == 1) {
-            List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
-            for (StockOnShelf stockOnShelf : stockOnShelves) {
-                List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI);
-                KdjTimeBean kdjTimeBean = kdjTimeList.get(kdjTimeList.size() - 1);
-                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
-                stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
-                stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
-                stockOnShelf.setFiveMiniRatio(kdjTimeBean.getC_px_change_percent());
-                stockOnShelfService.update(stockOnShelf);
-            }
-            try {
-                Thread.sleep(30000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI);
+            KdjTimeBean kdjTimeBean = kdjTimeList.get(kdjTimeList.size() - 1);
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
+            stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
+            stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
+            stockOnShelf.setFiveMiniRatio(kdjTimeBean.getC_px_change_percent());
+            stockOnShelfService.update(stockOnShelf);
+        }
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

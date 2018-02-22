@@ -63,6 +63,9 @@ public class RecmdStock {
     /**操作意见**/
     private String recmdOperate;
 
+    /**算法策略类型**/
+    private Integer strategyType ;
+
     /**算法策略**/
     private String strategy;
 

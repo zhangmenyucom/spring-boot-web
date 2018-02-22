@@ -29,7 +29,7 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
     @Override
     public void processData(IStrategy strategy) {
         RecmdStock recmdStock = new RecmdStock();
-        recmdStock.setStrategy(strategy.getName());
+        recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
         recmdStockService.del(recmdStock);
         new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SH.subList(0, STOCK_CODE_LIST_SH.size() / 4), "stock_sh_4-1").start();
@@ -48,7 +48,7 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
     @Override
     public void processDataWithKDJCount(GodenKdjCountStrategy strategy) {
         RecmdStock recmdStock = new RecmdStock();
-        recmdStock.setStrategy(strategy.getName());
+        recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
         recmdStockService.del(recmdStock);
         new QueryStockDayDataRequestWithGodenKdjCount(strategy, recmdStockService, STOCK_CODE_LIST_SH.subList(0, STOCK_CODE_LIST_SH.size() / 4), "stock_sh_4-1").start();

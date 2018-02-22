@@ -4,14 +4,13 @@ import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockOnShelfService;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.OnShelfUpdator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +29,23 @@ public class StockViewController {
     @Autowired
     private StockOnShelfService stockOnShelfService;
 
-    @RequestMapping("/recmd")
-    public String recomand(Map<String, Object> map) {
-        List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
+    @RequestMapping("/recmd/{type}")
+    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type) {
+        RecmdStock recmdStock = new RecmdStock();
+        List<RecmdStock> recmdStocks;
+        if (type == StrategyEnum.TYPE15.getCode()) {
+            recmdStocks = recmdStockService.getRecmdStockByCountTime();
+
+        } else {
+            if (type != -1) {
+                recmdStock.setStrategyType(type);
+            }
+            recmdStocks = recmdStockService.find(recmdStock);
+        }
+        map.put("type",type);
         map.put("recmdList", recmdStocks);
+        map.put("strategyName", StrategyEnum.getEnumValue(type));
+
         return "/recmd";
     }
 
@@ -52,9 +64,10 @@ public class StockViewController {
         map.put("stockOnShelves", stockOnShelves);
         return "/shelf";
     }
+
     @RequestMapping("/updateShelf")
     public String updateShlef(Map<String, Object> map) {
-        if(OnShelfUpdator.a==0){
+        if (OnShelfUpdator.a == 0) {
             StockOnShelf stockOnShelfUpdate = new StockOnShelf();
             stockOnShelfService.updateSelf(stockOnShelfUpdate);
         }

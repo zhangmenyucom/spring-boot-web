@@ -2,6 +2,7 @@ package com.taylor.stock.strategy;
 
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
+import com.taylor.stock.common.StrategyEnum;
 
 import java.util.List;
 
@@ -13,12 +14,11 @@ import java.util.List;
 public class Kdj5Strategy extends IStrategy {
 
     public Kdj5Strategy() {
-        super("kdj差值小于5");
+        super(StrategyEnum.TYPE2);
     }
 
     @Override
     public int doCheck(List<MashData> mashDataList) {
-        int kdDiff = 5;
         MashData today = mashDataList.get(0);
         if(today.getKline().getClose()> Constants.CURRENT_PRICE_LIMIT){
             return 0;
@@ -27,6 +27,7 @@ public class Kdj5Strategy extends IStrategy {
         /**
          * 今日：0<=k-d<=5,昨天0<=d-k<=5,macd<0
          */
+        int kdDiff = 5;
         if (today.getKdj().getK() - today.getKdj().getD() >= 0 && today.getKdj().getK() - today.getKdj().getD() <= kdDiff && yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0 && yestoday.getKdj().getD() - yestoday.getKdj().getK() <= kdDiff && today.getMacd().getMacd() <= 0) {
             return 1;
         }

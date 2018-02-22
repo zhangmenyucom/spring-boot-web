@@ -12,7 +12,6 @@ import com.taylor.entity.stock.query.StockQueryBean;
 import com.taylor.service.RecmdStockService;
 import com.taylor.stock.common.OperatorEnum;
 import com.taylor.stock.strategy.GodenKdjCountStrategy;
-import com.taylor.stock.strategy.IStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.methods.GetMethod;
 
@@ -51,7 +50,7 @@ public class QueryStockDayDataRequestWithGodenKdjCount extends Thread {
     public void run() {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(60 + "");
+        stockQueryBean.setCount(100 + "");
         stockQueryBean.setCuid("xxx");
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
@@ -92,7 +91,8 @@ public class QueryStockDayDataRequestWithGodenKdjCount extends Thread {
                 recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                 recmdStock.setStockName(stockPanKouData.getStockName());
                 recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
-                recmdStock.setStrategy(strategy.getName());
+                recmdStock.setStrategy(strategy.getStrategyEnum().getDesc());
+                recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
                 recmdStock.setMainIn(stockFundInOutData.getMainTotalIn());
                 recmdStock.setMainInBi(stockFundInOutData.getMainInBi());
                 recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");

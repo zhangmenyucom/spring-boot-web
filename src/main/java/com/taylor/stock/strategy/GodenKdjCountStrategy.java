@@ -1,6 +1,7 @@
 package com.taylor.stock.strategy;
 
 import com.taylor.entity.stock.MashData;
+import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class GodenKdjCountStrategy extends IStrategy {
 
 
     public GodenKdjCountStrategy() {
-        super("最近100天kdj黄金交叉数量");
+        super(StrategyEnum.TYPE1);
     }
 
     @Override

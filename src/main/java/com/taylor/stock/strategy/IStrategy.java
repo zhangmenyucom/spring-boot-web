@@ -1,6 +1,7 @@
 package com.taylor.stock.strategy;
 
 import com.taylor.entity.stock.MashData;
+import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.List;
  */
 @Data
 public abstract class IStrategy {
-    public String name;
+    protected StrategyEnum strategyEnum;
 
-    IStrategy(String name) {
-        this.name = name;
+    protected IStrategy next;
+
+    IStrategy(StrategyEnum strategyEnum) {
+        this.strategyEnum = strategyEnum;
     }
 
-   public abstract int doCheck(List<MashData> mashDataList);
+    public abstract int doCheck(List<MashData> mashDataList);
 
 }

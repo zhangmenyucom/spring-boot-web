@@ -4,6 +4,7 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.stock.common.StrategyEnum;
 import org.apache.commons.httpclient.HttpMethodBase;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class KdjOver45duRatioStrategy extends IStrategy {
     private Float ratio;
 
     public KdjOver45duRatioStrategy(Float kdiff, Float ratio) {
-        super("今天kdj差/昨天kdj差>1,今天kdiff大于"+kdiff+",ratio大于"+ratio);
+        super(StrategyEnum.TYPE6);
         this.kdiff = kdiff;
         this.ratio = ratio;
     }

@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>左侧导航</title>
@@ -27,7 +27,8 @@
         }
 
         body {
-            overflow-x: hidden;
+            overflow-x:scroll;
+            white-space:nowrap;
             background: url(/images/main/leftbg.jpg) left top repeat-y #f2f0f5;
             width: 194px;
         }
@@ -42,7 +43,7 @@
     <div class="collapsed">
         <span>股票管理</span>
         <a href="main.html" target="mainFrame" onFocus="this.blur()">后台首页</a>
-        <a href="../stock/view/recmd" target="mainFrame" onFocus="this.blur()">每日推荐</a>
+        <a href="../stock/view/recmd/0" target="mainFrame" onFocus="this.blur()">每日推荐</a>
         <a href="../stock/view/check_result" target="mainFrame" onFocus="this.blur()">刷新推荐</a>
         <a href="../stock/view/updateShelf" target="mainFrame" onFocus="this.blur()">自选股票</a>
     </div>
@@ -55,8 +56,21 @@
     </div>
     <div>
         <span>筛股策略</span>
-        <a href="../stock/kdj/start/week/0.9/main" target="mainFrame" onFocus="this.blur()">金叉换0.9周翘主进</a>
-        <a href="../stock/kdj/start/kdj_count" target="mainFrame" onFocus="this.blur()">60日金叉小于6</a>
+        <a href="../stock/view/recmd/15" target="mainFrame" th:attr="title=${strategyEnumMap[15]}" onFocus="this.blur()">所有策略重合大于3</a>
+        <a href="../stock/view/recmd/1" target="mainFrame" th:attr="title=${strategyEnumMap[1]}" onFocus="this.blur()">近60kdj金叉小6</a>
+        <a href="../stock/view/recmd/2" target="mainFrame" th:attr="title=${strategyEnumMap[2]}" onFocus="this.blur()">kdj差值小于5</a>
+        <a href="../stock/view/recmd/3" target="mainFrame" th:attr="title=${strategyEnumMap[3]}" onFocus="this.blur()">kdj差值小于10</a>
+        <a href="../stock/view/recmd/4" target="mainFrame" th:attr="title=${strategyEnumMap[4]}" onFocus="this.blur()">kdj差值在5-10之间</a>
+        <a href="../stock/view/recmd/5" target="mainFrame" th:attr="title=${strategyEnumMap[5]}" onFocus="this.blur()">kdj日周月上翘</a>
+        <a href="../stock/view/recmd/6" target="mainFrame" th:attr="title=${strategyEnumMap[6]}" onFocus="this.blur()">kdj比>1kdiff大5换大0.9</a>
+        <a href="../stock/view/recmd/7" target="mainFrame" th:attr="title=${strategyEnumMap[7]}" onFocus="this.blur()">kdj差大于5换大于1</a>
+        <a href="../stock/view/recmd/8" target="mainFrame" th:attr="title=${strategyEnumMap[8]}" onFocus="this.blur()">金叉周翘macd不限换大0.9</a>
+        <a href="../stock/view/recmd/9" target="mainFrame" th:attr="title=${strategyEnumMap[9]}" onFocus="this.blur()">金叉周翘量大1.1外大内主正换大0.9</a>
+        <a href="../stock/view/recmd/10" target="mainFrame" th:attr="title=${strategyEnumMap[10]}" onFocus="this.blur()">金叉周翘量大1.1外大盘换大0.9</a>
+        <a href="../stock/view/recmd/11" target="mainFrame" th:attr="title=${strategyEnumMap[11]}" onFocus="this.blur()">kdj差值小于5,换手率大于0.9</a>
+        <a href="../stock/view/recmd/12" target="mainFrame" th:attr="title=${strategyEnumMap[12]}" onFocus="this.blur()">macd在-0.02至+0.02之间</a>
+        <a href="../stock/view/recmd/13" target="mainFrame" th:attr="title=${strategyEnumMap[13]}" onFocus="this.blur()">十字架结构</a>
+        <a href="../stock/view/recmd/14" target="mainFrame" th:attr="title=${strategyEnumMap[14]}" onFocus="this.blur()">T型结构</a>
     </div>
 </div>
 </body>

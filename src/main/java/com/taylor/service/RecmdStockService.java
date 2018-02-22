@@ -4,6 +4,8 @@ import com.taylor.common.CrudService;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
 
+import java.util.List;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -15,4 +17,6 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
     void checkResult();
 
     int updateUpDownRatio(StockBaseInfo stockBaseInfo);
+
+    List<RecmdStock> getRecmdStockByCountTime();
 }

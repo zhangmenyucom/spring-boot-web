@@ -5,6 +5,7 @@ import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.QueryStockWeekDataRequest;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -22,7 +23,7 @@ public class KdjWeekRatioStrategyLiangBiMianInOut extends IStrategy {
     private static HttpMethodBase methodWeek = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
 
     public KdjWeekRatioStrategyLiangBiMianInOut(Float ratio) {
-        super("日kdj金叉，周kdj上翘，量比大于1.1，外盘大于内盘，主力净流入正值,且流入比大于10%，ratio大于" + ratio);
+        super(StrategyEnum.TYPE9);
         this.ratio = ratio;
     }
 

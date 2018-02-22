@@ -2,6 +2,7 @@ package com.taylor.stock.strategy;
 
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
+import com.taylor.stock.common.StrategyEnum;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class Kdj510Strategy extends IStrategy {
 
     public Kdj510Strategy() {
-        super("kdj差值在5-10之间");
+        super(StrategyEnum.TYPE4);
     }
 
     @Override

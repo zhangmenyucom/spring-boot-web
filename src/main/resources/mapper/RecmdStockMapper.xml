@@ -20,6 +20,7 @@
         <result column="change_ratio_today" property="changeRatioToday" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
         <result column="kdj_count" property="kdjCount" jdbcType="INTEGER"/>
+        <result column="strategy_type" property="strategyType" jdbcType="INTEGER"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -41,6 +42,8 @@
         t.change_ratio_today,
         t.recmd_operate,
         t.kdj_count,
+        t.strategy_type,
+        t.strategy,
         t.create_time
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
@@ -72,10 +75,13 @@
             <if test="query.strategy !=null">
                 and strategy=#{query.strategy,jdbcType=VARCHAR}
             </if>
+            <if test="query.strategyType !=null">
+                and strategy_type=#{query.strategyType,jdbcType=INTEGER}
+            </if>
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,create_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -92,6 +98,7 @@
         #{entity.changeRatioToday,jdbcType=DOUBLE},
         #{entity.recmdOperate,jdbcType=VARCHAR},
         #{entity.kdjCount,jdbcType=INTEGER},
+        #{entity.strategyType,jdbcType=INTEGER},
         #{entity.strategy,jdbcType=VARCHAR},
         NOW()
         )
@@ -127,14 +134,19 @@
         WHERE id = #{entity.id,jdbcType=BIGINT}
     </select>
 
+    <select id="getRecmdStockByCountTime" resultMap="BaseResultMap">
+        SELECT t.* FROM recmd_stock t, ( SELECT stock_code, count_num FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ) AS temp WHERE count_num >= 3 ) s WHERE t.stock_code IN ( SELECT stock_code FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ORDER BY count_num DESC ) AS temp WHERE count_num >= 3 ) AND t.stock_code = s.stock_code ORDER BY s.count_num DESC, t.stock_name DESC
+    </select>
+
     <delete id="delByPrimaryKey">
         DELETE FROM recmd_stock
         WHERE id = #{id ,jdbcType=BIGINT}
     </delete>
 
     <delete id="del">
-        <if test="entity.strategy!=null">
-            DELETE FROM recmd_stock where strategy=null or strategy = #{entity.strategy}
+        DELETE FROM recmd_stock where 1=1
+        <if test="entity.strategyType!=null">
+            and strategy=null or strategy_type = #{entity.strategyType}
         </if>
     </delete>
 </mapper>

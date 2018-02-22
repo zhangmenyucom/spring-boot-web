@@ -2,6 +2,7 @@ package com.taylor.stock.strategy;
 
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
+import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 public class MacdStrategy extends IStrategy {
     public MacdStrategy() {
-        super("macd在-0.02至+0.02之间");
+        super(StrategyEnum.TYPE12);
     }
 
     @Override

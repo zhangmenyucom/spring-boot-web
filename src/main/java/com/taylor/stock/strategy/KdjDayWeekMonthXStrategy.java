@@ -4,6 +4,7 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.QueryStockWeekDataRequest;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -24,7 +25,7 @@ public class KdjDayWeekMonthXStrategy extends IStrategy {
     private static HttpMethodBase methodMonth = new GetMethod(Constants.METHOD_URL_STOCK_MONTH_INFO);
 
     public KdjDayWeekMonthXStrategy() {
-        super("kdj日周月上翘");
+        super(StrategyEnum.TYPE5);
     }
 
 

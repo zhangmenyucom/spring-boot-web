@@ -4,6 +4,7 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.QueryStockWeekDataRequest;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -21,7 +22,7 @@ public class KdjWeekRatioStrategy extends IStrategy {
     private static HttpMethodBase methodWeek = new GetMethod(Constants.METHOD_URL_STOCK_WEEK_INFO);
 
     public KdjWeekRatioStrategy(Float ratio) {
-        super("日kdj金叉，周kdj上翘，macd不限ratio大于" + ratio);
+        super(StrategyEnum.TYPE8);
         this.ratio = ratio;
     }
 
