@@ -104,7 +104,15 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdforGodenCountData() {
-        stockDataService.processDataWithKDJCount(new GodenKdjCountStrategy());
+        stockDataService.processData(new GodenKdjCountStrategy(),80);
+    }
+
+    /**
+     * 每天定时刷新推荐数据
+     */
+    @Scheduled(cron = "0 1 18 * * *")
+    public void fetchTianEQuanData() {
+        stockDataService.processData(new TianEQuanStrategy(),13);
     }
 
 }

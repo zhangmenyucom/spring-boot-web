@@ -23,7 +23,8 @@ public enum StrategyEnum {
     TYPE12(12, "macd在-0.02至+0.02之间"),
     TYPE13(13, "k线程十字架，且macd<=0，kdj>=0,换手率大于1"),
     TYPE14(14, "T型结构，且macd<=0，kdj>=0,换手率大于1"),
-    TYPE15(15, "所有策略重合数>=3");
+    TYPE15(15, "所有策略重合数>=3"),
+    TYPE16(16, "天鹅拳形态");
 
 
     private Integer code;

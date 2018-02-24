@@ -19,6 +19,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.taylor.common.Constants.METHOD_URL_STOCK_DAY_INFO;
 import static com.taylor.common.ProcessCountor.CURRENT;
 
 /**
@@ -35,11 +36,14 @@ public class QueryStockDayDataRequest extends Thread {
 
     private IStrategy strategy;
 
-    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
+    private Integer count;
+
+    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName,Integer count) {
         super(taskName);
         this.recmdStockService = recmdStockService;
         this.stockCodeList = stockCodeList;
         this.strategy = strategy;
+        this.count=count;
     }
 
     public static String queryLatestResult(StockQueryBean stockQueryBean, GetMethod method) {
@@ -50,7 +54,7 @@ public class QueryStockDayDataRequest extends Thread {
     public void run() {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(3 + "");
+        stockQueryBean.setCount(count + "");
         stockQueryBean.setCuid("xxx");
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
@@ -59,7 +63,7 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setVv("100");
         DecimalFormat df = new DecimalFormat("######0.000");
 
-        GetMethod methodKline = new GetMethod(Constants.METHOD_URL_STOCK_DAY_INFO);
+        GetMethod methodKline = new GetMethod(METHOD_URL_STOCK_DAY_INFO);
         GetMethod methodBase = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
         for (String stockCode : stockCodeList) {
             CURRENT.incrementAndGet();
@@ -102,6 +106,7 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setLiangbi(stockPanKouData.getLiangBi());
                     recmdStock.setOuterPan(stockPanKouData.getOuter());
                     recmdStock.setInnerPan(stockPanKouData.getInner());
+                    recmdStock.setKdjCount(mashDataList.get(0).getKdjCount());
                     recmdStockService.save(recmdStock);
                     log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
                     System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());
@@ -126,7 +131,7 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
         stockQueryBean.setStock_code("SZ002186".toLowerCase());
-        GetMethod method=new GetMethod("https://gupiao.baidu.com/api/stocks/stockMini5bar");
+        GetMethod method=new GetMethod(METHOD_URL_STOCK_DAY_INFO);
         System.out.println( queryLatestResult(stockQueryBean,method));
 
     }

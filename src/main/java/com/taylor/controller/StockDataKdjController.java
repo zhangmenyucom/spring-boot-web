@@ -116,7 +116,7 @@ public class StockDataKdjController extends BaseAction {
     @ResponseBody
     @RequestMapping("/start/kdj_count")
     public String queryStockDataByKdjWeekMain() throws IOException {
-        stockDataService.processDataWithKDJCount(new GodenKdjCountStrategy());
+        stockDataService.processData(new GodenKdjCountStrategy(),100);
         return "正在分析，请耐心等待";
     }
 
