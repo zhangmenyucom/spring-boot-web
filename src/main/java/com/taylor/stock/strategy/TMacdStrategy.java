@@ -30,7 +30,7 @@ public class TMacdStrategy extends IStrategy {
         }
         MashData yestoday = mashDataList.get(1);
 
-        if (Math.abs(today.getKline().getOpen() - today.getKline().getClose()) <= 0.03 && Math.abs(today.getKline().getHigh()-today.getKline().getOpen())<=0.03&& today.getKline().getOpen()-today.getKline().getLow()>=0.1) {
+        if (Math.abs(today.getKline().getNetChangeRatio()) <= 1.0 && Math.abs(today.getKline().getHigh()-today.getKline().getOpen())<=0.03&& today.getKline().getOpen()-today.getKline().getLow()>=0.1) {
             Double diff = 0.02D;
             if (today.getMacd().getMacd() <=0 && today.getKdj().getK() - today.getKdj().getD() >= 0.02) {
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
