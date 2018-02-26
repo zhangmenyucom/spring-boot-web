@@ -39,6 +39,7 @@ public class OnShelfUpdator extends Thread {
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
             stockOnShelf.setFiveMiniRatio(kdjTimeBean.getC_px_change_percent());
+            stockOnShelf.setStockName(stockPanKouData.getStockName());
             stockOnShelfService.update(stockOnShelf);
         }
         try {

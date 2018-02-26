@@ -108,9 +108,9 @@ public class ScheduledTasks {
     }
 
     /**
-     * 每天定时刷新推荐数据
+     * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 1 18 * * *")
+    @Scheduled(cron = "0 32 14 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(),13);
     }

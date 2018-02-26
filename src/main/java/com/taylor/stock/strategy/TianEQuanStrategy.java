@@ -23,6 +23,7 @@ public class TianEQuanStrategy extends IStrategy {
 
     @Override
     public int doCheck(List<MashData> mashDataList) {
+        /**至少有十个交易日数据吧**/
         if (mashDataList.size() <= 10) {
             return 0;
         }
@@ -36,7 +37,7 @@ public class TianEQuanStrategy extends IStrategy {
                 /**近十个交易日内有涨停**/
                 for(int i = 0; i < 10; i++) {
                     if (checkTopStop(mashDataList.get(i))) {
-                        if(i>=2) {
+                        if(i>=2 &&mashDataList.get(0).getKline().getClose()< mashDataList.get(i).getKline().getClose()) {
                             return 1;
                         }
                         break;

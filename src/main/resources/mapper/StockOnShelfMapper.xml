@@ -54,7 +54,8 @@
     <update id="update">
         UPDATE stock_on_shelf
         SET
-        id=#{entity.id,jdbcType=BIGINT}
+        id=#{entity.id,jdbcType=BIGINT},
+        stock_name=#{entity.stockName,jdbcType=VARCHAR}
         <if test="entity.currentPrice!=null">
             ,current_price=#{entity.currentPrice,jdbcType=DOUBLE}
         </if>
