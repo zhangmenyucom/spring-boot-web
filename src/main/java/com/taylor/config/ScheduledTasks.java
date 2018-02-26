@@ -65,7 +65,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 0 23 * * *")
+    @Scheduled(cron = "0 0 22 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -102,7 +102,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 30 22 * * *")
+    @Scheduled(cron = "0 10 22 * * *")
     public void fetchRecmdforGodenCountData() {
         stockDataService.processData(new GodenKdjCountStrategy(),80);
     }
@@ -110,7 +110,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 6 17 * * *")
+    @Scheduled(cron = "0 15 22 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(),13);
     }
