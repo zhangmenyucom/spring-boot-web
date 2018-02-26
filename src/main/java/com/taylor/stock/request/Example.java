@@ -31,6 +31,7 @@ public class Example {
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(instream, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
+            System.out.println(jsonText);
             return new JSONObject(jsonText);
         } finally {
             instream.close();
@@ -44,6 +45,7 @@ public class Example {
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(instream, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
+            System.out.println(jsonText);
             return new JSONObject(jsonText);
         } finally {
             instream.close();
@@ -53,6 +55,6 @@ public class Example {
     public static void main(String... args) throws IOException, JSONException {
         String url = "http://www.iwencai.com/diag/block-detail?pid=8093&codes=002839&codeType=stock&info=%7B%22view%22%3A%7B%22nolazy%22%3A1%2C%22parseArr%22%3A%7B%22_v%22%3A%22new%22%2C%22dateRange%22%3A%5B%5D%2C%22staying%22%3A%5B%5D%2C%22queryCompare%22%3A%5B%5D%2C%22comparesOfIndex%22%3A%5B%5D%7D%2C%22asyncParams%22%3A%7B%22tid%22%3A137%7D%7D%7D";
         JSONObject json = getRequestFromUrl(url);
-        System.out.println(json.toString());
+        //System.out.println(json.toString());
     }
 }

@@ -130,7 +130,7 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setFq_type("no");
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
-        stockQueryBean.setStock_code("SZ002186".toLowerCase());
+        stockQueryBean.setStock_code("SZ300234".toLowerCase());
         GetMethod method=new GetMethod(METHOD_URL_STOCK_DAY_INFO);
         System.out.println( queryLatestResult(stockQueryBean,method));
 

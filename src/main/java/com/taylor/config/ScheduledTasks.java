@@ -110,7 +110,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 32 14 * * *")
+    @Scheduled(cron = "0 6 17 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(),13);
     }
