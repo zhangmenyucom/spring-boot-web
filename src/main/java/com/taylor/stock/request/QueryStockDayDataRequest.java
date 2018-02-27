@@ -78,7 +78,7 @@ public class QueryStockDayDataRequest extends Thread {
                 continue;
             }
             MashData mashDataToday = response.getMashData().get(0);
-            mashDataToday.setBlockCode(stockCode.toLowerCase());
+            mashDataToday.setStockCode(stockCode.toLowerCase());
             List<MashData> mashDataList = new ArrayList<>();
             for (MashData mashData : response.getMashData()) {
                 mashDataList.add(mashData);

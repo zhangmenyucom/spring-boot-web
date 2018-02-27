@@ -19,5 +19,10 @@ public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
      */
     int updateRecmdTodayUpDownRatio(@Param("stockBaseInfo") StockBaseInfo stockBaseInfo);
 
+    /**
+     * @return
+     */
     List<RecmdStock> getRecmdStockByCountTime();
+
+    int updateGuZhenScore(@Param("entity") RecmdStock recmdStockUpdate);
 }

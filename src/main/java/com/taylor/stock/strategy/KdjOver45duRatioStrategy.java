@@ -5,7 +5,6 @@ import com.taylor.common.Constants;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.stock.common.StrategyEnum;
-import org.apache.commons.httpclient.HttpMethodBase;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class KdjOver45duRatioStrategy extends IStrategy {
 
         if (today.getKdj().getK() - today.getKdj().getD() >= kdiff  && today.getMacd().getMacd() <= 0) {
             if (((today.getKdj().getK() - today.getKdj().getD()) / Math.abs(yestoday.getKdj().getD() - yestoday.getKdj().getK())) >= 1) {
-                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getStockCode().toLowerCase());
                 if (stockPanKouData!=null) {
                     if (stockPanKouData.getExchangeRatio() >= ratio) {
                         return 1;

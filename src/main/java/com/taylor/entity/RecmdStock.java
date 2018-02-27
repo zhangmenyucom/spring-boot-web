@@ -69,6 +69,9 @@ public class RecmdStock {
     /**算法策略**/
     private String strategy;
 
+    /**股诊分数**/
+    private Float score;
+
     /**创建时间**/
     private Date createTime;
 

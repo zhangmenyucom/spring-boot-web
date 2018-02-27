@@ -21,7 +21,6 @@ public class SinaStockData {
             char[] cha = new char[1024];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
-            System.out.println(result);
             result = result.substring(result.indexOf("=")+2,result.indexOf(";")-1);
             String[] stocks = result.split(";");
             for (String stock : stocks) {

@@ -19,4 +19,6 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
     int updateUpDownRatio(StockBaseInfo stockBaseInfo);
 
     List<RecmdStock> getRecmdStockByCountTime();
+
+    int updateGuZhenScore(RecmdStock recmdStockUpdate);
 }

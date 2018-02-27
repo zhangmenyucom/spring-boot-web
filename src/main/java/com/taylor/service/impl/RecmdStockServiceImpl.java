@@ -32,4 +32,9 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
     public List<RecmdStock> getRecmdStockByCountTime() {
         return this.getDao().getRecmdStockByCountTime();
     }
+
+    @Override
+    public int updateGuZhenScore(RecmdStock recmdStockUpdate) {
+          return this.getDao().updateGuZhenScore(recmdStockUpdate);
+    }
 }

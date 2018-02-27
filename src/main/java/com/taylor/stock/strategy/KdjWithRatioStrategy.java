@@ -36,7 +36,7 @@ public class KdjWithRatioStrategy extends IStrategy {
          * 今日：0<=k-d<=5,昨天0<=d-k<=5,macd<0
          */
         if (today.getKdj().getK() - today.getKdj().getD() >=0 && today.getKdj().getK() - today.getKdj().getD() <= kdiff && yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0 && yestoday.getKdj().getD() - yestoday.getKdj().getK() <= kdiff && today.getMacd().getMacd() <= 0) {
-            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getStockCode().toLowerCase());
             if (stockPanKouData!=null) {
                 if (stockPanKouData.getExchangeRatio() >= ratio) {
                     return 1;

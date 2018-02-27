@@ -5,9 +5,11 @@ import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockOnShelf;
+import com.taylor.entity.stock.GuZhenResponse;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
+import com.taylor.stock.request.GuZhenRequest;
 import com.taylor.stock.request.QueryStockBaseDataRequest;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +67,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 0 22 * * *")
+    @Scheduled(cron = "0 21 18 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -96,6 +98,8 @@ public class ScheduledTasks {
         macdStrategy.setNext(shiZiMacdStrategy);
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
         macdStrategy.setNext(tMacdStrategy);
+/*        TopScoreStrategy topScoreStrategy=new TopScoreStrategy();
+        tMacdStrategy.setNext(topScoreStrategy);*/
         stockDataService.processData(kdj5Strategy);
     }
 
@@ -114,5 +118,24 @@ public class ScheduledTasks {
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(),13);
     }
+
+    /**
+     * 每天定时刷新推荐股诊数据
+     */
+    @Scheduled(cron = "0 30 22 * * *")
+    public void updateGuZhengData() throws InterruptedException {
+            List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
+            log.info("正在刷新推荐股票数据...........");
+            for (RecmdStock recmdStock : recmdStocks) {
+                GuZhenResponse guZhengData = GuZhenRequest.getGuZhengData(recmdStock.getStockCode());
+                if (guZhengData!=null) {
+                   RecmdStock recmdStockUpdate=new RecmdStock();
+                    recmdStockUpdate.setStockCode(recmdStock.getStockCode());
+                    recmdStockUpdate.setScore(guZhengData.getData().getData().getResult().get_score());
+                    recmdStockService.updateGuZhenScore(recmdStockUpdate);
+                }
+                Thread.sleep(2000);
+            }
+        }
 
 }

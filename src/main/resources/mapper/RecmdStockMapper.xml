@@ -22,6 +22,7 @@
         <result column="kdj_count" property="kdjCount" jdbcType="INTEGER"/>
         <result column="strategy_type" property="strategyType" jdbcType="INTEGER"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="DOUBLE"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -44,6 +45,7 @@
         t.kdj_count,
         t.strategy_type,
         t.strategy,
+        t.score,
         t.create_time
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
@@ -111,6 +113,13 @@
         stock_name=#{entity.stockName,jdbcType=VARCHAR}
         macd=#{entity.macd,jdbcType=DOUBLE}
         WHERE id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateGuZhenScore">
+        UPDATE recmd_stock
+        SET
+        score=#{entity.score,jdbcType=DOUBLE}
+        WHERE stock_code = #{entity.stockCode,jdbcType=VARCHAR}
     </update>
 
     <update id="updateRecmdTodayUpDownRatio">

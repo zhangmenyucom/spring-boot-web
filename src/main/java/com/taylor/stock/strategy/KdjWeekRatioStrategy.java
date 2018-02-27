@@ -34,10 +34,10 @@ public class KdjWeekRatioStrategy extends IStrategy {
         }
         MashData yestoday = mashDataList.get(1);
         if (today.getKdj().getK() - today.getKdj().getD() >= 0 && yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0) {
-            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getStockCode().toLowerCase());
             if (stockPanKouData!=null) {
                 if (stockPanKouData.getExchangeRatio()>= ratio) {
-                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodWeek);
+                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getStockCode().toLowerCase(), methodWeek);
                     if (mashDataList2==null || mashDataList2.size() < 2) {
                         return 0;
                     } else {

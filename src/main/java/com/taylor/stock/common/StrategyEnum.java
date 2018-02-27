@@ -24,7 +24,8 @@ public enum StrategyEnum {
     TYPE13(13, "k线程十字架，且macd<=0，kdj>=0,换手率大于1"),
     TYPE14(14, "T型结构，且macd<=0，kdj>=0,换手率大于1"),
     TYPE15(15, "所有策略重合数>=3"),
-    TYPE16(16, "天鹅拳形态");
+    TYPE16(16, "天鹅拳形态"),
+    TYPE17(17, "股诊得分高于6分,多头行情,打败80%股");
 
 
     private Integer code;

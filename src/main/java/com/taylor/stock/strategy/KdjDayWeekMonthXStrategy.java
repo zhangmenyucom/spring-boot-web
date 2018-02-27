@@ -37,16 +37,16 @@ public class KdjDayWeekMonthXStrategy extends IStrategy {
         }
         MashData yestoday = mashDataList.get(1);
         if (today.getKdj().getK()-yestoday.getKdj().getK() >= 0 && today.getKdj().getK()-today.getKdj().getD()>0) {
-            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getStockCode().toLowerCase());
             if (stockPanKouData!=null) {
-                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodWeek);
+                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getStockCode().toLowerCase(), methodWeek);
                     if (mashDataList2==null || mashDataList2.size() < 2) {
                         return 0;
                     } else {
                         MashData mashDataLastOneWeek = mashDataList2.get(0);
                         MashData mashDataLastTwoWeek = mashDataList2.get(1);
                         if (mashDataLastOneWeek.getKdj().getK()-mashDataLastTwoWeek.getKdj().getK()>0 && mashDataLastOneWeek.getKdj().getK()-mashDataLastOneWeek.getKdj().getD()>0) {
-                            List<MashData> mashDataList3 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodMonth);
+                            List<MashData> mashDataList3 = QueryStockWeekDataRequest.queryLatestResult(today.getStockCode().toLowerCase(), methodMonth);
                             if (mashDataList3==null || mashDataList3.size() < 2) {
                                 return 0;
                             }else{

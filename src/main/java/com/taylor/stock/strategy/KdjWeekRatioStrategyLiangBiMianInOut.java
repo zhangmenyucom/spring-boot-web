@@ -46,13 +46,13 @@ public class KdjWeekRatioStrategyLiangBiMianInOut extends IStrategy {
         MashData yestoday = mashDataList.get(1);
         if (today.getKdj().getK() - today.getKdj().getD() >= 0 && (yestoday.getKdj().getD() - yestoday.getKdj().getK() >= 0 || (mashData3 != null && mashData3.getKdj().getD() - mashData3.getKdj().getK() >= 0))) {
             /**今日盘口数据***/
-            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getBlockCode().toLowerCase());
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(today.getStockCode().toLowerCase());
             /**今日主力注入情况**/
-            StockFundInOut stockFundInOut=CommonRequest.getStockFundInOutData(today.getBlockCode().toLowerCase());
+            StockFundInOut stockFundInOut=CommonRequest.getStockFundInOutData(today.getStockCode().toLowerCase());
             if (stockPanKouData != null && stockPanKouData.getLiangBi() > 1.1 && stockPanKouData.getOuter() > stockPanKouData.getInner() && stockFundInOut.getMainTotalIn()>0 && stockFundInOut.getMainInBi()>10.0) {
                 if (stockPanKouData.getExchangeRatio() >= ratio) {
                     /**周kdj值上翘**/
-                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getBlockCode().toLowerCase(), methodWeek);
+                    List<MashData> mashDataList2 = QueryStockWeekDataRequest.queryLatestResult(today.getStockCode().toLowerCase(), methodWeek);
                     if (mashDataList2 == null || mashDataList2.size() < 2) {
                         return 0;
                     } else {
