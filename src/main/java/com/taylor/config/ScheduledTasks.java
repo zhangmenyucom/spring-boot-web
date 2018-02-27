@@ -67,7 +67,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 21 18 * * *")
+    @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
