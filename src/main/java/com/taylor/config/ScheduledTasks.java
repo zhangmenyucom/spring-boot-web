@@ -21,6 +21,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author taylor
+ */
 @Component
 @Slf4j
 public class ScheduledTasks {
@@ -67,7 +70,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 30 22 * * *")
+    @Scheduled(cron = "0 45 16 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -98,15 +101,13 @@ public class ScheduledTasks {
         macdStrategy.setNext(shiZiMacdStrategy);
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
         macdStrategy.setNext(tMacdStrategy);
-/*        TopScoreStrategy topScoreStrategy=new TopScoreStrategy();
-        tMacdStrategy.setNext(topScoreStrategy);*/
         stockDataService.processData(kdj5Strategy);
     }
 
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 10 22 * * *")
+    @Scheduled(cron = "0 50 16 * * *")
     public void fetchRecmdforGodenCountData() {
         stockDataService.processData(new GodenKdjCountStrategy(),80);
     }
@@ -114,7 +115,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 15 22 * * *")
+    @Scheduled(cron = "0 55 16 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(),13);
     }
@@ -122,7 +123,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐股诊数据
      */
-    @Scheduled(cron = "0 30 22 * * *")
+    @Scheduled(cron = "0 0 17 * * *")
     public void updateGuZhengData() throws InterruptedException {
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
@@ -134,7 +135,7 @@ public class ScheduledTasks {
                     recmdStockUpdate.setScore(guZhengData.getData().getData().getResult().get_score());
                     recmdStockService.updateGuZhenScore(recmdStockUpdate);
                 }
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             }
         }
 

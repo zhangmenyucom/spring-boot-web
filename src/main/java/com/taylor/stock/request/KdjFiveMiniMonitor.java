@@ -1,10 +1,7 @@
 package com.taylor.stock.request;
 
-import com.taylor.common.CommonRequest;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.StockUtils;
-import com.taylor.entity.stock.StockPanKouData;
-import com.taylor.entity.stock.kdj.CheckResultBean;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
