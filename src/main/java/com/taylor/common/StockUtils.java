@@ -7,6 +7,7 @@ import com.taylor.stock.request.MacdTimeDataRequest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.taylor.common.MailUtils.sendMail;
@@ -86,5 +87,13 @@ public class StockUtils {
         if (kdjCheck.getCode() == 0) {
             System.out.println(stockFundInOutData.getStockName() + "一切正常，正在密切监视");
         }
+    }
+
+    /**获取前后几天的日期**/
+    public static Date getDateAfter(Date d,int day){
+        Calendar now =Calendar.getInstance();
+        now.setTime(d);
+        now.set(Calendar.DATE,now.get(Calendar.DATE)+day);
+        return now.getTime();
     }
 }

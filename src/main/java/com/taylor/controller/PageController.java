@@ -1,11 +1,15 @@
 package com.taylor.controller;
 
+import com.taylor.common.StockUtils;
 import com.taylor.entity.StockUser;
 import com.taylor.stock.common.StrategyEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,8 +23,13 @@ import java.util.Map;
 public class PageController {
 
     @RequestMapping("/index")
-    public String index(Map<String, Object> map) {
-        return "/index";
+    public String index(Map<String, Object> map, HttpServletRequest request) {
+        if (request.getSession().getAttribute("user") != null) {
+            map.put("user", request.getSession().getAttribute("user"));
+            return "/index";
+        }
+        return "/login";
+
     }
 
     @RequestMapping("/top")
@@ -35,9 +44,9 @@ public class PageController {
 
     @RequestMapping("/main")
     public String main(Map<String, Object> map, HttpServletRequest request) {
-        if(request.getSession().getAttribute("user")!=null) {
+        if (request.getSession().getAttribute("user") != null) {
             StockUser stockUser = (StockUser) request.getSession().getAttribute("user");
-            map.put("user",stockUser);
+            map.put("user", stockUser);
             return "/main";
         }
         return "/login";

@@ -72,7 +72,10 @@ public class RecmdStock {
     /**股诊分数**/
     private Float score;
 
-    /**创建时间**/
-    private Date createTime;
+    /**记录时间**/
+    private Date recordTime;
+
+    /**更新时间**/
+    private Date updateTime;
 
 }

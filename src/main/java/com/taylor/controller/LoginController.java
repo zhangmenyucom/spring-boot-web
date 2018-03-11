@@ -23,12 +23,12 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public CommonResponse login(@RequestBody StockUser stockUser, HttpServletRequest request, HttpServletResponse response) {
-        CommonResponse commonResponse=new CommonResponse();
+        CommonResponse commonResponse = new CommonResponse();
         if (stockUser != null && "zhangmenyucom".equals(stockUser.getUserName()) && "vbn123VBN".equals(stockUser.getPassword())) {
             request.getSession().setAttribute("user", stockUser);
             commonResponse.setErrorNo(0);
             commonResponse.setErrorMsg("sucess");
-        }else{
+        } else {
             commonResponse.setErrorMsg("error");
             commonResponse.setErrorNo(-1);
         }
@@ -36,7 +36,8 @@ public class LoginController {
     }
 
     @RequestMapping("/logout")
-    public String logout(Map<String, Object> map) {
+    public String logout(Map<String, Object> map, HttpServletRequest request) {
+        request.getSession().setAttribute("user", null);
         return "/login";
     }
 }

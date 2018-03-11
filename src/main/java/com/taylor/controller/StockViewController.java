@@ -1,5 +1,6 @@
 package com.taylor.controller;
 
+import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.service.RecmdStockService;
@@ -10,7 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,22 +36,32 @@ public class StockViewController {
     private StockOnShelfService stockOnShelfService;
 
     @RequestMapping("/recmd/{type}")
-    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type) {
+    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, String recordTime) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<String> listDate = new ArrayList<>();
+        Date now = new Date();
+        for (int i = 5; i >= 0; i--) {
+            listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
+        }
         RecmdStock recmdStock = new RecmdStock();
+        if (recordTime == null) {
+            recmdStock.setRecordTime(new Date());
+        } else {
+            recmdStock.setRecordTime(sdf.parse(recordTime));
+        }
         List<RecmdStock> recmdStocks;
         if (type == StrategyEnum.TYPE15.getCode()) {
             recmdStocks = recmdStockService.getRecmdStockByCountTime();
-
         } else {
             if (type != -1) {
                 recmdStock.setStrategyType(type);
             }
             recmdStocks = recmdStockService.find(recmdStock);
         }
-        map.put("type",type);
+        map.put("type", type);
         map.put("recmdList", recmdStocks);
         map.put("strategyName", StrategyEnum.getEnumValue(type));
-
+        map.put("listDate", listDate);
         return "/recmd";
     }
 

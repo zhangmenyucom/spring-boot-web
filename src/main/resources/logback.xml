@@ -106,12 +106,12 @@
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>-->
 	</appender>
-	<logger name="com.taylor.dao" addtivity="false" level="DEBUG">
+<!--	<logger name="com.taylor.dao" addtivity="false" level="DEBUG">
 		<appender-ref ref="SQL" />
 	</logger>
 	<logger name="org.apache.ibatis" level="DEBUG">
 		<appender-ref ref="STDOUT" />
-	</logger>	
+	</logger>-->
 	<root level="${root.logger.level}">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ERROR" />

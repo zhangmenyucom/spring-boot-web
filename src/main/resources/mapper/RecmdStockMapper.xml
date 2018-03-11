@@ -23,7 +23,8 @@
         <result column="strategy_type" property="strategyType" jdbcType="INTEGER"/>
         <result column="strategy" property="strategy" jdbcType="VARCHAR"/>
         <result column="score" property="score" jdbcType="DOUBLE"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="record_time" property="recordTime" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         t.id,
@@ -46,7 +47,8 @@
         t.strategy_type,
         t.strategy,
         t.score,
-        t.create_time
+        t.record_time,
+        t.update_time
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
@@ -80,10 +82,13 @@
             <if test="query.strategyType !=null">
                 and strategy_type=#{query.strategyType,jdbcType=INTEGER}
             </if>
+            <if test="query.recordTime !=null">
+                and day(record_time)=day(#{query.recordTime,jdbcType=TIMESTAMP})
+            </if>
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,create_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,update_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -102,6 +107,7 @@
         #{entity.kdjCount,jdbcType=INTEGER},
         #{entity.strategyType,jdbcType=INTEGER},
         #{entity.strategy,jdbcType=VARCHAR},
+        NOW(),
         NOW()
         )
     </insert>
@@ -154,6 +160,7 @@
 
     <delete id="del">
         DELETE FROM recmd_stock where 1=1
+        and date_add(now(),interval -5 day) > record_time
         <if test="entity.strategyType!=null">
             and strategy=null or strategy_type = #{entity.strategyType}
         </if>

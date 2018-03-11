@@ -45,8 +45,14 @@
 </head>
 <body>
 <div id="container">
+    <div>
+        <ol>
+            <li th:each="queryDate: ${listDate}"><a th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}" th:text="${queryDate}"></a></li>
+        </ol>
+    </div>
     <div style="margin-bottom: 10px;">策略名称：<span style="color:red;" th:text="${strategyName}"></span></div>
     <table>
+        <tr><td colspan="16" cols="16"><div style="color: green;float: left;">策略说明: <span th:text="${desc}"></span></div></td></tr>
         <tr>
             <th>股票代码</th>
             <th>股票名称</th>
@@ -93,7 +99,9 @@
             <td><a th:text="@{'股诊('+${stock.score}+')'}" th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}"></a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>
+        <tr><td colspan="16" cols="16"><div style="float: right;">共 <span th:text="${count}"></span> 条数据</div></td></tr>
     </table>
+
 </div>
 <script language="javascript">
     $(function () {
