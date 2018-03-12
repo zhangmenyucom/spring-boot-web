@@ -40,7 +40,7 @@ public class ScheduledTasks {
     /**
      * 每分钟刷新推荐数据
      */
-    @Scheduled(cron = "*/60 * * * * *")
+   // @Scheduled(cron = "*/60 * * * * *")
     public void updateRecmdData() {
         if (!StockUtils.noNeedMonotorTime()) {
             HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
@@ -59,7 +59,7 @@ public class ScheduledTasks {
     /**
      * 每30秒刷新股架数据
      */
-    @Scheduled(cron = "*/30 * * * * *")
+    //@Scheduled(cron = "*/30 * * * * *")
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
@@ -71,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 51 17 * * *")
+   // @Scheduled(cron = "0 51 17 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -114,7 +114,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 50 16 * * *")
+    //@Scheduled(cron = "0 50 16 * * *")
     public void fetchRecmdforGodenCountData() {
         stockDataService.processData(new GodenKdjCountStrategy(), 80);
     }
@@ -122,7 +122,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 55 16 * * *")
+    //@Scheduled(cron = "0 55 16 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(), 13);
     }
@@ -130,7 +130,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐股诊数据
      */
-    @Scheduled(cron = "0 28 17 * * *")
+    //@Scheduled(cron = "0 28 17 * * *")
     public void updateGuZhengData() throws InterruptedException {
         List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
         log.info("正在刷新推荐股票数据...........");

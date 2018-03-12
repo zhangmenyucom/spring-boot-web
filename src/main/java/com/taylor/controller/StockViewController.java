@@ -36,15 +36,15 @@ public class StockViewController {
     private StockOnShelfService stockOnShelfService;
 
     @RequestMapping("/recmd/{type}")
-    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, String recordTime) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, @RequestParam(defaultValue = "", name = "recordTime") String recordTime) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
         for (int i = 5; i >= 0; i--) {
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
-        if (recordTime == null) {
+        if ("".equals(recordTime)) {
             recmdStock.setRecordTime(new Date());
         } else {
             recmdStock.setRecordTime(sdf.parse(recordTime));
