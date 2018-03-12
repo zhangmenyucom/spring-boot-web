@@ -2,6 +2,7 @@ package com.taylor.stock.request;
 
 import com.taylor.common.JsonUtil;
 import com.taylor.entity.stock.GuZhenResponse;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -46,6 +47,9 @@ public class GuZhenRequest {
             inputStreamReader.close();
             // 释放资源
             inputStream.close();
+            if(StringUtil.isEmpty(buffer.toString())){
+                return null;
+            }
             return JsonUtil.transferToObj(buffer.toString(), GuZhenResponse.class);
         } catch (Exception e) {
             e.printStackTrace();

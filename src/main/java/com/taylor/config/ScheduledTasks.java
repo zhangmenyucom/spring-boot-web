@@ -42,7 +42,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "*/60 * * * * *")
     public void updateRecmdData() {
-        if(!StockUtils.noNeedMonotorTime()) {
+        if (!StockUtils.noNeedMonotorTime()) {
             HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
@@ -55,12 +55,13 @@ public class ScheduledTasks {
             }
         }
     }
+
     /**
      * 每30秒刷新股架数据
      */
     @Scheduled(cron = "*/30 * * * * *")
     public void updateShelfData() {
-        if(!StockUtils.noNeedMonotorTime()) {
+        if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
             StockOnShelf stockOnShelfUpdate = new StockOnShelf();
             stockOnShelfService.updateSelf(stockOnShelfUpdate);
@@ -70,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 45 16 * * *")
+    @Scheduled(cron = "0 51 17 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -101,6 +102,12 @@ public class ScheduledTasks {
         macdStrategy.setNext(shiZiMacdStrategy);
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
         macdStrategy.setNext(tMacdStrategy);
+        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
+        tMacdStrategy.setNext(over5DayStrategy);
+        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
+        over5DayStrategy.setNext(over10DayStrategy);
+        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
+        over10DayStrategy.setNext(over20DayStrategy);
         stockDataService.processData(kdj5Strategy);
     }
 
@@ -109,7 +116,7 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 50 16 * * *")
     public void fetchRecmdforGodenCountData() {
-        stockDataService.processData(new GodenKdjCountStrategy(),80);
+        stockDataService.processData(new GodenKdjCountStrategy(), 80);
     }
 
     /**
@@ -117,26 +124,26 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 55 16 * * *")
     public void fetchTianEQuanData() {
-        stockDataService.processData(new TianEQuanStrategy(),13);
+        stockDataService.processData(new TianEQuanStrategy(), 13);
     }
 
     /**
      * 每天定时刷新推荐股诊数据
      */
-    @Scheduled(cron = "0 0 17 * * *")
+    @Scheduled(cron = "0 28 17 * * *")
     public void updateGuZhengData() throws InterruptedException {
-            List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
-            log.info("正在刷新推荐股票数据...........");
-            for (RecmdStock recmdStock : recmdStocks) {
-                GuZhenResponse guZhengData = GuZhenRequest.getGuZhengData(recmdStock.getStockCode());
-                if (guZhengData!=null) {
-                   RecmdStock recmdStockUpdate=new RecmdStock();
-                    recmdStockUpdate.setStockCode(recmdStock.getStockCode());
-                    recmdStockUpdate.setScore(guZhengData.getData().getData().getResult().get_score());
-                    recmdStockService.updateGuZhenScore(recmdStockUpdate);
-                }
-                Thread.sleep(5000);
+        List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
+        log.info("正在刷新推荐股票数据...........");
+        for (RecmdStock recmdStock : recmdStocks) {
+            GuZhenResponse guZhengData = GuZhenRequest.getGuZhengData(recmdStock.getStockCode());
+            if (guZhengData != null) {
+                RecmdStock recmdStockUpdate = new RecmdStock();
+                recmdStockUpdate.setStockCode(recmdStock.getStockCode());
+                recmdStockUpdate.setScore(guZhengData.getData().getData().getResult().get_score());
+                recmdStockService.updateGuZhenScore(recmdStockUpdate);
             }
+            Thread.sleep(5000);
         }
+    }
 
 }

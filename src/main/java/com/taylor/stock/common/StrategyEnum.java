@@ -25,7 +25,9 @@ public enum StrategyEnum {
     TYPE14(14, "T型结构，且macd<=0，kdj>=0,换手率大于1"),
     TYPE15(15, "所有策略重合数>=3"),
     TYPE16(16, "天鹅拳形态"),
-    TYPE17(17, "股诊得分高于6分,多头行情,打败80%股");
+    TYPE17(17,"突然20日线"),
+    TYPE18(18,"突然10日线"),
+    TYPE19(19,"突然5日线");
 
 
     private Integer code;
