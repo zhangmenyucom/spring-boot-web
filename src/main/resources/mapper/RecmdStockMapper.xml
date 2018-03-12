@@ -88,7 +88,7 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,update_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
