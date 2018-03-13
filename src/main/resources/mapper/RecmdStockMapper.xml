@@ -150,7 +150,12 @@
     </select>
 
     <select id="getRecmdStockByCountTime" resultMap="BaseResultMap">
-        SELECT t.* FROM recmd_stock t, ( SELECT stock_code, count_num FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ) AS temp WHERE count_num >= 3 ) s WHERE t.stock_code IN ( SELECT stock_code FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ORDER BY count_num DESC ) AS temp WHERE count_num >= 3 ) AND t.stock_code = s.stock_code ORDER BY s.count_num DESC, t.stock_name DESC
+        SELECT t.* FROM recmd_stock t,
+        ( SELECT stock_code, count_num FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ) AS temp WHERE count_num >= 3 ) s
+        WHERE t.stock_code IN
+        ( SELECT stock_code FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ORDER BY count_num DESC ) AS temp WHERE count_num >= 3 )
+        AND t.stock_code = s.stock_code
+        ORDER BY s.count_num DESC, t.stock_name DESC
     </select>
 
     <delete id="delByPrimaryKey">
