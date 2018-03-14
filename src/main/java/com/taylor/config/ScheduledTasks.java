@@ -71,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 43 11 * * *")
+    @Scheduled(cron = "0 0 18 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**清空数据**/
@@ -114,7 +114,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 50 16 * * *")
+    @Scheduled(cron = "0 5 18 * * *")
     public void fetchRecmdforGodenCountData() {
         stockDataService.processData(new GodenKdjCountStrategy(), 80);
     }
@@ -122,28 +122,9 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新天鹅拳形态数据
      */
-    @Scheduled(cron = "0 55 16 * * *")
+    @Scheduled(cron = "0 10 18 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(), 13);
-    }
-
-    /**
-     * 每天定时刷新推荐股诊数据
-     */
-    @Scheduled(cron = "0 28 17 * * *")
-    public void updateGuZhengData() throws InterruptedException {
-        List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
-        log.info("正在刷新推荐股票数据...........");
-        for (RecmdStock recmdStock : recmdStocks) {
-            GuZhenResponse guZhengData = GuZhenRequest.getGuZhengData(recmdStock.getStockCode());
-            if (guZhengData != null) {
-                RecmdStock recmdStockUpdate = new RecmdStock();
-                recmdStockUpdate.setStockCode(recmdStock.getStockCode());
-                recmdStockUpdate.setScore(guZhengData.getData().getData().getResult().get_score());
-                recmdStockService.updateGuZhenScore(recmdStockUpdate);
-            }
-            Thread.sleep(5000);
-        }
     }
 
 }
