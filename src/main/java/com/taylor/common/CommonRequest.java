@@ -247,6 +247,6 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("sz002839")));
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SZ300240")));
     }
 }

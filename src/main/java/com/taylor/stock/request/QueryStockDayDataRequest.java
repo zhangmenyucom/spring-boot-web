@@ -38,12 +38,12 @@ public class QueryStockDayDataRequest extends Thread {
 
     private Integer count;
 
-    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName,Integer count) {
+    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName, Integer count) {
         super(taskName);
         this.recmdStockService = recmdStockService;
         this.stockCodeList = stockCodeList;
         this.strategy = strategy;
-        this.count=count;
+        this.count = count;
     }
 
     public static String queryLatestResult(StockQueryBean stockQueryBean, GetMethod method) {
@@ -83,14 +83,14 @@ public class QueryStockDayDataRequest extends Thread {
             for (MashData mashData : response.getMashData()) {
                 mashDataList.add(mashData);
             }
-            IStrategy temp=strategy;
+            IStrategy temp = strategy;
             while (strategy != null) {
                 int checkResult = strategy.doCheck(mashDataList);
                 /**只查买入意见的股票**/
-                if (checkResult == 1) {
+                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+                if (checkResult == 1 && stockFundInOutData != null) {
                     RecmdStock recmdStock = new RecmdStock();
-                    StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
-                    StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                     recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                     recmdStock.setStockCode(stockCode);
                     recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
@@ -98,8 +98,8 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                     recmdStock.setStrategy(strategy.getStrategyEnum().getDesc());
                     recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
-                    recmdStock.setMainIn(stockFundInOutData==null?null:stockFundInOutData.getMainTotalIn());
-                    recmdStock.setMainInBi(stockFundInOutData==null?null:stockFundInOutData.getMainInBi());
+                    recmdStock.setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn());
+                    recmdStock.setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi());
                     recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                     recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                     recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());
@@ -111,9 +111,9 @@ public class QueryStockDayDataRequest extends Thread {
                     log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
                     System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());
                 }
-                strategy=strategy.getNext();
+                strategy = strategy.getNext();
             }
-            strategy=temp;
+            strategy = temp;
         }
         System.out.println("##############################线程：" + Thread.currentThread().getName() + "已执行完毕###############################");
         if (!methodKline.isAborted()) {
@@ -131,8 +131,8 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
         stockQueryBean.setStock_code("SZ002582".toLowerCase());
-        GetMethod method=new GetMethod(METHOD_URL_STOCK_DAY_INFO);
-        System.out.println( queryLatestResult(stockQueryBean,method));
+        GetMethod method = new GetMethod(METHOD_URL_STOCK_DAY_INFO);
+        System.out.println(queryLatestResult(stockQueryBean, method));
 
     }
 }

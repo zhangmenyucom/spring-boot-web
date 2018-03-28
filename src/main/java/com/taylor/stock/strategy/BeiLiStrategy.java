@@ -24,11 +24,7 @@ public class BeiLiStrategy extends IStrategy {
     @Override
     public int doCheck(List<MashData> mashDataList) {
         String stockCode = mashDataList.get(0).getStockCode();
-        /**停牌的去除**/
-        StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
-        if (stockPanKouData.getB1Number() <= 1) {
-            return 0;
-        }
+
         List<MacdTimeBean> macdTimeBean5 = MacdTimeDataRequest.getKdjTimeList(stockCode, KLineTypeEnum.FIVE_MINI, 10);
         if (Math.abs(macdTimeBean5.get(macdTimeBean5.size() - 1).getClose_px() - macdTimeBean5.get(macdTimeBean5.size() - 1).getLow_px()) / macdTimeBean5.get(0).getClose_px() <= 0.005) {
             return 0;

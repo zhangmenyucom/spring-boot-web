@@ -89,14 +89,6 @@ public class ScheduledTasks {
     }
 
     /**
-     * 每天定时刷新推荐数据
-     */
-    @Scheduled(cron = "0 7 18 * * *")
-    public void fetchRecmdforGodenCountData() {
-        stockDataService.processData(new GodenKdjCountStrategy(), 80);
-    }
-
-    /**
      * 每天定时刷新天鹅拳形态数据
      */
     @Scheduled(cron = "0 10 18 * * *")
