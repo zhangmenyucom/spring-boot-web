@@ -57,7 +57,7 @@ public class StockUtils {
     /**数据监控，邮件预警**/
     public static void processStock(String stockCode,KLineTypeEnum kLineTypeEnum){
         CheckResultBean kdjCheck = KdjTimeDataRequest.check(stockCode, kLineTypeEnum);
-        CheckResultBean macdCheck = MacdTimeDataRequest.check(stockCode, kLineTypeEnum);
+        CheckResultBean macdCheck = MacdTimeDataRequest.check(stockCode, kLineTypeEnum,2);
 
         StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
         if (kdjCheck.getCode() == 1) {

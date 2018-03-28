@@ -124,13 +124,13 @@ public class QueryStockDayDataRequest extends Thread {
     public static void main(String... args) {
         StockQueryBean stockQueryBean = new StockQueryBean();
         stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(2 + "");
+        stockQueryBean.setCount(5 + "");
         stockQueryBean.setCuid("xxx");
         stockQueryBean.setFormat("json");
         stockQueryBean.setFq_type("no");
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
-        stockQueryBean.setStock_code("SZ300234".toLowerCase());
+        stockQueryBean.setStock_code("SZ002582".toLowerCase());
         GetMethod method=new GetMethod(METHOD_URL_STOCK_DAY_INFO);
         System.out.println( queryLatestResult(stockQueryBean,method));
 

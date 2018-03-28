@@ -2,6 +2,8 @@ package com.taylor.common;
 
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.entity.stock.TencentDayData;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -25,7 +29,7 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    public synchronized  String  executeRequest(T in, HttpMethodBase method) {
+    public synchronized String executeRequest(T in, HttpMethodBase method) {
         if (retryCount.get() == null) {
             retryCount.set(0);
         }
@@ -54,7 +58,7 @@ public class CommonRequest<T> {
                 return executeRequest(in, method);
             }
             ProcessCountor.FAIL_COUNT.incrementAndGet();
-           log.info("错误e{}",e.getMessage());
+            log.info("错误e{}", e.getMessage());
         }
         retryCount.set(0);
         if (!StringUtil.isEmpty(stringBuider.toString())) {
@@ -179,5 +183,70 @@ public class CommonRequest<T> {
             }
         }
         return stockPanKouData;
+    }
+
+    public static List<TencentDayData> getStckDailyHistory(String stockCode, int count) {
+        List<TencentDayData> list = new ArrayList<>();
+        try {
+            String url = "http://web.ifzq.gtimg.cn/appstock/app/kline/kline?param=" + stockCode + ",day,,," + count;
+            URL u = new URL(url);
+            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[10240];
+            int len = isr.read(cha);
+            String result = new String(cha, 0, len);
+            if (result != null) {
+                result = result.substring(result.indexOf("day") + 6, result.indexOf("qt") - 3).replace("[", "").replace("\"", "");
+            }
+            String[] dadaDaliyList = result.split("],");
+            for (String dailyData : dadaDaliyList) {
+                String[] dataDetailArray = dailyData.replace("]", "").split(",");
+                TencentDayData tencentDayData = new TencentDayData();
+                tencentDayData.setDate(dataDetailArray[0]);
+                tencentDayData.setOpen(Double.valueOf(dataDetailArray[1]));
+                tencentDayData.setClose(Double.valueOf(dataDetailArray[2]));
+                tencentDayData.setHigh(Double.valueOf(dataDetailArray[3]));
+                tencentDayData.setLow(Double.valueOf(dataDetailArray[4]));
+                tencentDayData.setTotalHands(Double.valueOf(dataDetailArray[5]).longValue());
+                list.add(tencentDayData);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+    public static TencentTodayBaseInfo getStckTodayBaseInfo(String stockCode) {
+        TencentTodayBaseInfo tencentTodayBaseInfo=new TencentTodayBaseInfo();
+        try {
+            String url = "http://web.sqt.gtimg.cn/q=" + stockCode;
+            URL u = new URL(url);
+            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[10240];
+            int len = isr.read(cha);
+            String result = new String(cha, 0, len);
+            String[] dataInfoArray=result.split("~");
+            tencentTodayBaseInfo.setStockName(dataInfoArray[1]);
+            tencentTodayBaseInfo.setClose(Double.valueOf(dataInfoArray[3]));
+            tencentTodayBaseInfo.setPreClose(Double.valueOf(dataInfoArray[4]));
+            tencentTodayBaseInfo.setOpen(Double.valueOf(dataInfoArray[5]));
+            tencentTodayBaseInfo.setTotalHands(Double.valueOf(dataInfoArray[6]).longValue());
+            tencentTodayBaseInfo.setUpDownValue(Double.valueOf(dataInfoArray[31]));
+            tencentTodayBaseInfo.setUpDownValue(Double.valueOf(dataInfoArray[31]));
+            tencentTodayBaseInfo.setUpDownPercent(Double.valueOf(dataInfoArray[32]));
+            tencentTodayBaseInfo.setHigh(Double.valueOf(dataInfoArray[33]));
+            tencentTodayBaseInfo.setLow(Double.valueOf(dataInfoArray[34]));
+            tencentTodayBaseInfo.setExchangeRatio(Double.valueOf(dataInfoArray[37]));
+            tencentTodayBaseInfo.setLiangbi(Double.valueOf(dataInfoArray[49]));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tencentTodayBaseInfo;
+    }
+
+    public static void main(String... args) {
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("sz002839")));
     }
 }

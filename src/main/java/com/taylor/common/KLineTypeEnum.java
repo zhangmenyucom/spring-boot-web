@@ -6,7 +6,11 @@ package com.taylor.common;
 
 public enum KLineTypeEnum {
 
-	ONE_MINI(1, "1分钟k线"), FIVE_MINI(2, "5分钟k线"),FIVETEEN_MINI(3, "15分钟k线");
+	ONE_MINI(1, "1分钟k线"),
+	FIVE_MINI(2, "5分钟k线"),
+	FIVETEEN_MINI(3, "15分钟k线"),
+	THIRTY_MINI(4, "30分钟k线"),
+	SIXTY_MINI(5, "60分钟k线");
 
 	private Integer key;
 

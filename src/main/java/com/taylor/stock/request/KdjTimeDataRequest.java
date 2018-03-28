@@ -28,7 +28,7 @@ public class KdjTimeDataRequest {
             HttpClient client = new HttpClient();
             // 表单域的值,既post传入的key=value
             String code = stockCode.substring(2, stockCode.length()) + "." + stockCode.substring(0, 2).toUpperCase();
-            NameValuePair[] data = {new NameValuePair("path", "/stock/stock/k_line"), new NameValuePair("data[prod_code]", code), new NameValuePair("data[candle_period]", kLineTypeEnum.getKey() + ""), new NameValuePair("data[candle_mode]", "1"), new NameValuePair("data[data_count]", "2"), new NameValuePair("data[exFieldArr]", "kdj"), new NameValuePair("ts", new Date().getTime() + "")};
+            NameValuePair[] data = {new NameValuePair("path", "/stock/stock/k_line"), new NameValuePair("data[prod_code]", code), new NameValuePair("data[candle_period]", kLineTypeEnum.getKey() + ""), new NameValuePair("data[candle_mode]", "1"), new NameValuePair("data[data_count]", "5"), new NameValuePair("data[exFieldArr]", "kdj"), new NameValuePair("ts", new Date().getTime() + "")};
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
@@ -110,6 +110,6 @@ public class KdjTimeDataRequest {
     }
 
     public static void main(String... args) {
-        System.out.println(postOrder("sh510900", KLineTypeEnum.FIVE_MINI));
+        System.out.println(postOrder("sz300479", KLineTypeEnum.SIXTY_MINI));
     }
 }

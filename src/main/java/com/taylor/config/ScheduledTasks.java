@@ -5,11 +5,9 @@ import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockOnShelf;
-import com.taylor.entity.stock.GuZhenResponse;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
-import com.taylor.stock.request.GuZhenRequest;
 import com.taylor.stock.request.QueryStockBaseDataRequest;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
@@ -71,50 +69,29 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 0 18 * * *")
+    @Scheduled(cron = "0 18 22 * * *")
     public void fetchRecmdData() {
         RecmdStock recmdStockDel = new RecmdStock();
-        /**清空数据**/
-        recmdStockService.del(recmdStockDel);
-
-        Kdj5Strategy kdj5Strategy = new Kdj5Strategy();
-        Kdj10Strategy kdj10Strategy = new Kdj10Strategy();
-        kdj5Strategy.setNext(kdj10Strategy);
-        Kdj510Strategy kdj510Strategy = new Kdj510Strategy();
-        kdj10Strategy.setNext(kdj510Strategy);
-        KdjDayWeekMonthXStrategy kdjDayWeekMonthXStrategy = new KdjDayWeekMonthXStrategy();
-        kdj510Strategy.setNext(kdjDayWeekMonthXStrategy);
-        KdjOver45duRatioStrategy kdjOver45duRatioStrategy = new KdjOver45duRatioStrategy(5.0f, 0.9f);
-        kdjDayWeekMonthXStrategy.setNext(kdjOver45duRatioStrategy);
-        KdjOverWithRatioStrategy kdjOverWithRatioStrategy = new KdjOverWithRatioStrategy(5.0f, 0.9f);
-        kdjOver45duRatioStrategy.setNext(kdjOverWithRatioStrategy);
-        KdjWeekRatioStrategy kdjWeekRatioStrategy = new KdjWeekRatioStrategy(0.9f);
-        kdjOverWithRatioStrategy.setNext(kdjWeekRatioStrategy);
-        KdjWeekRatioStrategyLiangBiMianInOut kdjWeekRatioStrategyLiangBiMianInOut = new KdjWeekRatioStrategyLiangBiMianInOut(0.9f);
-        kdjWeekRatioStrategy.setNext(kdjWeekRatioStrategyLiangBiMianInOut);
-        KdjWeekRatioStrategyLiangBiOver1 kdjWeekRatioStrategyLiangBiOver1 = new KdjWeekRatioStrategyLiangBiOver1(0.9f);
-        kdjWeekRatioStrategyLiangBiMianInOut.setNext(kdjWeekRatioStrategyLiangBiOver1);
-        KdjWithRatioStrategy kdjWithRatioStrategy = new KdjWithRatioStrategy(5.0f, 0.9f);
-        kdjWeekRatioStrategyLiangBiOver1.setNext(kdjWithRatioStrategy);
-        MacdStrategy macdStrategy = new MacdStrategy();
-        kdjWithRatioStrategy.setNext(macdStrategy);
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
-        macdStrategy.setNext(shiZiMacdStrategy);
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
-        macdStrategy.setNext(tMacdStrategy);
+        shiZiMacdStrategy.setNext(tMacdStrategy);
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
         tMacdStrategy.setNext(over5DayStrategy);
         Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
         over5DayStrategy.setNext(over10DayStrategy);
         Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         over10DayStrategy.setNext(over20DayStrategy);
-        stockDataService.processData(kdj5Strategy);
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        over20DayStrategy.setNext(bigYinLineStrategy);
+        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        bigYinLineStrategy.setNext(beiLiStrategy);
+        stockDataService.processData(shiZiMacdStrategy);
     }
 
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 5 18 * * *")
+    @Scheduled(cron = "0 7 18 * * *")
     public void fetchRecmdforGodenCountData() {
         stockDataService.processData(new GodenKdjCountStrategy(), 80);
     }
@@ -125,6 +102,18 @@ public class ScheduledTasks {
     @Scheduled(cron = "0 10 18 * * *")
     public void fetchTianEQuanData() {
         stockDataService.processData(new TianEQuanStrategy(), 13);
+    }
+
+    /**
+     * 尾盘推荐股票
+     **/
+    @Scheduled(cron = "0 40 14 * * *")
+    public void fetchBigYinData() {
+        RecmdStock recmdStockDel = new RecmdStock();
+        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        bigYinLineStrategy.setNext(beiLiStrategy);
+        stockDataService.processData(bigYinLineStrategy);
     }
 
 }

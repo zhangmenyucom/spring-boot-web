@@ -1,6 +1,5 @@
 package com.taylor.stock.request;
 
-import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.entity.stock.kdj.CheckResultBean;
 import com.taylor.entity.stock.kdj.MacdTimeBean;
@@ -23,13 +22,13 @@ import java.util.List;
 public class MacdTimeDataRequest {
     private static PostMethod method = new PostMethod("https://gupiao.nicaifu.com/Stock_router.php");
 
-    public static synchronized String postOrder(String stockCode, KLineTypeEnum kLineTypeEnum) {
+    public static synchronized String postOrder(String stockCode, KLineTypeEnum kLineTypeEnum,int count) {
         StringBuilder stringBuffer = null;
         try {
             HttpClient client = new HttpClient();
             // 表单域的值,既post传入的key=value
             String code = stockCode.substring(2, stockCode.length()) + "." + stockCode.substring(0, 2).toUpperCase();
-            NameValuePair[] data = {new NameValuePair("path", "/stock/stock/k_line"), new NameValuePair("data[prod_code]", code), new NameValuePair("data[candle_period]", kLineTypeEnum.getKey() + ""), new NameValuePair("data[candle_mode]", "1"), new NameValuePair("data[data_count]", "2"), new NameValuePair("data[exFieldArr]", "macd"), new NameValuePair("ts", new Date().getTime() + "")};
+            NameValuePair[] data = {new NameValuePair("path", "/stock/stock/k_line"), new NameValuePair("data[prod_code]", code), new NameValuePair("data[candle_period]", kLineTypeEnum.getKey() + ""), new NameValuePair("data[candle_mode]", "1"), new NameValuePair("data[data_count]", count+""), new NameValuePair("data[exFieldArr]", "macd"), new NameValuePair("ts", new Date().getTime() + "")};
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
@@ -53,8 +52,8 @@ public class MacdTimeDataRequest {
 
     }
 
-    public static List<MacdTimeBean> getKdjTimeList(String stockCode, KLineTypeEnum kLineTypeEnum) {
-        String result = postOrder(stockCode, kLineTypeEnum);
+    public static List<MacdTimeBean> getKdjTimeList(String stockCode, KLineTypeEnum kLineTypeEnum,int count) {
+        String result = postOrder(stockCode, kLineTypeEnum,count);
         String suResult = result.substring(result.indexOf("candle") + 8, result.indexOf("hq_type_code") - 3);
         String finalResult = suResult.substring(suResult.lastIndexOf(":") + 2, suResult.length() - 2).replace("[", "{").replace("]", "}");
         String firstBeanStr = finalResult.substring(finalResult.indexOf("{") + 1, finalResult.lastIndexOf("{") - 2).replace("\"", "");
@@ -68,7 +67,7 @@ public class MacdTimeDataRequest {
     }
 
     private static MacdTimeBean transterStr2KdjTimeBean(String beanStr) {
-        String[] beanAttr = beanStr.split(",");
+        String[] beanAttr =  beanStr.replace("{","").replace("}","").split(",");
         MacdTimeBean macdTimeBean = new MacdTimeBean();
         macdTimeBean.setMin_time(Long.valueOf(beanAttr[0]));
         macdTimeBean.setOpen_px(Double.valueOf(beanAttr[1]));
@@ -85,9 +84,9 @@ public class MacdTimeDataRequest {
         return macdTimeBean;
     }
 
-    public static CheckResultBean check(String stockCode, KLineTypeEnum kLineTypeEnum) {
+    public static CheckResultBean check(String stockCode, KLineTypeEnum kLineTypeEnum,int count) {
         CheckResultBean checkResultBean=new CheckResultBean();
-        List<MacdTimeBean> macdTimeList = getKdjTimeList(stockCode, kLineTypeEnum);
+        List<MacdTimeBean> macdTimeList = getKdjTimeList(stockCode, kLineTypeEnum,count);
         MacdTimeBean fisrt = macdTimeList.get(0);
         MacdTimeBean second = macdTimeList.get(1);
         String result=second.getMacd()-fisrt.getMacd()>0?"macd上翘":"macd下翘";
@@ -120,7 +119,6 @@ public class MacdTimeDataRequest {
     }
 
     public static void main(String... args) {
-        System.out.println(postOrder("sh510900",KLineTypeEnum.FIVE_MINI));
-        System.out.println(JsonUtil.transfer2JsonString(getKdjTimeList("sh510900",KLineTypeEnum.FIVE_MINI)));
+        System.out.println(postOrder("sh600201",KLineTypeEnum.FIVETEEN_MINI,6));
     }
 }
