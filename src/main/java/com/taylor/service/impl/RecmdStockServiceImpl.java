@@ -35,6 +35,11 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
 
     @Override
     public int updateGuZhenScore(RecmdStock recmdStockUpdate) {
-          return this.getDao().updateGuZhenScore(recmdStockUpdate);
+        return this.getDao().updateGuZhenScore(recmdStockUpdate);
+    }
+
+    @Override
+    public int delByStrategyList(List<Integer> strategyTypeList) {
+        return this.getDao().delByStrategyList(strategyTypeList);
     }
 }

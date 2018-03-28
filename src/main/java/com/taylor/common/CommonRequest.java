@@ -188,7 +188,7 @@ public class CommonRequest<T> {
     public static List<TencentDayData> getStckDailyHistory(String stockCode, int count) {
         List<TencentDayData> list = new ArrayList<>();
         try {
-            String url = "http://web.ifzq.gtimg.cn/appstock/app/kline/kline?param=" + stockCode + ",day,,," + count;
+            String url = "http://web.ifzq.gtimg.cn/appstock/app/kline/kline?param=" + stockCode.toLowerCase() + ",day,,," + count;
             URL u = new URL(url);
             InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
             char[] cha = new char[10240];
@@ -220,9 +220,9 @@ public class CommonRequest<T> {
     public static TencentTodayBaseInfo getStckTodayBaseInfo(String stockCode) {
         TencentTodayBaseInfo tencentTodayBaseInfo=new TencentTodayBaseInfo();
         try {
-            String url = "http://web.sqt.gtimg.cn/q=" + stockCode;
+            String url = "http://web.sqt.gtimg.cn/q=" + stockCode.toLowerCase();
             URL u = new URL(url);
-            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
+            InputStreamReader isr = new InputStreamReader(u.openStream());
             char[] cha = new char[10240];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
@@ -247,6 +247,6 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SZ300240")));
+        System.out.println(JsonUtil.transfer2JsonString(getStckDailyHistory("SZ002588",5)));
     }
 }

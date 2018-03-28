@@ -25,4 +25,6 @@ public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
     List<RecmdStock> getRecmdStockByCountTime();
 
     int updateGuZhenScore(@Param("entity") RecmdStock recmdStockUpdate);
+
+    int delByStrategyList(@Param("strategyTypeList") List<Integer> strategyTypeList);
 }

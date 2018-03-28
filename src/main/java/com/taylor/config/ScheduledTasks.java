@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,9 +70,8 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 18 22 * * *")
+    @Scheduled(cron = "0 14 0 * * *")
     public void fetchRecmdData() {
-        RecmdStock recmdStockDel = new RecmdStock();
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
         shiZiMacdStrategy.setNext(tMacdStrategy);
@@ -85,6 +85,14 @@ public class ScheduledTasks {
         over20DayStrategy.setNext(bigYinLineStrategy);
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
+        IStrategy iStrategy = shiZiMacdStrategy;
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(shiZiMacdStrategy);
     }
 
@@ -99,7 +107,7 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 40 14 * * *")
+    @Scheduled(cron = "0 27 0 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();

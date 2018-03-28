@@ -21,11 +21,6 @@ public class BigYinLineStrategy extends IStrategy {
 
     @Override
     public int doCheck(List<MashData> mashDataList) {
-        /**停牌的去除**/
-        StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(mashDataList.get(0).getStockCode());
-        if (stockPanKouData.getB1Number() <= 1) {
-            return 0;
-        }
         List<TencentDayData> stckDailyHistory = CommonRequest.getStckDailyHistory(mashDataList.get(0).getStockCode(), 5);
         if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
             return 0;
