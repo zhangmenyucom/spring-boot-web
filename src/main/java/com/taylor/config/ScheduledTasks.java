@@ -55,22 +55,22 @@ public class ScheduledTasks {
         }
     }
 
-/*    *//**
+    /**
      * 每30秒刷新股架数据
-     *//*
-    @Scheduled(cron = "*//*30 * * * * *")
+     */
+    @Scheduled(cron = "*/30 * * * * *")
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
             StockOnShelf stockOnShelfUpdate = new StockOnShelf();
             stockOnShelfService.updateSelf(stockOnShelfUpdate);
         }
-    }*/
+    }
 
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 52 14 * * *")
+    @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
@@ -96,18 +96,11 @@ public class ScheduledTasks {
         stockDataService.processData(shiZiMacdStrategy);
     }
 
-    /**
-     * 每天定时刷新天鹅拳形态数据
-     */
-    @Scheduled(cron = "0 10 18 * * *")
-    public void fetchTianEQuanData() {
-        stockDataService.processData(new TianEQuanStrategy(), 13);
-    }
 
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 54 10 * * *")
+    @Scheduled(cron = "0 30 14 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
