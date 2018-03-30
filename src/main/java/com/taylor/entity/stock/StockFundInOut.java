@@ -12,6 +12,10 @@ import lombok.Data;
 @Data
 public class StockFundInOut {
     /**
+     * 0：正常挂牌 -1:停牌
+     **/
+    private int status;
+    /**
      * 代码
      **/
     private String stockCode;

@@ -81,6 +81,11 @@ public class CommonRequest<T> {
             char[] cha = new char[1024];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
+            if (result.contains("pv_none_match=1")) {
+                stockFundInOut = new StockFundInOut();
+                stockFundInOut.setStatus(-1);
+                return stockFundInOut;
+            }
             result = result.substring(result.indexOf("=") + 2, result.indexOf(";") - 1);
             String[] datas = result.split("~");
             stockFundInOut = new StockFundInOut();
@@ -97,6 +102,7 @@ public class CommonRequest<T> {
             stockFundInOut.setTotalIN(Double.valueOf(datas[9]));
             stockFundInOut.setStockName(datas[12]);
         } catch (Exception e) {
+            System.out.println("hhaa");
             System.out.println(e.getMessage());
         } finally {
             if (isr != null) {
@@ -218,7 +224,7 @@ public class CommonRequest<T> {
 
 
     public static TencentTodayBaseInfo getStckTodayBaseInfo(String stockCode) {
-        TencentTodayBaseInfo tencentTodayBaseInfo=new TencentTodayBaseInfo();
+        TencentTodayBaseInfo tencentTodayBaseInfo = new TencentTodayBaseInfo();
         try {
             String url = "http://web.sqt.gtimg.cn/q=" + stockCode.toLowerCase();
             URL u = new URL(url);
@@ -226,7 +232,7 @@ public class CommonRequest<T> {
             char[] cha = new char[10240];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
-            String[] dataInfoArray=result.split("~");
+            String[] dataInfoArray = result.split("~");
             tencentTodayBaseInfo.setStockName(dataInfoArray[1]);
             tencentTodayBaseInfo.setClose(Double.valueOf(dataInfoArray[3]));
             tencentTodayBaseInfo.setPreClose(Double.valueOf(dataInfoArray[4]));
@@ -247,6 +253,6 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStckDailyHistory("SZ002588",5)));
+        System.out.println(JsonUtil.transfer2JsonString(getStockPanKouData("SZ002584")));
     }
 }

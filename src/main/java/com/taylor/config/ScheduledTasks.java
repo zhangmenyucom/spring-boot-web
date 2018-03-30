@@ -100,7 +100,7 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 30 14 * * *")
+    @Scheduled(cron = "0 15 17 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
