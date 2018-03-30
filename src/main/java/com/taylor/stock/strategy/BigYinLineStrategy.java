@@ -25,7 +25,7 @@ public class BigYinLineStrategy extends IStrategy {
         if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
             return 0;
         }
-        if (stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() >= 3) {
+        if (stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() >= 2) {
             for (int i = 0; i < stckDailyHistory.size() - 1; i++) {
                 if (stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() / stckDailyHistory.get(i).getTotalHands() > 3) {
                     continue;

@@ -89,7 +89,7 @@ public class QueryStockDayDataRequest extends Thread {
                 /**只查买入意见的股票**/
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
-                if (checkResult == 1 && stockFundInOutData != null) {
+                if (checkResult == 1 && stockFundInOutData != null && stockPanKouData != null) {
                     RecmdStock recmdStock = new RecmdStock();
                     recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                     recmdStock.setStockCode(stockCode);

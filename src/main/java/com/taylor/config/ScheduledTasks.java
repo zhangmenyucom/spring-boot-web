@@ -55,22 +55,22 @@ public class ScheduledTasks {
         }
     }
 
-    /**
+/*    *//**
      * 每30秒刷新股架数据
-     */
-    @Scheduled(cron = "*/30 * * * * *")
+     *//*
+    @Scheduled(cron = "*//*30 * * * * *")
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
             StockOnShelf stockOnShelfUpdate = new StockOnShelf();
             stockOnShelfService.updateSelf(stockOnShelfUpdate);
         }
-    }
+    }*/
 
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 14 0 * * *")
+    @Scheduled(cron = "0 52 14 * * *")
     public void fetchRecmdData() {
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
@@ -107,12 +107,20 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 27 0 * * *")
+    @Scheduled(cron = "0 54 10 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
+        IStrategy iStrategy = bigYinLineStrategy;
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(bigYinLineStrategy);
     }
 

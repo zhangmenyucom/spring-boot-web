@@ -66,7 +66,7 @@ public class KdjTimeDataRequest {
     }
 
     private static KdjTimeBean transterStr2KdjTimeBean(String beanStr) {
-        String[] beanAttr = beanStr.split(",");
+        String[] beanAttr = beanStr.replace("}","").split(",");
         KdjTimeBean kdjTimeBean = new KdjTimeBean();
         kdjTimeBean.setMin_time(Long.valueOf(beanAttr[0]));
         kdjTimeBean.setOpen_px(Double.valueOf(beanAttr[1]));
