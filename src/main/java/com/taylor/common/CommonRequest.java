@@ -102,8 +102,8 @@ public class CommonRequest<T> {
             stockFundInOut.setTotalIN(Double.valueOf(datas[9]));
             stockFundInOut.setStockName(datas[12]);
         } catch (Exception e) {
-            System.out.println("hhaa");
             System.out.println(e.getMessage());
+            return stockFundInOut;
         } finally {
             if (isr != null) {
                 try {
@@ -253,6 +253,6 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStockPanKouData("SZ002584")));
+        System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SH600068")));
     }
 }

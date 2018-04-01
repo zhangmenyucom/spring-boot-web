@@ -4,15 +4,23 @@ import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.service.RecmdStockService;
+import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.OnShelfUpdator;
+import com.taylor.stock.request.QueryStockDayDataRequest;
+import com.taylor.stock.strategy.BeiLiStrategy;
+import com.taylor.stock.strategy.BigYinLineStrategy;
+import com.taylor.stock.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +42,9 @@ public class StockViewController {
 
     @Autowired
     private StockOnShelfService stockOnShelfService;
+
+    @Autowired
+    private StockDataService stockDataService;
 
     @RequestMapping("/recmd/{type}")
     public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, @RequestParam(defaultValue = "", name = "recordTime") String recordTime) throws ParseException {
@@ -92,5 +103,28 @@ public class StockViewController {
         map.put("stockOnShelves", stockOnShelves);
         return "/shelf";
     }
+
+    @ResponseBody
+    @RequestMapping("/start_choose")
+    public String startChoose(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
+        QueryStockDayDataRequest.run_flag = 0;
+        Thread.sleep(5000);
+        QueryStockDayDataRequest.run_flag = 1;
+        RecmdStock recmdStockDel = new RecmdStock();
+        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        bigYinLineStrategy.setNext(beiLiStrategy);
+        IStrategy iStrategy = bigYinLineStrategy;
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
+        stockDataService.processData(bigYinLineStrategy);
+        return "筛选中。。。。";
+    }
+
 
 }

@@ -1,10 +1,15 @@
 package com.taylor.controller;
 
+import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockData;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.service.impl.RedisServiceImpl;
+import com.taylor.stock.request.QueryStockDayDataRequest;
+import com.taylor.stock.strategy.BeiLiStrategy;
+import com.taylor.stock.strategy.BigYinLineStrategy;
+import com.taylor.stock.strategy.IStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +42,6 @@ public class StockDataController extends BaseAction {
 
     @Autowired
     private StockOnShelfService stockOnShelfService;
-
 
 
     @ResponseBody
@@ -66,6 +71,7 @@ public class StockDataController extends BaseAction {
         recmdStockService.checkResult();
         return "正在提取数据，请耐心等待";
     }
+
     @ResponseBody
     @RequestMapping("/listen_shelf")
     public String listenShelf(HttpServletRequest request, HttpServletResponse response) {
@@ -73,14 +79,12 @@ public class StockDataController extends BaseAction {
         return "监听中。。。。";
     }
 
-
     public void catchStock(List<StockData> result) {
         for (StockData stockData : result) {
             System.out.println(stockData.getStockCode());
             redisService.put(stockData.getStockCode(), stockData.getStockName(), -1);
         }
     }
-
 
 
 }
