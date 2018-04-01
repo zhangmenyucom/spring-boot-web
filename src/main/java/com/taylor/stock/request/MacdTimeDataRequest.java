@@ -119,6 +119,6 @@ public class MacdTimeDataRequest {
     }
 
     public static void main(String... args) {
-        System.out.println(postOrder("sh600201",KLineTypeEnum.FIVETEEN_MINI,6));
+        System.out.println(postOrder("SH603985",KLineTypeEnum.FIVETEEN_MINI,6));
     }
 }

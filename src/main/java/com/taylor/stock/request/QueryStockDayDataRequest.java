@@ -86,20 +86,25 @@ public class QueryStockDayDataRequest extends Thread {
             IStrategy temp = strategy;
             while (strategy != null) {
                 int checkResult = strategy.doCheck(mashDataList);
+
+                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+                if (stockFundInOutData.getStatus() == -1) {
+                    break;
+                }
                 /**只查买入意见的股票**/
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
-                if (checkResult == 1 && stockFundInOutData != null) {
+                if (checkResult == 1 && stockPanKouData != null) {
                     RecmdStock recmdStock = new RecmdStock();
                     recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                     recmdStock.setStockCode(stockCode);
                     recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                     recmdStock.setStockName(stockPanKouData.getStockName());
+                    recmdStock.setRecordPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                     recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
                     recmdStock.setStrategy(strategy.getStrategyEnum().getDesc());
                     recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
-                    recmdStock.setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn());
-                    recmdStock.setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi());
+                    recmdStock.setMainIn(stockFundInOutData.getMainTotalIn());
+                    recmdStock.setMainInBi(stockFundInOutData.getMainInBi());
                     recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                     recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                     recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());

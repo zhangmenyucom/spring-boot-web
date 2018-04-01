@@ -70,7 +70,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 14 0 * * *")
+    @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
@@ -96,23 +96,24 @@ public class ScheduledTasks {
         stockDataService.processData(shiZiMacdStrategy);
     }
 
-    /**
-     * 每天定时刷新天鹅拳形态数据
-     */
-    @Scheduled(cron = "0 10 18 * * *")
-    public void fetchTianEQuanData() {
-        stockDataService.processData(new TianEQuanStrategy(), 13);
-    }
 
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 27 0 * * *")
+    @Scheduled(cron = "0 15 17 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
+        IStrategy iStrategy = bigYinLineStrategy;
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(bigYinLineStrategy);
     }
 
