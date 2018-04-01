@@ -19,8 +19,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--        <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
-        <thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>-->
+        <!--        <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+                <thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>-->
     </properties>
 
     <dependencies>
@@ -183,6 +183,27 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>deploy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <property name="deploy_home" value="/data/apps/deploy"/>
+                                <property name="target_file" value="${project.artifactId}.${project.packaging}"/>
+                                <copy file="target/${target_file}" todir="${deploy_home}/"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
