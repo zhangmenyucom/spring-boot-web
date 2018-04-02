@@ -81,8 +81,8 @@
                     <input type="checkbox" th:checked="${stock.authorOpinion=='1'}"/>
                 </label>
             </td>
-            <td th:text="${stock.recordPrice}"></td>
-            <td th:text="${stock.currentPrice}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal(stock.recordPrice, 0, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(stock.currentPrice, 0, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text=" ${stock.macd}"></td>
             <td th:text="${stock.kdj}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
