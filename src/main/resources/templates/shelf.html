@@ -67,7 +67,9 @@
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
             <td>
-                <button class="del-choose">删除自选</button>
+                <button class="del-choose">删除</button>
+                <button class="del-choose">监控</button>
+                <button class="del-choose">停止</button>
             </td>
         </tr>
     </table>
