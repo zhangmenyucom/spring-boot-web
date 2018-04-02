@@ -32,12 +32,11 @@ public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Ent
 
     @Override
     @Transactional
-    public Entity update(Entity entity) {
+    public int update(Entity entity) {
         if (entity == null) {
             throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), RETURN_CODE.ARGS_EMPTY.getMsg());
         }
-        this.getDao().update(entity);
-        return entity;
+        return this.getDao().update(entity);
     }
 
     @Override

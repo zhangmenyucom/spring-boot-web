@@ -7,6 +7,7 @@ import lombok.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
 import static com.taylor.common.MailUtils.sendMail;
 import static com.taylor.common.SoundUtil.paly;
 import static com.taylor.common.StockUtils.processStock;
@@ -32,9 +33,9 @@ public class KdjOneMiniMonitor extends Thread {
 
     @Override
     public void run() {
-        while (a == 1) {
-            if(StockUtils.noNeedMonotorTime()){
-                System.out.println(kLineTypeEnum.getDescription()+" 提示：非交易时间，不执行监控，当前时间   " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        while (a == 1 && STOCK_ON_MONITOR_MAP.get(stockCode) != null) {
+            if (StockUtils.noNeedMonotorTime()) {
+                System.out.println(kLineTypeEnum.getDescription() + " 提示：非交易时间，不执行监控，当前时间   " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
                 try {
                     Thread.sleep(60000);
                 } catch (InterruptedException e) {
@@ -48,7 +49,7 @@ public class KdjOneMiniMonitor extends Thread {
                 sendMail("时间警告", "当前时间超过14：40，后期跳水，逢高全抛，见好就收");
             }
             /**实时处理数据**/
-            processStock(stockCode,kLineTypeEnum);
+            processStock(stockCode, kLineTypeEnum);
 
             try {
                 Thread.sleep(30000);
@@ -59,7 +60,7 @@ public class KdjOneMiniMonitor extends Thread {
     }
 
     public static void main(String... args) {
-        KdjOneMiniMonitor kdjMonitor1 = new KdjOneMiniMonitor("sh510900",KLineTypeEnum.ONE_MINI);
+        KdjOneMiniMonitor kdjMonitor1 = new KdjOneMiniMonitor("sh510900", KLineTypeEnum.ONE_MINI);
         kdjMonitor1.start();
     }
 }

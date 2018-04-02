@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
+
 /**
  * 测试
  *
@@ -28,10 +30,10 @@ public class MonitorController {
 
     @RequestMapping("/start")
     public String startMonitor() {
-        if(KdjFiveMiniMonitor.a == 1){
+        if (KdjFiveMiniMonitor.a == 1) {
             return "已经开启，无需再次开启监控";
         }
-        KdjFiveMiniMonitor.a=1;
+        KdjFiveMiniMonitor.a = 1;
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
@@ -45,15 +47,16 @@ public class MonitorController {
 
     @RequestMapping("/startOne")
     public String startOneMonitor() {
-        if(KdjOneMiniMonitor.a ==1){
+        if (KdjOneMiniMonitor.a == 1) {
             return "已经开启，无需再次开启监控";
         }
-        KdjOneMiniMonitor.a=1;
+        KdjOneMiniMonitor.a = 1;
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         String stockStr = "";
         for (StockOnShelf stockOnShelf : stockOnShelves) {
+            STOCK_ON_MONITOR_MAP.put(stockOnShelf.getStockCode(), stockOnShelf.getStockName());
             new KdjOneMiniMonitor(stockOnShelf.getStockCode(), KLineTypeEnum.ONE_MINI).start();
             stockStr += " " + stockOnShelf.getStockName();
         }

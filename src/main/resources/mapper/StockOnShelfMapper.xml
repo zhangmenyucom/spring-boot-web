@@ -126,21 +126,37 @@
             </if>
         </trim>
     </insert>
+
     <update id="update">
         UPDATE stock_on_shelf
-        SET
-        id=#{entity.id,jdbcType=BIGINT},
-        stock_name=#{entity.stockName,jdbcType=VARCHAR}
-        <if test="entity.currentPrice!=null">
-            ,current_price=#{entity.currentPrice,jdbcType=DOUBLE}
-        </if>
-        <if test="entity.netRatio!=null">
-            ,net_ratio=#{entity.netRatio,jdbcType=DOUBLE}
-        </if>
-        <if test="entity.fiveMiniRatio!=null">
-            , five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
-        </if>
-        WHERE id = #{entity.id,jdbcType=BIGINT}
+        <set>
+            <if test="entity.id!=null">
+                id = #{entity.id,jdbcType=BIGINT}
+            </if>
+            <if test="entity.stockName!=null">
+                stock_name=#{entity.stockName,jdbcType=VARCHAR}
+            </if>
+            <if test="entity.currentPrice!=null">
+                current_price=#{entity.currentPrice,jdbcType=DOUBLE}
+            </if>
+            <if test="entity.netRatio!=null">
+                net_ratio=#{entity.netRatio,jdbcType=DOUBLE}
+            </if>
+            <if test="entity.fiveMiniRatio!=null">
+                five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
+            </if>
+            <if test="entity.status!=null">
+                status=#{entity.status}
+            </if>
+        </set>
+        <where>
+            <if test="entity.id!=null">
+                id = #{entity.id,jdbcType=BIGINT}
+            </if>
+            <if test="entity.stockCode!=null">
+                stock_code=#{entity.stockCode}
+            </if>
+        </where>
     </update>
 
 

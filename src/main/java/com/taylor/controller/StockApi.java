@@ -51,6 +51,16 @@ public class StockApi extends BaseAction {
         }
         return result;
     }
+    @ResponseBody
+    @RequestMapping("/update_monitor")
+    public ApiResponse<Boolean> updateMonitor(@RequestBody StockOnShelf stockOnShelf, HttpServletRequest request, HttpServletResponse response) {
+        ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+        if (stockOnShelfService.update(stockOnShelf)!= 0) {
+            result.setErrorNo(ErrorCode.SUCCESS);
+            result.setData(Boolean.TRUE);
+        }
+        return result;
+    }
 
     @ResponseBody
     @RequestMapping("/add_choose")

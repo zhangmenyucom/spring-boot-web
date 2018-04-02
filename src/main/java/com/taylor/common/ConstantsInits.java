@@ -1,8 +1,6 @@
 package com.taylor.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author xiaolu.zhang
@@ -18,4 +16,7 @@ public class ConstantsInits {
         STOCK_CODE_LIST_SH = Arrays.asList(Constants.STOCK_CODE_SH.split(","));
         STOCK_CODE_LIST_SZ = Arrays.asList(Constants.STOCK_CODE_SZ.split(","));
     }
+
+    /**监控列表**/
+    public static Map<String, String> STOCK_ON_MONITOR_MAP = new HashMap<>();
 }

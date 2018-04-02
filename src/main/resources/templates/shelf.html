@@ -68,8 +68,8 @@
             <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button class="del-choose">监控</button>
-                <button class="del-choose">停止</button>
+                <button class="start-monitor">监控</button>
+                <button class="stop-monitor">停止</button>
             </td>
         </tr>
     </table>
@@ -98,6 +98,38 @@
                     if (result.errorNo == 0) {
                         temp.parent().parent().hide();
                     }
+                }
+            });
+        });
+        $(".start-monitor").click(function () {
+            var temp = $(this);
+            $.ajax({
+                url: "/stock/api/update_monitor",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": $(this).parent().parent().find("td").first().html(),
+                    "status":1
+                }),
+                success: function (result) {
+                    alert("已开启");
+                }
+            });
+        });
+        $(".stop-monitor").click(function () {
+            var temp = $(this);
+            $.ajax({
+                url: "/stock/api/update_monitor",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": $(this).parent().parent().find("td").first().html(),
+                    "status":0
+                }),
+                success: function (result) {
+                   alert("已停止");
                 }
             });
         })

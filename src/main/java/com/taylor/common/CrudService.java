@@ -11,7 +11,7 @@ public interface CrudService<Entity,Query> {
 
 	  Entity saveSelective(Entity entity);
 
-	  Entity update(Entity entity);
+	  int update(Entity entity);
 
 	  Entity updateByPrimaryKeySelective(Entity entity);
 
