@@ -8,6 +8,7 @@
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="INTEGER"/>
         <result column="buy_price" property="buyPrice" jdbcType="DOUBLE"/>
+        <result column="focus_price" property="focusPrice" jdbcType="DOUBLE"/>
         <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
         <result column="net_ratio" property="netRatio" jdbcType="DOUBLE"/>
         <result column="five_mini_ratio" property="fiveMiniRatio" jdbcType="DOUBLE"/>
@@ -21,6 +22,7 @@
         t.amount,
         t.stock_name,
         t.buy_price,
+        t.focus_price,
         t.current_price,
         t.sold_price,
         t.net_ratio,
@@ -37,10 +39,10 @@
                 and id=#{query.id,jdbcType=BIGINT}
             </if>
             <if test="query.stockCode !=null">
-                and stockCode=#{query.stockCode,jdbcType=VARCHAR}
+                and stock_code=#{query.stockCode,jdbcType=VARCHAR}
             </if>
             <if test="query.stockName !=null">
-                and stockName=#{query.stockName,jdbcType=VARCHAR}
+                and stock_name=#{query.stockName,jdbcType=VARCHAR}
             </if>
             <if test="query.recmdOperate !=null">
                 and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
@@ -50,7 +52,80 @@
             </if>
         </where>
     </select>
-
+    <insert id="saveSelective" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO stock_on_shelf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entity.stockCode != null">
+                stock_code,
+            </if>
+            <if test="entity.stockName != null">
+                stock_name,
+            </if>
+            <if test="entity.amount != null">
+                amount,
+            </if>
+            <if test="entity.buyPrice != null">
+                buy_price,
+            </if>
+            <if test="entity.focusPrice != null">
+                focus_price,
+            </if>
+            <if test="entity.currentPrice != null">
+                current_price,
+            </if>
+            <if test="entity.soldPrice != null">
+                sold_price,
+            </if>
+            <if test="entity.netRatio != null">
+                net_ratio,
+            </if>
+            <if test="entity.fiveMiniRatio != null">
+                five_mini_ratio,
+            </if>
+            <if test="entity.recmdOperate != null">
+                recmd_operate,
+            </if>
+            <if test="entity.status != null">
+                status,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entity.stockCode != null">
+                #{entity.stockCode,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.stockName != null">
+                #{entity.stockName,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.amount != null">
+                #{entity.amount,jdbcType=INTEGER},
+            </if>
+            <if test="entity.buyPrice != null">
+                #{entity.buyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.focusPrice != null">
+                #{entity.focusPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.currentPrice != null">
+                #{entity.currentPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.soldPrice != null">
+                #{entity.soldPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.netRatio != null">
+                #{entity.netRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.fiveMiniRatio != null">
+                #{entity.fiveMiniRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.recmdOperate != null">
+                #{entity.recmdOperate,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.status != null">
+                #{entity.status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
     <update id="update">
         UPDATE stock_on_shelf
         SET
@@ -63,7 +138,7 @@
             ,net_ratio=#{entity.netRatio,jdbcType=DOUBLE}
         </if>
         <if test="entity.fiveMiniRatio!=null">
-           , five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
+            , five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
         </if>
         WHERE id = #{entity.id,jdbcType=BIGINT}
     </update>
@@ -86,5 +161,9 @@
     <delete id="delByPrimaryKey">
         DELETE FROM stock_on_shelf
         WHERE id = #{id ,jdbcType=BIGINT}
+    </delete>
+    <delete id="del">
+        DELETE FROM stock_on_shelf
+        WHERE stock_code=#{entity.stockCode}
     </delete>
 </mapper>

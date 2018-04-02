@@ -10,7 +10,7 @@
 
         table {
             border-collapse: separate;
-           /* margin: 0 auto;*/
+            /* margin: 0 auto;*/
             text-align: center;
         }
 
@@ -49,20 +49,26 @@
         <tr>
             <th>股票代码</th>
             <th>股票名称</th>
+            <th>关注价</th>
             <th>当前价</th>
-            <th>5分钟涨幅</th>
+            <th>当日涨幅</th>
             <th>总涨幅</th>
             <th>K线</th>
             <th>股诊</th>
-   </tr>
+            <th>操作</th>
+        </tr>
         <tr th:each="stock: ${stockOnShelves}">
             <td th:text="${stock.stockCode}"></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
+            <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
-            <td th:text="${stock.fiveMiniRatio!=null?#numbers.formatDecimal(stock.fiveMiniRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.fiveMiniRatio>0?'red':'green'}"></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
+            <td>
+                <button class="del-choose">删除自选</button>
+            </td>
         </tr>
     </table>
 </div>
@@ -76,6 +82,23 @@
                 $(this).removeClass('divOver');
             }
         );
+        $(".del-choose").click(function () {
+            var temp = $(this);
+            $.ajax({
+                url: "/stock/api/remove_choose",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": $(this).parent().parent().find("td").first().html()
+                }),
+                success: function (result) {
+                    if (result.errorNo == 0) {
+                        temp.parent().parent().hide();
+                    }
+                }
+            });
+        })
     });
 </script>
 </body>

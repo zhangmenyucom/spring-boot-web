@@ -1,15 +1,15 @@
 package com.taylor.common;
 
-import com.taylor.entity.stock.MashData;
 import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author taylor
  */
 @Data
-public class CommonResponse {
-	private Integer errorNo;
-	private String errorMsg;
+public class CommonResponse implements Serializable {
+	private static final long serialVersionUID = 3256823830099426928L;
+	protected Integer errorNo;
+	protected String errorMsg;
 }

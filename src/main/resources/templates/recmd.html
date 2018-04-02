@@ -55,21 +55,20 @@
         <tr>
             <th>股票代码</th>
             <th>股票名称</th>
-            <th>批阅</th>
+            <th>自选</th>
             <th>记录价</th>
             <th>当前价</th>
             <th>累计涨跌</th>
             <th>MACD</th>
             <th>KDJ</th>
             <th>换手率</th>
-            <th>主力净流入(万)</th>
+            <th>主力净流入</th>
             <th>主力净流入比</th>
             <th>量比</th>
             <th>外盘</th>
             <th>内盘</th>
-            <th>昨日涨幅</th>
+            <th>记录涨幅</th>
             <th>今日涨幅</th>
-            <th>操作</th>
             <th>K线</th>
             <th>评分</th>
             <th th:if="${type==15}">策略</th>
@@ -78,9 +77,7 @@
             <td th:text="${stock.stockCode}"></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td>
-                <label>
-                    <input type="checkbox" th:checked="${stock.authorOpinion=='1'}"/>
-                </label>
+                <button class="add_choose">加自选</button>
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
@@ -95,8 +92,7 @@
             <td th:text="${stock.innerPan}"></td>
             <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
-            <td th:text="${stock.recmdOperate}"></td>
-            <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
+            <td><a th:href="@{'http://quote.eastmoney.com/concept/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td><a th:text="股诊" th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}"></a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>
@@ -118,6 +114,26 @@
                 $(this).removeClass('divOver');
             }
         );
+    });
+    $(".add_choose").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/add_choose",
+            type: 'POST',
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: JSON.stringify({
+                "stockCode": $(this).parent().parent().find("td").first().html()
+            }),
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("success");
+                    temp.attr("disable", true);
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
     });
 </script>
 </body>

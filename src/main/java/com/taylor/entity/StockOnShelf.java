@@ -28,6 +28,9 @@ public class StockOnShelf implements Serializable{
     /**成本价**/
     private Double buyPrice;
 
+    /**关注时价**/
+    private Double focusPrice;
+
     /**当前价**/
     private Double currentPrice;
 
@@ -39,7 +42,6 @@ public class StockOnShelf implements Serializable{
 
     /**5分钟涨跌**/
     private Double fiveMiniRatio;
-
 
     /**操作意见**/
     private String recmdOperate;

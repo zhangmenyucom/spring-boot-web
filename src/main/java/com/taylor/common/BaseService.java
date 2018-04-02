@@ -2,6 +2,9 @@ package com.taylor.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * @author taylor
+ */
 public abstract class BaseService<Entity, Query, Dao extends BaseDao<Entity, Query>> {
     
     @Autowired

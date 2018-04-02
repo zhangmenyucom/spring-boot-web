@@ -15,12 +15,21 @@ public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Ent
     @Transactional
     public Entity save(Entity entity) {
         if (entity == null) {
-            throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(),RETURN_CODE.ARGS_EMPTY.getMsg());
+            throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), RETURN_CODE.ARGS_EMPTY.getMsg());
         }
         this.getDao().save(entity);
         return entity;
     }
-    
+    @Override
+    @Transactional
+    public Entity saveSelective(Entity entity) {
+        if (entity == null) {
+            throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), RETURN_CODE.ARGS_EMPTY.getMsg());
+        }
+        this.getDao().saveSelective(entity);
+        return entity;
+    }
+
     @Override
     @Transactional
     public Entity update(Entity entity) {
@@ -42,11 +51,11 @@ public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Ent
 
     @Override
     @Transactional
-    public void del(Entity entity) {
+    public int del(Entity entity) {
         if (entity == null) {
             throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), RETURN_CODE.ARGS_EMPTY.getMsg());
         }
-        this.getDao().del(entity);
+        return this.getDao().del(entity);
     }
 
     @Override
@@ -70,6 +79,7 @@ public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Ent
         }
         return this.getDao().get(entity);
     }
+
     @Override
     public Entity getByPrimaryKey(Object id) {
         return this.getDao().getByPrimaryKey(id);

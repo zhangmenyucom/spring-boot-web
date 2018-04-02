@@ -9,11 +9,13 @@ public interface CrudService<Entity,Query> {
 	
 	  Entity save(Entity entity);
 
+	  Entity saveSelective(Entity entity);
+
 	  Entity update(Entity entity);
 
 	  Entity updateByPrimaryKeySelective(Entity entity);
 
-	  void del(Entity entity);
+	  int del(Entity entity);
 
 	  void delByPrimaryKey(Object id);
 	  

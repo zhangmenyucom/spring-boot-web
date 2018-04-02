@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * DAO类,其它DAO类都要继承该类
- * 
+ *
  * @param <Entity>
  */
 public interface BaseDao<Entity, Query> extends Mapper<Entity> {
@@ -21,6 +21,8 @@ public interface BaseDao<Entity, Query> extends Mapper<Entity> {
     Integer findTotalCount(@Param("query") Query query);
 
     int save(@Param("entity") Entity entity);
+
+    int saveSelective(@Param("entity") Entity entity);
 
     int update(@Param("entity") Entity entity);
 
