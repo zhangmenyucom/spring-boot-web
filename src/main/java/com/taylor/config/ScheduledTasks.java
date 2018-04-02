@@ -96,6 +96,22 @@ public class ScheduledTasks {
         stockDataService.processData(shiZiMacdStrategy);
     }
 
+    /**
+     * 天鹅拳股票
+     **/
+    @Scheduled(cron = "0 0 22 * * *")
+    public void fetchTianEData() {
+        RecmdStock recmdStockDel = new RecmdStock();
+        IStrategy iStrategy = new TianEQuanStrategy();
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
+        stockDataService.processData(iStrategy, 10);
+    }
 
     /**
      * 尾盘推荐股票
