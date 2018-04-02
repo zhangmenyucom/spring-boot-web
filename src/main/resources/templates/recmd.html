@@ -58,6 +58,7 @@
             <th>批阅</th>
             <th>记录价</th>
             <th>当前价</th>
+            <th>累计涨跌</th>
             <th>MACD</th>
             <th>KDJ</th>
             <th>换手率</th>
@@ -81,8 +82,9 @@
                     <input type="checkbox" th:checked="${stock.authorOpinion=='1'}"/>
                 </label>
             </td>
-            <td th:text="${#numbers.formatDecimal(stock.recordPrice, 0, 2)}"></td>
-            <td th:text="${#numbers.formatDecimal(stock.currentPrice, 0, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text=" ${stock.macd}"></td>
             <td th:text="${stock.kdj}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
