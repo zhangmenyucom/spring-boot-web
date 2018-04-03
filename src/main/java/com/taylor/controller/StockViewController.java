@@ -67,6 +67,7 @@ public class StockViewController {
             }
             recmdStocks = recmdStockService.find(recmdStock);
         }
+        map.put("recordTime", "".equals(recordTime) ? listDate.get(listDate.size()-1):recordTime);
         map.put("type", type);
         map.put("recmdList", recmdStocks);
         map.put("strategyName", StrategyEnum.getEnumValue(type));

@@ -3,6 +3,7 @@
 <head>
     <title>每日推荐</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
         body {
             text-align: center;
@@ -21,7 +22,7 @@
         table td, table th {
             border: 1px solid #cad9ea;
             color: black;
-            height: 30px;
+            /*height: 30px;*/
         }
 
         table thead th {
@@ -41,13 +42,31 @@
             background: burlywood !important;
             border: solid 1px #d2dce3 !important;
         }
+
+        .sel_btn{
+            height: 21px;
+            line-height: 21px;
+            padding: 0 11px;
+            background: #e4e4e4;
+            border: 2px #26bbdb solid;
+            border-radius: 3px;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 12px;
+            outline: none;
+        }
+        .ch_cls{
+            background: #02bafa;
+        }
     </style>
 </head>
 <body>
 <div id="container">
     <div>
         <ol style="list-style: none;display: inline;float: left;-webkit-padding-start: 5px;">
-            <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;"><a th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}" th:text="${queryDate}"></a></li>
+            <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
+                <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}" th:text="${queryDate}" style="font-size:16px;"></a>
+            </li>
         </ol>
     </div>
     <div style="margin-bottom: 10px;">策略名称：<span style="color:red;" th:text="${strategyName}"></span></div>
@@ -77,7 +96,7 @@
             <td th:text="${stock.stockCode}"></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td>
-                <button class="add_choose">加自选</button>
+                <button class="add_choose">自选</button>
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>

@@ -3,6 +3,7 @@
 <head>
     <title>自选股票</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
         body {
             text-align: center;
@@ -68,8 +69,8 @@
             <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button th:if="${stock.status==0}" class="start-monitor">监控</button>
-                <button th:if="${stock.status==1}" class="stop-monitor">停止</button>
+                <button th:if="${stock.status==0}" class="update_btn" data-status="1">监控</button>
+                <button th:if="${stock.status==1}" class="update_btn" data-status="0">停止</button>
             </td>
         </tr>
     </table>
@@ -101,7 +102,7 @@
                 }
             });
         });
-        $(".start-monitor").click(function () {
+        $(".update_btn").on("click", function () {
             var temp = $(this);
             $.ajax({
                 url: "/stock/api/update_monitor",
@@ -110,33 +111,21 @@
                 dataType: "json",
                 data: JSON.stringify({
                     "stockCode": $(this).parent().parent().find("td").first().html(),
-                    "status": 1
+                    "status": $(this).data("status")
                 }),
                 success: function () {
-                    temp.removeClass("start-monitor").addClass("stop-monitor");
-                    temp.textContent = "停止";
-                    alert("已开启");
+                    if (temp.data("status") == "1") {
+                        temp.data("status", "0");
+                        temp.text("停止");
+                        alert("已开启");
+                    } else {
+                        temp.data("status", "1");
+                        temp.text("监控");
+                        alert("已停止");
+                    }
                 }
             });
         });
-        $(".stop-monitor").click(function () {
-            var temp = $(this);
-            $.ajax({
-                url: "/stock/api/update_monitor",
-                type: 'POST',
-                contentType: "application/json;charset=UTF-8",
-                dataType: "json",
-                data: JSON.stringify({
-                    "stockCode": $(this).parent().parent().find("td").first().html(),
-                    "status": 0
-                }),
-                success: function () {
-                    temp.removeClass("stop-monitor").addClass("start-monitor");
-                    temp.textContent = "监控";
-                    alert("已停止");
-                }
-            });
-        })
     });
 </script>
 </body>
