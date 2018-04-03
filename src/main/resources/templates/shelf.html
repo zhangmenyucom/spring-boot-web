@@ -110,9 +110,11 @@
                 dataType: "json",
                 data: JSON.stringify({
                     "stockCode": $(this).parent().parent().find("td").first().html(),
-                    "status":1
+                    "status": 1
                 }),
-                success: function (result) {
+                success: function () {
+                    temp.removeClass("start-monitor").addClass("stop-monitor");
+                    temp.textContent = "停止";
                     alert("已开启");
                 }
             });
@@ -126,10 +128,12 @@
                 dataType: "json",
                 data: JSON.stringify({
                     "stockCode": $(this).parent().parent().find("td").first().html(),
-                    "status":0
+                    "status": 0
                 }),
-                success: function (result) {
-                   alert("已停止");
+                success: function () {
+                    temp.removeClass("stop-monitor").addClass("start-monitor");
+                    temp.textContent = "监控";
+                    alert("已停止");
                 }
             });
         })
