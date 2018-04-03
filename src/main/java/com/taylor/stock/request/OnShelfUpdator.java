@@ -42,10 +42,5 @@ public class OnShelfUpdator extends Thread {
             stockOnShelf.setStockName(stockPanKouData.getStockName());
             stockOnShelfService.update(stockOnShelf);
         }
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

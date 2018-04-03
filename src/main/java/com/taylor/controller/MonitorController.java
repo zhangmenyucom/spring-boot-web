@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
 
 /**
@@ -37,11 +38,17 @@ public class MonitorController {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
-        String stockStr = "";
-        for (StockOnShelf stockOnShelf : stockOnShelves) {
-            new KdjFiveMiniMonitor(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI).start();
-            stockStr += " " + stockOnShelf.getStockName();
+        if (STOCK_ON_MONITOR_LIST.isEmpty()) {
+            for (StockOnShelf stockOnShelf : stockOnShelves) {
+                STOCK_ON_MONITOR_LIST.add(stockOnShelf.getStockCode());
+                STOCK_ON_MONITOR_MAP.put(stockOnShelf.getStockCode(), stockOnShelf.getStockName());
+            }
         }
+        String stockStr = "";
+        for (String stockCode : STOCK_ON_MONITOR_LIST) {
+            stockStr += " " + STOCK_ON_MONITOR_MAP.get(stockCode);
+        }
+        new KdjFiveMiniMonitor(KLineTypeEnum.FIVE_MINI).start();
         return "kdj 5分钟线，每90秒执行一次,正在监控下列股票" + stockStr;
     }
 
@@ -54,19 +61,24 @@ public class MonitorController {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
-        String stockStr = "";
-        for (StockOnShelf stockOnShelf : stockOnShelves) {
-            STOCK_ON_MONITOR_MAP.put(stockOnShelf.getStockCode(), stockOnShelf.getStockName());
-            new KdjOneMiniMonitor(stockOnShelf.getStockCode(), KLineTypeEnum.ONE_MINI).start();
-            stockStr += " " + stockOnShelf.getStockName();
+
+        if (STOCK_ON_MONITOR_LIST.isEmpty()) {
+            for (StockOnShelf stockOnShelf : stockOnShelves) {
+                STOCK_ON_MONITOR_LIST.add(stockOnShelf.getStockCode());
+                STOCK_ON_MONITOR_MAP.put(stockOnShelf.getStockCode(), stockOnShelf.getStockName());
+            }
         }
+        String stockStr = "";
+        for (String stockCode : STOCK_ON_MONITOR_LIST) {
+            stockStr += " " + STOCK_ON_MONITOR_MAP.get(stockCode);
+        }
+        new KdjOneMiniMonitor(KLineTypeEnum.ONE_MINI).start();
         return "kdj 1分钟线，每30秒执行一次,正在监控下列股票" + stockStr;
     }
 
     @RequestMapping("/stop")
     public String helloJsp(Map<String, Object> map) {
         KdjFiveMiniMonitor.a = 0;
-        KdjOneMiniMonitor.a = 0;
         return "5分钟kjd已停止监控";
     }
 

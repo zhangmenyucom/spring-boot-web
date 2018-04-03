@@ -18,7 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
 
 /**
  * @author Administrator
@@ -49,15 +55,22 @@ public class StockApi extends BaseAction {
             result.setErrorNo(ErrorCode.SUCCESS);
             result.setData(Boolean.TRUE);
         }
+        if (STOCK_ON_MONITOR_MAP.get(stockOnShelf.getStockCode()) != null) {
+            updateMonitorCheche();
+        }
         return result;
     }
+
     @ResponseBody
     @RequestMapping("/update_monitor")
     public ApiResponse<Boolean> updateMonitor(@RequestBody StockOnShelf stockOnShelf, HttpServletRequest request, HttpServletResponse response) {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
-        if (stockOnShelfService.update(stockOnShelf)!= 0) {
+        if (stockOnShelfService.update(stockOnShelf) != 0) {
             result.setErrorNo(ErrorCode.SUCCESS);
             result.setData(Boolean.TRUE);
+        }
+        if (STOCK_ON_MONITOR_MAP.get(stockOnShelf.getStockCode()) != null) {
+            updateMonitorCheche();
         }
         return result;
     }
@@ -82,5 +95,21 @@ public class StockApi extends BaseAction {
         stockOnShelfService.saveSelective(stockOnShelf);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
+    }
+
+    private void updateMonitorCheche() {
+        StockOnShelf stockOnShelfQuery = new StockOnShelf();
+        stockOnShelfQuery.setStatus(1);
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
+        List<String> stockMonitor = new ArrayList<>();
+        Map<String, String> stockMonitorMap = new HashMap<>(0);
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            stockMonitor.add(stockOnShelf.getStockCode());
+            stockMonitorMap.put(stockOnShelf.getStockCode(), stockOnShelf.getStockName());
+        }
+        STOCK_ON_MONITOR_LIST = stockMonitor;
+        STOCK_ON_MONITOR_MAP = stockMonitorMap;
+
+
     }
 }

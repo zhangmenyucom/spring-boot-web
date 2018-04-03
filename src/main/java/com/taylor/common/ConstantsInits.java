@@ -17,6 +17,10 @@ public class ConstantsInits {
         STOCK_CODE_LIST_SZ = Arrays.asList(Constants.STOCK_CODE_SZ.split(","));
     }
 
-    /**监控列表**/
-    public static Map<String, String> STOCK_ON_MONITOR_MAP = new HashMap<>();
+    /**
+     * 监控列表
+     **/
+    public static List<String> STOCK_ON_MONITOR_LIST = new ArrayList<>();
+
+    public static Map<String,String> STOCK_ON_MONITOR_MAP = new HashMap<>();
 }
