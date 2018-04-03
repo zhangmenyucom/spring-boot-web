@@ -9,9 +9,7 @@ import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.OnShelfUpdator;
 import com.taylor.stock.request.QueryStockDayDataRequest;
-import com.taylor.stock.strategy.BeiLiStrategy;
-import com.taylor.stock.strategy.BigYinLineStrategy;
-import com.taylor.stock.strategy.IStrategy;
+import com.taylor.stock.strategy.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -112,8 +110,14 @@ public class StockViewController {
         QueryStockDayDataRequest.run_flag = 1;
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
+        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
+        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
+        beiLiStrategy.setNext(over5DayStrategy);
+        over5DayStrategy.setNext(over10DayStrategy);
+        over10DayStrategy.setNext(over20DayStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/

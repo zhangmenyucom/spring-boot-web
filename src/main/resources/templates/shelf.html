@@ -68,8 +68,8 @@
             <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button class="start-monitor">监控</button>
-                <button class="stop-monitor">停止</button>
+                <button th:if="${stock.status==0}" class="start-monitor">监控</button>
+                <button th:if="${stock.status==1}" class="stop-monitor">停止</button>
             </td>
         </tr>
     </table>
