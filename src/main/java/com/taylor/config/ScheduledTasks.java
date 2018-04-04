@@ -1,5 +1,6 @@
 package com.taylor.config;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
