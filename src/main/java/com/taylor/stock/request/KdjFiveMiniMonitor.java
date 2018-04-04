@@ -3,11 +3,13 @@ package com.taylor.stock.request;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.StockUtils;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
+import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
 import static com.taylor.common.MailUtils.sendMail;
 import static com.taylor.common.SoundUtil.paly;
 import static com.taylor.common.StockUtils.processStock;
@@ -18,6 +20,7 @@ import static com.taylor.common.StockUtils.processStock;
  * @date: 2018/1/31 10:31
  */
 @Data
+@Slf4j
 public class KdjFiveMiniMonitor extends Thread {
 
     public static volatile int a = 0;

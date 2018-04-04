@@ -38,6 +38,6 @@ public class QueryStockBaseDataRequest {
 
     public static void main(String... args) {
         GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
-        System.out.println(JsonUtil.transfer2JsonString(queryStockBaseInfo("SH600004,SH600006", method)));
+        System.out.println(JsonUtil.transfer2JsonString(queryStockBaseInfo("sh510900", method)));
     }
 }

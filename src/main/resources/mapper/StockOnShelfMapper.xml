@@ -131,30 +131,30 @@
         UPDATE stock_on_shelf
         <set>
             <if test="entity.id!=null">
-                id = #{entity.id,jdbcType=BIGINT}
+                id = #{entity.id,jdbcType=BIGINT},
             </if>
             <if test="entity.stockName!=null">
-                stock_name=#{entity.stockName,jdbcType=VARCHAR}
+                stock_name=#{entity.stockName,jdbcType=VARCHAR},
             </if>
             <if test="entity.currentPrice!=null">
-                current_price=#{entity.currentPrice,jdbcType=DOUBLE}
+                current_price=#{entity.currentPrice,jdbcType=DOUBLE},
             </if>
             <if test="entity.netRatio!=null">
-                net_ratio=#{entity.netRatio,jdbcType=DOUBLE}
+                net_ratio=#{entity.netRatio,jdbcType=DOUBLE},
             </if>
             <if test="entity.fiveMiniRatio!=null">
-                five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE}
+                five_mini_ratio=#{entity.fiveMiniRatio,jdbcType=DOUBLE},
             </if>
             <if test="entity.status!=null">
-                status=#{entity.status}
+                status=#{entity.status},
             </if>
         </set>
         <where>
             <if test="entity.id!=null">
-                id = #{entity.id,jdbcType=BIGINT}
+                and id = #{entity.id,jdbcType=BIGINT}
             </if>
             <if test="entity.stockCode!=null">
-                stock_code=#{entity.stockCode}
+                and stock_code=#{entity.stockCode}
             </if>
         </where>
     </update>

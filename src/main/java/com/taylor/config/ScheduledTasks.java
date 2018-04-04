@@ -36,10 +36,10 @@ public class ScheduledTasks {
     @Autowired
     private StockOnShelfService stockOnShelfService;
 
-    /**
+/*    *//**
      * 每分钟刷新推荐数据
-     */
-    @Scheduled(cron = "*/60 * * * * *")
+     *//*
+    @Scheduled(cron = "*//*60 * * * * *")
     public void updateRecmdData() {
         if (!StockUtils.noNeedMonotorTime()) {
             HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
@@ -53,7 +53,7 @@ public class ScheduledTasks {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * 每30秒刷新股架数据

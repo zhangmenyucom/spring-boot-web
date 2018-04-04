@@ -33,12 +33,9 @@ public class OnShelfUpdator extends Thread {
     public void run() {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            List<KdjTimeBean> kdjTimeList = KdjTimeDataRequest.getKdjTimeList(stockOnShelf.getStockCode(), KLineTypeEnum.FIVE_MINI);
-            KdjTimeBean kdjTimeBean = kdjTimeList.get(kdjTimeList.size() - 1);
             StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
-            stockOnShelf.setFiveMiniRatio(kdjTimeBean.getC_px_change_percent());
             stockOnShelf.setStockName(stockPanKouData.getStockName());
             stockOnShelfService.update(stockOnShelf);
         }
