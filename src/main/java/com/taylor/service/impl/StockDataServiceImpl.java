@@ -29,6 +29,7 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
 
     @Override
     public void processData(IStrategy strategy) {
+        QueryStockDayDataRequest.run_flag = 1;
         processData(strategy, DEFALUT_COUNT);
     }
 

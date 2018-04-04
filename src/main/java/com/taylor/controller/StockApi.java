@@ -3,12 +3,15 @@ package com.taylor.controller;
 import com.taylor.common.ApiResponse;
 import com.taylor.common.CommonRequest;
 import com.taylor.common.ErrorCode;
+import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.service.impl.RedisServiceImpl;
+import com.taylor.stock.request.QueryStockDayDataRequest;
+import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,6 +100,35 @@ public class StockApi extends BaseAction {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("/start_choose")
+    public ApiResponse<Boolean> startChoose(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
+        ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+        QueryStockDayDataRequest.run_flag = 0;
+        RecmdStock recmdStockDel = new RecmdStock();
+        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
+        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
+        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        bigYinLineStrategy.setNext(beiLiStrategy);
+        beiLiStrategy.setNext(over5DayStrategy);
+        over5DayStrategy.setNext(over10DayStrategy);
+        over10DayStrategy.setNext(over20DayStrategy);
+        IStrategy iStrategy = bigYinLineStrategy;
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
+        stockDataService.processData(bigYinLineStrategy);
+
+        result.setErrorNo(ErrorCode.SUCCESS);
+        return result;
+    }
+
     private void updateMonitorCheche() {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         stockOnShelfQuery.setStatus(1);
@@ -109,7 +141,5 @@ public class StockApi extends BaseAction {
         }
         STOCK_ON_MONITOR_LIST = stockMonitor;
         STOCK_ON_MONITOR_MAP = stockMonitorMap;
-
-
     }
 }

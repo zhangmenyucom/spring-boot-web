@@ -3,6 +3,7 @@
 <head>
     <title>每日推荐</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/message-box.js"></script>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
         body {
@@ -146,10 +147,10 @@
             }),
             success: function (result) {
                 if (result.errorNo == 0) {
-                    alert("success");
+                    $.MsgBox.Alert("消息", "success");
                     temp.attr("disable", true);
                 } else {
-                    alert(result.errorMsg);
+                    $.MsgBox.Alert("消息",result.errorMsg);
                 }
             }
         });

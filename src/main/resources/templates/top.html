@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>后台页面头部</title>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/message-box.js"></script>
 </head>
 <body onselectstart="return false" oncontextmenu="return false" style="overflow-x:hidden;">
 <!--禁止网页另存为-->
@@ -31,14 +33,14 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td align="left" valign="top" id="header-admin">后台管理</td>
-                    <td align="left" valign="bottom" id="header-menu" style="padding-bottom: 12px;" >
+                    <td align="left" valign="bottom" id="header-menu" style="padding-bottom: 12px;">
                         <a href="/index" target="left" onFocus="this.blur()" id="menuon">后台首页</a>
                         <a href="/index" target="left" onFocus="this.blur()">用户管理</a>
                         <a href="/index" target="left" onFocus="this.blur()">栏目管理</a>
                         <a href="/index" target="left" onFocus="this.blur()">信息管理</a>
                         <a href="/index" target="left" onFocus="this.blur()">留言管理</a>
-                        <a href="/index" target="left" onFocus="this.blur()">附件管理</a>
                         <a href="/index" target="left" onFocus="this.blur()">站点管理</a>
+                        <a href="javascript:void(0);" class="start-choose" style="color:red;" onFocus="this.blur()">立即选股</a>
                     </td>
                 </tr>
             </table>
@@ -48,5 +50,24 @@
     <script type="text/javascript" src="/js/clock.js"></script>
     <script type="text/javascript">showcal();</script>
 </table>
+<script language="javascript">
+    $(function () {
+        $(".start-choose").click(function () {
+            var temp = $(this);
+            $.ajax({
+                url: "/stock/api/start_choose",
+                type: 'POST',
+                dataType: "json",
+                success: function (result) {
+                    if (result.errorNo == 0) {
+                        alert("正在筛选股票......");
+                        temp.disable();
+                    }
+                }
+
+            });
+        });
+    });
+</script>
 </body>
 </html>

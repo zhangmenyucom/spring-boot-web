@@ -102,34 +102,4 @@ public class StockViewController {
         map.put("stockOnShelves", stockOnShelves);
         return "/shelf";
     }
-
-    @ResponseBody
-    @RequestMapping("/start_choose")
-    public String startChoose(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
-        QueryStockDayDataRequest.run_flag = 0;
-        Thread.sleep(5000);
-        QueryStockDayDataRequest.run_flag = 1;
-        RecmdStock recmdStockDel = new RecmdStock();
-        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
-        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
-        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
-        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        bigYinLineStrategy.setNext(beiLiStrategy);
-        beiLiStrategy.setNext(over5DayStrategy);
-        over5DayStrategy.setNext(over10DayStrategy);
-        over10DayStrategy.setNext(over20DayStrategy);
-        IStrategy iStrategy = bigYinLineStrategy;
-        List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
-        do {
-            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
-            iStrategy = iStrategy.getNext();
-        } while (iStrategy != null);
-        recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy);
-        return "筛选中。。。。";
-    }
-
-
 }
