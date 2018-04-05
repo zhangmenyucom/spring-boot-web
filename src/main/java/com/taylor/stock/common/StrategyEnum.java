@@ -29,10 +29,11 @@ public enum StrategyEnum {
     TYPE18(18,"突破10日线"),
     TYPE19(19,"突破5日线"),
     TYPE20(20,"近五日缩量阴线，突然放量大阴线"),
-    TYPE21(21,"15,30,50分钟线macd背离");
-
+    TYPE21(21,"15,30,50分钟线macd背离"),
+    TYPE22(22,"短期内突破压力位");
 
     private Integer code;
+
     private String desc;
 
     StrategyEnum(int code, String desc) {

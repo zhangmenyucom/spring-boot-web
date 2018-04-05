@@ -111,10 +111,12 @@ public class StockApi extends BaseAction {
         Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
         Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(over10DayStrategy);
         over10DayStrategy.setNext(over20DayStrategy);
+        over20DayStrategy.setNext(overYaLiStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
@@ -123,8 +125,7 @@ public class StockApi extends BaseAction {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy);
-
+        stockDataService.processData(bigYinLineStrategy, 20);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }

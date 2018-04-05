@@ -29,12 +29,12 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
 
     @Override
     public void processData(IStrategy strategy) {
-        QueryStockDayDataRequest.run_flag = 1;
         processData(strategy, DEFALUT_COUNT);
     }
 
     @Override
     public void processData(IStrategy strategy, Integer count) {
+        QueryStockDayDataRequest.run_flag = 1;
         RecmdStock recmdStock = new RecmdStock();
         recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
