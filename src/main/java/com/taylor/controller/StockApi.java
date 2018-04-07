@@ -112,11 +112,13 @@ public class StockApi extends BaseAction {
         Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(over10DayStrategy);
         over10DayStrategy.setNext(over20DayStrategy);
         over20DayStrategy.setNext(overYaLiStrategy);
+        overYaLiStrategy.setNext(fiveOverTenStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
