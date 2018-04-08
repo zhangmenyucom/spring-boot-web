@@ -9,6 +9,9 @@
         <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
         <result column="record_price" property="recordPrice" jdbcType="DOUBLE"/>
         <result column="author_opinion" property="authorOpinion" jdbcType="VARCHAR"/>
+        <result column="industry" property="industry" jdbcType="VARCHAR"/>
+        <result column="majo_grow" property="majoGrow" jdbcType="DOUBLE"/>
+        <result column="net_increase_rate" property="netIncreaseRate" jdbcType="DOUBLE"/>
         <result column="macd" property="macd" jdbcType="DOUBLE"/>
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
         <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
@@ -34,6 +37,9 @@
         t.author_opinion,
         t.current_price,
         t.record_price,
+        t.industry,
+        t.majo_grow,
+        t.net_increase_rate,
         t.macd,
         t.kdj,
         t.turnover_ratio,
@@ -90,12 +96,15 @@
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,record_price,current_price,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
+        INSERT INTO recmd_stock(stock_code,stock_name,record_price,current_price,industry,majo_grow,net_increase_rate,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
         #{entity.recordPrice,jdbcType=DOUBLE},
         #{entity.currentPrice,jdbcType=DOUBLE},
+        #{entity.industry,jdbcType=VARCHAR},
+        #{entity.majoGrow,jdbcType=DOUBLE},
+        #{entity.netIncreaseRate,jdbcType=DOUBLE},
         #{entity.macd,jdbcType=DOUBLE},
         #{entity.kdj,jdbcType=VARCHAR},
         #{entity.turnoverRatio,jdbcType=DOUBLE},

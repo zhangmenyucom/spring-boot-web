@@ -61,6 +61,19 @@ public class RecmdStock {
      **/
     private Double liangbi;
 
+    /**所属行业**/
+    private String industry;
+
+    /**
+     * 营业收入比
+     **/
+    private Double majoGrow;
+
+    /**
+     * 净利润
+     **/
+    private Double netIncreaseRate;
+
     /**
      * 外盘
      **/

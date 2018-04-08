@@ -13,5 +13,6 @@ import java.util.List;
  */
 @Data
 public class StockBaseInfoResponse extends CommonResponse {
+    private static final long serialVersionUID = -1286026648771881006L;
     private List<StockBaseInfo> data;
 }

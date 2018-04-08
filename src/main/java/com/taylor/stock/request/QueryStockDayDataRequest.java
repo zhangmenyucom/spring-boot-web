@@ -4,6 +4,7 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
+import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.MashDataResponse;
 import com.taylor.entity.stock.StockFundInOut;
@@ -92,6 +93,8 @@ public class QueryStockDayDataRequest extends Thread {
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(mashDataList);
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+
+                StockBusinessinfo stockBusinessinfo = QueryStockBusinessDataRequest.queryStockBasicBussinessInfo(stockCode);
                 /**只查买入意见的股票**/
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 if (checkResult == 1 && stockPanKouData != null) {
@@ -113,6 +116,10 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setOuterPan(stockPanKouData.getOuter());
                     recmdStock.setInnerPan(stockPanKouData.getInner());
                     recmdStock.setKdjCount(mashDataList.get(0).getKdjCount());
+
+                    recmdStock.setIndustry(stockBusinessinfo.getIndustry());
+                    recmdStock.setMajoGrow(stockBusinessinfo.getMajoGrow());
+                    recmdStock.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
                     recmdStockService.save(recmdStock);
                     log.info("股票代码：{}中标策略:{}", stockCode, strategy.getStrategyEnum().getDesc());
                 }

@@ -25,6 +25,9 @@ public class Constants {
     /***查询股票资金流入情况信息**/
     public static final String METHOD_URL_STOCK_FOUNDS_IN_OUT = "https://gupiao.baidu.com/api/stocks/stockfunds";
 
+    /**股票行业概念**/
+    public static final String METHOD_URL_STOCK_BUSINESS = "https://gupiao.baidu.com/api/stocks/stockbasicinfo";
+
     public static final Double CURRENT_PRICE_LIMIT = 30.0;
 
 

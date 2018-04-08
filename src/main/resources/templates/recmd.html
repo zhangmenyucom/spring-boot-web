@@ -44,7 +44,7 @@
             border: solid 1px #d2dce3 !important;
         }
 
-        .sel_btn{
+        .sel_btn {
             height: 21px;
             line-height: 21px;
             padding: 0 11px;
@@ -56,7 +56,8 @@
             font-size: 12px;
             outline: none;
         }
-        .ch_cls{
+
+        .ch_cls {
             background: #02bafa;
         }
     </style>
@@ -79,14 +80,14 @@
             <th>记录价</th>
             <th>当前价</th>
             <th>累计涨跌</th>
-            <th>MACD</th>
+            <th>所属行业</th>
+            <th>营收(%)</th>
+            <th>净利(%)</th>
             <th>KDJ</th>
             <th>换手率</th>
-            <th>主力净流入</th>
-            <th>主力净流入比</th>
+            <th>主净入</th>
+            <th>主净入比</th>
             <th>量比</th>
-            <th>外盘</th>
-            <th>内盘</th>
             <th>记录涨幅</th>
             <th>今日涨幅</th>
             <th>K线</th>
@@ -102,14 +103,14 @@
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
-            <td th:text=" ${stock.macd}"></td>
+            <td th:text="${stock.industry}"></td>
+            <td th:text="${stock.majoGrow}+'%'"  th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
+            <td th:text="${stock.netIncreaseRate}+'%'"  th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
             <td th:text="${stock.kdj}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.mainIn}"></td>
             <td th:text="${stock.mainInBi}"></td>
             <td th:text="${stock.liangbi}"></td>
-            <td th:text="${stock.outerPan}"></td>
-            <td th:text="${stock.innerPan}"></td>
             <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/concept/'+${stock.stockCode}+'.html'}">K线</a></td>
@@ -150,7 +151,7 @@
                     $.MsgBox.Alert("消息", "success");
                     temp.attr("disable", true);
                 } else {
-                    $.MsgBox.Alert("消息",result.errorMsg);
+                    $.MsgBox.Alert("消息", result.errorMsg);
                 }
             }
         });
