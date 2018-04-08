@@ -4,6 +4,7 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
+import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.MashDataResponse;
@@ -79,6 +80,12 @@ public class QueryStockDayDataRequest extends Thread {
             if (responseStr == null) {
                 continue;
             }
+            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(stockCode.toLowerCase(), methodBase);
+            /**停牌的过滤掉**/
+            if (stockBaseInfos == null || stockBaseInfos.isEmpty() || "0".equals(stockBaseInfos.get(0).getStockStatus())) {
+                continue;
+            }
+
             MashDataResponse response = JsonUtil.transferToObj(responseStr, MashDataResponse.class);
             if (response == null || response.getErrorNo() != 0 || response.getMashData() == null || response.getMashData().size() < 2) {
                 continue;
@@ -93,7 +100,6 @@ public class QueryStockDayDataRequest extends Thread {
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(mashDataList);
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
-
                 StockBusinessinfo stockBusinessinfo = QueryStockBusinessDataRequest.queryStockBasicBussinessInfo(stockCode);
                 /**只查买入意见的股票**/
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
