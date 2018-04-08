@@ -92,9 +92,6 @@ public class QueryStockDayDataRequest extends Thread {
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(mashDataList);
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
-                if (stockFundInOutData != null && stockFundInOutData.getStatus() == -1) {
-                    break;
-                }
                 /**只查买入意见的股票**/
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 if (checkResult == 1 && stockPanKouData != null) {
