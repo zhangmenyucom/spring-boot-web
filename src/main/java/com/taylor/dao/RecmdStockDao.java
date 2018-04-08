@@ -2,7 +2,7 @@ package com.taylor.dao;
 
 import com.taylor.common.BaseDao;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
      * @param stockBaseInfo
      * @desc
      */
-    int updateRecmdTodayUpDownRatio(@Param("stockBaseInfo") StockBaseInfo stockBaseInfo);
+    int updateRecmdTodayUpDownRatio(@Param("stockBaseInfo") TencentTodayBaseInfo stockBaseInfo);
 
     /**
      * @return

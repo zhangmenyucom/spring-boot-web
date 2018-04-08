@@ -1,7 +1,6 @@
 package com.taylor.service;
 
 import com.taylor.common.CrudService;
-import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 
 /**

@@ -2,7 +2,7 @@ package com.taylor.service;
 
 import com.taylor.common.CrudService;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
 
     void checkResult();
 
-    int updateUpDownRatio(StockBaseInfo stockBaseInfo);
+    int updateUpDownRatio(TencentTodayBaseInfo stockTodayBaseInfo);
 
     List<RecmdStock> getRecmdStockByCountTime();
 

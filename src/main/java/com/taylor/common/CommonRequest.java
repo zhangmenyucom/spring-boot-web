@@ -228,7 +228,7 @@ public class CommonRequest<T> {
         try {
             String url = "http://web.sqt.gtimg.cn/q=" + stockCode.toLowerCase();
             URL u = new URL(url);
-            InputStreamReader isr = new InputStreamReader(u.openStream());
+            InputStreamReader isr = new InputStreamReader(u.openStream(),"GBK");
             char[] cha = new char[10240];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
@@ -253,6 +253,6 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SH600191")));
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SH600191")));
     }
 }

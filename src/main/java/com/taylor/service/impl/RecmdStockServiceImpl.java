@@ -3,7 +3,7 @@ package com.taylor.service.impl;
 import com.taylor.common.AbstractCrudService;
 import com.taylor.dao.RecmdStockDao;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.service.RecmdStockService;
 import com.taylor.stock.request.RecmdUpdator;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
     }
 
     @Override
-    public int updateUpDownRatio(StockBaseInfo stockBaseInfo) {
+    public int updateUpDownRatio(TencentTodayBaseInfo stockBaseInfo) {
         return this.getDao().updateRecmdTodayUpDownRatio(stockBaseInfo);
     }
 

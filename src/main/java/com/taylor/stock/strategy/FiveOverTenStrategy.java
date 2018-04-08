@@ -19,6 +19,9 @@ public class FiveOverTenStrategy extends IStrategy {
     @Override
     public int doCheck(List<MashData> mashDataList) {
         MashData mashDataToday = mashDataList.get(0);
+        if(mashDataToday.getKline().getNetChangeRatio()<0){
+            return 0;
+        }
         MashData mashDataYestoday = mashDataList.get(1);
         if ((mashDataToday.getMa5().getAvgPrice() - mashDataToday.getMa10().getAvgPrice() > 0) && (mashDataYestoday.getMa5().getAvgPrice() - mashDataYestoday.getMa10().getAvgPrice() < 0)) {
             return 1;

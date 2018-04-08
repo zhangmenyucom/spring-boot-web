@@ -12,6 +12,9 @@ import java.io.Serializable;
 @Data
 public class TencentTodayBaseInfo implements Serializable{
     private static final long serialVersionUID = 6865720686988375735L;
+
+    private Long id;
+    private String stockCode;
     private String stockName;
     private Double open;
     private Double close;

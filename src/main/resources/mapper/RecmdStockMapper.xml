@@ -134,9 +134,9 @@
     <update id="updateRecmdTodayUpDownRatio">
         UPDATE recmd_stock
         SET
-        change_ratio_today=#{stockBaseInfo.netChangeRatio,jdbcType=DOUBLE},
+        change_ratio_today=#{stockBaseInfo.upDownPercent,jdbcType=DOUBLE},
         current_price=#{stockBaseInfo.close,jdbcType=DOUBLE}
-        WHERE id = #{stockBaseInfo.id,jdbcType=BIGINT}
+        WHERE stock_code = #{stockBaseInfo.stockCode,jdbcType=VARCHAR}
     </update>
 
     <select id="getByPrimaryKey" resultMap="BaseResultMap">
