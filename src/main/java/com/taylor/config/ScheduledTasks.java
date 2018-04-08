@@ -93,8 +93,6 @@ public class ScheduledTasks {
         beiLiStrategy.setNext(fiveOverTenStrategy);
         OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
         fiveOverTenStrategy.setNext(overYaLiStrategy);
-
-
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         do {
