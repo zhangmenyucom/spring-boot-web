@@ -114,8 +114,7 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setInnerPan(stockPanKouData.getInner());
                     recmdStock.setKdjCount(mashDataList.get(0).getKdjCount());
                     recmdStockService.save(recmdStock);
-                    log.info("股票代码：{}中标macd:{}", stockCode, response.getMashData().get(0).getMacd().getMacd());
-                    System.out.println(stockCode + "中标:" + response.getMashData().get(0).getMacd().getMacd());
+                    log.info("股票代码：{}中标策略:{}", stockCode, strategy.getStrategyEnum().getDesc());
                 }
                 strategy = strategy.getNext();
             }
