@@ -3,7 +3,7 @@
     <contextName>logbackApp</contextName>
     <property name="default_pattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5level] - %m%n"/>
     <property name="log_home" value="/data/apps/log/stock-server"/>
-    <property name="root.logger.level" value="debug,info,error"/>
+    <property name="root.logger.level" value="debug,info,error,stdout"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
