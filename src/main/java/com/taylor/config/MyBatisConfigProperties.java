@@ -70,7 +70,7 @@ public class MyBatisConfigProperties {
 
     public Resource[] resolveMapperLocations() {
         ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
-        List<Resource> resources = new ArrayList<Resource>();
+        List<Resource> resources = new ArrayList<>();
         if (this.mapperLocations != null) {
             for (String mapperLocation : this.mapperLocations) {
                 try {
