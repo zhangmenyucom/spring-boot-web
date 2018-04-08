@@ -29,6 +29,24 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
+    <!-- 按日期区分的滚动日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_home}/out.log</file>
+        <encoder>
+            <pattern>${default_pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--daily rollover-->
+            <fileNamePattern>out.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <!--keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
 
     <!-- info -->
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
