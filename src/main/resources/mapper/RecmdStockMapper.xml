@@ -37,7 +37,7 @@
         t.author_opinion,
         t.current_price,
         t.record_price,
-        t.industry,
+        d.industry,
         t.majo_grow,
         t.net_increase_rate,
         t.macd,
@@ -61,7 +61,7 @@
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM recmd_stock t
+        FROM recmd_stock t,stock_data d
         <where>
             <if test="query.id !=null">
                 and id=#{query.id,jdbcType=BIGINT}
@@ -93,6 +93,7 @@
             <if test="query.recordTime !=null">
                 and day(record_time)=day(#{query.recordTime,jdbcType=TIMESTAMP})
             </if>
+                and t.stock_code=d.stock_code
         </where>
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
