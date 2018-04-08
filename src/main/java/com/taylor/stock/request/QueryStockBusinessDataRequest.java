@@ -35,6 +35,6 @@ public class QueryStockBusinessDataRequest {
     }
 
     public static void main(String... args) {
-        System.out.println(queryStockBasicBussinessInfo("sz300482").getIndustry());
+        System.out.println(queryStockBasicBussinessInfo("SH600872").getIndustry());
     }
 }

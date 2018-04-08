@@ -76,9 +76,9 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
-        ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
+        IStrategy iStrategy = new ShiZiMacdStrategy();
         TMacdStrategy tMacdStrategy = new TMacdStrategy();
-        shiZiMacdStrategy.setNext(tMacdStrategy);
+        iStrategy.setNext(tMacdStrategy);
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
         tMacdStrategy.setNext(over5DayStrategy);
         Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
@@ -89,7 +89,12 @@ public class ScheduledTasks {
         over20DayStrategy.setNext(bigYinLineStrategy);
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
-        IStrategy iStrategy = shiZiMacdStrategy;
+        FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
+        beiLiStrategy.setNext(fiveOverTenStrategy);
+        OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
+        fiveOverTenStrategy.setNext(overYaLiStrategy);
+
+
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         do {
@@ -97,7 +102,7 @@ public class ScheduledTasks {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(shiZiMacdStrategy);
+        stockDataService.processData(iStrategy);
     }
 
     /**
@@ -124,8 +129,18 @@ public class ScheduledTasks {
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
+        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
+        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
+        beiLiStrategy.setNext(over5DayStrategy);
+        over5DayStrategy.setNext(over10DayStrategy);
+        over10DayStrategy.setNext(over20DayStrategy);
+        over20DayStrategy.setNext(overYaLiStrategy);
+        overYaLiStrategy.setNext(fiveOverTenStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
