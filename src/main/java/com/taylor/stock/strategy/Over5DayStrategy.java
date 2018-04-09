@@ -20,7 +20,7 @@ public class Over5DayStrategy extends IStrategy {
     public int doCheck(List<MashData> mashDataList) {
         MashData today = mashDataList.get(0);
         MashData yestoday = mashDataList.get(1);
-        if (yestoday.getKline().getHigh() < yestoday.getMa5().getAvgPrice() && today.getKline().getLow() > today.getMa5().getAvgPrice()) {
+        if (yestoday.getKline().getClose() < yestoday.getMa5().getAvgPrice() && today.getKline().getLow() > today.getMa5().getAvgPrice()) {
             return 1;
         } else {
             return 0;
