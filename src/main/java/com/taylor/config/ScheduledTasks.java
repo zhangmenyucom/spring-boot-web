@@ -77,22 +77,17 @@ public class ScheduledTasks {
     @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
         IStrategy iStrategy = new ShiZiMacdStrategy();
-        TMacdStrategy tMacdStrategy = new TMacdStrategy();
-        iStrategy.setNext(tMacdStrategy);
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        tMacdStrategy.setNext(over5DayStrategy);
-        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
-        over5DayStrategy.setNext(over10DayStrategy);
-        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
-        over10DayStrategy.setNext(over20DayStrategy);
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        over20DayStrategy.setNext(bigYinLineStrategy);
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
-        bigYinLineStrategy.setNext(beiLiStrategy);
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
-        beiLiStrategy.setNext(fiveOverTenStrategy);
         OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
-        fiveOverTenStrategy.setNext(overYaLiStrategy);
+        iStrategy.setNext(over5DayStrategy);
+        over5DayStrategy.setNext(bigYinLineStrategy);
+        bigYinLineStrategy.setNext(beiLiStrategy);
+        beiLiStrategy.setNext(overYaLiStrategy);
+        overYaLiStrategy.setNext(fiveOverTenStrategy);
+
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         do {

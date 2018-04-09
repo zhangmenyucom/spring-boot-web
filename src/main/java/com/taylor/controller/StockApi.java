@@ -105,21 +105,19 @@ public class StockApi extends BaseAction {
     public ApiResponse<Boolean> startChoose(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
         QueryStockDayDataRequest.run_flag = 0;
-        RecmdStock recmdStockDel = new RecmdStock();
-        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
+
+        IStrategy iStrategy = new ShiZiMacdStrategy();
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
-        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
+        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        iStrategy.setNext(over5DayStrategy);
+        over5DayStrategy.setNext(bigYinLineStrategy);
         bigYinLineStrategy.setNext(beiLiStrategy);
-        beiLiStrategy.setNext(over5DayStrategy);
-        over5DayStrategy.setNext(over10DayStrategy);
-        over10DayStrategy.setNext(over20DayStrategy);
-        over20DayStrategy.setNext(overYaLiStrategy);
+        beiLiStrategy.setNext(overYaLiStrategy);
         overYaLiStrategy.setNext(fiveOverTenStrategy);
-        IStrategy iStrategy = bigYinLineStrategy;
+
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         do {
@@ -127,10 +125,10 @@ public class StockApi extends BaseAction {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy, 20);
+        stockDataService.processData(iStrategy, 20);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
-    }
+}
 
     private void updateMonitorCheche() {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
