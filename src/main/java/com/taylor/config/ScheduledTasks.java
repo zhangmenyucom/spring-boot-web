@@ -1,16 +1,13 @@
 package com.taylor.config;
 
-import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
-import com.taylor.stock.request.QueryStockBaseDataRequest;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -76,13 +73,13 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 30 22 * * *")
     public void fetchRecmdData() {
-        IStrategy iStrategy = new ShiZiMacdStrategy();
+        ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
         OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
-        iStrategy.setNext(over5DayStrategy);
+        shiZiMacdStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(bigYinLineStrategy);
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(overYaLiStrategy);
@@ -90,12 +87,13 @@ public class ScheduledTasks {
 
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
+        IStrategy iStrategy=shiZiMacdStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(iStrategy);
+        stockDataService.processData(shiZiMacdStrategy);
     }
 
     /**
