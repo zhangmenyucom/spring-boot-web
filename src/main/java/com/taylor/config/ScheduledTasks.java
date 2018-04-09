@@ -78,7 +78,7 @@ public class ScheduledTasks {
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
-        OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
+        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
         shiZiMacdStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(bigYinLineStrategy);
         bigYinLineStrategy.setNext(beiLiStrategy);
@@ -87,7 +87,7 @@ public class ScheduledTasks {
 
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
-        IStrategy iStrategy=shiZiMacdStrategy;
+        IStrategy iStrategy = shiZiMacdStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
@@ -116,7 +116,7 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 30 14 * * *")
+    @Scheduled(cron = "0 25 14 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
@@ -126,12 +126,14 @@ public class ScheduledTasks {
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
+        YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(over10DayStrategy);
         over10DayStrategy.setNext(over20DayStrategy);
         over20DayStrategy.setNext(overYaLiStrategy);
         overYaLiStrategy.setNext(fiveOverTenStrategy);
+        fiveOverTenStrategy.setNext(yiYangChuanSanXianStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/

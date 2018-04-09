@@ -31,7 +31,8 @@ public enum StrategyEnum {
     TYPE20(20,"近五日缩量阴线，突然放量大阴线"),
     TYPE21(21,"15,30,50分钟线macd背离"),
     TYPE22(22,"短期内突破压力位"),
-    TYPE23(23,"5日线突破10日线");
+    TYPE23(23,"5日线突破10日线"),
+    TYPE24(24,"1阳穿3线");
 
     private Integer code;
 

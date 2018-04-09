@@ -45,15 +45,6 @@ public class StockDataKdjController extends BaseAction {
     }
 
     /**
-     * 两天kdj差为510
-     **/
-    @ResponseBody
-    @RequestMapping("/start/kdiff/510")
-    public String queryStockDataByKdj510(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new Kdj510Strategy());
-        return "正在分析，请耐心等待";
-    }
-    /**
      * 两天kdj差为5并且换手率大于1
      **/
     @ResponseBody
@@ -69,15 +60,6 @@ public class StockDataKdjController extends BaseAction {
     @RequestMapping("/start/over/{kdiff}/{ratio}")
     public String queryStockDataByKdjOver(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
         stockDataService.processData(new KdjOverWithRatioStrategy(kdiff,ratio));
-        return "正在分析，请耐心等待";
-    }
-    /**
-     * 两天kdj比大于1
-     **/
-    @ResponseBody
-    @RequestMapping("/start/over45/{kdiff}/{ratio}")
-    public String queryStockDataByKdjOver45(HttpServletRequest request,@PathVariable("kdiff") Float kdiff,@PathVariable("ratio") Float ratio, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new KdjOver45duRatioStrategy(kdiff,ratio));
         return "正在分析，请耐心等待";
     }
 

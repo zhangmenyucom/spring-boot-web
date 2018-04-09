@@ -3,7 +3,6 @@ package com.taylor.controller;
 import com.taylor.common.ApiResponse;
 import com.taylor.common.CommonRequest;
 import com.taylor.common.ErrorCode;
-import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
@@ -111,16 +110,18 @@ public class StockApi extends BaseAction {
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
-        OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
+        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
         shiZiMacdStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(bigYinLineStrategy);
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(overYaLiStrategy);
         overYaLiStrategy.setNext(fiveOverTenStrategy);
+        fiveOverTenStrategy.setNext(yiYangChuanSanXianStrategy);
 
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
-        IStrategy iStrategy=shiZiMacdStrategy;
+        IStrategy iStrategy = shiZiMacdStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
@@ -129,7 +130,7 @@ public class StockApi extends BaseAction {
         stockDataService.processData(shiZiMacdStrategy);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
-}
+    }
 
     private void updateMonitorCheche() {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
