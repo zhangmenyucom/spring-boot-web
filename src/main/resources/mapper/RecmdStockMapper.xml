@@ -61,7 +61,45 @@
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM recmd_stock t,stock_data d
+        FROM recmd_stock t,stock_data d left join ( SELECT
+        z.industry,count(z.industry) as in_num
+        FROM recmd_stock s,stock_data z
+        <where>
+            <if test="query.id !=null">
+                and id=#{query.id,jdbcType=BIGINT}
+            </if>
+            <if test="query.stockCode !=null">
+                and stockCode=#{query.stockCode,jdbcType=VARCHAR}
+            </if>
+            <if test="query.stockName !=null">
+                and stockName=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+            <if test="query.macd !=null">
+                and macd=#{query.macd,jdbcType=DOUBLE}
+            </if>
+            <if test="query.turnoverRatio !=null">
+                and turnover_ratio=#{query.turnoverRatio,jdbcType=DOUBLE}
+            </if>
+            <if test="query.kdj !=null">
+                and kdj=#{query.kdj,jdbcType=VARCHAR}
+            </if>
+            <if test="query.recmdOperate !=null">
+                and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
+            </if>
+            <if test="query.strategy !=null">
+                and strategy=#{query.strategy,jdbcType=VARCHAR}
+            </if>
+            <if test="query.strategyType !=null">
+                and strategy_type=#{query.strategyType,jdbcType=INTEGER}
+            </if>
+            <if test="query.recordTime !=null">
+                and day(record_time)=day(#{query.recordTime,jdbcType=TIMESTAMP})
+            </if>
+            and s.stock_code=z.stock_code
+            GROUP BY z.industry
+        </where>
+        ) o on d.industry=o.industry
+
         <where>
             <if test="query.id !=null">
                 and id=#{query.id,jdbcType=BIGINT}
@@ -95,6 +133,9 @@
             </if>
                 and t.stock_code=d.stock_code
         </where>
+        order by o.in_num desc,industry desc,t.change_ratio_yestoday desc
+
+
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
         INSERT INTO recmd_stock(stock_code,stock_name,record_price,current_price,industry,majo_grow,net_increase_rate,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
