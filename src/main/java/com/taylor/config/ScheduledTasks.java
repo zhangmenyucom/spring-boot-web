@@ -68,9 +68,9 @@ public class ScheduledTasks {
         }
     }
 
-    /**
+/*    *//**
      * 每天定时刷新推荐数据
-     */
+     *//*
     @Scheduled(cron = "0 30 18 * * *")
     public void fetchRecmdData() {
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
@@ -86,7 +86,7 @@ public class ScheduledTasks {
         overYaLiStrategy.setNext(fiveOverTenStrategy);
 
         List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
+        *//**清除当天及5天以外的数据**//*
         IStrategy iStrategy = shiZiMacdStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
@@ -94,7 +94,7 @@ public class ScheduledTasks {
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(shiZiMacdStrategy);
-    }
+    }*/
 
     /**
      * 天鹅拳股票
