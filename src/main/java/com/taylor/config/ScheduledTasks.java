@@ -71,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 每天定时刷新推荐数据
      */
-    @Scheduled(cron = "0 30 22 * * *")
+    @Scheduled(cron = "0 30 18 * * *")
     public void fetchRecmdData() {
         ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
