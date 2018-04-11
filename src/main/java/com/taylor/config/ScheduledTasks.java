@@ -40,7 +40,7 @@ public class ScheduledTasks {
     /**
      * 每分钟刷新推荐数据
      */
-    @Scheduled(cron = "*/60 * * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void updateRecmdData() {
         if (!StockUtils.noNeedMonotorTime()) {
             HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);

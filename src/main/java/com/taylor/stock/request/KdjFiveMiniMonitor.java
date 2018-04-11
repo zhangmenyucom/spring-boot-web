@@ -43,16 +43,9 @@ public class KdjFiveMiniMonitor extends Thread {
                     }
                     continue;
                 }
-                /**如果超过14：40则逢高抛出所有股票**/
-                if (StockUtils.dangerTime()) {
-                    paly("audio/alarm.wav");
-                    sendMail("时间警告", "当前时间超过14：40，后期跳水，逢高全抛，见好就收");
-                }
-
                 /**实时处理数据**/
                 processStock(stockCode, kLineTypeEnum);
             }
-
             try {
                 Thread.sleep(90000);
             } catch (InterruptedException e) {
