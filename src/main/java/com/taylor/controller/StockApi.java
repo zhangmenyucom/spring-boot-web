@@ -111,6 +111,7 @@ public class StockApi extends BaseAction {
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
         OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
+        MacdOverZeroStrategy macdOverZeroStrategy = new MacdOverZeroStrategy();
         YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
         shiZiMacdStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(bigYinLineStrategy);
@@ -118,7 +119,7 @@ public class StockApi extends BaseAction {
         beiLiStrategy.setNext(overYaLiStrategy);
         overYaLiStrategy.setNext(fiveOverTenStrategy);
         fiveOverTenStrategy.setNext(yiYangChuanSanXianStrategy);
-
+        yiYangChuanSanXianStrategy.setNext(macdOverZeroStrategy);
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         IStrategy iStrategy = shiZiMacdStrategy;

@@ -32,7 +32,8 @@ public enum StrategyEnum {
     TYPE21(21,"15,30,50分钟线macd背离"),
     TYPE22(22,"短期内突破压力位"),
     TYPE23(23,"5日线突破10日线"),
-    TYPE24(24,"1阳穿3线");
+    TYPE24(24,"1阳穿3线"),
+    TYPE25(25,"macd在0轴向上突破");
 
     private Integer code;
 
