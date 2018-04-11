@@ -31,13 +31,12 @@ public class MacdOverZeroStrategy extends IStrategy {
             return 0;
         }
         /**macd在0轴上方且macd>0 **/
-        if (macdToday.getMacd() > 0 && macdToday.getDiff() > 0 && macdToday.getDea() > 0 && macdToday.getDiff() > macdToday.getDea()) {
-            if (macdYestoday.getMacd() > 0 && macdYestoday.getDiff() > 0 && macdYestoday.getDea() > 0 && macdYestoday.getDiff() > macdYestoday.getDea()) {
+        if (macdToday.getMacd() > 0) {
+            if (macdYestoday.getMacd() > 0) {
                 if (macdToday.getMacd() > macdYestoday.getMacd()) {
                     return 1;
                 }
             }
-
         }
         return 0;
     }
