@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
-import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
-import static com.taylor.common.MailUtils.sendMail;
-import static com.taylor.common.SoundUtil.paly;
 import static com.taylor.common.StockUtils.processStock;
 
 /**
@@ -44,12 +41,6 @@ public class KdjOneMiniMonitor extends Thread {
                     }
                     continue;
                 }
-                /**如果超过14：40则逢高抛出所有股票**/
-                if (StockUtils.dangerTime()) {
-                    paly("audio/alarm.wav");
-                    sendMail("时间警告", "当前时间超过14：40，后期跳水，逢高全抛，见好就收");
-                }
-                /**实时处理数据**/
                 processStock(stockCode, kLineTypeEnum);
             }
             try {
