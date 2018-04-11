@@ -3,7 +3,6 @@ package com.taylor.common;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.kdj.CheckResultBean;
 import com.taylor.stock.request.KdjTimeDataRequest;
-import com.taylor.stock.request.MacdTimeDataRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
@@ -70,25 +69,25 @@ public class StockUtils {
         if (kdjCheck.getCode() == 1) {
             paly("audio/chongfenghao.wav");
             if (stockFundInOutData != null) {
-                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->建议买进" + "股票(" + stockFundInOutData.getStockName() + ")，请立即买进", "");
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->请立即买进", "");
             }
         }
         if (kdjCheck.getCode() == -1) {
             paly("audio/pur-water.wav");
             if (stockFundInOutData != null) {
-                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->建议抛售" + "股票(" + stockFundInOutData.getStockName() + ")，请立即抛售", "");
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->请立即抛售", "");
             }
         }
         if (kdjCheck.getCode() == 2) {
             paly("audio/timeCount.wav");
             if (stockFundInOutData != null) {
-                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警" + "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有下跌趋势，请留意", "");
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警,出现临界值,有下跌趋势，请留意", "");
             }
         }
         if (kdjCheck.getCode() == 3) {
             paly("audio/timeCount.wav");
             if (stockFundInOutData != null) {
-                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警" + "股票(" + stockFundInOutData.getStockName() + ")出现临界值,有上涨趋势，请留意", "");
+                sendMail(kLineTypeEnum.getDescription() + stockFundInOutData.getStockName() + "-->预警,出现临界值,有上涨趋势，请留意", "");
             }
         }
         if (kdjCheck.getCode() == 0) {
