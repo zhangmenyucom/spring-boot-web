@@ -60,6 +60,18 @@
         .ch_cls {
             background: #02bafa;
         }
+
+        #box {
+            display: none;
+            width: 315px;
+            height: 180px;
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+            line-height: 175%;
+            text-indent: 2em;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -95,7 +107,7 @@
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
-            <td th:text="${stock.stockCode}"></td>
+            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}"></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td>
                 <button class="add_choose">自选</button>
@@ -104,8 +116,8 @@
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text="${stock.industry}"></td>
-            <td th:text="${stock.majoGrow}+'%'"  th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
-            <td th:text="${stock.netIncreaseRate}+'%'"  th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
+            <td th:text="${stock.majoGrow}+'%'" th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
+            <td th:text="${stock.netIncreaseRate}+'%'" th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
             <td th:text="${stock.kdj}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.mainIn}"></td>
@@ -123,8 +135,8 @@
             </td>
         </tr>
     </table>
-
 </div>
+<script type="text/javascript" src="/js/xui.js"></script>
 <script language="javascript">
     $(function () {
         //当鼠标滑入时将div的class换成divOver
