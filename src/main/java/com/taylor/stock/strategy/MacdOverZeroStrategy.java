@@ -37,10 +37,7 @@ public class MacdOverZeroStrategy extends IStrategy {
                     return 1;
                 }
             }
-
         }
-
-
         return 0;
     }
 }

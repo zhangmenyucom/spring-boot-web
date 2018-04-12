@@ -43,9 +43,17 @@
             background: burlywood !important;
             border: solid 1px #d2dce3 !important;
         }
+        #mouseover-showchart {
+            float: left;
+            display: none;
+            position: fixed;
+            background: lightgray;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
+<div id="mouseover-showchart"></div>
 <div id="container">
     <table>
         <tr>
@@ -59,8 +67,8 @@
             <th>股诊</th>
             <th>操作</th>
         </tr>
-        <tr th:each="stock: ${stockOnShelves}">
-            <td th:text="${stock.stockCode}"></td>
+        <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_chart">
+            <td th:text="${stock.stockCode}" ></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
@@ -76,6 +84,7 @@
         </tr>
     </table>
 </div>
+<script type="text/javascript" src="/js/xui.js"></script>
 <script language="javascript">
     $(function () {
         //当鼠标滑入时将div的class换成divOver

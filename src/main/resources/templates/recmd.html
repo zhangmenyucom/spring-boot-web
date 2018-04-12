@@ -6,6 +6,13 @@
     <script type="text/javascript" src="/js/message-box.js"></script>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12px;
+        }
+
         body {
             text-align: center;
         }
@@ -72,10 +79,19 @@
             text-indent: 2em;
             position: absolute;
         }
+
+        #mouseover-showchart {
+            float: left;
+            display: none;
+            position: fixed;
+            background: lightgray;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
 <div id="container">
+    <div id="mouseover-showchart"></div>
     <div>
         <ol style="list-style: none;display: inline;float: left;-webkit-padding-start: 5px;">
             <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
@@ -107,7 +123,7 @@
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
-            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}"></td>
+            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_chart"></td>
             <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
             <td>
                 <button class="add_choose">自选</button>
