@@ -62,4 +62,9 @@ public class PageController {
     public String swich(Map<String, Object> map) {
         return "/swich";
     }
+
+    @RequestMapping("/news")
+    public String news(Map<String, Object> map) {
+        return "/news";
+    }
 }
