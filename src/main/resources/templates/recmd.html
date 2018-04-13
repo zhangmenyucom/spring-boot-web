@@ -123,8 +123,8 @@
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
-            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_chart"></td>
-            <td th:text="${stock.stockName}" style="font-weight:bold !important;"></td>
+            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
+            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
             <td>
                 <button class="add_choose">自选</button>
             </td>

@@ -58,12 +58,14 @@ if (typeof jQuery === 'undefined') {
                 oImg.removeEventListener('load', doneHandler);
                 typeof done === 'function' && done(url);
             }
+
             oImg.addEventListener('load', doneHandler);
 
             function errHandler() {
                 oImg.removeEventListener('error', errHandler);
                 typeof err === 'function' && err(url);
             }
+
             oImg.addEventListener('error', errHandler);
 
             oImg.src = url;
@@ -73,16 +75,16 @@ if (typeof jQuery === 'undefined') {
 +
     function ($) {
         var codeReg = /\d{6}/;
-        function showChart($this, e) {
+
+        function showChart($this, e, prefix) {
             var code = $this.attr('data-code');
             if (!codeReg.test(code)) {
                 return;
             }
-            code = 'n' + code;
-            var url = 'http://image.sinajs.cn/newchart/small/' + code + '.gif';
+            var url = prefix + code + '.gif';
             Base.imgLoad(url, function (curUrl) {
                 if (url === curUrl) {
-                    var $chart =$("#mouseover-showchart");
+                    var $chart = $("#mouseover-showchart");
                     var $win = $(window);
                     $chart.html('<img src="' + curUrl + '"/>');
                     var left = e.clientX + 10;
@@ -105,10 +107,16 @@ if (typeof jQuery === 'undefined') {
             });
         };
         $(function () {
-            $(".show_chart").on("mouseover",function (e) {
-                showChart($(this), e);
+            $(".show_time").on("mouseover", function (e) {
+                showChart($(this), e, 'http://image.sinajs.cn/newchart/min/n/');
             });
-            $(".show_chart").on("mouseout",function (e) {
+            $(".show_time").on("mouseout", function (e) {
+                $("#mouseover-showchart").hide();
+            });
+            $(".show_kline").on("mouseover", function (e) {
+                showChart($(this), e, 'http://image.sinajs.cn/newchart/daily/n/');
+            });
+            $(".show_kline").on("mouseout", function (e) {
                 $("#mouseover-showchart").hide();
             });
         });
