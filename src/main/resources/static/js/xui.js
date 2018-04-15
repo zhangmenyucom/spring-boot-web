@@ -119,5 +119,8 @@ if (typeof jQuery === 'undefined') {
             $(".show_kline").on("mouseout", function (e) {
                 $("#mouseover-showchart").hide();
             });
+            $($).on("click", function (e) {
+                $("#mouseover-showchart").hide();
+            });
         });
     }(jQuery);

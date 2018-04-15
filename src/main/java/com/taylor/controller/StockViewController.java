@@ -8,23 +8,15 @@ import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.OnShelfUpdator;
-import com.taylor.stock.request.QueryStockDayDataRequest;
-import com.taylor.stock.strategy.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author xiaolu.zhang
@@ -67,11 +59,17 @@ public class StockViewController {
             }
             recmdStocks = recmdStockService.find(recmdStock);
         }
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
+        Map<String,Object> onshelfMap=new HashMap<>();
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            onshelfMap.put(stockOnShelf.getStockCode(),stockOnShelf);
+        }
         map.put("recordTime", "".equals(recordTime) ? listDate.get(listDate.size()-1):recordTime);
         map.put("type", type);
         map.put("recmdList", recmdStocks);
         map.put("strategyName", StrategyEnum.getEnumValue(type));
         map.put("listDate", listDate);
+        map.put("onshelfMap", onshelfMap);
         return "/recmd";
     }
 
