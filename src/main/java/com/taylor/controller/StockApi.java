@@ -113,7 +113,7 @@ public class StockApi extends BaseAction {
         OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
         MacdOverZeroStrategy macdOverZeroStrategy = new MacdOverZeroStrategy();
         YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
-        MacdRedFor3DayStrategy macdRedFor3DayStrategy=new MacdRedFor3DayStrategy();
+        MacdRedFor3DayStrategy macdRedFor3DayStrategy = new MacdRedFor3DayStrategy();
         shiZiMacdStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(bigYinLineStrategy);
         bigYinLineStrategy.setNext(beiLiStrategy);

@@ -34,7 +34,8 @@ public enum StrategyEnum {
     TYPE23(23,"5日线突破10日线"),
     TYPE24(24,"1阳穿3线"),
     TYPE25(25,"macd在0轴向上突破"),
-    TYPE26(26,"macd金叉三天，且放量");
+    TYPE26(26,"macd金叉三天，且放量"),
+    TYPE27(27,"竟价擒牛");
 
     private Integer code;
 

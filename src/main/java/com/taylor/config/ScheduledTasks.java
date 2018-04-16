@@ -68,33 +68,22 @@ public class ScheduledTasks {
         }
     }
 
-/*    *//**
+    /**
      * 每天定时刷新推荐数据
-     *//*
-    @Scheduled(cron = "0 30 18 * * *")
+     **/
+    @Scheduled(cron = "30 25 9 * * *")
     public void fetchRecmdData() {
-        ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
-        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
-        FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
-        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
-        shiZiMacdStrategy.setNext(over5DayStrategy);
-        over5DayStrategy.setNext(bigYinLineStrategy);
-        bigYinLineStrategy.setNext(beiLiStrategy);
-        beiLiStrategy.setNext(overYaLiStrategy);
-        overYaLiStrategy.setNext(fiveOverTenStrategy);
-
+        JinJiaQinNiuStrategy jinJianQinNiuStrategy = new JinJiaQinNiuStrategy();
         List<Integer> strategyTypeList = new ArrayList<>();
-        *//**清除当天及5天以外的数据**//*
-        IStrategy iStrategy = shiZiMacdStrategy;
+        /**清除当天及5天以外的数据**/
+        IStrategy iStrategy = jinJianQinNiuStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(shiZiMacdStrategy);
-    }*/
+        stockDataService.processData(jinJianQinNiuStrategy);
+    }
 
     /**
      * 天鹅拳股票
