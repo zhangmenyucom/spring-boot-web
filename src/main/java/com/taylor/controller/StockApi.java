@@ -105,8 +105,9 @@ public class StockApi extends BaseAction {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
         QueryStockDayDataRequest.run_flag = 0;
 
-        ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
-        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
+      /*  ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();*/
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
+      /*  Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
         FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
@@ -121,16 +122,16 @@ public class StockApi extends BaseAction {
         overYaLiStrategy.setNext(fiveOverTenStrategy);
         fiveOverTenStrategy.setNext(yiYangChuanSanXianStrategy);
         yiYangChuanSanXianStrategy.setNext(macdOverZeroStrategy);
-        macdOverZeroStrategy.setNext(macdRedFor3DayStrategy);
+        macdOverZeroStrategy.setNext(macdRedFor3DayStrategy);*/
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
-        IStrategy iStrategy = shiZiMacdStrategy;
+        IStrategy iStrategy = bigYinLineStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(shiZiMacdStrategy);
+        stockDataService.processData(bigYinLineStrategy);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }
