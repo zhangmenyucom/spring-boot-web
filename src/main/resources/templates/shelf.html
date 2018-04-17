@@ -43,6 +43,7 @@
             background: burlywood !important;
             border: solid 1px #d2dce3 !important;
         }
+
         #mouseover-showchart {
             float: left;
             display: none;
@@ -64,8 +65,8 @@
             <th>当日涨幅</th>
             <th>累计涨幅</th>
             <th>K线</th>
-            <th>股诊</th>
             <th>操作</th>
+            <th>入选理由</th>
         </tr>
         <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}">
             <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
@@ -75,12 +76,12 @@
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
-            <td><a th:href="@{'http://doctor.300033.info/'+${#strings.substring(stock.stockCode,2,#strings.length(stock.stockCode))}}">股诊</a></td>
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0}" class="update_btn" data-status="1">监控</button>
                 <button th:if="${stock.status==1}" class="update_btn" data-status="0">停止</button>
             </td>
+            <td th:text="${stock.reason}"></td>
         </tr>
     </table>
 </div>

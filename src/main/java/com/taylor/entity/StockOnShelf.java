@@ -48,4 +48,7 @@ public class StockOnShelf implements Serializable{
 
     /**状态**/
     private Integer status;
+
+    /**入选理由**/
+    private String reason;
 }

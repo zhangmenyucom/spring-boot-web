@@ -14,6 +14,7 @@
         <result column="five_mini_ratio" property="fiveMiniRatio" jdbcType="DOUBLE"/>
         <result column="sold_price" property="soldPrice" jdbcType="DOUBLE"/>
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -28,6 +29,7 @@
         t.net_ratio,
         t.five_mini_ratio,
         t.recmd_operate,
+        t.reason,
         t.status
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
@@ -88,6 +90,9 @@
             <if test="entity.status != null">
                 status,
             </if>
+            <if test="entity.reason != null">
+                reason,
+            </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -123,6 +128,9 @@
             </if>
             <if test="entity.status != null">
                 #{entity.status,jdbcType=TINYINT},
+            </if>
+            <if test="entity.reason != null">
+                #{entity.reason,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
