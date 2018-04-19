@@ -1,5 +1,6 @@
 package com.taylor.common;
 
+import com.taylor.entity.TongHuaShunStockBase;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.TencentDayData;
@@ -17,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -191,6 +193,83 @@ public class CommonRequest<T> {
         return stockPanKouData;
     }
 
+    /**
+     * @param stockCode
+     * @desc 股票同花顺数据
+     */
+    public static TongHuaShunStockBase getBaseDataFromTongHuaShun(String stockCode) {
+        TongHuaShunStockBase tongHuaShunStockBase = new TongHuaShunStockBase();
+        tongHuaShunStockBase.setStockCode(stockCode);
+        InputStreamReader isr = null;
+        try {
+            String url = "http://qd.10jqka.com.cn/quote.php?cate=real&type=stock&return=json&callback=showStockData&code=" + stockCode.substring(2);
+            URL u = new URL(url);
+            isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[1024];
+            int len = isr.read(cha);
+            String result = new String(cha, 0, len);
+            Map<String, Object> stockMap = JsonUtil.readJson2Map(result.substring(result.indexOf("(") + 1, result.indexOf(")")));
+            Map<String, Object> info = (Map<String, Object>) stockMap.get("info");
+            Map<String, Object> nameMap = (Map<String, Object>) info.get(stockCode.substring(2));
+            Map<String, Object> data = (Map<String, Object>) stockMap.get("data");
+            Map<String, Object> dataStockMap = (Map<String, Object>) data.get(stockCode.substring(2));
+            tongHuaShunStockBase.setStockName(nameMap.get("name").toString());
+            tongHuaShunStockBase.setClose(Double.valueOf(dataStockMap.get("10").toString()));
+            tongHuaShunStockBase.setPreClose(Double.valueOf(dataStockMap.get("6").toString()));
+            tongHuaShunStockBase.setAmplitudeRatio(Double.valueOf(dataStockMap.get("526792").toString()));
+            tongHuaShunStockBase.setCapitalization(Double.valueOf(dataStockMap.get("3475914").toString()).longValue());
+            tongHuaShunStockBase.setExchange(stockCode.substring(0,2));
+            tongHuaShunStockBase.setHigh(Double.valueOf(dataStockMap.get("8").toString()));
+            tongHuaShunStockBase.setLow(Double.valueOf(dataStockMap.get("9").toString()));
+            tongHuaShunStockBase.setNetChange(Double.valueOf(dataStockMap.get("264648").toString()));
+            tongHuaShunStockBase.setNetChangeRatio(Double.valueOf(dataStockMap.get("199112").toString()));
+            tongHuaShunStockBase.setOpen(Double.valueOf(dataStockMap.get("7").toString()));
+            tongHuaShunStockBase.setTurnoverRatio(Double.valueOf(dataStockMap.get("1968584").toString()));
+            tongHuaShunStockBase.setVolume(Double.valueOf(dataStockMap.get("19").toString()).longValue());
+            tongHuaShunStockBase.setLiangBi(Double.valueOf(dataStockMap.get("19").toString()));
+            tongHuaShunStockBase.setToltalHands(Double.valueOf(dataStockMap.get("13").toString()).longValue()/100);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return tongHuaShunStockBase;
+    }
+    /**
+     * @param stockCode
+     * @desc 股票同花顺数据
+     */
+    public static void test(String stockCode) {
+        TongHuaShunStockBase tongHuaShunStockBase = new TongHuaShunStockBase();
+        tongHuaShunStockBase.setStockCode(stockCode);
+        InputStreamReader isr = null;
+        try {
+            String url = "http://d.10jqka.com.cn/v6/line/hs_000735/11/today.js";
+            URL u = new URL(url);
+            isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[1024];
+            int len = isr.read(cha);
+            String result = new String(cha, 0, len);
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public static List<TencentDayData> getStckDailyHistory(String stockCode, int count) {
         List<TencentDayData> list = new ArrayList<>();
         try {
@@ -228,7 +307,7 @@ public class CommonRequest<T> {
         try {
             String url = "http://web.sqt.gtimg.cn/q=" + stockCode.toLowerCase();
             URL u = new URL(url);
-            InputStreamReader isr = new InputStreamReader(u.openStream(),"GBK");
+            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
             char[] cha = new char[10240];
             int len = isr.read(cha);
             String result = new String(cha, 0, len);
@@ -253,7 +332,10 @@ public class CommonRequest<T> {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
+        //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
+
+            test("SZ300482");
+
     }
 
 }
