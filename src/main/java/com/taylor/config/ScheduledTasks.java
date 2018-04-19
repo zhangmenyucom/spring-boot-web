@@ -114,15 +114,19 @@ public class ScheduledTasks {
         Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
-        FiveOverTenStrategy fiveOverTenStrategy = new FiveOverTenStrategy();
+        FiveOver20Strategy fiveOver20Strategy = new FiveOver20Strategy();
         YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
+        MacdOverZeroStrategy macdOverZeroStrategy = new MacdOverZeroStrategy();
+        MacdRedFor3DayStrategy macdRedFor3DayStrategy = new MacdRedFor3DayStrategy();
         bigYinLineStrategy.setNext(beiLiStrategy);
         beiLiStrategy.setNext(over5DayStrategy);
         over5DayStrategy.setNext(over10DayStrategy);
         over10DayStrategy.setNext(over20DayStrategy);
         over20DayStrategy.setNext(overYaLiStrategy);
-        overYaLiStrategy.setNext(fiveOverTenStrategy);
-        fiveOverTenStrategy.setNext(yiYangChuanSanXianStrategy);
+        overYaLiStrategy.setNext(fiveOver20Strategy);
+        fiveOver20Strategy.setNext(yiYangChuanSanXianStrategy);
+        yiYangChuanSanXianStrategy.setNext(macdOverZeroStrategy);
+        macdOverZeroStrategy.setNext(macdRedFor3DayStrategy);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/

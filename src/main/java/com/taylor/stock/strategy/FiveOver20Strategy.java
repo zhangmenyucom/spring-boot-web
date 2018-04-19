@@ -13,9 +13,9 @@ import java.util.List;
  * @desc:
  * @date: 2018/1/9 0:18
  */
-public class FiveOverTenStrategy extends IStrategy {
+public class FiveOver20Strategy extends IStrategy {
 
-    public FiveOverTenStrategy() {
+    public FiveOver20Strategy() {
         super(StrategyEnum.TYPE23);
     }
 
@@ -39,9 +39,9 @@ public class FiveOverTenStrategy extends IStrategy {
             return 0;
         }
 
-        /**5日线突破10日**/
+        /**5日线突破20日**/
         MashData mashDataYestoday = mashDataList.get(1);
-        if ((mashDataToday.getMa5().getAvgPrice() - mashDataToday.getMa10().getAvgPrice() > 0) && (mashDataYestoday.getMa5().getAvgPrice() - mashDataYestoday.getMa10().getAvgPrice() < 0)) {
+        if ((mashDataToday.getMa5().getAvgPrice() - mashDataToday.getMa20().getAvgPrice() > 0) && (mashDataYestoday.getMa5().getAvgPrice() - mashDataYestoday.getMa20().getAvgPrice() < 0)) {
             return 1;
         }
         return 0;
