@@ -8,6 +8,7 @@ import com.taylor.service.RecmdStockService;
 import com.taylor.stock.request.RecmdUpdator;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +30,8 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
     }
 
     @Override
-    public List<RecmdStock> getRecmdStockByCountTime() {
-        return this.getDao().getRecmdStockByCountTime();
+    public List<RecmdStock> getRecmdStockByCountTime(Date recordTime) {
+        return this.getDao().getRecmdStockByCountTime(recordTime);
     }
 
     @Override

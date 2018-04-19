@@ -5,6 +5,7 @@ import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @desc:
  * @date: 2018/1/6 0:27
  */
-public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
+public interface RecmdStockDao extends BaseDao<RecmdStock, RecmdStock> {
     /**
      * @param stockBaseInfo
      * @desc
@@ -22,7 +23,7 @@ public interface RecmdStockDao extends BaseDao<RecmdStock,RecmdStock> {
     /**
      * @return
      */
-    List<RecmdStock> getRecmdStockByCountTime();
+    List<RecmdStock> getRecmdStockByCountTime(@Param("recordTime") Date recordTime);
 
     int updateGuZhenScore(@Param("entity") RecmdStock recmdStockUpdate);
 

@@ -5,6 +5,7 @@ import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
 
     int updateUpDownRatio(TencentTodayBaseInfo stockTodayBaseInfo);
 
-    List<RecmdStock> getRecmdStockByCountTime();
+    List<RecmdStock> getRecmdStockByCountTime(Date recordTime);
 
     int updateGuZhenScore(RecmdStock recmdStockUpdate);
 

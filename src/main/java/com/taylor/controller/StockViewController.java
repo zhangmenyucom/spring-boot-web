@@ -52,7 +52,7 @@ public class StockViewController {
         }
         List<RecmdStock> recmdStocks;
         if (type == StrategyEnum.TYPE15.getCode()) {
-            recmdStocks = recmdStockService.getRecmdStockByCountTime();
+            recmdStocks = recmdStockService.getRecmdStockByCountTime(recmdStock.getRecordTime());
         } else {
             if (type != -1) {
                 recmdStock.setStrategyType(type);

@@ -131,14 +131,15 @@
             <if test="query.recordTime !=null">
                 and day(record_time)=day(#{query.recordTime,jdbcType=TIMESTAMP})
             </if>
-                and t.stock_code=d.stock_code
+            and t.stock_code=d.stock_code
         </where>
         order by o.in_num desc,industry desc,t.change_ratio_yestoday desc
 
 
     </select>
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
-        INSERT INTO recmd_stock(stock_code,stock_name,record_price,current_price,industry,majo_grow,net_increase_rate,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
+        INSERT INTO
+        recmd_stock(stock_code,stock_name,record_price,current_price,industry,majo_grow,net_increase_rate,macd,kdj,turnover_ratio,liang_bi,main_in,main_in_bi,outer_pan,inner_pan,change_ratio_yestoday,change_ratio_today,recmd_operate,kdj_count,strategy_type,strategy,record_time,update_time)
         VALUES (
         #{entity.stockCode,jdbcType=VARCHAR},
         #{entity.stockName,jdbcType=VARCHAR},
@@ -205,12 +206,38 @@
     </select>
 
     <select id="getRecmdStockByCountTime" resultMap="BaseResultMap">
-        SELECT t.* FROM recmd_stock t,
-        ( SELECT stock_code, count_num FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ) AS temp WHERE count_num >= 3 ) s
-        WHERE t.stock_code IN
-        ( SELECT stock_code FROM ( SELECT count(stock_code) AS count_num, stock_name, stock_code FROM recmd_stock GROUP BY stock_code ORDER BY count_num DESC ) AS temp WHERE count_num >= 3 )
+        SELECT t.*
+        FROM recmd_stock t,
+        (
+        SELECT stock_code,count_num
+        FROM
+        (
+        SELECT count(stock_code) AS count_num,stock_name,stock_code
+        FROM recmd_stock
+        GROUP BY stock_code
+        ) AS temp
+        WHERE
+        count_num >= 2
+        ) s
+        WHERE
+        t.stock_code IN (
+        SELECT stock_code
+        FROM
+        (
+        SELECT
+        count(stock_code) AS count_num,stock_name,stock_code
+        FROM
+        recmd_stock
+        WHERE DAY (record_time) =DAY(#{recordTime})
+        GROUP BY stock_code
+        ORDER BY count_num DESC
+        ) AS temp
+        WHERE
+        count_num >= 2
+        )
         AND t.stock_code = s.stock_code
-        ORDER BY s.count_num DESC, t.stock_name DESC
+        AND DAY (t.record_time) = DAY(#{recordTime})
+        ORDER BY s.count_num DESC,t.stock_name DESC
     </select>
 
     <delete id="delByPrimaryKey">
