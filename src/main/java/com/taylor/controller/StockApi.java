@@ -9,6 +9,7 @@ import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.service.impl.RedisServiceImpl;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.QueryStockDayDataRequest;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -131,6 +133,26 @@ public class StockApi extends BaseAction {
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(bigYinLineStrategy);
+        result.setErrorNo(ErrorCode.SUCCESS);
+        return result;
+    }
+
+    /**单个选股器启动**/
+    @ResponseBody
+    @RequestMapping("/start_choose_by_type")
+    public ApiResponse<Boolean> startChooseByType(@RequestParam("type") Integer type) throws InterruptedException {
+        ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+        QueryStockDayDataRequest.run_flag = 0;
+
+        List<Integer> strategyTypeList = new ArrayList<>();
+        /**清除当天及5天以外的数据**/
+        IStrategy iStrategy = StrategyEnum.STRATEGY_MAP.get(type);
+        do {
+            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+            iStrategy = iStrategy.getNext();
+        } while (iStrategy != null);
+        recmdStockService.delByStrategyList(strategyTypeList);
+        stockDataService.processData(StrategyEnum.STRATEGY_MAP.get(type));
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }

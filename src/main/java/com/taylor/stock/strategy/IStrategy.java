@@ -23,4 +23,8 @@ public abstract class IStrategy {
 
     public abstract int doCheck(List<MashData> mashDataList);
 
+    public boolean hasNext() {
+        return this.next != null;
+    }
+
 }

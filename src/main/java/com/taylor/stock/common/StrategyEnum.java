@@ -1,5 +1,7 @@
 package com.taylor.stock.common;
 
+import com.taylor.stock.strategy.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,17 +27,38 @@ public enum StrategyEnum {
     TYPE14(14, "T型结构，且macd<=0，kdj>=0,换手率大于1"),
     TYPE15(15, "所有策略重合数>=3"),
     TYPE16(16, "天鹅拳形态"),
-    TYPE17(17,"突破20日线"),
-    TYPE18(18,"突破10日线"),
-    TYPE19(19,"突破5日线"),
-    TYPE20(20,"近五日缩量阴线，突然放量大阴线"),
-    TYPE21(21,"15,30,50分钟线macd背离"),
-    TYPE22(22,"短期内突破压力位"),
-    TYPE23(23,"5日线突破20日线"),
-    TYPE24(24,"1阳穿3线"),
-    TYPE25(25,"macd在0轴向上突破"),
-    TYPE26(26,"macd金叉三天，且放量"),
-    TYPE27(27,"竟价擒牛");
+    TYPE17(17, "突破20日线"),
+    TYPE18(18, "突破10日线"),
+    TYPE19(19, "突破5日线"),
+    TYPE20(20, "近五日缩量阴线，突然放量大阴线"),
+    TYPE21(21, "15,30,50分钟线macd背离"),
+    TYPE22(22, "短期内突破压力位"),
+    TYPE23(23, "5日线突破20日线"),
+    TYPE24(24, "1阳穿3线"),
+    TYPE25(25, "macd在0轴向上突破"),
+    TYPE26(26, "macd金叉三天，且放量"),
+    TYPE27(27, "竟价擒牛"),
+    TYPE28(28, "5日站10日10日站20日");
+
+    public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
+
+    static {
+        STRATEGY_MAP.put(2, new Kdj5Strategy());
+        STRATEGY_MAP.put(3, new Kdj10Strategy());
+        STRATEGY_MAP.put(16, new TianEQuanStrategy());
+        STRATEGY_MAP.put(19, new Over5DayStrategy());
+        STRATEGY_MAP.put(18, new Over10DayStrategy());
+        STRATEGY_MAP.put(17, new Over20DayStrategy());
+        STRATEGY_MAP.put(20, new BigYinLineStrategy());
+        STRATEGY_MAP.put(21, new BeiLiStrategy());
+        STRATEGY_MAP.put(22, new OverYaLiStrategy());
+        STRATEGY_MAP.put(23, new FiveOver20Strategy());
+        STRATEGY_MAP.put(24, new YiYangChuanSanXianStrategy());
+        STRATEGY_MAP.put(25, new MacdOverZeroStrategy());
+        STRATEGY_MAP.put(26, new MacdRedFor3DayStrategy());
+        STRATEGY_MAP.put(27, new JinJiaQinNiuStrategy());
+        STRATEGY_MAP.put(28, new FiveOverTenOverTwentyStrategy());
+    }
 
     private Integer code;
 
