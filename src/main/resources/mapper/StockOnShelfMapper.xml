@@ -42,16 +42,16 @@
                 and id=#{query.id,jdbcType=BIGINT}
             </if>
             <if test="query.stockCode !=null">
-                and stock_code=#{query.stockCode,jdbcType=VARCHAR}
+                and t.stock_code=#{query.stockCode,jdbcType=VARCHAR}
             </if>
             <if test="query.stockName !=null">
-                and stock_name=#{query.stockName,jdbcType=VARCHAR}
+                and t.stock_name=#{query.stockName,jdbcType=VARCHAR}
             </if>
             <if test="query.recmdOperate !=null">
-                and recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
+                and t.recmd_operate=#{query.recmdOperate,jdbcType=VARCHAR}
             </if>
             <if test="query.status !=null">
-                and status=#{query.status,jdbcType=TINYINT}
+                and t.status=#{query.status,jdbcType=TINYINT}
             </if>
         </where>
     </select>
