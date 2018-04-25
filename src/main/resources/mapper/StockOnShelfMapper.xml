@@ -16,6 +16,7 @@
         <result column="recmd_operate" property="recmdOperate" jdbcType="VARCHAR"/>
         <result column="reason" property="reason" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="industry" property="industry" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         t.id,
@@ -34,8 +35,8 @@
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM stock_on_shelf t
+        <include refid="Base_Column_List"/>,z.industry
+        FROM stock_on_shelf t LEFT JOIN stock_data z ON t.stock_code=z.stock_code
         <where>
             <if test="query.id !=null">
                 and id=#{query.id,jdbcType=BIGINT}

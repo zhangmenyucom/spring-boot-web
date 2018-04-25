@@ -60,6 +60,7 @@
         <tr>
             <th>股票代码</th>
             <th>股票名称</th>
+            <th>行业</th>
             <th>关注价</th>
             <th>当前价</th>
             <th>当日涨幅</th>
@@ -71,6 +72,7 @@
         <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}">
             <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
             <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
+            <td th:text="${stock.industry}"></td>
             <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
