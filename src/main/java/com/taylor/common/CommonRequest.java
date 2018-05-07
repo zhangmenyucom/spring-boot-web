@@ -250,8 +250,9 @@ public class CommonRequest<T> {
         tongHuaShunStockBase.setStockCode(stockCode);
         InputStreamReader isr = null;
         try {
-            String url = "http://d.10jqka.com.cn/v6/line/hs_000735/11/today.js";
+            String url = "http://d.10jqka.com.cn/v2/realhead/hs_002839/last.js";
             URL u = new URL(url);
+            System.out.println(u.getRef());
             isr = new InputStreamReader(u.openStream(), "GBK");
             char[] cha = new char[1024];
             int len = isr.read(cha);
@@ -334,7 +335,7 @@ public class CommonRequest<T> {
     public static void main(String... args) {
         //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
 
-            test("SZ300482");
+        System.out.println(JsonUtil.transfer2JsonString(getBaseDataFromTongHuaShun("SZ300482")));
 
     }
 
