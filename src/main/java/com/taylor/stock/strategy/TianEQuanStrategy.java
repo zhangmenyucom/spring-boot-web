@@ -22,14 +22,14 @@ public class TianEQuanStrategy extends IStrategy {
     @Override
     public int doCheck(List<MashData> mashDataList) {
         /**至少有十个交易日数据吧**/
-        if (mashDataList.size() <= 10) {
+        if (mashDataList.size() < 10) {
             return 0;
         }
 
         MashData today = mashDataList.get(0);
 
-        /**十字结构,涨幅-1-1以内**/
-        if (Math.abs(today.getKline().getNetChangeRatio()) <= 1) {
+        /**十字结构,涨幅-1至1以内**/
+        if (Math.abs(today.getKline().getNetChangeRatio()) <= 5) {
             /**突破10日均线**/
             if(today.getKline().getClose()-today.getMa10().getAvgPrice()>=-0.1){
                 /**近十个交易日内有涨停**/
