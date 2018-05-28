@@ -39,7 +39,8 @@ public enum StrategyEnum {
     TYPE26(26, "macd金叉三天，且放量"),
     TYPE27(27, "竟价擒牛"),
     TYPE28(28, "5日站10日10日站20日"),
-    TYPE29(29, "龙虎榜");
+    TYPE29(29, "龙虎榜"),
+    TYPE30(30, "缩量洗盘");
 
     public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
 
