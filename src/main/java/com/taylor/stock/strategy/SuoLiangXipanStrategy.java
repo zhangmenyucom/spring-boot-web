@@ -24,7 +24,7 @@ public class SuoLiangXipanStrategy extends IStrategy {
         if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
             return 0;
         }
-        if (stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() > 2) {
+        if (stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() > 1.5) {
             return 1;
         }
         return 0;

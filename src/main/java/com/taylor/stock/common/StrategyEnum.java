@@ -61,6 +61,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(27, new JinJiaQinNiuStrategy());
         STRATEGY_MAP.put(28, new FiveOverTenOverTwentyStrategy());
         STRATEGY_MAP.put(29, new LongHuBang());
+        STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
     }
 
     private Integer code;

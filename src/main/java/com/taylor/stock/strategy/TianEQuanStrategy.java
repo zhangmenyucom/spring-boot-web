@@ -33,7 +33,7 @@ public class TianEQuanStrategy extends IStrategy {
             /**近十个交易日内有涨停**/
             for (int i = 0; i < 10; i++) {
                 if (checkTopStop(mashDataList.get(i)) && today.getKline().getLow() < mashDataList.get(i).getKline().getClose()) {
-                    break;
+                    return 1;
                 }
             }
         }
