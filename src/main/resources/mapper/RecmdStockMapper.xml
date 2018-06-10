@@ -16,6 +16,7 @@
         <result column="kdj" property="kdj" jdbcType="VARCHAR"/>
         <result column="turnover_ratio" property="turnoverRatio" jdbcType="DOUBLE"/>
         <result column="liang_bi" property="liangbi" jdbcType="DOUBLE"/>
+        <result column="liang_bi_today" property="liangbiToday" jdbcType="DOUBLE"/>
         <result column="main_in" property="mainIn" jdbcType="DOUBLE"/>
         <result column="main_in_bi" property="mainInBi" jdbcType="DOUBLE"/>
         <result column="outer_pan" property="outerPan" jdbcType="DOUBLE"/>
@@ -44,6 +45,7 @@
         t.kdj,
         t.turnover_ratio,
         t.liang_bi,
+        t.liang_bi_today,
         t.main_in ,
         t.main_in_bi,
         t.outer_pan,
@@ -187,6 +189,7 @@
         UPDATE recmd_stock
         SET
         change_ratio_today=#{stockBaseInfo.upDownPercent,jdbcType=DOUBLE},
+        liangbi_today=#{stockBaseInfo.liangbi,jdbcType=DOUBLE},
         current_price=#{stockBaseInfo.close,jdbcType=DOUBLE}
         WHERE stock_code = #{stockBaseInfo.stockCode,jdbcType=VARCHAR}
     </update>
@@ -247,15 +250,15 @@
 
     <delete id="del">
         DELETE FROM recmd_stock where 1=1
-        and (date_add(now(),interval -5 day) > record_time OR day(record_time)=day(NOW()))
+        and (date_add(now(),interval - 5 day) > record_time OR day(record_time)=day(NOW()))
         <if test="entity.strategyType!=null">
-            and strategy=null or strategy_type = #{entity.strategyType}
+            and (strategy=null or strategy_type = #{entity.strategyType})
         </if>
     </delete>
 
     <delete id="delByStrategyList">
         DELETE FROM recmd_stock where 1=1
-        and (date_add(now(),interval -5 day) > record_time OR day(record_time)=day(NOW()))
+        and (date_add(now(),interval - 5 day) > record_time OR day(record_time)=day(NOW()))
         <if test="strategyTypeList!=null">
             and strategy_type IN
             <foreach collection="strategyTypeList" index="index" item="item" open="(" separator="," close=")">

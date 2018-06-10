@@ -24,11 +24,11 @@ public class PageController {
 
     @RequestMapping("/index")
     public String index(Map<String, Object> map, HttpServletRequest request) {
-        if (request.getSession().getAttribute("user") != null) {
+       /* if (request.getSession().getAttribute("user") != null) {
             map.put("user", request.getSession().getAttribute("user"));
             return "/index";
-        }
-        return "/login";
+        }*/
+        return "/index";
 
     }
 
@@ -44,12 +44,15 @@ public class PageController {
 
     @RequestMapping("/main")
     public String main(Map<String, Object> map, HttpServletRequest request) {
+        StockUser stockUser=new StockUser();
         if (request.getSession().getAttribute("user") != null) {
-            StockUser stockUser = (StockUser) request.getSession().getAttribute("user");
+             stockUser = (StockUser) request.getSession().getAttribute("user");
             map.put("user", stockUser);
             return "/main";
         }
-        return "/login";
+         stockUser.setUserName("zhangmenyucom");
+        map.put("user", stockUser);
+        return "/main";
     }
 
     @RequestMapping("/left")

@@ -85,10 +85,13 @@ public class QueryStockDayDataRequest extends Thread {
             if (stockBaseInfos == null || stockBaseInfos.isEmpty() || "0".equals(stockBaseInfos.get(0).getStockStatus())) {
                 continue;
             }
-
             MashDataResponse response = JsonUtil.transferToObj(responseStr, MashDataResponse.class);
-            if (response == null || response.getErrorNo() != 0 || response.getMashData() == null || response.getMashData().size() < 2) {
+            if (response == null || response.getErrorNo() != 0) {
                 continue;
+            }
+            if(response.getMashData()==null || response.getMashData().isEmpty()){
+                response.setMashData(new ArrayList<MashData>());
+                response.getMashData().add(new MashData());
             }
             MashData mashDataToday = response.getMashData().get(0);
             mashDataToday.setStockCode(stockCode.toLowerCase());
@@ -105,24 +108,21 @@ public class QueryStockDayDataRequest extends Thread {
                 StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 if (checkResult == 1 && stockPanKouData != null) {
                     RecmdStock recmdStock = new RecmdStock();
-                    recmdStock.setMacd(Double.valueOf(df.format(mashDataToday.getMacd().getMacd())));
                     recmdStock.setStockCode(stockCode);
                     recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                     recmdStock.setStockName(stockPanKouData.getStockName());
-                    recmdStock.setRecordPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
-                    recmdStock.setCurrentPrice(Double.valueOf(df.format(mashDataToday.getKline().getClose())));
+                    recmdStock.setRecordPrice(Double.valueOf(df.format(stockBaseInfos.get(0).getClose())));
+                    recmdStock.setCurrentPrice(Double.valueOf(df.format(stockBaseInfos.get(0).getClose())));
                     recmdStock.setStrategy(strategy.getStrategyEnum().getDesc());
                     recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
                     recmdStock.setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn());
                     recmdStock.setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi());
-                    recmdStock.setKdj("(" + (int) mashDataToday.getKdj().getK() + "," + (int) mashDataToday.getKdj().getD() + "," + (int) mashDataToday.getKdj().getJ() + ")");
                     recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
-                    recmdStock.setChangeRatioYestoday(mashDataToday.getKline().getNetChangeRatio());
                     recmdStock.setLiangbi(stockPanKouData.getLiangBi());
+                    recmdStock.setChangeRatioYestoday(stockBaseInfos.get(0).getNetChangeRatio());
                     recmdStock.setOuterPan(stockPanKouData.getOuter());
                     recmdStock.setInnerPan(stockPanKouData.getInner());
                     recmdStock.setKdjCount(mashDataList.get(0).getKdjCount());
-
                     recmdStock.setIndustry(stockBusinessinfo.getIndustry());
                     recmdStock.setMajoGrow(stockBusinessinfo.getMajoGrow());
                     recmdStock.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
@@ -148,7 +148,7 @@ public class QueryStockDayDataRequest extends Thread {
         stockQueryBean.setFq_type("no");
         stockQueryBean.setOs_ver("1");
         stockQueryBean.setVv("100");
-        stockQueryBean.setStock_code("SZ002582".toLowerCase());
+        stockQueryBean.setStock_code("SZ300615".toLowerCase());
         GetMethod method = new GetMethod(METHOD_URL_STOCK_DAY_INFO);
         System.out.println(queryLatestResult(stockQueryBean, method));
 

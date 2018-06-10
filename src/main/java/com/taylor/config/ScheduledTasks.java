@@ -69,64 +69,39 @@ public class ScheduledTasks {
     }
 
     /**
-     * 每天定时刷新推荐数据
-     **/
-    @Scheduled(cron = "30 25 9 * * *")
-    public void fetchRecmdData() {
-        JinJiaQinNiuStrategy jinJianQinNiuStrategy = new JinJiaQinNiuStrategy();
-        List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
-        IStrategy iStrategy = jinJianQinNiuStrategy;
-        do {
-            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
-            iStrategy = iStrategy.getNext();
-        } while (iStrategy != null);
-        recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(jinJianQinNiuStrategy);
-    }
-
-    /**
      * 天鹅拳股票
      **/
     @Scheduled(cron = "0 0 22 * * *")
     public void fetchTianEData() {
         RecmdStock recmdStockDel = new RecmdStock();
-        IStrategy iStrategy = new TianEQuanStrategy();
+        TianEQuanStrategy tianEQuan=new TianEQuanStrategy();
         List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
-        do {
-            strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
-            iStrategy = iStrategy.getNext();
-        } while (iStrategy != null);
+        strategyTypeList.add(tianEQuan.getStrategyEnum().getCode());
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(iStrategy, 10);
+        stockDataService.processData(tianEQuan, 10);
     }
 
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 25 14 * * *")
+    @Scheduled(cron = "0 40 14 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
-        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
-        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        Over10DayStrategy over10DayStrategy = new Over10DayStrategy();
-        Over20DayStrategy over20DayStrategy = new Over20DayStrategy();
-        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
-        FiveOver20Strategy fiveOver20Strategy = new FiveOver20Strategy();
-        YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
-        MacdOverZeroStrategy macdOverZeroStrategy = new MacdOverZeroStrategy();
-        MacdRedFor3DayStrategy macdRedFor3DayStrategy = new MacdRedFor3DayStrategy();
-        bigYinLineStrategy.setNext(beiLiStrategy);
-        beiLiStrategy.setNext(over5DayStrategy);
-        over5DayStrategy.setNext(over10DayStrategy);
-        over10DayStrategy.setNext(over20DayStrategy);
-        over20DayStrategy.setNext(overYaLiStrategy);
-        overYaLiStrategy.setNext(fiveOver20Strategy);
-        fiveOver20Strategy.setNext(yiYangChuanSanXianStrategy);
-        yiYangChuanSanXianStrategy.setNext(macdOverZeroStrategy);
-        macdOverZeroStrategy.setNext(macdRedFor3DayStrategy);
+        /**放量大阴**/
+        BigYinLineStrategy bigYinLineStrategy=new BigYinLineStrategy();
+        /**龙虎榜**/
+        LongHuBang longHuBang=new LongHuBang();
+        bigYinLineStrategy.setNext(longHuBang);
+        /**突破短期压力**/
+        OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
+        longHuBang.setNext(overYaLiStrategy);
+        /**三重叠多头**/
+        FiveOverTenOverTwentyStrategy fiveOverTenOverTwentyStrategy=new FiveOverTenOverTwentyStrategy();
+        overYaLiStrategy.setNext(fiveOverTenOverTwentyStrategy);
+        /**缩量洗盘**/
+        SuoLiangXipanStrategy suoLiangXipanStrategy=new SuoLiangXipanStrategy();
+        fiveOverTenOverTwentyStrategy.setNext(suoLiangXipanStrategy);
+
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/

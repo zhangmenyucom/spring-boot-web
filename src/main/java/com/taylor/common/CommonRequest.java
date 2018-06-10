@@ -31,7 +31,7 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    public synchronized String executeRequest(T in, HttpMethodBase method) {
+    public  String executeRequest(T in, HttpMethodBase method) {
         if (retryCount.get() == null) {
             retryCount.set(0);
         }
@@ -335,7 +335,7 @@ public class CommonRequest<T> {
     public static void main(String... args) {
         //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
 
-        System.out.println(JsonUtil.transfer2JsonString(getBaseDataFromTongHuaShun("SZ300278")));
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SZ300615").getUpDownPercent()));
 
     }
 

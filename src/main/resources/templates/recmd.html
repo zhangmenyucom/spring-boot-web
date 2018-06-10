@@ -115,11 +115,11 @@
             <th>所属行业</th>
             <th>营收(%)</th>
             <th>净利(%)</th>
-            <th>KDJ</th>
             <th>换手率</th>
             <th>主净入</th>
             <th>主净入比</th>
-            <th>量比</th>
+            <th>记录量比</th>
+            <th>今日量比</th>
             <th>记录涨幅</th>
             <th>今日涨幅</th>
             <th>K线</th>
@@ -137,11 +137,11 @@
             <td th:text="${stock.industry}"></td>
             <td th:text="${stock.majoGrow}+'%'" th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
             <td th:text="${stock.netIncreaseRate}+'%'" th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
-            <td th:text="${stock.kdj}"></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.mainIn}"></td>
             <td th:text="${stock.mainInBi}"></td>
             <td th:text="${stock.liangbi}"></td>
+            <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>
             <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/concept/'+${stock.stockCode}+'.html'}">K线</a></td>

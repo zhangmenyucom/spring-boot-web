@@ -60,6 +60,10 @@ public class RecmdStock {
      * 量比
      **/
     private Double liangbi;
+    /**
+     * 今日量比
+     **/
+    private Double liangbiToday;
 
     /**所属行业**/
     private String industry;

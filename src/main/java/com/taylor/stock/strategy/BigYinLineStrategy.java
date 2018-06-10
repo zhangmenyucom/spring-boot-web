@@ -2,7 +2,6 @@ package com.taylor.stock.strategy;
 
 import com.taylor.common.CommonRequest;
 import com.taylor.entity.stock.MashData;
-import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.TencentDayData;
 import com.taylor.stock.common.StrategyEnum;
 
@@ -25,9 +24,10 @@ public class BigYinLineStrategy extends IStrategy {
         if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
             return 0;
         }
-        if (stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() >= 1.5) {
+        TencentDayData tencentDayDataToday = stckDailyHistory.get(stckDailyHistory.size() - 1);
+        if ((tencentDayDataToday.getOpen()>= tencentDayDataToday.getClose())&& tencentDayDataToday.getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() >= 1.5) {
             for (int i = 0; i < stckDailyHistory.size() - 1; i++) {
-                if (stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() / stckDailyHistory.get(i).getTotalHands() > 1.5) {
+                if (tencentDayDataToday.getTotalHands() / stckDailyHistory.get(i).getTotalHands() > 1.5) {
                     continue;
                 }
                 return 0;

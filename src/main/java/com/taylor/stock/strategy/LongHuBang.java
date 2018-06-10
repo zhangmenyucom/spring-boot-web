@@ -23,8 +23,7 @@ public class LongHuBang extends IStrategy {
     @Override
     public int doCheck(List<MashData> mashDataList) {
         String stockCode = mashDataList.get(0).getStockCode();
-        TongHuaShunStockBase baseDataFromTongHuaShun = CommonRequest.getBaseDataFromTongHuaShun(stockCode);
-        if (baseDataFromTongHuaShun.getNetChangeRatio() > 9) {
+        if (CommonRequest.getStckTodayBaseInfo(stockCode).getUpDownPercent() > 9.0d) {
             return 1;
         }
         return 0;
