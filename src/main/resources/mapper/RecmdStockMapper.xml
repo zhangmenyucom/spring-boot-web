@@ -189,7 +189,7 @@
         UPDATE recmd_stock
         SET
         change_ratio_today=#{stockBaseInfo.upDownPercent,jdbcType=DOUBLE},
-        liangbi_today=#{stockBaseInfo.liangbi,jdbcType=DOUBLE},
+        liang_bi_today=#{stockBaseInfo.liangbi,jdbcType=DOUBLE},
         current_price=#{stockBaseInfo.close,jdbcType=DOUBLE}
         WHERE stock_code = #{stockBaseInfo.stockCode,jdbcType=VARCHAR}
     </update>
