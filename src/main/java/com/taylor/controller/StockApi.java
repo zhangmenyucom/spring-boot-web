@@ -106,26 +106,9 @@ public class StockApi extends BaseAction {
     public ApiResponse<Boolean> startChoose(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
         QueryStockDayDataRequest.run_flag = 0;
-
         ShiZiStrategy shiZiMacdStrategy = new ShiZiStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
-        BeiLiStrategy beiLiStrategy = new BeiLiStrategy();
-        FiveOver20Strategy fiveOver20Strategy = new FiveOver20Strategy();
-        OverYaLiStrategy overYaLiStrategy = new OverYaLiStrategy();
-        MacdOverZeroStrategy macdOverZeroStrategy = new MacdOverZeroStrategy();
-        YiYangChuanSanXianStrategy yiYangChuanSanXianStrategy = new YiYangChuanSanXianStrategy();
-        MacdRedFor3DayStrategy macdRedFor3DayStrategy = new MacdRedFor3DayStrategy();
         LongHuBang longHuBang=new LongHuBang();
-        shiZiMacdStrategy.setNext(over5DayStrategy);
-        over5DayStrategy.setNext(bigYinLineStrategy);
-        bigYinLineStrategy.setNext(beiLiStrategy);
-        beiLiStrategy.setNext(overYaLiStrategy);
-        overYaLiStrategy.setNext(fiveOver20Strategy);
-        fiveOver20Strategy.setNext(yiYangChuanSanXianStrategy);
-        yiYangChuanSanXianStrategy.setNext(macdOverZeroStrategy);
-        macdOverZeroStrategy.setNext(macdRedFor3DayStrategy);
-        macdRedFor3DayStrategy.setNext(longHuBang);
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         IStrategy iStrategy = bigYinLineStrategy;

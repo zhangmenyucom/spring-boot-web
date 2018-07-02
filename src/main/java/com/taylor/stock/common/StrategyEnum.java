@@ -45,22 +45,11 @@ public enum StrategyEnum {
     public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
 
     static {
-        STRATEGY_MAP.put(2, new Kdj5Strategy());
-        STRATEGY_MAP.put(3, new Kdj10Strategy());
         STRATEGY_MAP.put(16, new TianEQuanStrategy());
         STRATEGY_MAP.put(13, new ShiZiStrategy());
-        STRATEGY_MAP.put(19, new Over5DayStrategy());
-        STRATEGY_MAP.put(18, new Over10DayStrategy());
-        STRATEGY_MAP.put(17, new Over20DayStrategy());
         STRATEGY_MAP.put(20, new BigYinLineStrategy());
-        STRATEGY_MAP.put(21, new BeiLiStrategy());
         STRATEGY_MAP.put(22, new OverYaLiStrategy());
-        STRATEGY_MAP.put(23, new FiveOver20Strategy());
-        STRATEGY_MAP.put(24, new YiYangChuanSanXianStrategy());
-        STRATEGY_MAP.put(25, new MacdOverZeroStrategy());
-        STRATEGY_MAP.put(26, new MacdRedFor3DayStrategy());
         STRATEGY_MAP.put(27, new JinJiaQinNiuStrategy());
-        STRATEGY_MAP.put(28, new FiveOverTenOverTwentyStrategy());
         STRATEGY_MAP.put(29, new LongHuBang());
         STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
     }

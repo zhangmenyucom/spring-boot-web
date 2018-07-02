@@ -95,12 +95,9 @@ public class ScheduledTasks {
         /**突破短期压力**/
         OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
         longHuBang.setNext(overYaLiStrategy);
-        /**三重叠多头**/
-        FiveOverTenOverTwentyStrategy fiveOverTenOverTwentyStrategy=new FiveOverTenOverTwentyStrategy();
-        overYaLiStrategy.setNext(fiveOverTenOverTwentyStrategy);
         /**缩量洗盘**/
         SuoLiangXipanStrategy suoLiangXipanStrategy=new SuoLiangXipanStrategy();
-        fiveOverTenOverTwentyStrategy.setNext(suoLiangXipanStrategy);
+        overYaLiStrategy.setNext(suoLiangXipanStrategy);
         /**底部十字或T型结构**/
         ShiZiStrategy shiZiStrategy=new ShiZiStrategy();
         suoLiangXipanStrategy.setNext(shiZiStrategy);

@@ -32,7 +32,7 @@ public class ShiZiStrategy extends IStrategy {
             return 0;
         }
         MashData yestoday = mashDataList.get(1);
-        if (yestoday.getKline().getNetChangeRatio() < -2.0 && Math.abs(today.getKline().getNetChangeRatio()) <= 0.5 && Math.abs(today.getKline().getClose() - today.getKline().getLow()) / today.getKline().getPreClose() >0.02) {
+        if (yestoday.getKline().getNetChangeRatio() < -2.0 && Math.abs(today.getKline().getNetChangeRatio()) <= 1 && Math.abs(today.getKline().getClose() - today.getKline().getLow()) / today.getKline().getPreClose() >0.02) {
             return 1;
         }
         return 0;

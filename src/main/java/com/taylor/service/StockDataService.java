@@ -2,7 +2,6 @@ package com.taylor.service;
 
 import com.taylor.common.CrudService;
 import com.taylor.entity.StockData;
-import com.taylor.stock.strategy.GodenKdjCountStrategy;
 import com.taylor.stock.strategy.IStrategy;
 
 /**

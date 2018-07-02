@@ -3,6 +3,7 @@ package com.taylor.stock.strategy;
 import com.taylor.entity.stock.MashData;
 import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @date: 2018/1/9 0:18
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TianEQuanStrategy extends IStrategy {
 
 

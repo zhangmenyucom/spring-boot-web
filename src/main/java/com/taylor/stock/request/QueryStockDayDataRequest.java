@@ -73,11 +73,10 @@ public class QueryStockDayDataRequest extends Thread {
             if (run_flag == 0) {
                 break;
             }
-            CURRENT.incrementAndGet();
             stockQueryBean.setStock_code(stockCode.toLowerCase());
             System.out.println("正在检测股票代码：" + stockCode);
             String responseStr = queryLatestResult(stockQueryBean, methodKline);
-            log.info(responseStr);
+            log.info("stockCode{}responseStr{}",stockCode,responseStr);
             if (responseStr == null) {
                 continue;
             }

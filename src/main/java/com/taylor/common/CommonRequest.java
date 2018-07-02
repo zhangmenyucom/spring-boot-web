@@ -56,11 +56,11 @@ public class CommonRequest<T> {
         } catch (Exception e) {
             /**重试两次**/
             if (retryCount.get() <= 2) {
+                log.info("错误，重试e{}", e.getMessage());
                 retryCount.set(retryCount.get() + 1);
                 return executeRequest(in, method);
             }
-            ProcessCountor.FAIL_COUNT.incrementAndGet();
-            log.info("错误e{}", e.getMessage());
+            log.info("错误{}", e.getMessage());
         }
         retryCount.set(0);
         if (!StringUtil.isEmpty(stringBuider.toString())) {
@@ -104,7 +104,7 @@ public class CommonRequest<T> {
             stockFundInOut.setTotalIN(Double.valueOf(datas[9]));
             stockFundInOut.setStockName(datas[12]);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("主力散户资金流入出错"+e.getMessage());
             return stockFundInOut;
         } finally {
             if (isr != null) {
@@ -180,7 +180,7 @@ public class CommonRequest<T> {
             stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
             stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("股票盘口数据出错"+e.getMessage());
         } finally {
             if (isr != null) {
                 try {
@@ -229,7 +229,7 @@ public class CommonRequest<T> {
             tongHuaShunStockBase.setLiangBi(Double.valueOf(dataStockMap.get("19").toString()));
             tongHuaShunStockBase.setToltalHands(Double.valueOf(dataStockMap.get("13").toString()).longValue()/100);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("股票同花顺数据"+e.getMessage());
         } finally {
             if (isr != null) {
                 try {
