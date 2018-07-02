@@ -77,6 +77,7 @@ public class QueryStockDayDataRequest extends Thread {
             stockQueryBean.setStock_code(stockCode.toLowerCase());
             System.out.println("正在检测股票代码：" + stockCode);
             String responseStr = queryLatestResult(stockQueryBean, methodKline);
+            log.info(responseStr);
             if (responseStr == null) {
                 continue;
             }

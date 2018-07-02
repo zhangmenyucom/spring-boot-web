@@ -23,7 +23,7 @@ public enum StrategyEnum {
     TYPE10(10, "日kdj金叉，周kdj上翘，量比大于1.1，外盘大于内盘，ratio大于0.9"),
     TYPE11(11, "kdj差值小于5,换手率大于0.9"),
     TYPE12(12, "macd在-0.02至+0.02之间"),
-    TYPE13(13, "k线程十字架，且macd<=0，kdj>=0,换手率大于1"),
+    TYPE13(13, "底部十字或T型结构"),
     TYPE14(14, "T型结构，且macd<=0，kdj>=0,换手率大于1"),
     TYPE15(15, "所有策略重合数>=3"),
     TYPE16(16, "天鹅拳形态"),
@@ -48,6 +48,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(2, new Kdj5Strategy());
         STRATEGY_MAP.put(3, new Kdj10Strategy());
         STRATEGY_MAP.put(16, new TianEQuanStrategy());
+        STRATEGY_MAP.put(13, new ShiZiStrategy());
         STRATEGY_MAP.put(19, new Over5DayStrategy());
         STRATEGY_MAP.put(18, new Over10DayStrategy());
         STRATEGY_MAP.put(17, new Over20DayStrategy());

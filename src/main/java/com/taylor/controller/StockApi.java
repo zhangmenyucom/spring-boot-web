@@ -107,7 +107,7 @@ public class StockApi extends BaseAction {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
         QueryStockDayDataRequest.run_flag = 0;
 
-        ShiZiMacdStrategy shiZiMacdStrategy = new ShiZiMacdStrategy();
+        ShiZiStrategy shiZiMacdStrategy = new ShiZiStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         Over5DayStrategy over5DayStrategy = new Over5DayStrategy();
         BeiLiStrategy beiLiStrategy = new BeiLiStrategy();

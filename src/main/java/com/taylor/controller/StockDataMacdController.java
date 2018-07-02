@@ -3,7 +3,7 @@ package com.taylor.controller;
 import com.taylor.service.StockBaseInfoService;
 import com.taylor.service.StockDataService;
 import com.taylor.stock.strategy.MacdStrategy;
-import com.taylor.stock.strategy.ShiZiMacdStrategy;
+import com.taylor.stock.strategy.ShiZiStrategy;
 import com.taylor.stock.strategy.TMacdStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class StockDataMacdController extends BaseAction {
     @ResponseBody
     @RequestMapping("/shizi/start")
     public String queryShiZiWithMacd(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        stockDataService.processData(new ShiZiMacdStrategy());
+        stockDataService.processData(new ShiZiStrategy());
         return "正在分析，请耐心等待";
     }
     @ResponseBody

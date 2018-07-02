@@ -101,6 +101,9 @@ public class ScheduledTasks {
         /**缩量洗盘**/
         SuoLiangXipanStrategy suoLiangXipanStrategy=new SuoLiangXipanStrategy();
         fiveOverTenOverTwentyStrategy.setNext(suoLiangXipanStrategy);
+        /**底部十字或T型结构**/
+        ShiZiStrategy shiZiStrategy=new ShiZiStrategy();
+        suoLiangXipanStrategy.setNext(shiZiStrategy);
 
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();

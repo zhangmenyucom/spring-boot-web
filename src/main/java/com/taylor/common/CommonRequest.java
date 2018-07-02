@@ -335,7 +335,7 @@ public class CommonRequest<T> {
     public static void main(String... args) {
         //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
 
-        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SZ300615").getUpDownPercent()));
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SH603345").getUpDownPercent()));
 
     }
 
