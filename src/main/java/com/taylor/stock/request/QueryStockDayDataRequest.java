@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.taylor.common.Constants.METHOD_URL_STOCK_DAY_INFO;
-import static com.taylor.common.ProcessCountor.CURRENT;
 
 /**
  * 获取股票日K数据
@@ -74,9 +73,8 @@ public class QueryStockDayDataRequest extends Thread {
                 break;
             }
             stockQueryBean.setStock_code(stockCode.toLowerCase());
-            System.out.println("正在检测股票代码：" + stockCode);
+            log.info("正在检测股票代码：{}", stockCode);
             String responseStr = queryLatestResult(stockQueryBean, methodKline);
-            log.info("stockCode{}responseStr{}",stockCode,responseStr);
             if (responseStr == null) {
                 continue;
             }
