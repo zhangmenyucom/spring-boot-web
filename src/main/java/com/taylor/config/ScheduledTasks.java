@@ -52,7 +52,6 @@ public class ScheduledTasks {
                 if (stckTodayBaseInfo != null) {
                     stckTodayBaseInfo.setStockCode(recmdStock.getStockCode());
                     recmdStockService.updateUpDownRatio(stckTodayBaseInfo);
-                    ConcurrentHashMap
                 }
             }
         }
