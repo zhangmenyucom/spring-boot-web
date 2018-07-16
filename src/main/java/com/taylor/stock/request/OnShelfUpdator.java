@@ -1,15 +1,15 @@
 package com.taylor.stock.request;
 
 import com.taylor.common.CommonRequest;
-import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.MailUtils;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
-import com.taylor.entity.stock.kdj.KdjTimeBean;
 import com.taylor.service.StockOnShelfService;
 import lombok.Data;
 
 import java.util.List;
+
+import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
 
 /**
  * @author xiaolu.zhang
@@ -35,8 +35,8 @@ public class OnShelfUpdator extends Thread {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
-            if(Math.abs((stockPanKouData.getCurrentPrice()-stockOnShelf.getCurrentPrice())/stockOnShelf.getCurrentPrice())>0.01){
-                MailUtils.sendMail(stockOnShelf.getStockName()+"有异动请立即关注","");
+            if (YIDONG_MONITOR == 1 && Math.abs((stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice()) > 0.01) {
+                MailUtils.sendMail(stockOnShelf.getStockName() + "有异动请立即关注", "");
             }
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());

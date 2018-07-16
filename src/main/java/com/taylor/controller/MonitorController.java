@@ -15,6 +15,7 @@ import java.util.Map;
 
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
+import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
 
 /**
  * 测试
@@ -28,6 +29,26 @@ public class MonitorController {
 
     @Autowired
     private StockOnShelfService stockOnShelfService;
+
+
+    @RequestMapping("/start_yidong")
+    public String startYiDongMonitor() {
+        if (YIDONG_MONITOR == 1) {
+            return "已经开启，无需再次开启监控";
+        }
+        YIDONG_MONITOR = 1;
+        return "已经开启异动监控";
+    }
+
+    @RequestMapping("/stop_yidong")
+    public String stopYiDongMonitor() {
+        if (YIDONG_MONITOR == 0) {
+            return "已经关闭，无需再次关闭监控";
+        }
+        YIDONG_MONITOR = 0;
+        return "已经关闭异动监控";
+    }
+
 
     @RequestMapping("/start")
     public String startMonitor() {
