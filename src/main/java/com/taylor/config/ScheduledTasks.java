@@ -17,7 +17,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.taylor.common.CommonRequest.getStckTodayBaseInfo;
 
@@ -51,6 +53,7 @@ public class ScheduledTasks {
                 if (stckTodayBaseInfo != null) {
                     stckTodayBaseInfo.setStockCode(recmdStock.getStockCode());
                     recmdStockService.updateUpDownRatio(stckTodayBaseInfo);
+                    ConcurrentHashMap
                 }
             }
         }
@@ -75,9 +78,6 @@ public class ScheduledTasks {
     public void fetchTianEData() {
         RecmdStock recmdStockDel = new RecmdStock();
         TianEQuanStrategy tianEQuan=new TianEQuanStrategy();
-        List<Integer> strategyTypeList = new ArrayList<>();
-        strategyTypeList.add(tianEQuan.getStrategyEnum().getCode());
-        recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(tianEQuan, 10);
     }
 
