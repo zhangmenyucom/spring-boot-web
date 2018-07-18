@@ -252,7 +252,7 @@
         DELETE FROM recmd_stock where 1=1
         and (date_add(now(),interval - 5 day) > record_time OR day(record_time)=day(NOW()))
         <if test="entity.strategyType!=null">
-            and (strategy=null or strategy_type = #{entity.strategyType})
+            and strategy_type = #{entity.strategyType}
         </if>
     </delete>
 

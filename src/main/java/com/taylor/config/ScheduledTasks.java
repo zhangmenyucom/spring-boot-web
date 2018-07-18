@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static com.taylor.common.CommonRequest.getStckTodayBaseInfo;
 
@@ -70,19 +69,9 @@ public class ScheduledTasks {
     }
 
     /**
-     * 天鹅拳股票
-     **/
-    @Scheduled(cron = "0 0 22 * * *")
-    public void fetchTianEData() {
-        RecmdStock recmdStockDel = new RecmdStock();
-        TianEQuanStrategy tianEQuan=new TianEQuanStrategy();
-        stockDataService.processData(tianEQuan, 10);
-    }
-
-    /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 20 21 * * *")
+    @Scheduled(cron = "0 0 22 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**放量大阴**/
@@ -99,7 +88,9 @@ public class ScheduledTasks {
         /**底部十字或T型结构**/
         ShiZiStrategy shiZiStrategy=new ShiZiStrategy();
         suoLiangXipanStrategy.setNext(shiZiStrategy);
-
+        /**天鹅拳形态**/
+        TianEQuanStrategy tianEQuan=new TianEQuanStrategy();
+        shiZiStrategy.setNext(tianEQuan);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
@@ -108,7 +99,7 @@ public class ScheduledTasks {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy);
+        stockDataService.processData(bigYinLineStrategy,10);
     }
 
 }
