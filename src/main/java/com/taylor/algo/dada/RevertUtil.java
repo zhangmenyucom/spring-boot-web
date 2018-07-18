@@ -6,7 +6,7 @@ package com.taylor.algo.dada;
  * @desc:
  * @date: 2018/7/19 1:12
  */
-public class Test {
+public class RevertUtil {
 
     public static String revert(char[] source, int start, int end) {
         while (start < end) {
@@ -51,7 +51,6 @@ public class Test {
     public static void main(String[] args) {
         String str = "   how are you   ";
         revertMessage(str);
-
     }
 
 }
