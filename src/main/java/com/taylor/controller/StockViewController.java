@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -37,19 +39,23 @@ public class StockViewController {
     private StockDataService stockDataService;
 
     @RequestMapping("/recmd/{type}")
-    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, @RequestParam(defaultValue = "", name = "recordTime") String recordTime) throws ParseException {
+    public String recomand(Map<String, Object> map, @PathVariable(name = "type") int type, @RequestParam(defaultValue = "", name = "recordTime") String recordTime, HttpServletRequest request) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        HttpSession session = request.getSession();
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
         for (int i = 5; i >= 0; i--) {
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
-        if ("".equals(recordTime)) {
+        if ("".equals(recordTime) && session.getAttribute("recordTime") == null) {
             recmdStock.setRecordTime(new Date());
-        } else {
+        } else if (!"".equals(recordTime)) {
             recmdStock.setRecordTime(sdf.parse(recordTime));
+        } else {
+            recmdStock.setRecordTime((Date) session.getAttribute("recordTime"));
         }
+        session.setAttribute("recordTime", recmdStock.getRecordTime());
         List<RecmdStock> recmdStocks;
         if (type == StrategyEnum.TYPE15.getCode()) {
             recmdStocks = recmdStockService.getRecmdStockByCountTime(recmdStock.getRecordTime());
@@ -60,11 +66,11 @@ public class StockViewController {
             recmdStocks = recmdStockService.find(recmdStock);
         }
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
-        Map<String,Object> onshelfMap=new HashMap<>();
+        Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            onshelfMap.put(stockOnShelf.getStockCode(),stockOnShelf);
+            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
         }
-        map.put("recordTime", "".equals(recordTime) ? listDate.get(listDate.size()-1):recordTime);
+        map.put("recordTime", sdf.format(recmdStock.getRecordTime()));
         map.put("type", type);
         map.put("recmdList", recmdStocks);
         map.put("strategyName", StrategyEnum.getEnumValue(type));
