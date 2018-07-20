@@ -71,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 38 16 * * *")
+    @Scheduled(cron = "0 50 16 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**放量大阴**/
