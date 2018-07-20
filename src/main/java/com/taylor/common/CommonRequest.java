@@ -327,6 +327,7 @@ public class CommonRequest<T> {
             tencentTodayBaseInfo.setLow(Double.valueOf(dataInfoArray[34]));
             tencentTodayBaseInfo.setExchangeRatio(Double.valueOf(dataInfoArray[37]));
             tencentTodayBaseInfo.setLiangbi(Double.valueOf(dataInfoArray[49]));
+            tencentTodayBaseInfo.setStockCode(stockCode);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -367,7 +368,7 @@ public class CommonRequest<T> {
     public static void main(String... args) {
         //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
 
-        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SH603345").getUpDownPercent()));
+        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SH603345")));
 
     }
 
