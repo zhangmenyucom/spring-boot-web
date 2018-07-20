@@ -27,7 +27,7 @@ public class TianEQuanStrategy extends IStrategy {
     public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
         List<MashData> mashDataList = CommonRequest.queryLatestResult(tencentTodayBaseInfo.getStockCode(), 10);
         /**至少有十个交易日数据吧**/
-        if (mashDataList==null||mashDataList.size() < 10) {
+        if (mashDataList == null || mashDataList.size() < 10) {
             return 0;
         }
 

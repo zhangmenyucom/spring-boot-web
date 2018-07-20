@@ -21,7 +21,7 @@ public class BigYinLineStrategy extends IStrategy {
     @Override
     public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
         List<TencentDayData> stckDailyHistory = CommonRequest.getStckDailyHistory(tencentTodayBaseInfo.getStockCode(), 5);
-        if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
+        if (stckDailyHistory == null || stckDailyHistory.size() < 2) {
             return 0;
         }
         TencentDayData tencentDayDataToday = stckDailyHistory.get(stckDailyHistory.size() - 1);

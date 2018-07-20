@@ -22,7 +22,7 @@ public class SuoLiangXipanStrategy extends IStrategy {
     public int doCheck(TencentTodayBaseInfo stckTodayBaseInfo) {
 
         List<TencentDayData> stckDailyHistory = CommonRequest.getStckDailyHistory(stckTodayBaseInfo.getStockCode(), 2);
-        if (stckDailyHistory == null && stckDailyHistory.size() < 2) {
+        if (stckDailyHistory == null || stckDailyHistory.size() < 2) {
             return 0;
         }
         if (stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() > 1.5) {
