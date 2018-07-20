@@ -1,6 +1,7 @@
 package com.taylor.stock.strategy;
 
 import com.taylor.entity.stock.MashData;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public abstract class IStrategy {
         this.strategyEnum = strategyEnum;
     }
 
-    public abstract int doCheck(List<MashData> mashDataList);
+    public abstract int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo);
 
     public boolean hasNext() {
         return this.next != null;

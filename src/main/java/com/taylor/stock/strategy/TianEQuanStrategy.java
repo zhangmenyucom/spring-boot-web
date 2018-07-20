@@ -1,6 +1,8 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.common.CommonRequest;
 import com.taylor.entity.stock.MashData;
+import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +24,8 @@ public class TianEQuanStrategy extends IStrategy {
     }
 
     @Override
-    public int doCheck(List<MashData> mashDataList) {
+    public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
+        List<MashData> mashDataList = CommonRequest.queryLatestResult(tencentTodayBaseInfo.getStockCode(), 10);
         /**至少有十个交易日数据吧**/
         if (mashDataList.size() < 10) {
             return 0;

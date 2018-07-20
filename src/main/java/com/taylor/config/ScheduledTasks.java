@@ -71,7 +71,7 @@ public class ScheduledTasks {
     /**
      * 尾盘推荐股票
      **/
-    @Scheduled(cron = "0 50 16 * * *")
+    @Scheduled(cron = "0 0 18 * * *")
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**放量大阴**/
@@ -79,12 +79,9 @@ public class ScheduledTasks {
         /**龙虎榜**/
         LongHuBang longHuBang=new LongHuBang();
         bigYinLineStrategy.setNext(longHuBang);
-        /**突破短期压力**/
-        OverYaLiStrategy overYaLiStrategy=new OverYaLiStrategy();
-        longHuBang.setNext(overYaLiStrategy);
         /**缩量洗盘**/
         SuoLiangXipanStrategy suoLiangXipanStrategy=new SuoLiangXipanStrategy();
-        overYaLiStrategy.setNext(suoLiangXipanStrategy);
+        longHuBang.setNext(suoLiangXipanStrategy);
         /**底部十字或T型结构**/
         ShiZiStrategy shiZiStrategy=new ShiZiStrategy();
         suoLiangXipanStrategy.setNext(shiZiStrategy);
@@ -99,7 +96,6 @@ public class ScheduledTasks {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy,10);
+        stockDataService.processData(bigYinLineStrategy);
     }
-
 }

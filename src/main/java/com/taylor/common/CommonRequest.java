@@ -1,14 +1,13 @@
 package com.taylor.common;
 
 import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.StockFundInOut;
-import com.taylor.entity.stock.StockPanKouData;
-import com.taylor.entity.stock.TencentDayData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
+import com.taylor.entity.stock.*;
+import com.taylor.entity.stock.query.StockQueryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.GetMethod;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -19,6 +18,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.taylor.common.Constants.METHOD_URL_STOCK_DAY_INFO;
 
 
 /**
@@ -31,7 +32,7 @@ public class CommonRequest<T> {
 
     static final ThreadLocal<Integer> retryCount = new ThreadLocal<>();
 
-    public  String executeRequest(T in, HttpMethodBase method) {
+    public String executeRequest(T in, HttpMethodBase method) {
         if (retryCount.get() == null) {
             retryCount.set(0);
         }
@@ -104,7 +105,7 @@ public class CommonRequest<T> {
             stockFundInOut.setTotalIN(Double.valueOf(datas[9]));
             stockFundInOut.setStockName(datas[12]);
         } catch (Exception e) {
-            System.out.println("主力散户资金流入出错"+e.getMessage());
+            System.out.println("主力散户资金流入出错" + e.getMessage());
             return stockFundInOut;
         } finally {
             if (isr != null) {
@@ -180,7 +181,7 @@ public class CommonRequest<T> {
             stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
             stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
         } catch (Exception e) {
-            System.out.println("股票盘口数据出错"+e.getMessage());
+            System.out.println("股票盘口数据出错" + e.getMessage());
         } finally {
             if (isr != null) {
                 try {
@@ -218,7 +219,7 @@ public class CommonRequest<T> {
             tongHuaShunStockBase.setPreClose(Double.valueOf(dataStockMap.get("6").toString()));
             tongHuaShunStockBase.setAmplitudeRatio(Double.valueOf(dataStockMap.get("526792").toString()));
             tongHuaShunStockBase.setCapitalization(Double.valueOf(dataStockMap.get("3475914").toString()).longValue());
-            tongHuaShunStockBase.setExchange(stockCode.substring(0,2));
+            tongHuaShunStockBase.setExchange(stockCode.substring(0, 2));
             tongHuaShunStockBase.setHigh(Double.valueOf(dataStockMap.get("8").toString()));
             tongHuaShunStockBase.setLow(Double.valueOf(dataStockMap.get("9").toString()));
             tongHuaShunStockBase.setNetChange(Double.valueOf(dataStockMap.get("264648").toString()));
@@ -227,9 +228,9 @@ public class CommonRequest<T> {
             tongHuaShunStockBase.setTurnoverRatio(Double.valueOf(dataStockMap.get("1968584").toString()));
             tongHuaShunStockBase.setVolume(Double.valueOf(dataStockMap.get("19").toString()).longValue());
             tongHuaShunStockBase.setLiangBi(Double.valueOf(dataStockMap.get("19").toString()));
-            tongHuaShunStockBase.setToltalHands(Double.valueOf(dataStockMap.get("13").toString()).longValue()/100);
+            tongHuaShunStockBase.setToltalHands(Double.valueOf(dataStockMap.get("13").toString()).longValue() / 100);
         } catch (Exception e) {
-            System.out.println("股票同花顺数据"+e.getMessage());
+            System.out.println("股票同花顺数据" + e.getMessage());
         } finally {
             if (isr != null) {
                 try {
@@ -241,6 +242,7 @@ public class CommonRequest<T> {
         }
         return tongHuaShunStockBase;
     }
+
     /**
      * @param stockCode
      * @desc 股票同花顺数据
@@ -330,6 +332,36 @@ public class CommonRequest<T> {
             e.printStackTrace();
         }
         return tencentTodayBaseInfo;
+    }
+
+
+    public static List<MashData> queryLatestResult(String stockCode, int count) {
+        StockQueryBean stockQueryBean = new StockQueryBean();
+        stockQueryBean.setFrom("pc");
+        stockQueryBean.setCount(count + "");
+        stockQueryBean.setCuid("xxx");
+        stockQueryBean.setFormat("json");
+        stockQueryBean.setFq_type("no");
+        stockQueryBean.setStep(1 + "");
+        stockQueryBean.setOs_ver("1");
+        stockQueryBean.setVv("100");
+        stockQueryBean.setStock_code(stockCode.toLowerCase());
+        String responseStr = new CommonRequest<StockQueryBean>().executeRequest(stockQueryBean, new GetMethod(METHOD_URL_STOCK_DAY_INFO));
+        MashDataResponse response = JsonUtil.transferToObj(responseStr, MashDataResponse.class);
+        if (response == null || response.getErrorNo() != 0) {
+            return null;
+        }
+        if (response.getMashData() == null || response.getMashData().isEmpty()) {
+            response.setMashData(new ArrayList<MashData>());
+            response.getMashData().add(new MashData());
+        }
+        MashData mashDataToday = response.getMashData().get(0);
+        mashDataToday.setStockCode(stockCode.toLowerCase());
+        List<MashData> mashDataList = new ArrayList<>();
+        for (MashData mashData : response.getMashData()) {
+            mashDataList.add(mashData);
+        }
+        return mashDataList;
     }
 
     public static void main(String... args) {

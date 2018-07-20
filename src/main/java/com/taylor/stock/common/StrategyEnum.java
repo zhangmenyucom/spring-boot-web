@@ -48,8 +48,6 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(16, new TianEQuanStrategy());
         STRATEGY_MAP.put(13, new ShiZiStrategy());
         STRATEGY_MAP.put(20, new BigYinLineStrategy());
-        STRATEGY_MAP.put(22, new OverYaLiStrategy());
-        STRATEGY_MAP.put(27, new JinJiaQinNiuStrategy());
         STRATEGY_MAP.put(29, new LongHuBang());
         STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
     }

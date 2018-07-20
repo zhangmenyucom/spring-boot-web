@@ -11,7 +11,5 @@ import com.taylor.stock.strategy.IStrategy;
  */
 public interface StockDataService extends CrudService<StockData, StockData> {
 
-    void processData(IStrategy strategy, Integer count);
-
     void processData(IStrategy strategy);
 }

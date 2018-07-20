@@ -11,7 +11,6 @@ import com.taylor.stock.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SH;
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SZ;
 
 /**
@@ -27,20 +26,16 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
 
     private static final int THREAD_HOLD = 4;
 
-    @Override
-    public void processData(IStrategy strategy) {
-        processData(strategy, DEFALUT_COUNT);
-    }
 
     @Override
-    public void processData(IStrategy strategy, Integer count) {
+    public void processData(IStrategy strategy) {
         QueryStockDayDataRequest.run_flag = 1;
         RecmdStock recmdStock = new RecmdStock();
         recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
         recmdStockService.del(recmdStock);
         for (int i = 0; i < THREAD_HOLD; i++) {
-            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(i * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD - 1), "stock_sz_" + THREAD_HOLD + "-" + i, count).start();
+            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(i * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD - 1), "stock_sz_" + THREAD_HOLD + "-" + i).start();
         }
     }
 }
