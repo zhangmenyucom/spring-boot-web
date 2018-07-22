@@ -23,6 +23,17 @@ spring:
           max-wait-millis: 60000
           initial-size: 1
           max-total: 20
+  redis:
+    database: 0
+    host: 111.231.140.42
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.taylor.entity
@@ -39,5 +50,5 @@ pagehelper:
 logging:
   level:
     root: info
-    #com.taylor.dao: debug
+    com.taylor.dao: debug
 
