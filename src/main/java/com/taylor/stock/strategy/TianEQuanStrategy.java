@@ -1,8 +1,6 @@
 package com.taylor.stock.strategy;
 
-import com.taylor.common.CommonRequest;
-import com.taylor.entity.stock.MashData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,31 +22,20 @@ public class TianEQuanStrategy extends IStrategy {
     }
 
     @Override
-    public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
-        List<MashData> mashDataList = CommonRequest.queryLatestResult(tencentTodayBaseInfo.getStockCode(), 10);
+    public int doCheck(List<HistoryData> historyData, String stockCode) {
         /**至少有十个交易日数据吧**/
-        if (mashDataList == null || mashDataList.size() < 10) {
+        if (historyData == null || historyData.size() < 10) {
             return 0;
         }
 
-        MashData today = mashDataList.get(0);
+        HistoryData today = historyData.get(historyData.size()-1);
 
-        /**十字结构,涨幅-1至1以内**/
-        if (Math.abs(today.getKline().getNetChangeRatio()) <= 5) {
-            /**近十个交易日内有涨停**/
-            for (int i = 0; i < 10; i++) {
-                if (checkTopStop(mashDataList.get(i)) && today.getKline().getLow() < mashDataList.get(i).getKline().getClose()) {
-                    return 1;
-                }
+        /**近十个交易日内有涨停**/
+        for (int i = 1; i < 10; i++) {
+            if ((historyData.get(i).getClose() - historyData.get(i - 1).getClose()) / historyData.get(i - 1).getClose() > 0.09f && today.getLow() < today.getClose() && historyData.get(i).getClose() > today.getClose()) {
+                return 1;
             }
         }
         return 0;
-    }
-
-    private boolean checkTopStop(MashData mashData) {
-        if (mashData.getKline().getNetChangeRatio() >= 9.9f) {
-            return true;
-        }
-        return false;
     }
 }

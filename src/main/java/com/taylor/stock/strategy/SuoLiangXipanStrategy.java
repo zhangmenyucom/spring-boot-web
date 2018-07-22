@@ -1,8 +1,6 @@
 package com.taylor.stock.strategy;
 
-import com.taylor.common.CommonRequest;
-import com.taylor.entity.stock.TencentDayData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
 
 import java.util.List;
@@ -19,13 +17,12 @@ public class SuoLiangXipanStrategy extends IStrategy {
     }
 
     @Override
-    public int doCheck(TencentTodayBaseInfo stckTodayBaseInfo) {
-
-        List<TencentDayData> stckDailyHistory = CommonRequest.getStckDailyHistory(stckTodayBaseInfo.getStockCode(), 2);
-        if (stckDailyHistory == null || stckDailyHistory.size() < 2) {
+    public int doCheck(List<HistoryData> historyData, String stockCode) {
+        /**至少有十个交易日数据吧**/
+        if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        if (stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 1).getTotalHands() > 1.5) {
+        if (historyData.get(historyData.size() - 2).getVolume() / historyData.get(historyData.size() - 1).getVolume()> 1.5) {
             return 1;
         }
         return 0;

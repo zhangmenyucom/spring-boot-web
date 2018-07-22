@@ -1,5 +1,6 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.MashData;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.stock.common.StrategyEnum;
@@ -22,7 +23,7 @@ public abstract class IStrategy {
         this.strategyEnum = strategyEnum;
     }
 
-    public abstract int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo);
+    public abstract int doCheck(List<HistoryData> historyData,String stockCode);
 
     public boolean hasNext() {
         return this.next != null;

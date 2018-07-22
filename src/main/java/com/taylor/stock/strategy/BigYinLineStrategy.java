@@ -1,8 +1,6 @@
 package com.taylor.stock.strategy;
 
-import com.taylor.common.CommonRequest;
-import com.taylor.entity.stock.TencentDayData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
 
 import java.util.List;
@@ -19,15 +17,15 @@ public class BigYinLineStrategy extends IStrategy {
     }
 
     @Override
-    public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
-        List<TencentDayData> stckDailyHistory = CommonRequest.getStckDailyHistory(tencentTodayBaseInfo.getStockCode(), 5);
-        if (stckDailyHistory == null || stckDailyHistory.size() < 2) {
+    public int doCheck(List<HistoryData> historyData, String stockCode) {
+        /**至少有十个交易日数据吧**/
+        if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        TencentDayData tencentDayDataToday = stckDailyHistory.get(stckDailyHistory.size() - 1);
-        if ((tencentDayDataToday.getOpen()>= tencentDayDataToday.getClose())&& tencentDayDataToday.getTotalHands() / stckDailyHistory.get(stckDailyHistory.size() - 2).getTotalHands() >= 1.5) {
-            for (int i = 0; i < stckDailyHistory.size() - 1; i++) {
-                if (tencentDayDataToday.getTotalHands() / stckDailyHistory.get(i).getTotalHands() > 1.5) {
+        HistoryData today = historyData.get(historyData.size() - 1);
+        if ((today.getOpen() >= today.getClose()) && today.getVolume() / historyData.get(historyData.size() - 2).getVolume() >= 1.5) {
+            for (int i = 0; i < historyData.size() - 1; i++) {
+                if (today.getVolume() / historyData.get(i).getVolume() > 1.5) {
                     continue;
                 }
                 return 0;

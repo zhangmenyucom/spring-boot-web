@@ -1,13 +1,7 @@
 package com.taylor.stock.strategy;
 
-import com.taylor.common.CommonRequest;
-import com.taylor.common.KLineTypeEnum;
-import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.MashData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
-import com.taylor.entity.stock.kdj.MacdTimeBean;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
-import com.taylor.stock.request.MacdTimeDataRequest;
 
 import java.util.List;
 
@@ -22,8 +16,12 @@ public class LongHuBang extends IStrategy {
     }
 
     @Override
-    public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
-        if (tencentTodayBaseInfo.getUpDownPercent() > 9.0d) {
+    public int doCheck(List<HistoryData> historyData, String stockCode) {
+        /**至少有十个交易日数据吧**/
+        if (historyData == null || historyData.size() < 10) {
+            return 0;
+        }
+        if ((historyData.get(historyData.size()-1).getClose()-historyData.get(historyData.size()-2).getClose())/ historyData.get(historyData.size()-2).getClose()> 0.09d) {
             return 1;
         }
         return 0;

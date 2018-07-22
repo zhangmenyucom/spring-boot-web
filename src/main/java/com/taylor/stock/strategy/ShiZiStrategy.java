@@ -1,9 +1,7 @@
 package com.taylor.stock.strategy;
 
-import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
-import com.taylor.entity.stock.MashData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,17 +23,17 @@ public class ShiZiStrategy extends IStrategy {
     }
 
     @Override
-    public int doCheck(TencentTodayBaseInfo tencentTodayBaseInfo) {
-        List<MashData> mashDataList = CommonRequest.queryLatestResult(tencentTodayBaseInfo.getStockCode(), 10);
-        if (mashDataList == null || mashDataList.size() < 2) {
+    public int doCheck(List<HistoryData> historyData, String stockCode) {
+        /**至少有十个交易日数据吧**/
+        if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        MashData today = mashDataList.get(0);
-        if (today.getKline().getClose() > Constants.CURRENT_PRICE_LIMIT) {
+        HistoryData today = historyData.get(historyData.size()-1);
+        if (today.getClose() > Constants.CURRENT_PRICE_LIMIT) {
             return 0;
         }
-        MashData yestoday = mashDataList.get(1);
-        if (yestoday.getKline().getNetChangeRatio() < -2.0 && Math.abs(today.getKline().getNetChangeRatio()) <= 1 && Math.abs(today.getKline().getClose() - today.getKline().getLow()) / today.getKline().getPreClose() > 0.02) {
+        HistoryData yestoday = historyData.get(historyData.size()-2);
+        if (Math.abs((today.getClose()-today.getOpen())/yestoday.getClose()) <= 0.01 && Math.abs(today.getClose() - today.getLow()) / yestoday.getClose() > 0.02) {
             return 1;
         }
         return 0;

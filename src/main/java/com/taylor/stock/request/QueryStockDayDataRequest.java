@@ -6,6 +6,7 @@ import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
+import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
@@ -61,9 +62,10 @@ public class QueryStockDayDataRequest extends Thread {
             if (stockBaseInfos == null || stockBaseInfos.isEmpty() || "0".equals(stockBaseInfos.get(0).getStockStatus())) {
                 continue;
             }
+            List<HistoryData> historyData = QueryStockHistroryDataRequest.queryLatestDataList(stockCode.toLowerCase(), 10);
             IStrategy temp = strategy;
             while (strategy != null && run_flag == 1) {
-                int checkResult = strategy.doCheck(stckTodayBaseInfo);
+                int checkResult = strategy.doCheck(historyData,stockCode.toLowerCase());
                 StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
                 StockBusinessinfo stockBusinessinfo = QueryStockBusinessDataRequest.queryStockBasicBussinessInfo(stockCode);
                 /**只查买入意见的股票**/
@@ -99,6 +101,6 @@ public class QueryStockDayDataRequest extends Thread {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(queryLatestResult("SZ300615",10)));
+        System.out.println(JsonUtil.transfer2JsonString(queryLatestResult("SZ300615", 10)));
     }
 }
