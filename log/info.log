@@ -568,3 +568,201 @@
 2017-08-15 20:17:57 [INFO ] - Using a shared selector for servlet write/read
 2017-08-15 20:17:57 [INFO ] - Tomcat started on port(s): 8080 (http)
 2017-08-15 20:17:57 [INFO ] - Started ApplicationStarter in 4.713 seconds (JVM running for 5.477)
+2018-07-22 11:26:36 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 5036 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:26:36 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:26:36 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:26:36 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:26:38 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:26:42 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:26:42 [INFO ] - Starting service Tomcat
+2018-07-22 11:26:42 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:26:42 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:26:42 [INFO ] - Root WebApplicationContext: initialization completed in 5929 ms
+2018-07-22 11:26:42 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:26:42 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:26:42 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:26:42 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:26:42 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:26:43 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:26:36 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:26:43 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:26:43 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:26:43 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:26:43 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:26:43 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:26:43 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:26:43 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:26:43 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:26:43 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:26:43 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:26:44 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:26:44 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:26:44 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:26:44 [INFO ] - Started ApplicationStarter in 9.402 seconds (JVM running for 11.795)
+2018-07-22 11:27:02 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:27:02 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:27:02 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 67 ms
+2018-07-22 11:28:06 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 13448 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:28:06 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:28:06 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:28:06 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:28:07 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:28:10 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:28:10 [INFO ] - Starting service Tomcat
+2018-07-22 11:28:10 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:28:10 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:28:10 [INFO ] - Root WebApplicationContext: initialization completed in 3961 ms
+2018-07-22 11:28:11 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:28:11 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:28:11 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:28:11 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:28:11 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:28:12 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:28:06 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:28:12 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:28:12 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:28:12 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:28:12 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:12 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:12 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:13 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:28:13 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:28:13 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:28:13 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:28:13 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:28:13 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:28:13 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:28:13 [INFO ] - Started ApplicationStarter in 8.028 seconds (JVM running for 11.094)
+2018-07-22 11:28:19 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:28:19 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:28:19 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 62 ms
+2018-07-22 11:28:50 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 11372 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:28:50 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:28:50 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:28:50 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:28:51 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:28:53 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:28:53 [INFO ] - Starting service Tomcat
+2018-07-22 11:28:53 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:28:54 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:28:54 [INFO ] - Root WebApplicationContext: initialization completed in 3117 ms
+2018-07-22 11:28:54 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:28:54 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:28:54 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:28:54 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:28:54 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:28:54 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:28:50 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:28:54 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:28:54 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:28:54 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:28:55 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:55 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:55 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:28:55 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:28:55 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:28:55 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:28:55 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:28:55 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:28:55 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:28:55 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:28:55 [INFO ] - Started ApplicationStarter in 5.299 seconds (JVM running for 7.217)
+2018-07-22 11:29:15 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:29:15 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:29:15 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 55 ms
+2018-07-22 11:29:15 [INFO ] - {dataSource-1} inited
+2018-07-22 11:33:01 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 964 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:33:01 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:33:01 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:33:01 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:33:03 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:33:05 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:33:05 [INFO ] - Starting service Tomcat
+2018-07-22 11:33:05 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:33:06 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:33:06 [INFO ] - Root WebApplicationContext: initialization completed in 4295 ms
+2018-07-22 11:33:06 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:33:06 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:33:06 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:33:06 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:33:06 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:33:08 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:33:01 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:33:08 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:33:08 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:33:08 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:33:08 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:33:08 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:33:08 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:33:09 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:33:09 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:33:09 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:33:09 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:33:09 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:33:09 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:33:09 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:33:09 [INFO ] - Started ApplicationStarter in 8.303 seconds (JVM running for 9.579)
+2018-07-22 11:33:21 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:33:21 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:33:21 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 62 ms
+2018-07-22 11:33:21 [INFO ] - {dataSource-1} inited
+2018-07-22 11:34:10 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 5224 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:34:10 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:34:11 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:34:11 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:34:11 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:34:13 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:34:13 [INFO ] - Starting service Tomcat
+2018-07-22 11:34:13 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:34:13 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:34:13 [INFO ] - Root WebApplicationContext: initialization completed in 2638 ms
+2018-07-22 11:34:14 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:34:14 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:34:14 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:34:14 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:34:14 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:34:14 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:34:11 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:34:15 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:34:15 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:34:15 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:34:15 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:34:15 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:34:15 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:34:15 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:34:15 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:34:15 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:34:15 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:34:15 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:34:15 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:34:15 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:34:15 [INFO ] - Started ApplicationStarter in 5.29 seconds (JVM running for 6.5)
+2018-07-22 11:34:17 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:34:17 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:34:17 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 54 ms
+2018-07-22 11:34:17 [INFO ] - {dataSource-1} inited
+2018-07-22 11:34:19 [INFO ] - Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2018-07-22 11:34:19 [INFO ] - SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2018-07-22 11:38:45 [INFO ] - Starting ApplicationStarter on XB-20161130KUAO with PID 14004 (D:\git-test\spring-boot-web\target\classes started by Administrator in D:\git-test\spring-boot-web)
+2018-07-22 11:38:45 [INFO ] - No active profile set, falling back to default profiles: default
+2018-07-22 11:38:45 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:38:45 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:38:45 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-07-22 11:38:49 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-07-22 11:38:49 [INFO ] - Starting service Tomcat
+2018-07-22 11:38:49 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-07-22 11:38:49 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-07-22 11:38:49 [INFO ] - Root WebApplicationContext: initialization completed in 4708 ms
+2018-07-22 11:38:50 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-22 11:38:50 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-22 11:38:50 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-22 11:38:50 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-22 11:38:50 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-22 11:38:51 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291ae: startup date [Sun Jul 22 11:38:45 GMT+08:00 2018]; root of context hierarchy
+2018-07-22 11:38:52 [INFO ] - Mapped "{[/test/query]}" onto public java.util.List<com.taylor.entity.TestEntity> com.taylor.controller.TestController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:38:52 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-22 11:38:52 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-22 11:38:52 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:38:52 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:38:52 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-22 11:38:52 [INFO ] - Registering beans for JMX exposure on startup
+2018-07-22 11:38:52 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-22 11:38:52 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-22 11:38:52 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:38:52 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-07-22 11:38:52 [INFO ] - Using a shared selector for servlet write/read
+2018-07-22 11:38:52 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-07-22 11:38:53 [INFO ] - Started ApplicationStarter in 8.54 seconds (JVM running for 9.983)
+2018-07-22 11:38:54 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-22 11:38:54 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-22 11:38:54 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 73 ms
+2018-07-22 11:38:54 [INFO ] - {dataSource-1} inited
