@@ -4,7 +4,6 @@ import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.StockFundInOut;
@@ -56,13 +55,10 @@ public class QueryStockDayDataRequest extends Thread {
             }
 
             log.info("正在检测股票代码：{}", stockCode);
-            List<StockBaseInfo> stockBaseInfos = QueryStockBaseDataRequest.queryStockBaseInfo(stockCode.toLowerCase(), methodBase);
             TencentTodayBaseInfo stckTodayBaseInfo = CommonRequest.getStckTodayBaseInfo(stockCode);
-            /**停牌的过滤掉**/
-            if (stockBaseInfos == null || stockBaseInfos.isEmpty() || "0".equals(stockBaseInfos.get(0).getStockStatus())) {
-                continue;
-            }
             List<HistoryData> historyData = QueryStockHistroryDataRequest.queryLatestDataList(stockCode.toLowerCase(), 10);
+            HistoryData today = historyData.get(historyData.size()-1);
+            HistoryData yestoday = historyData.get(historyData.size()-2);
             IStrategy temp = strategy;
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(historyData,stockCode.toLowerCase());
@@ -75,18 +71,17 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setStockCode(stockCode);
                     recmdStock.setTurnoverRatio(stockPanKouData.getExchangeRatio());
                     recmdStock.setStockName(stockPanKouData.getStockName());
-                    recmdStock.setRecordPrice(Double.valueOf(df.format(stockBaseInfos.get(0).getClose())));
-                    recmdStock.setCurrentPrice(Double.valueOf(df.format(stockBaseInfos.get(0).getClose())));
+                    recmdStock.setRecordPrice(today.getClose());
+                    recmdStock.setCurrentPrice(today.getClose());
                     recmdStock.setStrategy(strategy.getStrategyEnum().getDesc());
                     recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
                     recmdStock.setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn());
                     recmdStock.setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi());
                     recmdStock.setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult));
                     recmdStock.setLiangbi(stockPanKouData.getLiangBi());
-                    recmdStock.setChangeRatioYestoday(stockBaseInfos.get(0).getNetChangeRatio());
+                    recmdStock.setChangeRatioYestoday((today.getClose()-yestoday.getClose())/yestoday.getClose()*100);
                     recmdStock.setOuterPan(stockPanKouData.getOuter());
                     recmdStock.setInnerPan(stockPanKouData.getInner());
-                    recmdStock.setIndustry(stockBusinessinfo.getIndustry());
                     recmdStock.setMajoGrow(stockBusinessinfo.getMajoGrow());
                     recmdStock.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
                     recmdStockService.save(recmdStock);
