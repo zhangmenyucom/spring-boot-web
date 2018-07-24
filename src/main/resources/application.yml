@@ -25,7 +25,7 @@ spring:
           max-total: 20
   redis:
     database: 0
-    host: 111.231.140.42
+    host: 139.196.79.91
     port: 6379
     pool:
       max-active: 8
