@@ -17,6 +17,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import static com.taylor.common.CommonRequest.queryLatestResult;
 
@@ -60,12 +61,15 @@ public class QueryStockDayDataRequest extends Thread {
             HistoryData today = historyData.get(historyData.size()-1);
             HistoryData yestoday = historyData.get(historyData.size()-2);
             IStrategy temp = strategy;
+            /**去掉停牌的股票**/
+            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
+            if(stockPanKouData.getLiangBi()==0){
+                continue;
+            }
+            StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+            StockBusinessinfo stockBusinessinfo = QueryStockBusinessDataRequest.queryStockBasicBussinessInfo(stockCode);
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(historyData,stockCode.toLowerCase());
-                StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
-                StockBusinessinfo stockBusinessinfo = QueryStockBusinessDataRequest.queryStockBasicBussinessInfo(stockCode);
-                /**只查买入意见的股票**/
-                StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
                 if (checkResult == 1 && stockPanKouData != null) {
                     RecmdStock recmdStock = new RecmdStock();
                     recmdStock.setStockCode(stockCode);
@@ -85,6 +89,7 @@ public class QueryStockDayDataRequest extends Thread {
                     recmdStock.setMajoGrow(stockBusinessinfo.getMajoGrow());
                     recmdStock.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
                     recmdStockService.save(recmdStock);
+                    Executors.newFixedThreadPool(1);
                     log.info("股票代码：{}中标策略:{}", stockCode, strategy.getStrategyEnum().getDesc());
                 }
                 strategy = strategy.getNext();
