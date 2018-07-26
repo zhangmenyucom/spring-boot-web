@@ -209,38 +209,22 @@
     </select>
 
     <select id="getRecmdStockByCountTime" resultMap="BaseResultMap">
-        SELECT t.*
-        FROM recmd_stock t,
-        (
-        SELECT stock_code,count_num
-        FROM
-        (
-        SELECT count(stock_code) AS count_num,stock_name,stock_code
-        FROM recmd_stock
-        GROUP BY stock_code
-        ) AS temp
-        WHERE
-        count_num >= 2
-        ) s
-        WHERE
-        t.stock_code IN (
-        SELECT stock_code
-        FROM
-        (
         SELECT
-        count(stock_code) AS count_num,stock_name,stock_code
+	    d.industry,r.*
         FROM
-        recmd_stock
-        WHERE DAY (record_time) =DAY(#{recordTime})
-        GROUP BY stock_code
-        ORDER BY count_num DESC
-        ) AS temp
-        WHERE
-        count_num >= 2
-        )
-        AND t.stock_code = s.stock_code
-        AND DAY (t.record_time) = DAY(#{recordTime})
-        ORDER BY s.count_num DESC,t.stock_name DESC
+	    recmd_stock r
+	    LEFT JOIN stock_data d on r.stock_code=d.stock_code
+        LEFT JOIN
+        (
+            SELECT count(stock_code) AS count_num,stock_code
+            FROM recmd_stock
+            WHERE DAY (record_time) = DAY (#{recordTime})
+            GROUP BY stock_code
+        ) temp ON temp.stock_code = r.stock_code
+
+        WHERE count_num >= 2
+        AND DAY (r.record_time) = DAY (#{recordTime})
+        ORDER BY count_num DESC,r.stock_name DESC,r.strategy_type DESC
     </select>
 
     <delete id="delByPrimaryKey">
