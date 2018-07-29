@@ -365,11 +365,35 @@ public class CommonRequest<T> {
         return mashDataList;
     }
 
-    public static void main(String... args) {
-        //System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ000506")));
 
-        System.out.println(JsonUtil.transfer2JsonString(getStckTodayBaseInfo("SH603345")));
-
+    public static List<TencentDayData> getDayKline(String stockCode, int count) {
+        List<TencentDayData> list = new ArrayList<>();
+        try {
+            String url = "http://data.gtimg.cn/flashdata/hushen/latest/daily/" + stockCode.toLowerCase() + ".js";
+            URL u = new URL(url);
+            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
+            char[] cha = new char[10240];
+            int len = isr.read(cha);
+            String[] result = new String(cha, 0, len).replace("\\", "").split("n");
+            for (int i = 0; i < count; i++) {
+                TencentDayData tencentDayData = new TencentDayData();
+                String[] data = result[result.length - 2 - i].trim().split(" ");
+                tencentDayData.setOpen(Double.valueOf(data[1]));
+                tencentDayData.setClose(Double.valueOf(data[2]));
+                tencentDayData.setHigh(Double.valueOf(data[3]));
+                tencentDayData.setLow(Double.valueOf(data[4]));
+                tencentDayData.setTotalHands(Long.valueOf(data[5]));
+                tencentDayData.setDate(data[0]);
+                list.add(tencentDayData);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
+
+    public static void main(String... args) {
+        System.out.println(JsonUtil.transfer2JsonString(getDayKline("sh603345", 10)));
+    }
 }
