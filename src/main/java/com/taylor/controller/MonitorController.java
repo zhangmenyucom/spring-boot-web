@@ -118,7 +118,7 @@ public class MonitorController {
 
     @RequestMapping("/onshelf/stop")
     public String updateStop(Map<String, Object> map) {
-        OnShelfUpdator.a = 1;
+        OnShelfUpdator.FLAG = 1;
         return "停止更新....";
     }
 }

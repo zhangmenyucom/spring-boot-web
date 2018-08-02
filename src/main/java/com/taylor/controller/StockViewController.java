@@ -97,7 +97,7 @@ public class StockViewController {
 
     @RequestMapping("/updateShelf")
     public String updateShlef(Map<String, Object> map) {
-        if (OnShelfUpdator.a == 0) {
+        if (OnShelfUpdator.FLAG == 0) {
             StockOnShelf stockOnShelfUpdate = new StockOnShelf();
             stockOnShelfService.updateSelf(stockOnShelfUpdate);
         }

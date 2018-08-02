@@ -19,7 +19,7 @@ import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
 @Data
 public class OnShelfUpdator extends Thread {
 
-    public static volatile int a = 0;
+    public static volatile int FLAG = 0;
 
     private StockOnShelfService stockOnShelfService;
 
@@ -35,8 +35,9 @@ public class OnShelfUpdator extends Thread {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
-            if (YIDONG_MONITOR == 1 && Math.abs((stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice()) > 0.01) {
-                MailUtils.sendMail(stockOnShelf.getStockName() + "有异动请立即关注", "");
+            double discount = (stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice();
+            if (YIDONG_MONITOR == 1 && Math.abs(discount) > 0.01) {
+                MailUtils.sendMail(stockOnShelf.getStockName() + "异动" + (discount > 0.0d ? "拉升" : "抛盘") + discount * 100 + "%请立即关注,当前涨幅" + (stockPanKouData.getCurrentPrice() - stockPanKouData.getOpenPrice()) / stockPanKouData.getOpenPrice() * 100 + "%", "");
             }
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
