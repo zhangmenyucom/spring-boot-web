@@ -1,11 +1,13 @@
 package com.taylor.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Table(name = "test")
@@ -18,8 +20,10 @@ public class TestEntity {
     }
 
     @Id
+    @NotNull
+    @ApiModelProperty( value= "id", position = 1)
     private Integer id;
-
+    @ApiModelProperty(value = "姓名", position = 2)
     private String name;
 
 }

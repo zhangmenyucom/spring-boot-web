@@ -35,7 +35,6 @@ public class TestController extends BaseAction {
     @GetMapping("get")
     @ResponseBody
     public String getRedis() {
-
         return (String) redisService.get("name");
     }
 }

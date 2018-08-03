@@ -17,3 +17,45 @@
 2018-07-22 11:39:15 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
 2018-07-22 11:39:15 [DEBUG] - ==> Parameters: 
 2018-07-22 11:39:15 [DEBUG] - <==      Total: 8
+2018-08-03 16:21:07 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:21:07 [DEBUG] - ==> Parameters: 
+2018-08-03 16:21:08 [DEBUG] - <==      Total: 8
+2018-08-03 16:30:27 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:30:27 [DEBUG] - ==> Parameters: 
+2018-08-03 16:30:28 [DEBUG] - <==      Total: 8
+2018-08-03 16:51:18 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:51:18 [DEBUG] - ==> Parameters: 
+2018-08-03 16:51:18 [DEBUG] - <==      Total: 8
+2018-08-03 16:58:12 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:58:12 [DEBUG] - ==> Parameters: 
+2018-08-03 16:58:12 [DEBUG] - <==      Total: 8
+2018-08-03 16:58:23 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:58:23 [DEBUG] - ==> Parameters: 
+2018-08-03 16:58:23 [DEBUG] - <==      Total: 8
+2018-08-03 16:58:24 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t 
+2018-08-03 16:58:24 [DEBUG] - ==> Parameters: 
+2018-08-03 16:58:24 [DEBUG] - <==      Total: 8
+2018-08-03 17:31:08 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? and name=? 
+2018-08-03 17:31:08 [DEBUG] - ==> Parameters: 1(Integer), 1(String)
+2018-08-03 17:31:08 [DEBUG] - <==      Total: 0
+2018-08-03 17:33:30 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? and name=? 
+2018-08-03 17:33:30 [DEBUG] - ==> Parameters: 1(Integer), 2(String)
+2018-08-03 17:33:30 [DEBUG] - <==      Total: 0
+2018-08-03 17:33:33 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:33:33 [DEBUG] - ==> Parameters: 1(Integer)
+2018-08-03 17:33:33 [DEBUG] - <==      Total: 1
+2018-08-03 17:33:42 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:33:42 [DEBUG] - ==> Parameters: 2(Integer)
+2018-08-03 17:33:42 [DEBUG] - <==      Total: 1
+2018-08-03 17:33:46 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:33:46 [DEBUG] - ==> Parameters: 3(Integer)
+2018-08-03 17:33:46 [DEBUG] - <==      Total: 1
+2018-08-03 17:33:51 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:33:51 [DEBUG] - ==> Parameters: 4(Integer)
+2018-08-03 17:33:51 [DEBUG] - <==      Total: 1
+2018-08-03 17:33:55 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:33:55 [DEBUG] - ==> Parameters: 5(Integer)
+2018-08-03 17:33:55 [DEBUG] - <==      Total: 1
+2018-08-03 17:34:37 [DEBUG] - ==>  Preparing: SELECT t.id, t.name FROM test t WHERE id=? 
+2018-08-03 17:34:37 [DEBUG] - ==> Parameters: 1(Integer)
+2018-08-03 17:34:37 [DEBUG] - <==      Total: 1
