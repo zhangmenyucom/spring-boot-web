@@ -178,3 +178,39 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template "succe
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:745)
+2018-08-02 18:05:12 [ERROR] - Properties configuration failed validation
+2018-08-02 18:05:12 [ERROR] - Field error in object 'spring.datasource' on field 'type': rejected value [com.alibaba.druid.pool.DruidDataSource]; codes [typeMismatch.spring.datasource.type,typeMismatch.type,typeMismatch.java.lang.Class,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [spring.datasource.type,type]; arguments []; default message [type]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Class' for property 'type'; nested exception is java.lang.IllegalArgumentException: Cannot find class [com.alibaba.druid.pool.DruidDataSource]]
+2018-08-02 18:05:12 [ERROR] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target org.springframework.boot.autoconfigure.jdbc.DataSourceProperties@396eae53 failed:
+
+    Property: spring.datasource.type
+    Value: com.alibaba.druid.pool.DruidDataSource
+    Reason: Failed to convert property value of type 'java.lang.String' to required type 'java.lang.Class' for property 'type'; nested exception is java.lang.IllegalArgumentException: Cannot find class [com.alibaba.druid.pool.DruidDataSource]
+
+
+Action:
+
+Update your application's configuration
+
+2018-08-03 17:11:56 [ERROR] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field testService in com.taylor.controller.SwaggerController required a bean of type 'com.taylor.service.TestService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.taylor.service.TestService' in your configuration.
+
