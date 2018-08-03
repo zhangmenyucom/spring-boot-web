@@ -25,8 +25,6 @@ public class OnShelfUpdator extends Thread {
 
     private StockOnShelfService stockOnShelfService;
 
-    private DecimalFormat df = new DecimalFormat("######0.000");
-
     private StockOnShelf stockOnShelfQuery;
 
     public OnShelfUpdator(StockOnShelf stockOnShelfQuery, StockOnShelfService stockOnShelfService) {
@@ -36,16 +34,13 @@ public class OnShelfUpdator extends Thread {
 
     @Override
     public void run() {
+        DecimalFormat df = new DecimalFormat("#.00");
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
-            double discount = (stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice();
+            Double discount = (stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice();
             if (YIDONG_MONITOR == 1 && Math.abs(discount) > 0.01) {
-                try {
-                    MailUtils.sendMail(stockOnShelf.getStockName() + "异动" + (discount > 0.0d ? "拉升" : "抛盘") + df.parse(discount * 100+"") + "%当前涨幅" + df.parse((stockPanKouData.getCurrentPrice() - stockPanKouData.getOpenPrice()) / stockPanKouData.getOpenPrice() * 100+"") + "%", "");
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                MailUtils.sendMail(stockOnShelf.getStockName() + "异动" + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%当前涨幅" + df.format((stockPanKouData.getCurrentPrice() - stockPanKouData.getOpenPrice()) / stockPanKouData.getOpenPrice() * 100) + "%", "");
             }
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());

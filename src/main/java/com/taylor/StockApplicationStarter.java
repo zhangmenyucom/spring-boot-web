@@ -13,8 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class StockApplicationStarter {
     public static void main(String... args) {
-
         SpringApplication.run(StockApplicationStarter.class, args);
-
     }
 }
