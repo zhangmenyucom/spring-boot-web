@@ -19,7 +19,7 @@ import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
 @Data
 public class OnShelfUpdator extends Thread {
 
-    public static volatile int a = 0;
+    public static volatile int FLAG = 0;
 
     private StockOnShelfService stockOnShelfService;
 
