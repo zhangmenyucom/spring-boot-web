@@ -1,4 +1,4 @@
-package com.taylor.entity;
+package com.taylor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +11,9 @@ import javax.persistence.Table;
 @Table(name = "test")
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestEntity {
+public class TestDto {
     @Id
     private Integer id;
 
     private String name;
-
 }

@@ -1,8 +1,9 @@
-package org.mybatis.spring.boot.autoconfigure;
+package com.taylor.config;
 
 import lombok.Data;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
+import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.core.io.Resource;
