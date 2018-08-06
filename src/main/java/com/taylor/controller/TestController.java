@@ -1,5 +1,6 @@
 package com.taylor.controller;
 
+import com.taylor.annotation.LogInfo;
 import com.taylor.entity.TestEntity;
 import com.taylor.service.RedisService;
 import com.taylor.service.TestService;
@@ -27,6 +28,7 @@ public class TestController extends BaseAction {
 
     @ResponseBody
     @RequestMapping("/query")
+    @LogInfo
     public List<TestEntity> queryTest(TestEntity test, HttpServletRequest request, HttpServletResponse response) {
         log.debug("这只是一个测试");
         return testService.find(test);
