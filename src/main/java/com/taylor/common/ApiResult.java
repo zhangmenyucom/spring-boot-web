@@ -26,11 +26,11 @@ public class ApiResult<T> {
     @ApiModelProperty(value = "业务数据", position = 3)
     private T data;
 
-    public ApiResult<T> failure(String message) {
+    public static <T> ApiResult<T> failure(String message) {
         return new ApiResult<T>().setErrorCode(ErrorCode.FAILED).setErrorMessage(message);
     }
 
-    public ApiResult<T> ok(T data) {
+    public static <T> ApiResult<T> ok(T data) {
         return new ApiResult<T>().setErrorCode(ErrorCode.SUCCESS).setErrorMessage("sucess").setData(data);
     }
 }

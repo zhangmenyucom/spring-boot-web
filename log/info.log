@@ -835,3 +835,110 @@ Error starting ApplicationContext. To display the auto-configuration report re-r
 2018-08-06 15:23:26 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
 2018-08-06 15:23:26 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
 2018-08-06 15:23:26 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 3 ms
+2018-08-06 15:30:23 [INFO ] - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4eae13c4: startup date [Mon Aug 06 15:23:24 CST 2018]; root of context hierarchy
+2018-08-06 15:30:23 [INFO ] - Stopping beans in phase 2147483647
+2018-08-06 15:30:23 [INFO ] - Unregistering JMX-exposed beans on shutdown
+2018-08-06 15:30:23 [INFO ] - Unregistering JMX-exposed beans
+2018-08-06 15:30:23 [INFO ] - Starting ApplicationStarter on DESKTOP-5K9MPUB with PID 18060 (D:\git\spring-boot-web\target\classes started by Taylor in D:\git\spring-boot-web)
+2018-08-06 15:30:23 [INFO ] - No active profile set, falling back to default profiles: default
+2018-08-06 15:30:23 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2924f4b0: startup date [Mon Aug 06 15:30:23 CST 2018]; root of context hierarchy
+2018-08-06 15:30:24 [INFO ] - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-08-06 15:30:24 [INFO ] - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$e30cb8a7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'dataSourceInitializer' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'pagehelper-com.taylor.config.PageHelperProperties' of type [com.taylor.config.PageHelperProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'mybatis-org.mybatis.spring.boot.autoconfigure.MyBatisConfigProperties' of type [org.mybatis.spring.boot.autoconfigure.MyBatisConfigProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'myBatisConfig' of type [com.taylor.config.MyBatisConfig$$EnhancerBySpringCGLIB$$f4ab9593] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'annotationDrivenTransactionManager' of type [org.springframework.jdbc.datasource.DataSourceTransactionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1191547] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:24 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-08-06 15:30:24 [INFO ] - Starting service Tomcat
+2018-08-06 15:30:24 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-08-06 15:30:24 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-08-06 15:30:24 [INFO ] - Root WebApplicationContext: initialization completed in 825 ms
+2018-08-06 15:30:24 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-08-06 15:30:24 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-08-06 15:30:24 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-08-06 15:30:24 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-08-06 15:30:24 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/api/swagger/query],methods=[POST]}" onto public com.taylor.common.ApiResult com.taylor.controller.SwaggerController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/test/get],methods=[GET]}" onto public java.lang.String com.taylor.controller.TestController.getRedis()
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-08-06 15:30:24 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-06 15:30:24 [INFO ] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2018-08-06 15:30:24 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2924f4b0: startup date [Mon Aug 06 15:30:23 CST 2018]; root of context hierarchy
+2018-08-06 15:30:24 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:24 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:24 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:24 [INFO ] - LiveReload server is running on port 35729
+2018-08-06 15:30:25 [INFO ] - Registering beans for JMX exposure on startup
+2018-08-06 15:30:25 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-08-06 15:30:25 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-08-06 15:30:25 [INFO ] - Starting beans in phase 2147483647
+2018-08-06 15:30:25 [INFO ] - Context refreshed
+2018-08-06 15:30:25 [INFO ] - Found 1 custom documentation plugin(s)
+2018-08-06 15:30:25 [INFO ] - Scanning for api listing references
+2018-08-06 15:30:25 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-08-06 15:30:25 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-08-06 15:30:25 [INFO ] - Using a shared selector for servlet write/read
+2018-08-06 15:30:25 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-08-06 15:30:25 [INFO ] - Started ApplicationStarter in 1.35 seconds (JVM running for 483.761)
+2018-08-06 15:30:29 [INFO ] - Starting ApplicationStarter on DESKTOP-5K9MPUB with PID 11768 (D:\git\spring-boot-web\target\classes started by Taylor in D:\git\spring-boot-web)
+2018-08-06 15:30:29 [INFO ] - No active profile set, falling back to default profiles: default
+2018-08-06 15:30:29 [INFO ] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6f3904e: startup date [Mon Aug 06 15:30:29 CST 2018]; root of context hierarchy
+2018-08-06 15:30:29 [INFO ] - HV000001: Hibernate Validator 5.3.5.Final
+2018-08-06 15:30:30 [INFO ] - Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-08-06 15:30:30 [INFO ] - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Generic] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$$EnhancerBySpringCGLIB$$d65a23d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'dataSourceInitializer' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'pagehelper-com.taylor.config.PageHelperProperties' of type [com.taylor.config.PageHelperProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'mybatis-org.mybatis.spring.boot.autoconfigure.MyBatisConfigProperties' of type [org.mybatis.spring.boot.autoconfigure.MyBatisConfigProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'myBatisConfig' of type [com.taylor.config.MyBatisConfig$$EnhancerBySpringCGLIB$$1f047f29] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'annotationDrivenTransactionManager' of type [org.springframework.jdbc.datasource.DataSourceTransactionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:30 [INFO ] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2b71fedd] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-06 15:30:31 [INFO ] - Tomcat initialized with port(s): 8080 (http)
+2018-08-06 15:30:31 [INFO ] - Starting service Tomcat
+2018-08-06 15:30:31 [INFO ] - Starting Servlet Engine: Apache Tomcat/8.5.14
+2018-08-06 15:30:31 [INFO ] - Initializing Spring embedded WebApplicationContext
+2018-08-06 15:30:31 [INFO ] - Root WebApplicationContext: initialization completed in 1964 ms
+2018-08-06 15:30:31 [INFO ] - Mapping servlet: 'dispatcherServlet' to [/]
+2018-08-06 15:30:31 [INFO ] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-08-06 15:30:31 [INFO ] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-08-06 15:30:31 [INFO ] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-08-06 15:30:31 [INFO ] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/api/swagger/query],methods=[POST]}" onto public com.taylor.common.ApiResult com.taylor.controller.SwaggerController.queryTest(com.taylor.entity.TestEntity,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/test/get],methods=[GET]}" onto public java.lang.String com.taylor.controller.TestController.getRedis()
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-08-06 15:30:32 [INFO ] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-06 15:30:32 [INFO ] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2018-08-06 15:30:32 [INFO ] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6f3904e: startup date [Mon Aug 06 15:30:29 CST 2018]; root of context hierarchy
+2018-08-06 15:30:32 [INFO ] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:32 [INFO ] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:32 [INFO ] - Detected @ExceptionHandler methods in commonExceptionAdvice
+2018-08-06 15:30:32 [INFO ] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-06 15:30:32 [INFO ] - LiveReload server is running on port 35729
+2018-08-06 15:30:32 [INFO ] - Registering beans for JMX exposure on startup
+2018-08-06 15:30:32 [INFO ] - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-08-06 15:30:32 [INFO ] - Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-08-06 15:30:32 [INFO ] - Starting beans in phase 2147483647
+2018-08-06 15:30:32 [INFO ] - Context refreshed
+2018-08-06 15:30:32 [INFO ] - Found 1 custom documentation plugin(s)
+2018-08-06 15:30:32 [INFO ] - Scanning for api listing references
+2018-08-06 15:30:32 [INFO ] - Initializing ProtocolHandler ["http-nio-8080"]
+2018-08-06 15:30:32 [INFO ] - Starting ProtocolHandler ["http-nio-8080"]
+2018-08-06 15:30:32 [INFO ] - Using a shared selector for servlet write/read
+2018-08-06 15:30:33 [INFO ] - Tomcat started on port(s): 8080 (http)
+2018-08-06 15:30:33 [INFO ] - Started ApplicationStarter in 4.277 seconds (JVM running for 4.967)
+2018-08-06 15:30:41 [INFO ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-08-06 15:30:41 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization started
+2018-08-06 15:30:41 [INFO ] - FrameworkServlet 'dispatcherServlet': initialization completed in 19 ms

@@ -35,9 +35,9 @@ public class SwaggerController extends BaseAction {
     @PostMapping("/query")
     public ApiResult queryTest(@ApiParam @Valid TestEntity test, HttpServletRequest request, HttpServletResponse response) {
         try {
-            return new ApiResult<>().ok(testService.find(test));
+            return  ApiResult.ok(testService.find(test));
         } catch (ServiceException e) {
-            return new ApiResult<>().failure(e.getMessage());
+            return  ApiResult.failure(e.getMessage());
         }
     }
 }
