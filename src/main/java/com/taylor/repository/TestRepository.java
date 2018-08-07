@@ -10,10 +10,9 @@ import java.util.Optional;
  * @author Taylor
  */
 public interface TestRepository extends MongoRepository<TestEntity, String> {
-    /**
+    /**@Desc 查询单个
      * @param id
      * @return
-     * @Desc 查询单个实体
      */
     Optional<TestEntity> findOneById(String id);
 }

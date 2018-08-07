@@ -1,12 +1,10 @@
 package com.taylor.repository;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -64,13 +62,6 @@ public interface RepositoryCustom<T> extends MetadataRepository<T> {
     T upsert(Query query, T entity);
 
     /*-----------------------查询-----------------------*/
-
-    /**
-     * Returns all entities sorted by the given options.
-     *
-     * @return all entities sorted by the given options
-     */
-    List<T> findAll(@Nonnull Sort sort);
 
     /**
      * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
