@@ -34,7 +34,7 @@ public class OnShelfUpdator extends Thread {
 
     @Override
     public void run() {
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("0.00");
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
