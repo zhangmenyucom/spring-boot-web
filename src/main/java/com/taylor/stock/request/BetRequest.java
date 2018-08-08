@@ -52,9 +52,12 @@ public class BetRequest {
 
     }
 
-    public static void main(String... args) {
-        Order order = new Order();
-        order.setA(0.004f).setC("单,双|双").setI("21023").setK(0).setM(4).setN(2).setT(1);
-        System.out.println(postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order));
+    public static void main(String... args) throws InterruptedException {
+        for (int i = 0; i < 60; i++) {
+            Order order = new Order();
+            order.setA(0.004f).setC("单,双|双").setI("21023").setK(0).setM(4).setN(2).setT(1);
+            System.out.println(postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order));
+            Thread.sleep(60000);
+        }
     }
 }
