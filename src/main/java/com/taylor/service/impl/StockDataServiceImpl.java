@@ -11,6 +11,7 @@ import com.taylor.stock.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SH;
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_SZ;
 
 /**
@@ -35,7 +36,7 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
         /**清空数据**/
         recmdStockService.del(recmdStock);
         for (int i = 0; i < THREAD_HOLD; i++) {
-            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SZ.subList(i * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_SZ.size() / THREAD_HOLD - 1), "stock_sz_" + THREAD_HOLD + "-" + i).start();
+            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_SH.subList(i * STOCK_CODE_LIST_SH.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_SH.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
         }
     }
 }
