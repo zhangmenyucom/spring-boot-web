@@ -3,7 +3,9 @@ package com.taylor.stock.request;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.taylor.common.JsonUtil;
-import com.taylor.entity.stock.HistoryData;
+import com.taylor.yicai.entity.NewPeriodEntity;
+import com.taylor.yicai.entity.PeriodResult;
+import com.taylor.yicai.entity.PeriodResultResp;
 import lombok.extern.slf4j.Slf4j;
 import tk.mybatis.mapper.util.StringUtil;
 
@@ -14,6 +16,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 获取股票数据
@@ -21,21 +24,19 @@ import java.util.List;
  * @author taylor
  */
 @Slf4j
-public class QueryStockHistroryDataRequest {
+public class NewPeriodDataRequest {
 
-    public static List<HistoryData> queryLatestDataList(String stockCode, int count) {
+    public static NewPeriodEntity queryLatestDataPeriod(String gameId) {
             try {
-                StringBuilder buffer = new StringBuilder();
-                String url = "http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol="+stockCode+"&scale=240&ma=240&datalen="+count;
+                String url = "https://www.yc2025.com/Shared/GetNewPeriod?gameid="+gameId;
                 //发送get请求
                 URL serverUrl = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) serverUrl.openConnection();
-
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 conn.setRequestMethod("GET");
-                conn.setRequestProperty("host", "http://money.finance.sina.com.cn");
-                conn.setRequestProperty("Referer","http://money.finance.sina.com.cn");
+                conn.setRequestProperty("host", "https://www.yc2025.com");
+                conn.setRequestProperty("Referer","https://www.yc2025.com");
                 conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
                 conn.connect();
                 //将返回的输入流转换成字符串
@@ -44,28 +45,21 @@ public class QueryStockHistroryDataRequest {
                 InputStream inputStream = conn.getInputStream();
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String str;
-                while ((str = bufferedReader.readLine()) != null) {
-                    buffer.append(str);
-                }
+                String buffer = bufferedReader.lines().collect(Collectors.joining());
                 bufferedReader.close();
                 inputStreamReader.close();
                 // 释放资源
                 inputStream.close();
-                if (!StringUtil.isEmpty(buffer.toString())) {
+                if (!StringUtil.isEmpty(buffer)) {
                     Gson gson = new Gson();
-                    return  gson.fromJson(buffer.toString(), new TypeToken<List<HistoryData>>(){}.getType());
+                    return gson.fromJson(buffer, new TypeToken<NewPeriodEntity>() {}.getType());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
-
     public static void main(String... args) {
-        for (int i = 0; i < 100; i++) {
-
-            System.out.println(JsonUtil.transfer2JsonString(queryLatestDataList("sz000001",10)));
-        }
+            System.out.println(JsonUtil.transfer2JsonString(queryLatestDataPeriod("123")));
     }
 }
