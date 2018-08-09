@@ -5,6 +5,8 @@ package com.taylor.yicai.entity;/**
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 /**
  * Add some description about this class.
  *
@@ -14,9 +16,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum BillEnum {
-    YUAN(1,1.0f),JIAO(2,0.1f),FENG(3,0.01f),LI(4,0.001f);
+    YUAN(1,BigDecimal.valueOf(1.0)),JIAO(2,BigDecimal.valueOf(0.1)),FENG(3,BigDecimal.valueOf(0.01)),LI(4,BigDecimal.valueOf(0.001));
 
     private int unit;
 
-    private float value;
+    private BigDecimal value;
 }

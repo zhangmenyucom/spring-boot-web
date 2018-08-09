@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author xiaolu.zhang
@@ -23,7 +23,51 @@ public class Order {
         this.t = t;
         this.m = billEnum.getUnit();
         this.k = 0;
-        this.a = 2 * billEnum.getValue() * t * n;
+        this.a = billEnum.getValue().multiply(BigDecimal.valueOf(2 * t * n));
+    }
+
+    public boolean just(String result) {
+        String[] split = result.split(",");
+        switch (c) {
+            case "单|双":
+                if (Integer.valueOf(split[2]) % 2 != 0 && Integer.valueOf(split[3]) % 2 == 0) {
+                    return true;
+                }
+                return false;
+            case "双|单":
+                if (Integer.valueOf(split[2]) % 2 == 0 && Integer.valueOf(split[3]) % 2 != 0) {
+                    return true;
+                }
+                return false;
+            case "单,双|单":
+                if (Integer.valueOf(split[3]) % 2 != 0) {
+                    return true;
+                }
+                return false;
+            case "单,双|双":
+                if (Integer.valueOf(split[3]) % 2 == 0) {
+                    return true;
+                }
+                return false;
+            case "单|单,双":
+                if (Integer.valueOf(split[2]) % 2 != 0) {
+                    return true;
+                }
+                return false;
+            case "双|单,双":
+                if (Integer.valueOf(split[2]) % 2 == 0) {
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Order order = new Order("21023", BetStrategyEnum.DS_S, 1, BillEnum.LI);
+
+        System.out.println(order.just("1,2,5,2"));
     }
 
     /**
@@ -43,7 +87,7 @@ public class Order {
     /**
      * 返现率
      **/
-    private float k;
+    private int k;
     /**
      * 金额单位 1元 2角 3分 4里
      **/
@@ -51,5 +95,5 @@ public class Order {
     /**
      * 投注金额
      **/
-    private float a;
+    private BigDecimal a;
 }
