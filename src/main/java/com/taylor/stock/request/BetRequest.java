@@ -62,7 +62,7 @@ public class BetRequest {
     public static void bet(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
         SecureRandom secureRandom = new SecureRandom();
         BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
-        Order order = new Order("21024", betStrategyEnum, initTime, BillEnum.LI);
+        Order order = new Order(21024, betStrategyEnum, initTime, BillEnum.LI);
         List<Order> list=new ArrayList<>();
         for (int i = 0; i < times; i++) {
             list.add(order);

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Order {
 
-    public Order(String i, BetStrategyEnum betStrategyEnum, int t, BillEnum billEnum) {
+    public Order(int i, BetStrategyEnum betStrategyEnum, int t, BillEnum billEnum) {
         this.i = i;
         this.c = betStrategyEnum.getContent();
         this.n = betStrategyEnum.getN();
@@ -65,7 +65,7 @@ public class Order {
     }
 
     public static void main(String[] args) {
-        Order order = new Order("21023", BetStrategyEnum.DS_S, 1, BillEnum.LI);
+        Order order = new Order(21023, BetStrategyEnum.DS_S, 1, BillEnum.LI);
 
         System.out.println(order.just("1,2,5,2"));
     }
@@ -73,7 +73,7 @@ public class Order {
     /**
      * 投注id
      **/
-    private String i;
+    private int i;
     /**
      * 投注内容
      **/
