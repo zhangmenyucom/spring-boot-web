@@ -1,6 +1,7 @@
 package com.taylor.yicai.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -12,7 +13,19 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 public class Order {
+
+    public Order(String i, BetStrategyEnum betStrategyEnum, int t, BillEnum billEnum) {
+        this.i = i;
+        this.c = betStrategyEnum.getContent();
+        this.n = betStrategyEnum.getN();
+        this.t = t;
+        this.m = billEnum.getUnit();
+        this.k = 0;
+        this.a = 2 * billEnum.getValue() * t * n;
+    }
+
     /**
      * 投注id
      **/

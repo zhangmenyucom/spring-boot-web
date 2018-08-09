@@ -1,10 +1,11 @@
 package com.taylor.stock.request;
 
 import com.taylor.common.JsonUtil;
+import com.taylor.yicai.entity.BetStrategyEnum;
+import com.taylor.yicai.entity.BillEnum;
 import com.taylor.yicai.entity.Order;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 import java.io.BufferedReader;
@@ -13,6 +14,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.taylor.common.Constants.COOKIE;
 
 /**
  * @author taylor
@@ -33,7 +36,7 @@ public class BetRequest {
             method.setRequestHeader("Host", "www.yc2025.com");
             method.setRequestHeader("Origin", "https://www.yc2025.com");
             method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            method.setRequestHeader("Cookie", "ASP.NET_SessionId=di05huhgdzlchsgh1kmkrxbz; ValidateToken=bd5df4b0d5224c64d15f8ab2bde55665;SESSION_COOKIE=3; GeneralizToken=ec19f0526a45451c991831395f0ca35b; LoginSessionID=631b843bbca7af373c918574a8ca9875; multiSelect=false; GAMEID=26");
+            method.setRequestHeader("Cookie", COOKIE);
             //method.setContentChunked(true);
             // 提交表单
             client.executeMethod(method);
@@ -52,12 +55,8 @@ public class BetRequest {
 
     }
 
-    public static void main(String... args) throws InterruptedException {
-        for (int i = 0; i < 60; i++) {
-            Order order = new Order();
-            order.setA(0.004f).setC("单,双|双").setI("21023").setK(0).setM(4).setN(2).setT(1);
+    public static void main(String... args) {
+            Order order = new Order("21023", BetStrategyEnum.DS_S,1, BillEnum.LI);
             System.out.println(postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order));
-            Thread.sleep(60000);
-        }
     }
 }
