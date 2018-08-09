@@ -65,6 +65,9 @@ public class BetRequest {
         System.out.println(result);
         while (!result.contains("投注成功")) {
             Thread.sleep(20000);
+            if(result.contains("传入的订单列表，格式不正确")){
+                order = new Order("21023", betStrategyEnum, order.getT()+1, BillEnum.FENG);
+            }
             System.out.println(JsonUtil.transfer2JsonString(order));
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
             System.out.println(result);
@@ -76,11 +79,11 @@ public class BetRequest {
                 myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
             }
             if (myOrder.getOrderResult() == 2) {
-                System.out.println("恭喜你中奖:"+myOrder.getBettingBalance()+"元");
+                System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
                 times = initTime;
                 bet(times, strategyEnumList);
             } else {
-                times = times << 1+1;
+                times = times * 2 + 1;
                 bet(times, strategyEnumList);
             }
         }
