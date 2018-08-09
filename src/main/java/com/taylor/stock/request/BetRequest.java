@@ -60,57 +60,57 @@ public class BetRequest {
 
     public static void bet(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
         SecureRandom secureRandom = new SecureRandom();
-        BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
+        BetStrategyEnum betStrategyEnum = strategyEnumList.get(0);
         Order order = new Order("21024", betStrategyEnum, times, BillEnum.FENG);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
         System.out.println(result);
         while (!result.contains("投注成功")) {
-            Thread.sleep(20000);
-            if(result.contains("传入的订单列表，格式不正确")){
-                order = new Order("21024", strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1)), order.getT()+1, BillEnum.FENG);
+            if (result.contains("传入的订单列表，格式不正确")) {
+                order = new Order("21024", betStrategyEnum, order.getT() + 1, BillEnum.FENG);
             }
             System.out.println(JsonUtil.transfer2JsonString(order));
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
             System.out.println(result);
+            Thread.sleep(10000);
         }
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
         if (result.contains(myOrder.getOrderId())) {
+            System.out.println("请求最后订单状态:" + (myOrder.getPeriodStatus()==4?"未开奖":"已开奖"));
             while (myOrder.getPeriodStatus() != 4) {
-                Thread.sleep(20000);
+                Thread.sleep(10000);
                 myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
+                System.out.println("请求最后订单状态:" + (myOrder.getPeriodStatus()==4?"未开奖":"已开奖"));
             }
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
                 times = initTime;
                 bet(times, strategyEnumList);
             } else {
-                times = times * 2 + 1;
+                times = (times << 1)+1;
                 bet(times, strategyEnumList);
             }
         }
-
     }
+
     public static void betBatch(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
         SecureRandom secureRandom = new SecureRandom();
         BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
-        Order order = new Order("21024", betStrategyEnum, initTime, BillEnum.FENG);
-
-        String result="";
-        for (int i = 0; i < times; i++) {
-             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
-             System.out.println(result);
-             while (!result.contains("投注成功")) {
-                Thread.sleep(10000);
-                System.out.println(JsonUtil.transfer2JsonString(order));
-                result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
-                System.out.println(result);
-            }
+        Order order = new Order("21023", betStrategyEnum, initTime, BillEnum.FENG);
+        String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
+        System.out.println(result);
+        while (!result.contains("投注成功")) {
+            System.out.println(JsonUtil.transfer2JsonString(order));
+            result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), order);
+            System.out.println(result);
         }
+
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
+        System.out.println("请求最后订单状态:" + myOrder.getPeriodStatus());
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
-                Thread.sleep(20000);
+                Thread.sleep(5000);
                 myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
+                System.out.println("请求最后订单状态:" + myOrder.getPeriodStatus());
             }
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
@@ -121,14 +121,14 @@ public class BetRequest {
                 bet(times, strategyEnumList);
             }
         }
-
     }
+
     public static void main(String... args) throws InterruptedException {
         List<BetStrategyEnum> strategyEnumList = new ArrayList<>();
         strategyEnumList.add(BetStrategyEnum.D_DS);
         strategyEnumList.add(BetStrategyEnum.S_DS);
         strategyEnumList.add(BetStrategyEnum.DS_S);
         strategyEnumList.add(BetStrategyEnum.DS_D);
-        betBatch(initTime, strategyEnumList);
+        bet(initTime, strategyEnumList);
     }
 }
