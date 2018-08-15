@@ -9,12 +9,14 @@ import java.util.*;
  */
 public class ConstantsInits {
 
-    public static List<String> STOCK_CODE_LIST_SH = new ArrayList<>(0);
-    public static List<String> STOCK_CODE_LIST_SZ = new ArrayList<>(0);
+    public static List<String> STOCK_CODE_LIST_MAIN = new ArrayList<>(1000);
+    public static List<String> STOCK_CODE_LIST_ZHONGXIAO = new ArrayList<>(1000);
+    public static List<String> STOCK_CODE_LIST_CHUANGYE = new ArrayList<>(1000);
 
     static {
-        STOCK_CODE_LIST_SH = Arrays.asList(Constants.STOCK_CODE_SH.split(","));
-        STOCK_CODE_LIST_SZ = Arrays.asList(Constants.STOCK_CODE_SZ.split(","));
+        STOCK_CODE_LIST_MAIN = Arrays.asList(Constants.STOCK_CODE_MAIN_BAN.split(","));
+        STOCK_CODE_LIST_ZHONGXIAO = Arrays.asList(Constants.STOCK_CODE_ZHONGXIAO_BAN.split(","));
+        STOCK_CODE_LIST_CHUANGYE = Arrays.asList(Constants.STOCK_CODE_CHUANGYE_BAN.split(","));
     }
 
     /**
