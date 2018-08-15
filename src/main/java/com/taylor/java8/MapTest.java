@@ -17,7 +17,7 @@ public class MapTest {
     public static void main(String... args) {
         /**map里面是对原始数据转换为目标数据，具体就是匿名函数appy**/
         val listMapBefore = IntStream.rangeClosed(1, 100).boxed().collect(Collectors.toList());
-        val listMapAfter = listMapBefore.stream().map(e -> e * 3).collect(Collectors.toList());
-        listMapAfter.forEach(System.out::print);
+        val listMapAfter = listMapBefore.stream().map(e -> e * 3).filter(e -> e % 6 == 0).collect(Collectors.toList());
+        listMapAfter.forEach(System.out::println);
     }
 }
