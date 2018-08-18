@@ -14,6 +14,7 @@ import lombok.Data;
 public class PeriodResult {
     private String id;
     private String date;
+    private String period;
     private String result;
     private String year;
 }

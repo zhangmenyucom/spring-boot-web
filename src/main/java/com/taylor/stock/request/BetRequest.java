@@ -3,7 +3,6 @@ package com.taylor.stock.request;
 import com.taylor.common.JsonUtil;
 import com.taylor.common.MailUtils;
 import com.taylor.yicai.entity.BetStrategyEnum;
-import com.taylor.yicai.entity.BillEnum;
 import com.taylor.yicai.entity.MyOrder;
 import com.taylor.yicai.entity.Order;
 import org.apache.commons.httpclient.HttpClient;
@@ -14,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class BetRequest {
         try {
             HttpClient client = new HttpClient();
             System.out.println(JsonUtil.transfer2JsonString(orderList));
-            NameValuePair[] data = {new NameValuePair("gameId", gameId), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
+            NameValuePair[] data = {new NameValuePair("gameId", "123"), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList",JsonUtil.transfer2JsonString(orderList))};
 
             System.out.println(JsonUtil.transfer2JsonString(data));
             method.setRequestBody(data);
@@ -62,11 +62,17 @@ public class BetRequest {
     public static void bet(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
         SecureRandom secureRandom = new SecureRandom();
         BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
-        Order order = new Order(21024, betStrategyEnum, initTime, BillEnum.LI);
+       // Order order = new Order(21024, betStrategyEnum, initTime, BillEnum.LI);
+        Order order=new Order();
+        order.setC(HistoryResultRequest.getNextContent("123",50));
+        order.setI(20979);
+        order.setN(56);
+        order.setT(1);
+        order.setM(4);
+        order.setK(0);
+        order.setA(BigDecimal.valueOf(0.112));
         List<Order> list=new ArrayList<>();
-        for (int i = 0; i < times; i++) {
-            list.add(order);
-        }
+        list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
         System.out.println(result);
         while (!result.contains("投注成功")) {
