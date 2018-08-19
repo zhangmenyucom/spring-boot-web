@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.taylor</groupId>
-    <artifactId>stock-server</artifactId>
+    <artifactId>yicai-server</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -162,17 +162,21 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>yicai-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.taylor.StockApplicationStarter</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>${project.artifactId}</finalName>
+                            <finalName>yicai-server</finalName>
                             <outputDirectory>/data/apps/deploy</outputDirectory>
                         </configuration>
                     </execution>
