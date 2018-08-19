@@ -1,5 +1,6 @@
 package com.taylor;
 
+import com.taylor.stock.request.BetRequestForDanShuang;
 import com.taylor.yicai.entity.BetStrategyEnum;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +27,6 @@ public class StockApplicationStarter {
         strategyEnumList.add(BetStrategyEnum.S_DS);
         strategyEnumList.add(BetStrategyEnum.DS_S);
         strategyEnumList.add(BetStrategyEnum.DS_D);
-        bet(initTime, strategyEnumList);
+        BetRequestForDanShuang.bet(initTime, strategyEnumList);
     }
 }
