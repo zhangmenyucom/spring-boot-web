@@ -60,7 +60,6 @@ public class BetRequestForDanShuang {
         SecureRandom secureRandom = new SecureRandom();
         BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
         Order order = new Order(21024, betStrategyEnum, times, BillEnum.LI);
-        System.out.println("当前投注金额为：" + order.getA() + "元,当前倍数为：" + times);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
@@ -72,6 +71,7 @@ public class BetRequestForDanShuang {
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
             Thread.sleep(10000);
         }
+        System.out.println("当前投注金额为：" + order.getA() + "元,当前倍数为：" + times + " 当前余额：" + AccountRequest.getAccount().getCreditBalance() + "元");
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
@@ -83,7 +83,8 @@ public class BetRequestForDanShuang {
                 times = initTime;
                 bet(times, strategyEnumList);
             } else {
-                times = (times << 1) + ((times >> 1) > 2 ? times >> 1 : 2);
+                //times = (times << 1) + ((times >> 1) > 2 ? times >> 1 : 2) + ((times >> 2) > 0 ? (times >> 2) : 0);
+                times = (times << 1) + 2 + ((times >> 2) > 0 ? (times >> 2) : 0);
                 System.out.println("未中奖");
                 bet(times, strategyEnumList);
             }
