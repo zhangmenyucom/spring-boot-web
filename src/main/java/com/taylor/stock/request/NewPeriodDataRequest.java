@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
+import static com.taylor.common.Constants.BASE_URL;
+
 /**
  * 获取股票数据
  *
@@ -24,15 +26,15 @@ public class NewPeriodDataRequest {
 
     public static NewPeriodEntity queryLatestDataPeriod(String gameId) {
         try {
-            String url = "https://www.yc2025.com/Shared/GetNewPeriod?gameid=" + gameId;
+            String url = BASE_URL+"/Shared/GetNewPeriod?gameid=" + gameId;
             //发送get请求
             URL serverUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) serverUrl.openConnection();
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("host", "https://www.yc2025.com");
-            conn.setRequestProperty("Referer", "https://www.yc2025.com");
+            conn.setRequestProperty("host", BASE_URL);
+            conn.setRequestProperty("Referer", BASE_URL);
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
             conn.connect();
             //将返回的输入流转换成字符串

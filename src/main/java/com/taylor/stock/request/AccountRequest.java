@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
+import static com.taylor.common.Constants.BASE_URL;
 import static com.taylor.common.Constants.COOKIE;
 
 /**
@@ -21,13 +22,13 @@ import static com.taylor.common.Constants.COOKIE;
 public class AccountRequest {
 
     public static synchronized Account getAccount() {
-        GetMethod method = new GetMethod("https://www.yc2025.com/AccountInfo/GetAccount");
+        GetMethod method = new GetMethod(BASE_URL+"/AccountInfo/GetAccount");
 
         try {
             HttpClient client = new HttpClient();
-            method.setRequestHeader("Referer", "https://www.yc2025.com/OffcialOtherGame/Index/26");
-            method.setRequestHeader("Host", "www.yc2025.com");
-            method.setRequestHeader("Origin", "https://www.yc2025.com");
+            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/26");
+            method.setRequestHeader("Host", BASE_URL);
+            method.setRequestHeader("Origin", BASE_URL);
             method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             method.setRequestHeader("Cookie", COOKIE);
             //method.setContentChunked(true);

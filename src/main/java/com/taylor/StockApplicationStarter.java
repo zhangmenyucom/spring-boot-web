@@ -1,6 +1,5 @@
 package com.taylor;
 
-import com.taylor.common.JsonUtil;
 import com.taylor.stock.request.BetRequestForDanShuang;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

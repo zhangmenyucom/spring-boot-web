@@ -16,6 +16,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.taylor.common.Constants.BASE_URL;
+
 /**
  * 获取彩票历史数据
  *
@@ -26,7 +28,7 @@ public class QueryHistroryDataRequest {
 
     public static List<PeriodResult> queryLatestDataList(String gameId, int count) {
         try {
-            String url = "https://www.yc2025.com/Result/GetLotteryResultList?gameID=" + gameId + "&pageSize=" + count + "&pageIndex=1";
+            String url = BASE_URL+"/Result/GetLotteryResultList?gameID=" + gameId + "&pageSize=" + count + "&pageIndex=1";
             //发送get请求
             URL serverUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) serverUrl.openConnection();
@@ -34,8 +36,8 @@ public class QueryHistroryDataRequest {
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("host", "https://www.yc2025.com");
-            conn.setRequestProperty("Referer", "https://www.yc2025.com");
+            conn.setRequestProperty("host",BASE_URL);
+            conn.setRequestProperty("Referer", BASE_URL);
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
             conn.connect();
             //将返回的输入流转换成字符串
