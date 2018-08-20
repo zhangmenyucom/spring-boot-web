@@ -26,6 +26,6 @@ public enum BetGameEnum {
     private static final SecureRandom secureRandom = new SecureRandom();
 
     public static BetGameEnum getRandomBetGame() {
-        return list.get(secureRandom.nextInt(10000) % (list.size() - 1));
+        return list.get(secureRandom.nextInt(10000) % list.size());
     }
 }

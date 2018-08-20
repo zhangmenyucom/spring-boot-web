@@ -32,6 +32,6 @@ public enum BetStrategyEnum {
     private static final SecureRandom secureRandom = new SecureRandom();
 
     public static BetStrategyEnum getRandomBetStrategy() {
-        return list.get(secureRandom.nextInt(10000) % (list.size() - 1));
+        return list.get(secureRandom.nextInt(10000) % list.size());
     }
 }
