@@ -18,20 +18,63 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public enum BetStrategyEnum {
-    D_S("单|双", 1),
-    S_D("双|单", 1),
-    DS_S("单,双|双", 2),
-    DS_D("单,双|单", 2),
-    D_DS("单|单,双", 2),
-    S_DS("双|单,双", 2);
+    /*DAN_SHUANG("单|双", 1),
+    DAN_DA("单|大", 1),
+    DAN_XIAO("单|小", 1),
+    DAN_DAN("单|单", 1),
+    SHUANG_DA("双|大", 1),
+    SHUANG_XIAO("双|小", 1),
+    SHUANG_DAN("双|单", 1),
+    SHUANG_SHUANG("双|双", 1),
+    DA_SHUANG("大|双", 1),
+    DA_DA("大|大", 1),
+    DA_XIAO("大|小", 1),
+    DA_DAN("大|单", 1),
+    XIAO_SHUANG("小|双", 1),
+    XIAO_DA("小|大", 1),
+    XIAO_XIAO("小|小", 1),
+    XIAO_DAN("小|单", 1),*/
+
+    DANSHUANG_SHUANG("单,双|双", 2),
+    DANSHUANG_DAN("单,双|单", 2),
+    DANSHUANG_DA("单,双|大", 2),
+    DANSHUANG_XIAO("单,双|小", 2),
+
+
+    DAN_DANSHUANG("单|单,双", 2),
+    DA_DANSHUANG("大|单,双", 2),
+    XIAO_DANSHUANG("小|单,双", 2),
+    SHUANG_DANSHUANG("双|单,双", 2),
+
+
+    DAXIAO_DA("大,小|大", 2),
+    DAXIAO_DAN("大,小|单", 2),
+    DAXIAO_SHUANG("大,小|双", 2),
+    DAXIAO_XIAO("大,小|小", 2),
+
+
+    DA_DAXIAO("大|大,小", 2),
+    SHUANG_DAXIAO("双|大,小", 2),
+    XIAO_DAXIAO("小|大,小", 2),
+    DAN_DAXIAO("单|大,小", 2);
+
 
     private String content;
+
     private int n;
-    private static final List<BetStrategyEnum> list = Arrays.asList(DS_S, DS_D, D_DS, S_DS);
+
+
+    private static final List<BetStrategyEnum> list = Arrays.asList(BetStrategyEnum.values());
 
     private static final SecureRandom secureRandom = new SecureRandom();
 
     public static BetStrategyEnum getRandomBetStrategy() {
         return list.get(secureRandom.nextInt(10000) % list.size());
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(getRandomBetStrategy().getContent());
+        }
     }
 }

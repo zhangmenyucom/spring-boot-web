@@ -22,10 +22,16 @@ public enum BetGameEnum {
     HOUER_DAN_SHUANG(21023, "后二单双");
     private int gameId;
     private String name;
-    private static final List<BetGameEnum> list = Arrays.asList(QIANER_DAN_SHUANG, HOUER_DAN_SHUANG);
+    private static final List<BetGameEnum> list = Arrays.asList(BetGameEnum.values());
     private static final SecureRandom secureRandom = new SecureRandom();
 
     public static BetGameEnum getRandomBetGame() {
         return list.get(secureRandom.nextInt(10000) % list.size());
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(getRandomBetGame().getGameId());
+        }
     }
 }
