@@ -2,10 +2,7 @@ package com.taylor.stock.request;
 
 import com.taylor.common.JsonUtil;
 import com.taylor.common.MailUtils;
-import com.taylor.yicai.entity.BetStrategyEnum;
-import com.taylor.yicai.entity.BillEnum;
-import com.taylor.yicai.entity.MyOrder;
-import com.taylor.yicai.entity.Order;
+import com.taylor.yicai.entity.*;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -14,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +52,8 @@ public class BetRequestForDanShuang {
 
     }
 
-    public static void bet(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
-        SecureRandom secureRandom = new SecureRandom();
-        BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
-        Order order = new Order(21024, betStrategyEnum, times, BillEnum.LI);
+    public static void bet(int times) throws InterruptedException {
+        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times, BillEnum.LI);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
@@ -81,22 +75,17 @@ public class BetRequestForDanShuang {
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
                 times = initTime;
-                bet(times, strategyEnumList);
+                bet(times);
             } else {
                 //times = (times << 1) + ((times >> 1) > 2 ? times >> 1 : 2) + ((times >> 2) > 0 ? (times >> 2) : 0);
                 times = (times << 1) + 2 + ((times >> 2) > 0 ? (times >> 2) : 0);
                 System.out.println("未中奖");
-                bet(times, strategyEnumList);
+                bet(times);
             }
         }
     }
 
     public static void main(String... args) throws InterruptedException {
-        List<BetStrategyEnum> strategyEnumList = new ArrayList<>();
-        strategyEnumList.add(BetStrategyEnum.D_DS);
-        strategyEnumList.add(BetStrategyEnum.S_DS);
-        strategyEnumList.add(BetStrategyEnum.DS_S);
-        strategyEnumList.add(BetStrategyEnum.DS_D);
-        bet(initTime, strategyEnumList);
+        bet(initTime);
     }
 }

@@ -2,7 +2,6 @@ package com.taylor.stock.request;
 
 import com.taylor.common.JsonUtil;
 import com.taylor.common.MailUtils;
-import com.taylor.yicai.entity.BetStrategyEnum;
 import com.taylor.yicai.entity.MyOrder;
 import com.taylor.yicai.entity.Order;
 import org.apache.commons.httpclient.HttpClient;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import static com.taylor.common.Constants.initTime;
 /**
  * @author taylor
  */
-public class BetRequest {
+public class BetRequestForZuLiu {
     public static synchronized String postOrder(String gameId, String periodId, List<Order> orderList) {
         PostMethod method = new PostMethod("https://www.yc2025.com/OfficialAddOrders/AddOrders");
         StringBuilder stringBuffer = null;
@@ -58,10 +56,7 @@ public class BetRequest {
 
     }
 
-    public static void bet(int times, List<BetStrategyEnum> strategyEnumList) throws InterruptedException {
-        SecureRandom secureRandom = new SecureRandom();
-        BetStrategyEnum betStrategyEnum = strategyEnumList.get(secureRandom.nextInt(10000) % (strategyEnumList.size() - 1));
-       // Order order = new Order(21024, betStrategyEnum, initTime, BillEnum.LI);
+    public static void bet(int times) throws InterruptedException {
         Order order=new Order();
         order.setC(HistoryResultRequest.getNextContent("123",6));
         order.setI(20979);
@@ -94,20 +89,15 @@ public class BetRequest {
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
                 times = initTime;
-                bet(times, strategyEnumList);
+                bet(times);
             } else {
                 times = (times << 1) + 1;
-                bet(times, strategyEnumList);
+                bet(times);
             }
         }
     }
 
     public static void main(String... args) throws InterruptedException {
-        List<BetStrategyEnum> strategyEnumList = new ArrayList<>();
-        strategyEnumList.add(BetStrategyEnum.D_DS);
-        strategyEnumList.add(BetStrategyEnum.S_DS);
-        strategyEnumList.add(BetStrategyEnum.DS_S);
-        strategyEnumList.add(BetStrategyEnum.DS_D);
-        bet(initTime, strategyEnumList);
+        bet(initTime);
     }
 }

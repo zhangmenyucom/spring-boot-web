@@ -1,6 +1,4 @@
-package com.taylor.stock.request; /**
- * Created by david on 2017-7-5.
- */
+package com.taylor.stock.request;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -12,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HttpRequestUtil {
     /**
@@ -21,7 +20,6 @@ public class HttpRequestUtil {
      */
     public static JsonObject getXpath(String requestUrl) {
         JsonObject object = null;
-        StringBuilder buffer = new StringBuilder();
         try {
             URL url = new URL(requestUrl);
             HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
@@ -30,16 +28,12 @@ public class HttpRequestUtil {
                 InputStreamReader isr = new InputStreamReader(is, "utf-8");
                 BufferedReader br = new BufferedReader(isr);
 
-                String str;
-                while ((str = br.readLine()) != null) {
-                    buffer.append(str);
-                }
+                String buffer = br.lines().collect(Collectors.joining());
                 br.close();
                 isr.close();
                 is.close();
-                String res = buffer.toString();
                 JsonParser parse = new JsonParser();
-                object = (JsonObject) parse.parse(res);
+                object = (JsonObject) parse.parse(buffer);
             }
         } catch (IOException e) {
             e.printStackTrace();

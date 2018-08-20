@@ -6,8 +6,8 @@ package com.taylor.common;
  * @date: 2018/1/6 1:28
  */
 public class Constants {
-   public static final String COOKIE="SESSION_COOKIE=2; kangle_runat=1; ASP.NET_SessionId=gr3w5201xezh4lqt0xmnv4m4; ValidateToken=a561ba2c59f778aa07ce2d91c51ea482; skinStyle=suolaier-vio; CurrentSkin=suolaier; LoginSessionID=6f0b26bc7a4db1f2b5673006a9869898; GAMEID=123; XYHandicap=0; multiSelect=false";
-   public static final int initTime=2;
+   public static final String COOKIE="SESSION_COOKIE=2; kangle_runat=1; ASP.NET_SessionId=jxgkebrnujgnbvyk2tk5x1ht; ValidateToken=22924c5171df5c826d3797609ef46a89; skinStyle=suolaier; CurrentSkin=suolaier; LoginSessionID=2818e8a337ae920727c88b8fc29dc514; GAMEID=123; XYHandicap=0; multiSelect=false";
+   public static final int initTime=3;
 }
 
 

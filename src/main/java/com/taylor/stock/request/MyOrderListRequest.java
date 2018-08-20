@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.taylor.common.Constants.COOKIE;
 
@@ -25,7 +26,6 @@ public class MyOrderListRequest {
     public static synchronized List<MyOrder> postOrder(String gameId, int count) {
          GetMethod method = new GetMethod("https://www.yc2025.com/OffcialOtherGame/GetHistoryOrders?gameId="+gameId+"&num="+count);
 
-        StringBuilder stringBuffer = null;
         try {
             HttpClient client = new HttpClient();
             method.setRequestHeader("Referer", "https://www.yc2025.com/OffcialOtherGame/Index/26");
@@ -39,13 +39,9 @@ public class MyOrderListRequest {
             // 字符流转字节流 循环输出，同get解释
             InputStream inputStream = method.getResponseBodyAsStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            stringBuffer = new StringBuilder();
-            String str;
-            while ((str = br.readLine()) != null) {
-                stringBuffer.append(str);
-            }
+            String stringBuffer = br.lines().collect(Collectors.joining());
             Gson gson = new Gson();
-            String result=stringBuffer.toString().replace("\\","");
+            String result= stringBuffer.replace("\\","");
             return  gson.fromJson(result.substring(1,result.length()-1), new TypeToken<List<MyOrder>>() {}.getType());
         } catch (IOException e) {
             e.printStackTrace();
