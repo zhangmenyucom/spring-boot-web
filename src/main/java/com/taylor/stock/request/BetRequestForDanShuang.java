@@ -109,7 +109,7 @@ public class BetRequestForDanShuang {
                         times = (times << 1) + times / 2;
                     }
                     /**重试的时候是有损失的，失败时添加缺失因子,弥补缺失**/
-                    times = times + 2;
+                    times = times + 1;
                     /**到重复次数了**/
                     REPEAT_TIME++;
                 }
