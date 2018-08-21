@@ -41,17 +41,15 @@ public class AccountRequest {
             if (stringBuffer.contains("CreditBalance")) {
                 Gson gson = new Gson();
                 String result = stringBuffer.replace("\\", "");
-                return gson.fromJson(result, new TypeToken<Account>() {
-                }.getType());
+                return gson.fromJson(result, new TypeToken<Account>() {}.getType());
             } else {
                 Thread.sleep(5000);
                 return getAccount();
             }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("获取用户信息出错重试"+e.getMessage());
+            return getAccount();
         }
-        return null;
-
     }
 
 

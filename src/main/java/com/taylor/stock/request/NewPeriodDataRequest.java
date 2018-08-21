@@ -48,13 +48,18 @@ public class NewPeriodDataRequest {
             inputStreamReader.close();
             // 释放资源
             inputStream.close();
+            if(!buffer.contains("fnumberofperiod")){
+                System.out.println("获取periodId出错，5秒后重试");
+                Thread.sleep(5000);
+               return queryLatestDataPeriod(gameId);
+            }
             if (buffer != null) {
                 Gson gson = new Gson();
-                return gson.fromJson(buffer, new TypeToken<NewPeriodEntity>() {
-                }.getType());
+                return gson.fromJson(buffer, new TypeToken<NewPeriodEntity>() {}.getType());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("获取periodId出错，重试"+e.getMessage());
+            return queryLatestDataPeriod(gameId);
         }
         return null;
     }

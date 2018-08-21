@@ -61,9 +61,6 @@ public class BetRequestForDanShuang {
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
         while (!result.contains("投注成功")) {
-            if (result.contains("传入的订单列表，格式不正确")) {
-                MailUtils.sendMail("格式不正确", result);
-            }
             System.out.println("未投注成功重试");
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
             Thread.sleep(15000);
