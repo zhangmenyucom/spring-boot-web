@@ -83,7 +83,7 @@ public class BetRequestForDanShuang {
                     bet(initTime);
                 } else {
                     REPEAT_SUCCESS_TIME++;
-                    /**只有成功次数是失败次数多两次才能回本且有赚头**/
+                    /**只有成功次数是失败次数多一次才能回本且有赚头**/
                     if (REPEAT_SUCCESS_TIME > REPEAT_FAILT_TIME) {
                         REPEAT_TIME = 0;
                         REPEAT_FAILT_TIME=0;
