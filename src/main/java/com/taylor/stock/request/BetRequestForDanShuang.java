@@ -83,7 +83,7 @@ public class BetRequestForDanShuang {
                     bet(initTime);
                 } else {
                     REPEAT_SUCCESS_TIME++;
-                    /**回本**/
+                    /**只有成功次数是失败次数多两次才能回本且有赚头**/
                     if (REPEAT_SUCCESS_TIME > REPEAT_FAILT_TIME) {
                         REPEAT_TIME = 0;
                         REPEAT_FAILT_TIME=0;
@@ -107,6 +107,10 @@ public class BetRequestForDanShuang {
                     /**第一次重试当然不算是重试失败了**/
                     if (REPEAT_TIME > 0) {
                         REPEAT_FAILT_TIME++;
+                    }
+                    /**重试的时候双倍，这时成功数只要大于失败数一次就够了**/
+                    if(REPEAT_TIME==0){
+                        times = (times << 1) +times/2;
                     }
                     /**到重复次数了**/
                     REPEAT_TIME++;
