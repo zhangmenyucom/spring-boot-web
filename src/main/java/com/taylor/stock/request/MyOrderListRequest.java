@@ -23,11 +23,11 @@ import static com.taylor.common.Constants.COOKIE;
 public class MyOrderListRequest {
 
     public static synchronized List<MyOrder> postOrder(String gameId, int count) {
-         GetMethod method = new GetMethod(BASE_URL+"/OffcialOtherGame/GetHistoryOrders?gameId="+gameId+"&num="+count);
+        GetMethod method = new GetMethod(BASE_URL + "/OffcialOtherGame/GetHistoryOrders?gameId=" + gameId + "&num=" + count);
 
         try {
             HttpClient client = new HttpClient();
-            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/26");
+            method.setRequestHeader("Referer", BASE_URL + "/OffcialOtherGame/Index/26");
             method.setRequestHeader("Host", BASE_URL);
             method.setRequestHeader("Origin", BASE_URL);
             method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -40,25 +40,31 @@ public class MyOrderListRequest {
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String stringBuffer = br.lines().collect(Collectors.joining());
             Gson gson = new Gson();
-            String result= stringBuffer.replace("\\","");
-            if(!result.contains("Ordernumber")){
+            String result = stringBuffer.replace("\\", "");
+            if (!result.contains("Ordernumber")) {
                 System.out.println("获取订单失败15秒后重试");
                 try {
                     Thread.sleep(15000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return postOrder(gameId,count);
+                return postOrder(gameId, count);
             }
-            return  gson.fromJson(result.substring(1,result.length()-1), new TypeToken<List<MyOrder>>() {}.getType());
+            return gson.fromJson(result.substring(1, result.length() - 1), new TypeToken<List<MyOrder>>() {
+            }.getType());
         } catch (IOException e) {
-            System.out.println("获取订单出错:"+e.getMessage());
-           return  postOrder(gameId,count);
+            System.out.println("查询订单失败重试");
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            return postOrder(gameId, count);
         }
     }
 
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(postOrder("123",1)));
+        System.out.println(JsonUtil.transfer2JsonString(postOrder("123", 1)));
     }
 }

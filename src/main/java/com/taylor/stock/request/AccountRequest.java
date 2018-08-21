@@ -8,7 +8,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ import static com.taylor.common.Constants.COOKIE;
  */
 public class AccountRequest {
 
-    public static synchronized Account getAccount() {
+    public static synchronized Account getAccount(){
         GetMethod method = new GetMethod(BASE_URL+"/AccountInfo/GetAccount");
 
         try {
@@ -43,11 +42,16 @@ public class AccountRequest {
                 String result = stringBuffer.replace("\\", "");
                 return gson.fromJson(result, new TypeToken<Account>() {}.getType());
             } else {
-                Thread.sleep(5000);
+                Thread.sleep(12000);
                 return getAccount();
             }
         } catch (Exception e) {
             System.out.println("获取用户信息出错重试"+e.getMessage());
+            try {
+                Thread.sleep(12000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
             return getAccount();
         }
     }

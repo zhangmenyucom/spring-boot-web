@@ -1,7 +1,6 @@
 package com.taylor.stock.request;
 
 import com.taylor.common.JsonUtil;
-import com.taylor.common.MailUtils;
 import com.taylor.yicai.entity.*;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
@@ -15,10 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.taylor.common.Constants.*;
-import static com.taylor.common.Constants.REPEAT_TIME;
-import static com.taylor.common.Constants.BASE_URL;
-import static com.taylor.common.Constants.COOKIE;
-import static com.taylor.common.Constants.initTime;
 
 /**
  * @author taylor
@@ -49,14 +44,18 @@ public class BetRequestForDanShuang {
                 stringBuffer.append(str);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("下单出错了" + e.getMessage());
+            return "下单出错了";
         }
-        return stringBuffer.toString();
+        if (stringBuffer != null) {
+            return stringBuffer.toString();
+        }
+        return "";
 
     }
 
     public static void bet(int times) throws InterruptedException {
-        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times, BillEnum.LI);
+        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times, BillEnum.FENG);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
