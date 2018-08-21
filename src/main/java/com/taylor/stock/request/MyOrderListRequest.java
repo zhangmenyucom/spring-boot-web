@@ -41,12 +41,20 @@ public class MyOrderListRequest {
             String stringBuffer = br.lines().collect(Collectors.joining());
             Gson gson = new Gson();
             String result= stringBuffer.replace("\\","");
+            if(!result.contains("ordernumber")){
+                System.out.println("获取订单失败5秒后重试");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return postOrder(gameId,count);
+            }
             return  gson.fromJson(result.substring(1,result.length()-1), new TypeToken<List<MyOrder>>() {}.getType());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("获取订单出错:"+e.getMessage());
+           return  postOrder(gameId,count);
         }
-        return null;
-
     }
 
 
