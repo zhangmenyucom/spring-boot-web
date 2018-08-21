@@ -77,7 +77,7 @@ public class BetRequestForDanShuang {
                 myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
             }
             if (myOrder.getOrderResult() == 2) {
-                System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
+                System.out.println("中奖:" + myOrder.getBettingBalance() + "元");
                 if (REPEAT_TIME == 0) {
                     FAIL_TIME = 0;
                     bet(initTime);
