@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.taylor.common.Constants.*;
+import static com.taylor.common.Constants.REPEAT_TIME;
 import static com.taylor.common.Constants.BASE_URL;
 import static com.taylor.common.Constants.COOKIE;
 import static com.taylor.common.Constants.initTime;
@@ -23,14 +25,14 @@ import static com.taylor.common.Constants.initTime;
  */
 public class BetRequestForDanShuang {
     public static synchronized String postOrder(String gameId, String periodId, List<Order> orderList) {
-        PostMethod method = new PostMethod(BASE_URL+"/OfficialAddOrders/AddOrders");
+        PostMethod method = new PostMethod(BASE_URL + "/OfficialAddOrders/AddOrders");
         StringBuilder stringBuffer = null;
         try {
             HttpClient client = new HttpClient();
             NameValuePair[] data = {new NameValuePair("gameId", "123"), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
 
             method.setRequestBody(data);
-            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/26");
+            method.setRequestHeader("Referer", BASE_URL + "/OffcialOtherGame/Index/26");
             method.setRequestHeader("Host", BASE_URL);
             method.setRequestHeader("Origin", BASE_URL);
             method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -66,7 +68,8 @@ public class BetRequestForDanShuang {
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
             Thread.sleep(10000);
         }
-        System.out.println("当前投注金额为：" + order.getA() + "元,当前倍数为：" + times + " 当前余额：" + AccountRequest.getAccount().getCreditBalance() + "元");
+        Account account = AccountRequest.getAccount();
+        System.out.println("账户：" + account.getAccountName() + " 当前投注金额为：" + order.getA() + "元,当前倍数为：" + times + " 当前余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME+" 重试失败次数："+REPEAT_FAILT_TIME+" 重试成功次数："+REPEAT_SUCCESS_TIME);
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
@@ -75,12 +78,39 @@ public class BetRequestForDanShuang {
             }
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
-                times = initTime;
-                bet(times);
+                if (REPEAT_TIME == 0) {
+                    FAIL_TIME = 0;
+                    bet(initTime);
+                } else {
+                    REPEAT_SUCCESS_TIME++;
+                    /**回本**/
+                    if (REPEAT_SUCCESS_TIME > REPEAT_FAILT_TIME) {
+                        REPEAT_TIME = 0;
+                        REPEAT_FAILT_TIME=0;
+                        REPEAT_SUCCESS_TIME=0;
+                        FAIL_TIME = 0;
+                        bet(initTime);
+                    } else {
+                        /**重试虽然成功，但未回本，继续**/
+                        REPEAT_TIME++;
+                        bet(times);
+                    }
+                }
             } else {
-                //times = (times << 1) + ((times >> 1) > 2 ? times >> 1 : 2) + ((times >> 2) > 0 ? (times >> 2) : 0);
-                times = (times << 1) + 2 + ((times >> 2) > 0 ? (times >> 2) : 0);
-                System.out.println("未中奖");
+                if (REPEAT_TIME == 0) {
+                    FAIL_TIME++;
+                }
+                /**未到重试次数**/
+                if (REPEAT_TIME == 0 && FAIL_TIME < FAIL_LIMIT) {
+                    times = (times << 1) +times/2;
+                } else {
+                    /**第一次重试当然不算是重试失败了**/
+                    if (REPEAT_TIME > 0) {
+                        REPEAT_FAILT_TIME++;
+                    }
+                    /**到重复次数了**/
+                    REPEAT_TIME++;
+                }
                 bet(times);
             }
         }

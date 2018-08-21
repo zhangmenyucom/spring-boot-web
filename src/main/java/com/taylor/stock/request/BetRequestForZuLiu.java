@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.taylor.common.Constants.*;
 import static com.taylor.common.Constants.BASE_URL;
 import static com.taylor.common.Constants.COOKIE;
 import static com.taylor.common.Constants.initTime;
@@ -30,7 +31,7 @@ public class BetRequestForZuLiu {
         try {
             HttpClient client = new HttpClient();
             System.out.println(JsonUtil.transfer2JsonString(orderList));
-            NameValuePair[] data = {new NameValuePair("gameId", "123"), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList",JsonUtil.transfer2JsonString(orderList))};
+            NameValuePair[] data = {new NameValuePair("gameId", "123"), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
 
             System.out.println(JsonUtil.transfer2JsonString(data));
             method.setRequestBody(data);
@@ -58,21 +59,21 @@ public class BetRequestForZuLiu {
     }
 
     public static void bet(int times) throws InterruptedException {
-        Order order=new Order();
-        order.setC(HistoryResultRequest.getNextContent("123",6));
+        Order order = new Order();
+        order.setC(HistoryResultRequest.getNextContent("123", 6));
         order.setI(20979);
         order.setN(56);
         order.setT(1);
         order.setM(4);
         order.setK(0);
         order.setA(BigDecimal.valueOf(0.112));
-        List<Order> list=new ArrayList<>();
+        List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
         System.out.println(result);
         while (!result.contains("投注成功")) {
             if (result.contains("传入的订单列表，格式不正确")) {
-                MailUtils.sendMail("格式不正确",result);
+                MailUtils.sendMail("格式不正确", result);
             }
             System.out.println(JsonUtil.transfer2JsonString(list));
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
@@ -89,10 +90,22 @@ public class BetRequestForZuLiu {
             }
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("恭喜你中奖:" + myOrder.getBettingBalance() + "元");
-                times = initTime;
-                bet(times);
+                if (REPEAT_TIME == 0) {
+                    FAIL_TIME = 0;
+                    bet(initTime);
+                } else {
+                    REPEAT_TIME--;
+                    bet(times);
+                }
             } else {
-                times = (times << 1) + 1;
+                if (REPEAT_TIME == 0) {
+                    FAIL_TIME++;
+                }
+                if (REPEAT_TIME == 0 && FAIL_TIME < FAIL_LIMIT) {
+                    times = (times << 1) + 1;
+                } else {
+                    REPEAT_TIME++;
+                }
                 bet(times);
             }
         }
