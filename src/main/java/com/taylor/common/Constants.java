@@ -18,7 +18,7 @@ public class Constants {
     /**
      * 允许失败次数
      **/
-    public static int FAIL_LIMIT = 4;
+    public static int FAIL_LIMIT = 3;
 
     /**
      * 到达失败上限时，重试次数
