@@ -69,7 +69,7 @@ public class BetRequestForDanShuang {
             Thread.sleep(10000);
         }
         Account account = AccountRequest.getAccount();
-        System.out.println("账户：" + account.getAccountName() + " 当前投注金额为：" + order.getA() + "元,当前倍数为：" + times + " 当前余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME+" 重试失败次数："+REPEAT_FAILT_TIME+" 重试成功次数："+REPEAT_SUCCESS_TIME);
+        System.out.println("账户：" + account.getAccountName() + " 投注金额：" + order.getA() + "元,倍数：" + times + " 余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME+" 重试失败次数："+REPEAT_FAILT_TIME+" 重试成功次数："+REPEAT_SUCCESS_TIME);
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
