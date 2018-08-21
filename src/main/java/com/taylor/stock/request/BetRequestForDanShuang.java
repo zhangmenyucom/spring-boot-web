@@ -69,7 +69,7 @@ public class BetRequestForDanShuang {
             Thread.sleep(10000);
         }
         Account account = AccountRequest.getAccount();
-        System.out.println("账户：" + account.getAccountName() + " 投注金额：" + order.getA() + "元,倍数：" + times + " 余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME+" 重试失败次数："+REPEAT_FAILT_TIME+" 重试成功次数："+REPEAT_SUCCESS_TIME);
+        System.out.println("账户：" + account.getAccountName() + " 投注金额：" + order.getA() + "元,倍数：" + times + " 余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME + " 重试失败次数：" + REPEAT_FAILT_TIME + " 重试成功次数：" + REPEAT_SUCCESS_TIME);
         MyOrder myOrder = MyOrderListRequest.postOrder("123", 1).get(0);
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
@@ -86,8 +86,8 @@ public class BetRequestForDanShuang {
                     /**只有成功次数是失败次数多一次才能回本且有赚头**/
                     if (REPEAT_SUCCESS_TIME > REPEAT_FAILT_TIME) {
                         REPEAT_TIME = 0;
-                        REPEAT_FAILT_TIME=0;
-                        REPEAT_SUCCESS_TIME=0;
+                        REPEAT_FAILT_TIME = 0;
+                        REPEAT_SUCCESS_TIME = 0;
                         FAIL_TIME = 0;
                         bet(initTime);
                     } else {
@@ -102,16 +102,18 @@ public class BetRequestForDanShuang {
                 }
                 /**未到重试次数**/
                 if (REPEAT_TIME == 0 && FAIL_TIME < FAIL_LIMIT) {
-                    times = (times << 1) +times/2;
+                    times = (times << 1) + times / 2;
                 } else {
                     /**第一次重试当然不算是重试失败了**/
                     if (REPEAT_TIME > 0) {
                         REPEAT_FAILT_TIME++;
                     }
                     /**重试的时候双倍，这时成功数只要大于失败数一次就够了**/
-                    if(REPEAT_TIME==0){
-                        times = (times << 1) +times/2;
+                    if (REPEAT_TIME == 0) {
+                        times = (times << 1) + times / 2;
                     }
+                    /**重试的时候是有损失的，失败时添加缺失因子,弥补缺失**/
+                    times = times + 2;
                     /**到重复次数了**/
                     REPEAT_TIME++;
                 }
