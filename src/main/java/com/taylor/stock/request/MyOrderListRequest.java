@@ -41,10 +41,10 @@ public class MyOrderListRequest {
             String stringBuffer = br.lines().collect(Collectors.joining());
             Gson gson = new Gson();
             String result= stringBuffer.replace("\\","");
-            if(!result.contains("ordernumber")){
-                System.out.println("获取订单失败5秒后重试");
+            if(!result.contains("Ordernumber")){
+                System.out.println("获取订单失败15秒后重试");
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(15000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
