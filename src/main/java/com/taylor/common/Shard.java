@@ -2,26 +2,37 @@ package com.taylor.common;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.security.SecureRandom;
 import java.util.*;
-/**S类封装了机器节点的信息 ，如name、password、ip、port等**/
+
+/**
+ * S类封装了机器节点的信息 ，如name、password、ip、port等
+ **/
 public class Shard<S> {
-    /** 虚拟节点 **/
+    /**
+     * 虚拟节点
+     **/
     private TreeMap<Long, S> nodes;
-    /** 真实机器节点**/
+    /**
+     * 真实机器节点
+     **/
     private List<S> shards;
 
-    public Shard(List<S> shards,int virtualNumer) {
+    public Shard(List<S> shards, int virtualNumer) {
         this.shards = shards;
         init(virtualNumer);
     }
-    /**初始化一致性hash环**/
+
+    /**
+     * 初始化一致性hash环
+     **/
     private void init(int virtualNumer) {
         nodes = new TreeMap<>();
         /**每个真实机器节点都需要关联虚拟节点**/
         for (int i = 0; i != shards.size(); i++) {
             final S shardInfo = shards.get(i);
             for (int n = 0; n < virtualNumer; n++)
-                /** 一个真实机器节点关联NODE_NUM个虚拟节点**/ {
+            /** 一个真实机器节点关联NODE_NUM个虚拟节点**/ {
                 nodes.put(hash("SHARD-" + i + "-NODE-" + n), shardInfo);
             }
 
@@ -81,11 +92,22 @@ public class Shard<S> {
     }
 
     public static void main(String... args) {
-        List<String> list = Arrays.asList("1", "2", "3", "4", "5", "6", "7");
-        Shard share = new Shard<>(list,1000);
+        List<Boolean> list = Arrays.asList(Boolean.TRUE, Boolean.FALSE);
+        Shard<Boolean> share = new Shard<>(list, 1000000);
+        SecureRandom secureRandom = new SecureRandom();
+        int countFalse = 0;
+        int countTrue = 0;
         for (int i = 0; i < 10000; i++) {
-            System.out.println(share.getShardInfo(i+""));
+            Boolean b=share.getShardInfo(UUID.randomUUID().toString());
+            System.out.println(b);
+            if (b) {
+                countFalse++;
+            } else {
+                countTrue++;
+            }
         }
+        System.out.println("True:"+countTrue);
+        System.out.println("False:"+countFalse);
     }
 
 }

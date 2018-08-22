@@ -28,7 +28,7 @@ public enum BetGameEnum {
     private static final Shard<BetGameEnum> shard=new Shard<>(list,100000);
 
     public static BetGameEnum getRandomBetGame() {
-        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
+        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
     }
 
     public static void main(String... args) {

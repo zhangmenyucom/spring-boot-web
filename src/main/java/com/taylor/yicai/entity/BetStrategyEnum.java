@@ -66,13 +66,13 @@ public enum BetStrategyEnum {
 
     private static final List<BetStrategyEnum> list = Arrays.asList(BetStrategyEnum.values());
 
-    private static final Shard<BetStrategyEnum> shard=new Shard<>(list,10000);
+    private static final Shard<BetStrategyEnum> shard=new Shard<>(list,100000);
 
     private static final SecureRandom secureRandom = new SecureRandom();
 
 
     public static BetStrategyEnum getRandomBetStrategy() {
-        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
+        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
     }
 
     public static void main(String... args) {
