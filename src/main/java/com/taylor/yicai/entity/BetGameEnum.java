@@ -2,9 +2,9 @@ package com.taylor.yicai.entity;/**
  * ${author} on 2018/8/20.
  */
 
+import com.taylor.common.Shard;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.codehaus.groovy.runtime.ArrayUtil;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -25,11 +25,13 @@ public enum BetGameEnum {
     private static final List<BetGameEnum> list = Arrays.asList(BetGameEnum.values());
     private static final SecureRandom secureRandom = new SecureRandom();
 
+    private static final Shard<BetGameEnum> shard=new Shard<>(list,100000);
+
     public static BetGameEnum getRandomBetGame() {
-        return list.get(secureRandom.nextInt(10000) % list.size());
+        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         for (int i = 0; i < 1000; i++) {
             System.out.println(getRandomBetGame().getGameId());
         }
