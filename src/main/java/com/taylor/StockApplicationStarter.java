@@ -46,7 +46,7 @@ public class StockApplicationStarter {
             FACTOR = Integer.valueOf(args[3]);
         }
         log.info("初始化完成,配置如下");
-        log.info("初始倍数：{},失败上限:{}加注单位：{},校验因子：{}", initTime, FAIL_LIMIT, BILLUNIT.getName(), FACTOR);
+        log.info("初始倍数：{},失败上限:{},加注单位：{},校验因子：{}", initTime, FAIL_LIMIT, BILLUNIT.getName(), FACTOR);
         log.info("Cookie:{}", COOKIE);
         BetRequestForDanShuang.bet(initTime);
     }
