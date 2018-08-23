@@ -16,9 +16,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 public enum BillEnum {
-    YUAN(1,BigDecimal.valueOf(1.0)),JIAO(2,BigDecimal.valueOf(0.1)),FENG(3,BigDecimal.valueOf(0.01)),LI(4,BigDecimal.valueOf(0.001));
+    YUAN(1,BigDecimal.valueOf(1.0),"元"),JIAO(2,BigDecimal.valueOf(0.1),"角"),FENG(3,BigDecimal.valueOf(0.01),"分"),LI(4,BigDecimal.valueOf(0.001),"厘");
 
     private int unit;
 
     private BigDecimal value;
+
+    private String name;
 }
