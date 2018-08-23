@@ -112,6 +112,14 @@ public class BetRequestForDanShuang {
                     times = times + FACTOR;
                     /**到重复次数了**/
                     REPEAT_TIME++;
+
+                    if (REPEAT_FAILT_TIME - REPEAT_SUCCESS_TIME > 10) {
+                        /**10次以上是扳不回来的了，即使板回来成本太大**/
+                        REPEAT_TIME = 0;
+                        REPEAT_FAILT_TIME = 0;
+                        REPEAT_SUCCESS_TIME = 0;
+                        FAIL_TIME = 0;
+                    }
                 }
                 bet(times);
             }

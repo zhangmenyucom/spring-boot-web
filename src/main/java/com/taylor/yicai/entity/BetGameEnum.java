@@ -24,10 +24,10 @@ public enum BetGameEnum {
     private static final List<BetGameEnum> list = Arrays.asList(BetGameEnum.values());
     private static final SecureRandom secureRandom = new SecureRandom();
 
-    private static final Shard<BetGameEnum> shard=new Shard<>(list,1000000);
+    private static final Shard<BetGameEnum> shard=new Shard<>(list,100000);
 
     public static BetGameEnum getRandomBetGame() {
-        return shard.getShardInfo("SHARD-"+new Date().getTime()+""+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
+        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
     }
 
     public static void main(String... args) {
