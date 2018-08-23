@@ -29,7 +29,7 @@ public class StockApplicationStarter {
             initTime = Integer.valueOf(properties.get("initTime").toString());
             FAIL_LIMIT = Integer.valueOf(properties.get("failLimit").toString());
             BILLUNIT = BillEnum.valueOf(properties.get("unit").toString());
-            FACTOR = Integer.valueOf(properties.get("fator").toString());
+            FACTOR = Integer.valueOf(properties.get("factor").toString());
             COOKIE = properties.get("COOKIE").toString();
         }
 
