@@ -55,14 +55,14 @@ public class BetRequestForDanShuang {
     }
 
     public static void bet(int times) throws InterruptedException {
+        Thread.sleep(10000);
         Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times,BILLUNIT);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
         while (!result.contains("投注成功")) {
-            System.out.println("未投注成功重试");
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
-            Thread.sleep(15000);
+            Thread.sleep(12000);
         }
         Account account = AccountRequest.getAccount();
         System.out.println("账户：" + account.getAccountName() + " 投注金额：" + order.getA() + "元,倍数：" + times + " 余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME + " 重试失败次数：" + REPEAT_FAILT_TIME + " 重试成功次数：" + REPEAT_SUCCESS_TIME);
