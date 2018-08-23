@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhangxiaolu
@@ -25,15 +24,21 @@ public enum BetGameEnum {
     private static final List<BetGameEnum> list = Arrays.asList(BetGameEnum.values());
     private static final SecureRandom secureRandom = new SecureRandom();
 
-    private static final Shard<BetGameEnum> shard=new Shard<>(list,100000);
+    private static final Shard<BetGameEnum> shard=new Shard<>(list,1000000);
 
     public static BetGameEnum getRandomBetGame() {
-        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
+        return shard.getShardInfo("SHARD-"+new Date().getTime()+""+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
     }
 
     public static void main(String... args) {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(getRandomBetGame().getGameId());
+        Map<Integer,Integer> map=new HashMap<>(2);
+        map.put(QIANER_DAN_SHUANG.getGameId(),0);
+        map.put(HOUER_DAN_SHUANG.getGameId(),0);
+        for (int i = 0; i < 10000; i++) {
+            int gameId = getRandomBetGame().getGameId();
+            map.put(gameId,map.get(gameId)+1);
         }
+        System.out.println(map.get(QIANER_DAN_SHUANG.getGameId()));
+        System.out.println(map.get(HOUER_DAN_SHUANG.getGameId()));
     }
 }

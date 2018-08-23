@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Add some description about this class.
@@ -70,14 +69,16 @@ public enum BetStrategyEnum {
 
     private static final SecureRandom secureRandom = new SecureRandom();
 
-
     public static BetStrategyEnum getRandomBetStrategy() {
-        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
+        return shard.getShardInfo("SHARD-"+new Date().getTime()+""+secureRandom.nextInt(Integer.MAX_VALUE)+"-NODE-");
     }
-
     public static void main(String... args) {
+        Map<String,Integer> map=new HashMap<>();
+        Arrays.stream(BetStrategyEnum.values()).forEach(value-> map.put(value.getContent(),0));
         for (int i = 0; i < 1000; i++) {
-            System.out.println(getRandomBetStrategy().getContent());
+            String content = getRandomBetStrategy().getContent();
+            map.put(content,map.get(content)+1);
         }
+        map.entrySet().forEach(entry-> System.out.println(entry.getKey()+":"+entry.getValue()));
     }
 }

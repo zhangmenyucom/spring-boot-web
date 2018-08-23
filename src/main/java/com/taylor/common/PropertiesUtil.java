@@ -21,11 +21,7 @@ public class PropertiesUtil {
             Properties pps = new Properties();
             pps.load(new FileInputStream(path));
             Enumeration enum1 = pps.propertyNames();//得到配置文件的名字
-            while (enum1.hasMoreElements()) {
-                String strKey = (String) enum1.nextElement();
-                String strValue = pps.getProperty(strKey);
-                System.out.println(strKey + "=" + strValue);
-            }
+            System.out.println(pps.get("COOKIE"));
             return pps;
         }
         System.out.println("配置文件" + path + "不存在,现采用其指定参数或默认参数");
