@@ -21,7 +21,7 @@ import static com.taylor.common.Constants.*;
 public class BetRequestForDanShuang {
     public static synchronized String postOrder(String gameId, String periodId, List<Order> orderList) {
         PostMethod method = new PostMethod(BASE_URL + "/OfficialAddOrders/AddOrders");
-        StringBuilder stringBuffer = null;
+        StringBuilder stringBuffer;
         try {
             HttpClient client = new HttpClient();
             NameValuePair[] data = {new NameValuePair("gameId", "123"), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
@@ -55,7 +55,7 @@ public class BetRequestForDanShuang {
     }
 
     public static void bet(int times) throws InterruptedException {
-        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times, BillEnum.FENG);
+        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times,BILLUNIT);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);

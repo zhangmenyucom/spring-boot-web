@@ -1,5 +1,7 @@
 package com.taylor.common;
 
+import com.taylor.yicai.entity.BillEnum;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -34,6 +36,8 @@ public class Constants {
      * 重试成功次数
      **/
     public static int REPEAT_SUCCESS_TIME = 0;
+
+    public static BillEnum  BILLUNIT=BillEnum.JIAO;
 }
 
 
