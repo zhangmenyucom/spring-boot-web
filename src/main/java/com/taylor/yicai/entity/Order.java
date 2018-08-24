@@ -65,8 +65,8 @@ public class Order {
 
     public static Order getZuliuOrder(int times) {
         return new Order()
-                .setC(BetZuLiuStategy.generateNextNumber())
                 .setI(ZuliuGameEnum.getRandomBetStrategy().getGameId())
+                .setC(BetZuLiuStategy.generateNextNumber())
                 .setN(56)
                 .setT(times)
                 .setM(4)
