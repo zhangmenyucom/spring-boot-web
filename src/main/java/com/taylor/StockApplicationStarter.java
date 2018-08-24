@@ -3,6 +3,7 @@ package com.taylor;
 import com.taylor.common.Constants;
 import com.taylor.common.PropertiesUtil;
 import com.taylor.stock.request.BetRequestForDanShuang;
+import com.taylor.stock.request.BetRequestForZuLiu;
 import com.taylor.yicai.entity.BillEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -48,6 +49,6 @@ public class StockApplicationStarter {
         log.info("初始化完成,配置如下");
         log.info("初始倍数：{},失败上限:{},加注单位：{},校验因子：{}", initTime, FAIL_LIMIT, BILLUNIT.getName(), FACTOR);
         log.info("Cookie:{}", COOKIE);
-        BetRequestForDanShuang.bet(initTime);
+        BetRequestForZuLiu.bet(initTime);
     }
 }

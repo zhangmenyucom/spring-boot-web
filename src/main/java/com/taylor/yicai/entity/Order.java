@@ -1,5 +1,6 @@
 package com.taylor.yicai.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     /**
@@ -43,13 +45,31 @@ public class Order {
      **/
     private BigDecimal a;
 
-    public Order(BetGameEnum betGameEnum, BetStrategyEnum betStrategyEnum, int t, BillEnum billEnum) {
-        this.i = betGameEnum.getGameId();
-        this.c = betStrategyEnum.getContent();
-        this.n = betStrategyEnum.getN();
+    public static Order getDanShuangOrder(int t, BillEnum billEnum) {
+        return new Order(t, billEnum);
+
+    }
+
+    private Order(int t, BillEnum billEnum) {
+        BetGameEnum randomBetGame = BetGameEnum.getRandomBetGame();
+        BetStrategyEnum randomBetStrategy = BetStrategyEnum.getRandomBetStrategy();
+        this.i = randomBetGame.getGameId();
+        this.c = randomBetStrategy.getContent();
+        this.n = randomBetStrategy.getN();
         this.t = t;
         this.m = billEnum.getUnit();
         this.k = 0;
         this.a = billEnum.getValue().multiply(BigDecimal.valueOf(2 * t * n));
+    }
+
+    public static Order getZuliuOrder(int times) {
+        return new Order()
+                .setC(BetZuLiuStategy.generateNextNumber())
+                .setI(20979)
+                .setN(56)
+                .setT(times)
+                .setM(4)
+                .setK(0)
+                .setA(BigDecimal.valueOf(0.112 * times));
     }
 }

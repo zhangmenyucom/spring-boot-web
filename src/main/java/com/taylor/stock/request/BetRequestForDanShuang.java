@@ -56,7 +56,7 @@ public class BetRequestForDanShuang {
 
     public static void bet(int times) throws InterruptedException {
         Thread.sleep(10000);
-        Order order = new Order(BetGameEnum.getRandomBetGame(), BetStrategyEnum.getRandomBetStrategy(), times,BILLUNIT);
+        Order order = Order.getDanShuangOrder(times,BILLUNIT);
         List<Order> list = new ArrayList<>();
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);

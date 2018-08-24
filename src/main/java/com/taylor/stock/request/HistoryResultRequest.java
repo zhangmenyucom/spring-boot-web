@@ -86,7 +86,6 @@ public class HistoryResultRequest {
 
     public static String getNextContent(String gameId, int count) {
         List<Integer> lenMenHaoList = getLenMenHao(gameId, count);
-        System.out.println(JsonUtil.transfer2JsonString(lenMenHaoList));
         String template = "0|1|2|3|4|5|6|7|8|9|";
         Integer first = lenMenHaoList.get(0);
         Integer second = lenMenHaoList.get(1);
