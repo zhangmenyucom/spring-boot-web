@@ -65,11 +65,12 @@ public class Order {
     public static Order getZuliuOrder(int times) {
         return new Order()
                 .setC(BetZuLiuStategy.generateNextNumber())
-                .setI(20979)
+                .setI(ZuliuGameEnum.getRandomBetStrategy().getGameId())
                 .setN(56)
                 .setT(times)
                 .setM(4)
                 .setK(0)
                 .setA(BigDecimal.valueOf(0.112 * times));
     }
+
 }

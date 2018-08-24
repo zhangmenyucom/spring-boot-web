@@ -67,10 +67,9 @@ public enum BetStrategyEnum {
 
     private static final Shard<BetStrategyEnum> shard=new Shard<>(list,10000);
 
-    private static final SecureRandom secureRandom = new SecureRandom();
 
     public static BetStrategyEnum getRandomBetStrategy() {
-        return shard.getShardInfo("SHARD-"+secureRandom.nextInt(Integer.MAX_VALUE)/2+secureRandom.nextInt(Integer.MAX_VALUE)/2+"-NODE-");
+        return shard.getShardInfo(UUID.randomUUID().toString());
     }
     public static void main(String... args) {
         Map<String,Integer> map=new HashMap<>();

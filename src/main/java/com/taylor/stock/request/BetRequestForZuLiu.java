@@ -58,6 +58,7 @@ public class BetRequestForZuLiu {
         list.add(order);
         String result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
         while (!result.contains("投注成功")) {
+            System.out.println("投注失败,12秒后重试："+result);
             result = postOrder("123", NewPeriodDataRequest.queryLatestDataPeriod("123").getFid(), list);
             Thread.sleep(12000);
         }
