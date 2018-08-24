@@ -39,5 +39,4 @@ public enum ZuliuGameEnum {
             System.out.println(getRandomBetStrategy().name);
         }
     }
-
 }
