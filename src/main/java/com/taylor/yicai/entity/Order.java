@@ -1,5 +1,6 @@
 package com.taylor.yicai.entity;
 
+import com.taylor.common.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -70,7 +71,11 @@ public class Order {
                 .setT(times)
                 .setM(4)
                 .setK(0)
-                .setA(BigDecimal.valueOf(0.112 * times));
+                .setA(BigDecimal.valueOf(0.112).multiply(BigDecimal.valueOf(times)));
+    }
+
+    public static void main(String... args) {
+        System.out.println(JsonUtil.transfer2JsonString(getZuliuOrder(38)));
     }
 
 }
