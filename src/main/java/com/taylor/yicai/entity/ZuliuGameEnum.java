@@ -8,7 +8,10 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangxiaolu
@@ -26,11 +29,13 @@ public enum ZuliuGameEnum {
 
     private static final List<ZuliuGameEnum> list = Arrays.asList(ZuliuGameEnum.values());
 
+    private  static final Map<Integer,String> gamesMaps = Arrays.stream(ZuliuGameEnum.values()).collect(Collectors.toMap(ZuliuGameEnum::getGameId,ZuliuGameEnum::getName));
+
     private static final Shard<ZuliuGameEnum> shard = new Shard<>(list, 100000);
 
     public static ZuliuGameEnum getRandomBetStrategy() {
         ZuliuGameEnum shardInfo = shard.getShardInfo(UUID.randomUUID().toString());
-        System.out.println("本期策略码：" + shardInfo.getName());
+        //System.out.println("本期策略码：" + shardInfo.getName());
         return shardInfo;
     }
 
@@ -38,5 +43,9 @@ public enum ZuliuGameEnum {
         for (int i = 0; i < 10000; i++) {
             System.out.println(getRandomBetStrategy().name);
         }
+    }
+
+    public static String getStrategyName(Integer gameId){
+        return gamesMaps.get(gameId);
     }
 }

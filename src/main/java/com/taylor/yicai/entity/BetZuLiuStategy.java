@@ -14,20 +14,18 @@ import static com.taylor.common.Constants.NUMBER_LIST;
  * @since 2018/8/24 16:52
  */
 public class BetZuLiuStategy {
-    private static final Shard<Integer> shard = new Shard<>(NUMBER_LIST, 100000);
+    public  static final Shard<Integer> shard = new Shard<>(NUMBER_LIST, 100000);
 
     public static String generateNextNumber() {
         Set<Integer> numberSet = new HashSet<>();
-        while (numberSet.size() < 2) {
+        while (numberSet.size() <1) {
             numberSet.add(shard.getShardInfo(UUID.randomUUID().toString()));
         }
         List<Integer> numerList = new ArrayList<>(NUMBER_LIST);
-        System.out.println("本期杀： " + numberSet.toString());
+        //System.out.println("本期杀： " + numberSet.toString());
         numerList.removeAll(numberSet);
         StringBuilder sb = new StringBuilder("");
-        numerList.forEach(e -> {
-            sb.append(e + "|");
-        });
+        numerList.forEach(e -> sb.append(e + "|"));
         String s = sb.toString();
         return s.substring(0, s.length() - 1);
     }
