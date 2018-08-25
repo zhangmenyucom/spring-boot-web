@@ -1,8 +1,6 @@
 package com.taylor;
 
-import com.taylor.common.Constants;
 import com.taylor.common.PropertiesUtil;
-import com.taylor.stock.request.BetRequestForDanShuang;
 import com.taylor.stock.request.BetRequestForZuLiu;
 import com.taylor.yicai.entity.BillEnum;
 import lombok.extern.slf4j.Slf4j;

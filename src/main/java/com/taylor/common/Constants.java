@@ -13,9 +13,10 @@ import java.util.List;
  */
 public class Constants {
 
+    public static String GAMEID="26";
     public static final List<Integer> NUMBER_LIST = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
     public static final String BASE_URL = "http://yc3033.com:90";
-    public static  String COOKIE = "SESSION_COOKIE=2; kangle_runat=1; ASP.NET_SessionId=jxgkebrnujgnbvyk2tk5x1ht; ValidateToken=22924c5171df5c826d3797609ef46a89; skinStyle=suolaier; CurrentSkin=suolaier; GAMEID=123; XYHandicap=0; multiSelect=false; LoginSessionID=b1af68329b3e440595411d50538bf74d";
+    public static  String COOKIE = "ASP.NET_SessionId=g30bre21fwzrpraix0qyr2m2; ValidateToken=3ba84ea1dfa82cdccbe60f7e694cf5a3; skinStyle=suolaier; CurrentSkin=suolaier; SESSION_COOKIE=2; kangle_runat=1; LoginSessionID=6b9e0a248e5924bfe5f90be6cb39302c";
 
     public static int initTime = 1;
     /**
