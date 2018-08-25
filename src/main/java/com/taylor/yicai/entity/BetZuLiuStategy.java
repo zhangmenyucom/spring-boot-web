@@ -18,7 +18,7 @@ public class BetZuLiuStategy {
 
     public static String generateNextNumber() {
         Set<Integer> numberSet = new HashSet<>();
-        while (numberSet.size() <1) {
+        while (numberSet.size() <2) {
             numberSet.add(shard.getShardInfo(UUID.randomUUID().toString()));
         }
         List<Integer> numerList = new ArrayList<>(NUMBER_LIST);
