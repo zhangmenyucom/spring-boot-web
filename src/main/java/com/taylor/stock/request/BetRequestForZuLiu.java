@@ -1,17 +1,9 @@
 package com.taylor.stock.request;
 
-import com.taylor.common.JsonUtil;
 import com.taylor.yicai.entity.Account;
 import com.taylor.yicai.entity.MyOrder;
 import com.taylor.yicai.entity.Order;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.methods.PostMethod;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,35 +13,6 @@ import static com.taylor.common.Constants.*;
  * @author taylor
  */
 public class BetRequestForZuLiu {
-    public static synchronized String postOrder(String gameId, String periodId, List<Order> orderList) {
-        PostMethod method = new PostMethod(BASE_URL+"/OfficialAddOrders/AddOrders");
-        StringBuilder stringBuffer = null;
-        try {
-            HttpClient client = new HttpClient();
-            NameValuePair[] data = {new NameValuePair("gameId", GAMEID), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
-            method.setRequestBody(data);
-            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/26");
-            method.setRequestHeader("Host", BASE_URL);
-            method.setRequestHeader("Origin", BASE_URL);
-            method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            method.setRequestHeader("Cookie", COOKIE);
-            //method.setContentChunked(true);
-            // 提交表单
-            client.executeMethod(method);
-            // 字符流转字节流 循环输出，同get解释
-            InputStream inputStream = method.getResponseBodyAsStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            stringBuffer = new StringBuilder();
-            String str;
-            while ((str = br.readLine()) != null) {
-                stringBuffer.append(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuffer.toString();
-
-    }
 
     public static void bet(int times) throws InterruptedException {
         /**重试失败大于成功10次自动从一半来**/
@@ -64,19 +27,19 @@ public class BetRequestForZuLiu {
         Order order = Order.getZuliuOrder(times);
         List<Order> list = new ArrayList<>();
         list.add(order);
-        String result = postOrder(GAMEID, NewPeriodDataRequest.queryLatestDataPeriod(GAMEID).getFid(), list);
+        String result = ApiClient.postOrder(GAMEID,list);
         while (!result.contains("投注成功")) {
             System.out.println("投注失败,12秒后重试："+result);
-            result = postOrder(GAMEID, NewPeriodDataRequest.queryLatestDataPeriod(GAMEID).getFid(), list);
+            result = ApiClient.postOrder(GAMEID,list);
             Thread.sleep(12000);
         }
-        Account account = AccountRequest.getAccount();
+        Account account = ApiClient.getAccount();
         System.out.println("账户：" + account.getAccountName() + " 投注金额：" + order.getA() + "元,倍数：" + times + " 余额：" + account.getCreditBalance() + "元" + " 失败次数：" + FAIL_TIME + " 重试次数: " + REPEAT_TIME + " 重试失败次数：" + REPEAT_FAILT_TIME + " 重试成功次数：" + REPEAT_SUCCESS_TIME);
-        MyOrder myOrder = MyOrderListRequest.postOrder(GAMEID, 1).get(0);
+        MyOrder myOrder = ApiClient.getMyOrderList(GAMEID,1).get(0);
         if (result.contains(myOrder.getOrderId())) {
             while (myOrder.getPeriodStatus() != 4) {
                 Thread.sleep(20000);
-                myOrder = MyOrderListRequest.postOrder(GAMEID, 1).get(0);
+                myOrder = ApiClient.getMyOrderList(GAMEID,1).get(0);
             }
             if (myOrder.getOrderResult() == 2) {
                 System.out.println("中奖:" + myOrder.getBettingBalance() + "元");

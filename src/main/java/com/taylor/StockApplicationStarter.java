@@ -1,6 +1,7 @@
 package com.taylor;
 
 import com.taylor.common.PropertiesUtil;
+import com.taylor.stock.request.BetRequestForDanShuang;
 import com.taylor.stock.request.BetRequestForZuLiu;
 import com.taylor.yicai.entity.BillEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class StockApplicationStarter {
             FAIL_LIMIT = Integer.valueOf(properties.get("failLimit").toString());
             BILLUNIT = BillEnum.valueOf(properties.get("unit").toString());
             FACTOR = Integer.valueOf(properties.get("factor").toString());
-            COOKIE = properties.get("COOKIE").toString();
+            //COOKIE = properties.get("COOKIE").toString();
         }
 
         if (args != null && args.length > 0 && args[0] != null) {
@@ -47,6 +48,6 @@ public class StockApplicationStarter {
         log.info("初始化完成,配置如下");
         log.info("初始倍数：{},失败上限:{},加注单位：{},校验因子：{}", initTime, FAIL_LIMIT, BILLUNIT.getName(), FACTOR);
         log.info("Cookie:{}", COOKIE);
-        BetRequestForZuLiu.bet(initTime);
+        BetRequestForDanShuang.bet(initTime);
     }
 }
