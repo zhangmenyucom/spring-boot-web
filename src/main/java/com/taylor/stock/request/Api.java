@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 import static com.taylor.common.Constants.COOKIE;
 
-public interface ApiRequest {
+public interface Api {
     /**
      * 获取下一期periodId
      **/

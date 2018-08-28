@@ -6,6 +6,7 @@ import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.taylor.common.JsonUtil;
+import com.taylor.common.Retrofits;
 import com.taylor.yicai.entity.*;
 import retrofit2.Retrofit;
 
@@ -22,14 +23,14 @@ import static com.taylor.common.Constants.BASE_URL;
 public class ApiClient {
 
     public static final Retrofit retrofit = new Retrofit.Builder().addConverterFactory(new Retrofit2ConverterFactory()).baseUrl(BASE_URL).build();
-    public static ApiRequest api = retrofit.create(ApiRequest.class);
+    public static Api api = retrofit.create(Api.class);
 
     /**
      * 获取最新proidId
      **/
     public static NewPeriodEntity getNewPeriodEntity(String gameId) {
         try {
-            return api.getPeriod(gameId).execute().body();
+            return Retrofits.execute(api.getPeriod(gameId));
         } catch (IOException e) {
             try {
                 Thread.sleep(20000);
@@ -47,7 +48,7 @@ public class ApiClient {
     public static List<MyOrder> getMyOrderList(String gameId, int count) {
         String body;
         try {
-            body = api.getMyOrder(gameId, count).execute().body();
+            body = Retrofits.execute(api.getMyOrder(gameId, count));
         } catch (IOException e) {
             try {
                 Thread.sleep(20000);
@@ -66,7 +67,7 @@ public class ApiClient {
      **/
     public static Account getAccount() {
         try {
-            return api.getMyAccount().execute().body();
+            return Retrofits.execute(api.getMyAccount());
         } catch (IOException e) {
             try {
                 Thread.sleep(20000);
@@ -83,7 +84,7 @@ public class ApiClient {
      **/
     public static String postOrder(String gameId, List<Order> orderList) {
         try {
-            return api.postOrder(gameId, getNewPeriodEntity(gameId).getFid(), false, false, JsonUtil.transfer2JsonString(orderList)).execute().body();
+            return Retrofits.execute(api.postOrder(gameId, getNewPeriodEntity(gameId).getFid(), false, false, JsonUtil.transfer2JsonString(orderList)));
         } catch (IOException e) {
             try {
                 Thread.sleep(20000);
