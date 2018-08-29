@@ -12,5 +12,6 @@ import java.util.List;
  */
 @Data
 public class MashDataResponse extends CommonResponse {
+    private static final long serialVersionUID = -7603682858918248857L;
     private List<MashData> mashData;
 }

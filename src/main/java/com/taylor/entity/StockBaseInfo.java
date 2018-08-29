@@ -1,8 +1,10 @@
 package com.taylor.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author xiaolu.zhang
@@ -10,11 +12,10 @@ import java.io.Serializable;
  * @date: 2018/1/9 19:22
  */
 @Data
+@Accessors(chain = true)
 public class StockBaseInfo implements Serializable {
 
     private static final long serialVersionUID = 4413621543793129829L;
-
-    private Long id;
 
     /**
      * 股票代码
@@ -37,17 +38,17 @@ public class StockBaseInfo implements Serializable {
     private String stockStatus;
 
     /***收盘价**/
-    private double close;
+    private BigDecimal close;
 
     /**
      * 最高价
      **/
-    private double high;
+    private BigDecimal high;
 
     /**
      * 最低价
      **/
-    private double low;
+    private BigDecimal low;
 
     /**
      * 流通市值
@@ -57,12 +58,12 @@ public class StockBaseInfo implements Serializable {
     /**
      * 单位值变化
      **/
-    private double netChange;
+    private BigDecimal netChange;
 
     /**
      * 涨幅
      **/
-    private double netChangeRatio;
+    private BigDecimal netChangeRatio;
 
     /**
      * 成交量
@@ -72,22 +73,22 @@ public class StockBaseInfo implements Serializable {
     /**
      * 振幅
      **/
-    private double amplitudeRatio;
+    private BigDecimal amplitudeRatio;
 
     /**
      * 换手率
      **/
-    private double turnoverRatio;
+    private BigDecimal turnoverRatio;
 
     /**
      * 昨天收盘价
      **/
-    private double preClose;
+    private BigDecimal preClose;
 
     /**
      * 开盘价
      **/
-    private double open;
+    private BigDecimal open;
 
 
     private Integer asset;

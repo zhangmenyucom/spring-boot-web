@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface StockBaseInfoService {
 
-    List<StockBaseInfo> getStockBaseInfo(String stockCode);
+    StockBaseInfo getStockBaseInfo(String stockCode);
 }

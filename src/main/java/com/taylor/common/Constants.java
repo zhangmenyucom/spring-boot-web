@@ -9,6 +9,10 @@ public class Constants {
 
     public static final String TENCENT_PREFIX="http://web.sqt.gtimg.cn/";
 
+    public static final String BAIDU_PREFIX="https://gupiao.baidu.com/";
+
+    public static final String SINA_PREFIX="http://money.finance.sina.com.cn/";
+
     /***查询股票基本信息**/
     public static final String METHOD_URL_STOCK_BASE_INFO = "https://gupiao.baidu.com/api/rails/stockbasicbatch";
 

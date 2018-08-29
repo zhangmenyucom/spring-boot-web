@@ -1,15 +1,13 @@
 package com.taylor.service.impl;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.AbstractCrudService;
-import com.taylor.common.Constants;
 import com.taylor.dao.StockOnShelfDao;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.TimeLineBean;
 import com.taylor.entity.stock.TimeStockDataResponse;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.request.OnShelfUpdator;
-import com.taylor.stock.request.QueryStockTimeDataRequest;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,9 +22,8 @@ public class StockOnShelfServiceImpl extends AbstractCrudService<StockOnShelf, S
         StockOnShelf stockOnShelf = new StockOnShelf();
         stockOnShelf.setStatus(1);
         List<StockOnShelf> stockOnShelves = this.find(stockOnShelf);
-        GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_TIME_INFO);
         for (StockOnShelf onShelf : stockOnShelves) {
-            TimeStockDataResponse timeStockDataResponse = QueryStockTimeDataRequest.queryStockBaseInfo(onShelf.getStockCode().toLowerCase(), method);
+            TimeStockDataResponse timeStockDataResponse = ApiClient.getTimeDataInfo(onShelf.getStockCode().toLowerCase());
             if (timeStockDataResponse != null) {
                 List<TimeLineBean> timeLines = timeStockDataResponse.getTimeLine();
                 StockOnShelf updateBean = new StockOnShelf();

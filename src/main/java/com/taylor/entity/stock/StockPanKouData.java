@@ -1,5 +1,6 @@
 package com.taylor.entity.stock;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.CommonRequest;
 import com.taylor.common.JsonUtil;
 import lombok.Data;
@@ -46,89 +47,6 @@ public class StockPanKouData {
      * 内盘
      **/
     private Double inner;
-
-    /**
-     * 买1价
-     **/
-    private Double b1Price;
-    /**
-     * 买1数
-     **/
-    private Double b1Number;
-    /**
-     * 买2价
-     **/
-    private Double b2Price;
-    /**
-     * 买2数
-     **/
-    private Double b2Number;
-    /**
-     * 买3价
-     **/
-    private Double b3Price;
-    /**
-     * 买3数
-     **/
-    private Double b3Number;
-    /**
-     * 买4价
-     **/
-    private Double b4Price;
-    /**
-     * 买4数
-     **/
-    private Double b4Number;
-    /**
-     * 买5价
-     **/
-    private Double b5Price;
-    /**
-     * 买5数
-     **/
-    private Double b5Number;
-
-    /**
-     * 卖1价
-     **/
-    private Double s1Price;
-    /**
-     * 卖1数
-     **/
-    private Double s1Number;
-    /**
-     * 卖2价
-     **/
-    private Double s2Price;
-    /**
-     * 卖2数
-     **/
-    private Double s2Number;
-    /**
-     * 卖3价
-     **/
-    private Double s3Price;
-    /**
-     * 卖3数
-     **/
-    private Double s3Number;
-    /**
-     * 卖4价
-     **/
-    private Double s4Price;
-    /**
-     * 卖4数
-     **/
-    private Double s4Number;
-    /**
-     * 卖5价
-     **/
-    private Double s5Price;
-    /**
-     * 卖5数
-     **/
-    private Double s5Number;
-
     /**
      * 涨跌
      **/
@@ -200,7 +118,7 @@ public class StockPanKouData {
     private Double liangBi;
 
     public static void main(String... args) {
-        StockPanKouData sh600116 = CommonRequest.getStockPanKouData("SH603188");
+        StockPanKouData sh600116 = ApiClient.getPanKouData("SH603188");
         System.out.println(JsonUtil.transfer2JsonString(sh600116));
     }
 }

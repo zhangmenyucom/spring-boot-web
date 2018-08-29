@@ -1,5 +1,6 @@
 package com.taylor.common;
 
+import com.taylor.api.ApiClient;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.kdj.CheckResultBean;
 import com.taylor.stock.request.KdjTimeDataRequest;
@@ -65,7 +66,7 @@ public class StockUtils {
         CheckResultBean kdjCheck = KdjTimeDataRequest.check(stockCode, kLineTypeEnum);
         /*CheckResultBean macdCheck = MacdTimeDataRequest.check(stockCode, kLineTypeEnum, 2);*/
 
-        StockPanKouData stockFundInOutData = CommonRequest.getStockPanKouData(stockCode);
+        StockPanKouData stockFundInOutData = ApiClient.getPanKouData(stockCode);
         if (kdjCheck.getCode() == 1) {
             paly("audio/chongfenghao.wav");
             if (stockFundInOutData != null) {

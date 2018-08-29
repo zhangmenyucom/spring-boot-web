@@ -1,5 +1,6 @@
 package com.taylor.common;
 
+import com.taylor.api.ApiClient;
 import com.taylor.entity.TongHuaShunStockBase;
 import com.taylor.entity.stock.*;
 import com.taylor.entity.stock.query.StockQueryBean;
@@ -119,80 +120,6 @@ public class CommonRequest<T> {
         return stockFundInOut;
     }
 
-
-    /**
-     * @param stockCode
-     * @desc 股票盘口数据
-     */
-    public static StockPanKouData getStockPanKouData(String stockCode) {
-        StockPanKouData stockPanKouData = null;
-        InputStreamReader isr = null;
-        try {
-            String url = "http://qt.gtimg.cn/q=" + stockCode.toLowerCase();
-            URL u = new URL(url);
-            isr = new InputStreamReader(u.openStream(), "GBK");
-            char[] cha = new char[1024];
-            int len = isr.read(cha);
-            String result = new String(cha, 0, len);
-            result = result.substring(result.indexOf("=") + 2, result.indexOf(";") - 1);
-            String[] datas = result.split("~");
-            stockPanKouData = new StockPanKouData();
-            stockPanKouData.setStockCode(datas[2]);
-            stockPanKouData.setStockName(datas[1]);
-            stockPanKouData.setCurrentPrice(Double.valueOf(datas[3]));
-            stockPanKouData.setYesPrice(Double.valueOf(datas[4]));
-            stockPanKouData.setOpenPrice(Double.valueOf(datas[5]));
-            stockPanKouData.setExchangeTotal(Double.valueOf(datas[6]) / 10000);
-            stockPanKouData.setUpDownMount(Double.valueOf(datas[31]));
-            stockPanKouData.setUpDownMountPercent(Double.valueOf(datas[32]));
-
-            stockPanKouData.setLiangBi(Double.valueOf(datas[49]));
-            stockPanKouData.setAmplitude(datas[43] + "%");
-            stockPanKouData.setB1Price(Double.valueOf(datas[9]));
-            stockPanKouData.setB1Number(Double.valueOf(datas[10]));
-            stockPanKouData.setB2Price(Double.valueOf(datas[11]));
-            stockPanKouData.setB2Number(Double.valueOf(datas[12]));
-            stockPanKouData.setB3Price(Double.valueOf(datas[13]));
-            stockPanKouData.setB3Number(Double.valueOf(datas[14]));
-            stockPanKouData.setB4Price(Double.valueOf(datas[15]));
-            stockPanKouData.setB4Number(Double.valueOf(datas[16]));
-            stockPanKouData.setB5Price(Double.valueOf(datas[17]));
-            stockPanKouData.setB5Number(Double.valueOf(datas[18]));
-            stockPanKouData.setS1Price(Double.valueOf(datas[19]));
-            stockPanKouData.setS1Number(Double.valueOf(datas[20]));
-            stockPanKouData.setS2Price(Double.valueOf(datas[21]));
-            stockPanKouData.setS2Number(Double.valueOf(datas[22]));
-            stockPanKouData.setS3Price(Double.valueOf(datas[23]));
-            stockPanKouData.setS3Number(Double.valueOf(datas[24]));
-            stockPanKouData.setS4Price(Double.valueOf(datas[25]));
-            stockPanKouData.setS4Number(Double.valueOf(datas[26]));
-            stockPanKouData.setS5Price(Double.valueOf(datas[27]));
-            stockPanKouData.setS5Number(Double.valueOf(datas[28]));
-
-            stockPanKouData.setBowtomPrice(Double.valueOf(datas[48]));
-            stockPanKouData.setTopPrice(Double.valueOf(datas[47]));
-            stockPanKouData.setMaxPrice(Double.valueOf(datas[33]));
-            stockPanKouData.setMiniPrice(Double.valueOf(datas[34]));
-            stockPanKouData.setExchangeValue(Double.valueOf(datas[37]) / 10000);
-            stockPanKouData.setExchangeRatio(Double.valueOf(datas[38]));
-            stockPanKouData.setMarketEarnActive(Double.valueOf(datas[39]));
-            stockPanKouData.setOuter(Double.valueOf(datas[7]) / 10000);
-            stockPanKouData.setInner(Double.valueOf(datas[8]) / 10000);
-            stockPanKouData.setTotalValue(Double.valueOf(datas[45]));
-            stockPanKouData.setMarketValue(Double.valueOf(datas[44]));
-        } catch (Exception e) {
-            System.out.println("股票盘口数据出错" + e.getMessage());
-        } finally {
-            if (isr != null) {
-                try {
-                    isr.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return stockPanKouData;
-    }
 
     /**
      * @param stockCode
@@ -335,37 +262,6 @@ public class CommonRequest<T> {
         return tencentTodayBaseInfo;
     }
 
-
-    public static List<MashData> queryLatestResult(String stockCode, int count) {
-        StockQueryBean stockQueryBean = new StockQueryBean();
-        stockQueryBean.setFrom("pc");
-        stockQueryBean.setCount(count + "");
-        stockQueryBean.setCuid("xxx");
-        stockQueryBean.setFormat("json");
-        stockQueryBean.setFq_type("no");
-        stockQueryBean.setStep(1 + "");
-        stockQueryBean.setOs_ver("1");
-        stockQueryBean.setVv("100");
-        stockQueryBean.setStock_code(stockCode.toLowerCase());
-        String responseStr = new CommonRequest<StockQueryBean>().executeRequest(stockQueryBean, new GetMethod(METHOD_URL_STOCK_DAY_INFO));
-        MashDataResponse response = JsonUtil.transferToObj(responseStr, MashDataResponse.class);
-        if (response == null || response.getErrorNo() != 0) {
-            return null;
-        }
-        if (response.getMashData() == null || response.getMashData().isEmpty()) {
-            response.setMashData(new ArrayList<MashData>());
-            response.getMashData().add(new MashData());
-        }
-        MashData mashDataToday = response.getMashData().get(0);
-        mashDataToday.setStockCode(stockCode.toLowerCase());
-        List<MashData> mashDataList = new ArrayList<>();
-        for (MashData mashData : response.getMashData()) {
-            mashDataList.add(mashData);
-        }
-        return mashDataList;
-    }
-
-
     public static List<TencentDayData> getDayKline(String stockCode, int count) {
         List<TencentDayData> list = new ArrayList<>();
         try {
@@ -394,6 +290,6 @@ public class CommonRequest<T> {
 
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getDayKline("sh603345", 10)));
+        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getLatestResult(2,"sh603345")));
     }
 }

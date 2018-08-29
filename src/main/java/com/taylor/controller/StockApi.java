@@ -1,5 +1,6 @@
 package com.taylor.controller;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.ApiResponse;
 import com.taylor.common.CommonRequest;
 import com.taylor.common.ErrorCode;
@@ -88,7 +89,7 @@ public class StockApi extends BaseAction {
             result.setErrorMsg("该股票已经存在自选中");
             return result;
         }
-        StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockOnShelf.getStockCode());
+        StockPanKouData stockPanKouData = ApiClient.getPanKouData(stockOnShelf.getStockCode());
         if (stockPanKouData != null) {
             stockOnShelf.setStockName(stockPanKouData.getStockName());
             stockOnShelf.setFocusPrice(stockPanKouData.getCurrentPrice());

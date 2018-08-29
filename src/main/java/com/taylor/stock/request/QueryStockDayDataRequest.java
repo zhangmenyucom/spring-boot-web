@@ -1,5 +1,6 @@
 package com.taylor.stock.request;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.CommonRequest;
 import com.taylor.common.Constants;
 import com.taylor.common.JsonUtil;
@@ -19,7 +20,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import static com.taylor.common.CommonRequest.queryLatestResult;
 
 /**
  * 获取股票日K数据
@@ -57,12 +57,12 @@ public class QueryStockDayDataRequest extends Thread {
 
             log.info("正在检测股票代码：{}", stockCode);
             TencentTodayBaseInfo stckTodayBaseInfo = CommonRequest.getStckTodayBaseInfo(stockCode);
-            List<HistoryData> historyData = QueryStockHistroryDataRequest.queryLatestDataList(stockCode.toLowerCase(), 10);
+            List<HistoryData> historyData = ApiClient.getHistoryData(stockCode.toLowerCase(), 10);
             HistoryData today = historyData.get(historyData.size()-1);
             HistoryData yestoday = historyData.get(historyData.size()-2);
             IStrategy temp = strategy;
             /**去掉停牌的股票**/
-            StockPanKouData stockPanKouData = CommonRequest.getStockPanKouData(stockCode);
+            StockPanKouData stockPanKouData = ApiClient.getPanKouData(stockCode);
             if(stockPanKouData.getLiangBi()==0){
                 continue;
             }
@@ -101,6 +101,6 @@ public class QueryStockDayDataRequest extends Thread {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(queryLatestResult("SZ300615", 10)));
+        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getLatestResult(10,"sz300615")));
     }
 }
