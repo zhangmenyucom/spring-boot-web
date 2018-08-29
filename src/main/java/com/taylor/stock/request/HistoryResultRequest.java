@@ -45,14 +45,18 @@ public class HistoryResultRequest {
                 return gson.fromJson(result, new TypeToken<PeriodResultResp>() {
                 }.getType());
             } else {
-                Thread.sleep(5000);
+                Thread.sleep(12000);
                 return postOrder(gameId, count);
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            try {
+                Thread.sleep(12000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println(e.getMessage());
+            return postOrder(gameId, count);
         }
-        return null;
-
     }
 
     public static List<Integer> getLenMenHao(String gameId, int count) {

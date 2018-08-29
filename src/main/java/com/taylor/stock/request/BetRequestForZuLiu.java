@@ -27,8 +27,9 @@ public class BetRequestForZuLiu {
         try {
             HttpClient client = new HttpClient();
             NameValuePair[] data = {new NameValuePair("gameId", GAMEID), new NameValuePair("periodId", periodId), new NameValuePair("isSingle", "false"), new NameValuePair("canAdvance", "false"), new NameValuePair("orderList", JsonUtil.transfer2JsonString(orderList))};
+           // System.out.println(JsonUtil.transfer2JsonString(data));
             method.setRequestBody(data);
-            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/26");
+            method.setRequestHeader("Referer", BASE_URL+"/OffcialOtherGame/Index/"+GAMEID);
             method.setRequestHeader("Host", BASE_URL);
             method.setRequestHeader("Origin", BASE_URL);
             method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -86,7 +87,7 @@ public class BetRequestForZuLiu {
                 } else {
                     REPEAT_SUCCESS_TIME++;
                     /**只有成功次数是失败次数多一次才能回本且有赚头**/
-                    if (REPEAT_FAILT_TIME/REPEAT_SUCCESS_TIME<=2) {
+                    if (REPEAT_SUCCESS_TIME>REPEAT_FAILT_TIME) {
                         REPEAT_TIME = 0;
                         REPEAT_FAILT_TIME = 0;
                         REPEAT_SUCCESS_TIME = 0;

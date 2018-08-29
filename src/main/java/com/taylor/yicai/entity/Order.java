@@ -1,12 +1,16 @@
 package com.taylor.yicai.entity;
 
 import com.taylor.common.JsonUtil;
+import com.taylor.stock.request.HistoryResultRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static com.taylor.common.Constants.GAMEID;
 
 /**
  * @author xiaolu.zhang
@@ -67,11 +71,11 @@ public class Order {
         return new Order()
                 .setI(ZuliuGameEnum.getRandomBetStrategy().getGameId())
                 .setC(BetZuLiuStategy.generateNextNumber())
-                .setN(56)
+                .setN(84)
                 .setT(times)
                 .setM(4)
                 .setK(0)
-                .setA(BigDecimal.valueOf(0.112).multiply(BigDecimal.valueOf(times)));
+                .setA(BigDecimal.valueOf(0.168).multiply(BigDecimal.valueOf(times)));
     }
 
     public static void main(String... args) {
