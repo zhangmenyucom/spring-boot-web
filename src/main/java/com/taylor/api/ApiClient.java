@@ -30,7 +30,7 @@ public class ApiClient {
     /**
      * 获取盘口数据
      **/
-    public static StockPanKouData getStackBaseInfo(String q) throws IOException {
+    public static StockPanKouData getPanKouData(String q) throws IOException {
         String result = Retrofits.execute(api.getStackBaseInfo(q));
         result = result.substring(result.indexOf("=") + 2, result.indexOf(";") - 1);
         String[] datas = result.split("~");
@@ -82,7 +82,7 @@ public class ApiClient {
     }
 
     public static void main(String... args) throws IOException {
-        System.out.println(getStackBaseInfo("sh603345"));
+            System.out.println(getPanKouData("sh603345"));
     }
 
 
