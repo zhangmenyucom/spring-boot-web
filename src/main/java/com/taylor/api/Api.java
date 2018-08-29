@@ -2,15 +2,13 @@ package com.taylor.api;/**
  * ${author} on 2018/8/29.
  */
 
+import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.MashDataResponse;
 import com.taylor.entity.stock.StockBaseInfoResponse;
 import com.taylor.entity.stock.TimeStockDataResponse;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +23,13 @@ public interface Api {
      * 腾讯盘口数据
      **/
     @GET("/")
-    Call<String> getStackBaseInfo(@Query("q") String q) throws IOException;
+    Call<String> getStackBaseInfo(@Query("q") String q);
+
+    /**
+     * 腾讯日K
+     **/
+    @GET("/flashdata/hushen/latest/daily/{stockCode}.js")
+    Call<String> getTencentKlineInfo(@Path("stockCode") String stockCode);
 
     /**
      * 百度日K数据
@@ -64,6 +68,19 @@ public interface Api {
                                                  @Query("stock_code") String stock_code,
                                                  @Query("format") String format);
 
+
+    /**
+     * 百度股票基本面
+     **/
+    @GET("/api/stocks/stockbasicinfo")
+    Call<StockBusinessinfo> queryStockBasicBussinessInfo(@Query("fq_type") String fq_type,
+                                                         @Query("from") String from,
+                                                         @Query("os_ver") int os_ver,
+                                                         @Query("cuid") String cuid,
+                                                         @Query("vv") String vv,
+                                                         @Query("stock_code") String stock_code,
+                                                         @Query("format") String format);
+
     /**
      * 新浪历史数据
      **/
@@ -74,9 +91,7 @@ public interface Api {
     /**
      * 360kdj数据
      **/
-    @Headers({
-            "Referer:https://gupiao.nicaifu.com"
-    })
+    @Headers("Referer:https://gupiao.nicaifu.com")
     @POST("/Stock_router.php")
     Call<String> getKdjData(@Query("path") String path,
                                 @Query("data[prod_code]") String code,
@@ -84,6 +99,9 @@ public interface Api {
                                 @Query("data[candle_mode]")String candleMode,
                                 @Query("data[data_count]")int count,
                                 @Query("data[exFieldArr]")String field,
-                                @Query("ts") long ts
-                                );
+                                @Query("ts") long ts);
+
+
+
+
 }

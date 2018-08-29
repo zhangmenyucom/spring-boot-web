@@ -232,64 +232,6 @@ public class CommonRequest<T> {
     }
 
 
-    public static TencentTodayBaseInfo getStckTodayBaseInfo(String stockCode) {
-        TencentTodayBaseInfo tencentTodayBaseInfo = new TencentTodayBaseInfo();
-        try {
-            String url = "http://web.sqt.gtimg.cn/q=" + stockCode.toLowerCase();
-            URL u = new URL(url);
-            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
-            char[] cha = new char[10240];
-            int len = isr.read(cha);
-            String result = new String(cha, 0, len);
-            String[] dataInfoArray = result.split("~");
-            tencentTodayBaseInfo.setStockName(dataInfoArray[1]);
-            tencentTodayBaseInfo.setClose(Double.valueOf(dataInfoArray[3]));
-            tencentTodayBaseInfo.setPreClose(Double.valueOf(dataInfoArray[4]));
-            tencentTodayBaseInfo.setOpen(Double.valueOf(dataInfoArray[5]));
-            tencentTodayBaseInfo.setTotalHands(Double.valueOf(dataInfoArray[6]).longValue());
-            tencentTodayBaseInfo.setUpDownValue(Double.valueOf(dataInfoArray[31]));
-            tencentTodayBaseInfo.setUpDownValue(Double.valueOf(dataInfoArray[31]));
-            tencentTodayBaseInfo.setUpDownPercent(Double.valueOf(dataInfoArray[32]));
-            tencentTodayBaseInfo.setHigh(Double.valueOf(dataInfoArray[33]));
-            tencentTodayBaseInfo.setLow(Double.valueOf(dataInfoArray[34]));
-            tencentTodayBaseInfo.setExchangeRatio(Double.valueOf(dataInfoArray[37]));
-            tencentTodayBaseInfo.setLiangbi(Double.valueOf(dataInfoArray[49]));
-            tencentTodayBaseInfo.setStockCode(stockCode);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return tencentTodayBaseInfo;
-    }
-
-    public static List<TencentDayData> getDayKline(String stockCode, int count) {
-        List<TencentDayData> list = new ArrayList<>();
-        try {
-            String url = "http://data.gtimg.cn/flashdata/hushen/latest/daily/" + stockCode.toLowerCase() + ".js";
-            URL u = new URL(url);
-            InputStreamReader isr = new InputStreamReader(u.openStream(), "GBK");
-            char[] cha = new char[10240];
-            int len = isr.read(cha);
-            String[] result = new String(cha, 0, len).replace("\\", "").split("n");
-            for (int i = 0; i < count; i++) {
-                TencentDayData tencentDayData = new TencentDayData();
-                String[] data = result[result.length - 2 - i].trim().split(" ");
-                tencentDayData.setOpen(Double.valueOf(data[1]));
-                tencentDayData.setClose(Double.valueOf(data[2]));
-                tencentDayData.setHigh(Double.valueOf(data[3]));
-                tencentDayData.setLow(Double.valueOf(data[4]));
-                tencentDayData.setTotalHands(Long.valueOf(data[5]));
-                tencentDayData.setDate(data[0]);
-                list.add(tencentDayData);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getLatestResult(2,"sh603345")));
     }
 }

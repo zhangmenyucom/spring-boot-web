@@ -5,10 +5,12 @@ import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
 import com.taylor.entity.StockBaseInfo;
+import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.*;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class ApiClient {
     public static final Retrofit retrofitTencent = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
             .baseUrl(TENCENT_PREFIX).build();
 
+    public static final Retrofit retrofitTencentKline = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
+            .baseUrl(TENCENT_KLINE_PREFIX).build();
+
     public static final Retrofit retrofit360 = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
             .baseUrl(NICAIFU_PREFIX).build();
 
@@ -35,6 +40,8 @@ public class ApiClient {
             .baseUrl(SINA_PREFIX).build();
 
     public static Api apiTencent = retrofitTencent.create(Api.class);
+
+    public static Api apiTencentKline = retrofitTencentKline.create(Api.class);
 
     public static Api apiBaidu = retrofitBaidu.create(Api.class);
 
@@ -84,6 +91,33 @@ public class ApiClient {
 
 
     /**
+     * 获取腾讯日K
+     **/
+    public static List<TencentDayData> getTencentKlineInfo(String stockCode,int count) {
+        try {
+            String apiresult = Retrofits.execute(apiTencentKline.getTencentKlineInfo(stockCode));
+            String[] result = apiresult.replace("\\", "").split("n");
+            List<TencentDayData> list=new ArrayList<>(1);
+            for (int i = 0; i < count; i++) {
+                TencentDayData tencentDayData = new TencentDayData();
+                String[] data = result[result.length - 2 - i].trim().split(" ");
+                tencentDayData.setOpen(Double.valueOf(data[1]));
+                tencentDayData.setClose(Double.valueOf(data[2]));
+                tencentDayData.setHigh(Double.valueOf(data[3]));
+                tencentDayData.setLow(Double.valueOf(data[4]));
+                tencentDayData.setTotalHands(Long.valueOf(data[5]));
+                tencentDayData.setDate(data[0]);
+                list.add(tencentDayData);
+            }
+            return list;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
      * 最近日K
      **/
     public static List<MashData> getLatestResult(int count, String stockCode) {
@@ -124,6 +158,18 @@ public class ApiClient {
     }
 
     /**
+     * 分时数据
+     **/
+    public static StockBusinessinfo queryStockBasicBussinessInfo(String stockCode) {
+        try {
+            return Retrofits.execute(apiBaidu.queryStockBasicBussinessInfo("no", "pc", 1, "xxx", "100", stockCode, "json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 新浪历史数据
      **/
     public static List<HistoryData> getHistoryData(String symbol, int datalen) {
@@ -144,8 +190,8 @@ public class ApiClient {
     }
 
 
-    public static void main(String... args) throws IOException {
-        System.out.println(getKdjData("sz000430",KLineTypeEnum.FIVE_MINI,10));
+    public static void main(String... args) {
+        System.out.println(getTencentKlineInfo("sz000430",10));
     }
 
 

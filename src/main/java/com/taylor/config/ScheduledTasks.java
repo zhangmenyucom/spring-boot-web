@@ -1,9 +1,11 @@
 package com.taylor.config;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.Constants;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
+import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.taylor.common.CommonRequest.getStckTodayBaseInfo;
 
 /**
  * @author taylor
@@ -47,7 +48,7 @@ public class ScheduledTasks {
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
             for (RecmdStock recmdStock : recmdStocks) {
-                TencentTodayBaseInfo stckTodayBaseInfo = getStckTodayBaseInfo(recmdStock.getStockCode().toLowerCase());
+                StockPanKouData stckTodayBaseInfo = ApiClient.getPanKouData(recmdStock.getStockCode().toLowerCase());
                 if (stckTodayBaseInfo != null) {
                     stckTodayBaseInfo.setStockCode(recmdStock.getStockCode());
                     recmdStockService.updateUpDownRatio(stckTodayBaseInfo);

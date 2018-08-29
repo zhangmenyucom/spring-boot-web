@@ -9,6 +9,8 @@ public class Constants {
 
     public static final String TENCENT_PREFIX="http://web.sqt.gtimg.cn/";
 
+    public static final String TENCENT_KLINE_PREFIX="http://data.gtimg.cn";
+
     public static final String BAIDU_PREFIX="https://gupiao.baidu.com/";
 
     public static final String SINA_PREFIX="http://money.finance.sina.com.cn/";
