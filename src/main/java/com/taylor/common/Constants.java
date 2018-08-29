@@ -16,7 +16,7 @@ public class Constants {
     public static String GAMEID = "123";
     public static final List<Integer> NUMBER_LIST = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
     public static final String BASE_URL = "http://yc3033.com:90";
-    public static final String COOKIE = "ASP.NET_SessionId=0ii4ayytt4coytebuzol3aoq; ValidateToken=f0d6b351d3500dbb544b5f91bcaa297f; SESSION_COOKIE=2; kangle_runat=1; skinStyle=suolaier; CurrentSkin=suolaier; LoginSessionID=47e39ac08bd1b99426b04b788ed64a0e";
+    public static final String COOKIE = "ASP.NET_SessionId=zqgt0vurufs5okebtm5uq4xq; ValidateToken=dac181eef33aca3b7e7ceec6fcb8afe1; skinStyle=suolaier; CurrentSkin=suolaier; SESSION_COOKIE=1; kangle_runat=1; LoginSessionID=7b605c20ca3bf6fda75a2de2344a70d2";
     public static int initTime = 1;
     /**
      * 失败次数
@@ -26,7 +26,7 @@ public class Constants {
     /**
      * 允许失败次数
      **/
-    public static int FAIL_LIMIT = 5;
+    public static int FAIL_LIMIT = 6;
 
     /**
      * 到达失败上限时，重试次数

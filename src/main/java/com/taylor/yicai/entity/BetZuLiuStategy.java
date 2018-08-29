@@ -16,7 +16,7 @@ import static com.taylor.common.Constants.NUMBER_LIST;
 public class BetZuLiuStategy {
     public  static final Shard<Integer> shard = new Shard<>(NUMBER_LIST, 100000);
 
-    public static String generateNextNumber() {
+    public static String  generateNextNumber() {
         Set<Integer> numberSet = new HashSet<>();
         while (numberSet.size() <2) {
             numberSet.add(shard.getShardInfo(UUID.randomUUID().toString()));

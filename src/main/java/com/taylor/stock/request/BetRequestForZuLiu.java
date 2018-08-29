@@ -75,6 +75,8 @@ public class BetRequestForZuLiu {
                     }
                     /**重试的时候双倍，这时成功数只要大于失败数一次就够了**/
                     if (REPEAT_TIME == 0) {
+                        /**到达上限时停止下注5分钟，以缓解必要压力**/
+                        Thread.sleep(5*60*1000);
                         times = (times << 1) + times / 2;
                     }
                     /**重试的时候是有损失的，失败时添加缺失因子,弥补缺失**/
