@@ -7,6 +7,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+import java.io.IOException;
+
 /**
  * @author zhangxiaolu
  * @描述
@@ -15,6 +17,6 @@ import retrofit2.http.Query;
 public interface Api {
 
 
-    @GET
-    Call<TencentTodayBaseInfo> getStackBaseInfo(@Query("q") String q);
+    @GET("/")
+    Call<String> getStackBaseInfo(@Query("q") String q) throws IOException;
 }
