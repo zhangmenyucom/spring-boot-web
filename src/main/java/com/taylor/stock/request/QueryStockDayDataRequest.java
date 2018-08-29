@@ -1,8 +1,6 @@
 package com.taylor.stock.request;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.CommonRequest;
-import com.taylor.common.Constants;
 import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockBusinessinfo;
@@ -13,7 +11,6 @@ import com.taylor.service.RecmdStockService;
 import com.taylor.stock.common.OperatorEnum;
 import com.taylor.stock.strategy.IStrategy;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -47,8 +44,6 @@ public class QueryStockDayDataRequest extends Thread {
     @Override
     public void run() {
         DecimalFormat df = new DecimalFormat("######0.000");
-
-        GetMethod methodBase = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
         for (String stockCode : stockCodeList) {
             if (run_flag == 0) {
                 break;
@@ -64,7 +59,7 @@ public class QueryStockDayDataRequest extends Thread {
             if(panKouData.getLiangBi()==0){
                 continue;
             }
-            StockFundInOut stockFundInOutData = CommonRequest.getStockFundInOutData(stockCode);
+            StockFundInOut stockFundInOutData =ApiClient.getStockFundInOutData(stockCode);
             StockBusinessinfo stockBusinessinfo =ApiClient.queryStockBasicBussinessInfo(stockCode);
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(historyData,stockCode.toLowerCase());

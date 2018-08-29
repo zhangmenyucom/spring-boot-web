@@ -98,6 +98,42 @@ public class ApiClient {
     }
 
 
+
+    /**
+     * 获取资金流向
+     **/
+    public static StockFundInOut getStockFundInOutData(String q) {
+        StockFundInOut stockFundInOut = new StockFundInOut();
+        String result = null;
+        try {
+            result = Retrofits.execute(apiTencent.getStockFundInOutData("ff_"+q.toLowerCase()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (result.contains("pv_none_match=1")) {
+            stockFundInOut.setStatus(-1);
+            return stockFundInOut;
+        }
+        result = result.substring(result.indexOf("=") + 2, result.indexOf(";") - 1);
+        String[] datas = result.split("~");
+        stockFundInOut = new StockFundInOut();
+        stockFundInOut.setDateTime(datas[13]);
+        stockFundInOut.setMainIn(Double.valueOf(datas[1]));
+        stockFundInOut.setStockCode(datas[0]);
+        stockFundInOut.setMainOut(Double.valueOf(datas[2]));
+        stockFundInOut.setMainTotalIn(Double.valueOf(datas[3]));
+        stockFundInOut.setMainInBi(Double.valueOf(datas[4]));
+        stockFundInOut.setRetailIn(Double.valueOf(datas[5]));
+        stockFundInOut.setRetailOut(Double.valueOf(datas[6]));
+        stockFundInOut.setRetailTotalIn(Double.valueOf(datas[7]));
+        stockFundInOut.setRetailInBi(Double.valueOf(datas[8]));
+        stockFundInOut.setTotalIN(Double.valueOf(datas[9]));
+        stockFundInOut.setStockName(datas[12]);
+        return stockFundInOut;
+    }
+
+
+
     /**
      * 获取腾讯日K
      **/
@@ -130,7 +166,7 @@ public class ApiClient {
      **/
     public static List<MashData> getLatestResult(int count, String stockCode) {
         try {
-            MashDataResponse execute = Retrofits.execute(apiBaidu.getLatestResult(1, count, "no", "pc", 1, "xxx", "100", stockCode, "json"));
+            MashDataResponse execute = Retrofits.execute(apiBaidu.getLatestResult(1, count, "no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
             return execute.getMashData();
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,7 +181,7 @@ public class ApiClient {
      **/
     public static StockBaseInfo getBaseStockInfo(String stockCode) {
         try {
-            StockBaseInfoResponse execute = Retrofits.execute(apiBaidu.getBaseStockInfo("no", "pc", 1, "xxx", "100", stockCode, "json"));
+            StockBaseInfoResponse execute = Retrofits.execute(apiBaidu.getBaseStockInfo("no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
             return execute.getData().get(0).setStockCode(stockCode);
         } catch (IOException e) {
             e.printStackTrace();
@@ -158,7 +194,7 @@ public class ApiClient {
      **/
     public static TimeStockDataResponse getTimeDataInfo(String stockCode) {
         try {
-            return Retrofits.execute(apiBaidu.getTimeDataInfo("no", "pc", 1, "xxx", "100", stockCode, "json"));
+            return Retrofits.execute(apiBaidu.getTimeDataInfo("no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -170,7 +206,7 @@ public class ApiClient {
      **/
     public static StockBusinessinfo queryStockBasicBussinessInfo(String stockCode) {
         try {
-            return Retrofits.execute(apiBaidu.queryStockBasicBussinessInfo("no", "pc", 1, "xxx", "100", stockCode, "json"));
+            return Retrofits.execute(apiBaidu.queryStockBasicBussinessInfo("no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -236,7 +272,7 @@ public class ApiClient {
 
     public static void main(String... args) {
         for (int i = 0; i < 1000; i++) {
-            System.out.println(getTongHuaShenBaseInfo("sz000430"));
+            System.out.println(queryStockBasicBussinessInfo("SZ000430"));
         }
     }
 

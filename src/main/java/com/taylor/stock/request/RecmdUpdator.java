@@ -1,13 +1,10 @@
 package com.taylor.stock.request;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.Constants;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
 import lombok.Data;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.util.List;
 
@@ -33,7 +30,6 @@ public class RecmdUpdator extends Thread {
 
     @Override
     public void run() {
-        HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
         List<RecmdStock> recmdStocks = recmdStockService.find(recmdStock);
         for (RecmdStock recmdStock : recmdStocks) {
             StockPanKouData stockPanKouData = ApiClient.getPanKouData(recmdStock.getStockCode().toLowerCase());

@@ -2,12 +2,10 @@ package com.taylor.service.impl;
 
 import com.taylor.api.ApiClient;
 import com.taylor.common.AbstractCrudService;
-import com.taylor.common.Constants;
 import com.taylor.dao.RecmdStockWithRatioDao;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.RecmdWithRatioStock;
 import com.taylor.service.RecmdStockWithRatioService;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,6 @@ public class RecmdStockWithRatioServiceImpl extends AbstractCrudService<RecmdWit
     @Override
     public void process(List<RecmdStock> recmdStocks) {
         double redioOver = 1.0;
-        GetMethod method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
         for (RecmdStock recmdStock : recmdStocks) {
             double turnoverRatio = ApiClient.getBaseStockInfo(recmdStock.getStockCode()).getTurnoverRatio().doubleValue();
             if (turnoverRatio >= redioOver) {

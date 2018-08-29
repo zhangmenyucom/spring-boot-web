@@ -19,23 +19,6 @@ public class Constants {
 
     public static final String TONGHUASHUN_PREFIX="http://qd.10jqka.com.cn/";
 
-
-    
-    /***查询股票基本信息**/
-    public static final String METHOD_URL_STOCK_BASE_INFO = "https://gupiao.baidu.com/api/rails/stockbasicbatch";
-
-    /***查询股票分时信息**/
-    public static final String METHOD_URL_STOCK_TIME_INFO = "https://gupiao.baidu.com/api/stocks/stocktimeline";
-
-    /***查询股票日K信息**/
-    public static final String METHOD_URL_STOCK_DAY_INFO = "https://gupiao.baidu.com/api/stocks/stockdaybar";
-
-    /***查询股票周K信息**/
-    public static final String METHOD_URL_STOCK_WEEK_INFO = "https://gupiao.baidu.com/api/stocks/stockweekbar";
-
-    /***查询股票月K信息**/
-    public static final String METHOD_URL_STOCK_MONTH_INFO = "https://gupiao.baidu.com/api/stocks/stockmonthbar";
-
     /***查询股票资金流入情况信息**/
     public static final String METHOD_URL_STOCK_FOUNDS_IN_OUT = "https://gupiao.baidu.com/api/stocks/stockfunds";
 

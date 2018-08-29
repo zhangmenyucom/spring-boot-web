@@ -1,6 +1,6 @@
 package com.taylor.entity.stock;
 
-import com.taylor.common.CommonRequest;
+import com.taylor.api.ApiClient;
 import com.taylor.common.JsonUtil;
 import lombok.Data;
 
@@ -65,6 +65,6 @@ public class StockFundInOut {
     private String dateTime;
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(CommonRequest.getStockFundInOutData("SH603188")));
+        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getStockFundInOutData("SH603188")));
     }
 }

@@ -1,19 +1,15 @@
 package com.taylor.config;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.Constants;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
-import com.taylor.entity.stock.TencentTodayBaseInfo;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.strategy.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -44,7 +40,6 @@ public class ScheduledTasks {
     @Scheduled(cron = "0 */5 * * * *")
     public void updateRecmdData() {
         if (!StockUtils.noNeedMonotorTime()) {
-            HttpMethodBase method = new GetMethod(Constants.METHOD_URL_STOCK_BASE_INFO);
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
             for (RecmdStock recmdStock : recmdStocks) {
