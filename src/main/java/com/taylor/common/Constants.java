@@ -17,6 +17,8 @@ public class Constants {
 
     public static final String NICAIFU_PREFIX="https://gupiao.nicaifu.com/";
 
+    public static final String TONGHUASHUN_PREFIX="http://qd.10jqka.com.cn/";
+
 
     
     /***查询股票基本信息**/

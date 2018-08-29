@@ -102,6 +102,12 @@ public interface Api {
                                 @Query("ts") long ts);
 
 
+    /**
+     * 新浪历史数据
+     **/
+    @GET("/quote.php")
+    Call<String> getTongHuaShenBaseInfo(@Query("cate") String cate, @Query("type") String type, @Query("return") String ret,@Query("callback") String callback,@Query("code") String code);
+
 
 
 }

@@ -1,11 +1,13 @@
 package com.taylor.api;
 
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
+import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
 import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
+import com.taylor.entity.TongHuaShunStockBase;
 import com.taylor.entity.stock.*;
 import retrofit2.Retrofit;
 
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.taylor.common.Constants.*;
 
@@ -26,6 +29,9 @@ public class ApiClient {
 
     public static final Retrofit retrofitTencent = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
             .baseUrl(TENCENT_PREFIX).build();
+
+    public static final Retrofit retrofitTongHuaShun = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
+            .baseUrl(TONGHUASHUN_PREFIX).build();
 
     public static final Retrofit retrofitTencentKline = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
             .baseUrl(TENCENT_KLINE_PREFIX).build();
@@ -49,6 +55,8 @@ public class ApiClient {
 
     public static Api api360 = retrofit360.create(Api.class);
 
+    public static Api apiTongHuaShun = retrofitTongHuaShun.create(Api.class);
+
 
     /**
      * 获取盘口数据
@@ -56,7 +64,7 @@ public class ApiClient {
     public static StockPanKouData getPanKouData(String q) {
         String result = null;
         try {
-            result = Retrofits.execute(apiTencent.getStackBaseInfo(q));
+            result = Retrofits.execute(apiTencent.getStackBaseInfo(q.toLowerCase()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,11 +101,11 @@ public class ApiClient {
     /**
      * 获取腾讯日K
      **/
-    public static List<TencentDayData> getTencentKlineInfo(String stockCode,int count) {
+    public static List<TencentDayData> getTencentKlineInfo(String stockCode, int count) {
         try {
             String apiresult = Retrofits.execute(apiTencentKline.getTencentKlineInfo(stockCode));
             String[] result = apiresult.replace("\\", "").split("n");
-            List<TencentDayData> list=new ArrayList<>(1);
+            List<TencentDayData> list = new ArrayList<>(1);
             for (int i = 0; i < count; i++) {
                 TencentDayData tencentDayData = new TencentDayData();
                 String[] data = result[result.length - 2 - i].trim().split(" ");
@@ -182,6 +190,42 @@ public class ApiClient {
     }
 
     /**
+     * 同花顺数据
+     **/
+    public static TongHuaShunStockBase getTongHuaShenBaseInfo(String stockCode) {
+        try {
+            String result = Retrofits.execute(apiTongHuaShun.getTongHuaShenBaseInfo("real", "stock", "json", "showStockData", stockCode.substring(2).toLowerCase()));
+
+            Map<String, Object> stockMap = JsonUtil.readJson2Map(result.substring(result.indexOf("(") + 1, result.indexOf(")")));
+            Map<String, Object> info = (Map<String, Object>) stockMap.get("info");
+            Map<String, Object> nameMap = (Map<String, Object>) info.get(stockCode.substring(2));
+            Map<String, Object> data = (Map<String, Object>) stockMap.get("data");
+            Map<String, Object> dataStockMap = (Map<String, Object>) data.get(stockCode.substring(2));
+            TongHuaShunStockBase tongHuaShunStockBase = new TongHuaShunStockBase();
+            tongHuaShunStockBase.setStockName(nameMap.get("name").toString());
+            tongHuaShunStockBase.setClose(Double.valueOf(dataStockMap.get("10").toString()));
+            tongHuaShunStockBase.setPreClose(Double.valueOf(dataStockMap.get("6").toString()));
+            tongHuaShunStockBase.setAmplitudeRatio(Double.valueOf(dataStockMap.get("526792").toString()));
+            tongHuaShunStockBase.setCapitalization(Double.valueOf(dataStockMap.get("3475914").toString()).longValue());
+            tongHuaShunStockBase.setExchange(stockCode.substring(0, 2));
+            tongHuaShunStockBase.setHigh(Double.valueOf(dataStockMap.get("8").toString()));
+            tongHuaShunStockBase.setLow(Double.valueOf(dataStockMap.get("9").toString()));
+            tongHuaShunStockBase.setNetChange(Double.valueOf(dataStockMap.get("264648").toString()));
+            tongHuaShunStockBase.setNetChangeRatio(Double.valueOf(dataStockMap.get("199112").toString()));
+            tongHuaShunStockBase.setOpen(Double.valueOf(dataStockMap.get("7").toString()));
+            tongHuaShunStockBase.setTurnoverRatio(Double.valueOf(dataStockMap.get("1968584").toString()));
+            tongHuaShunStockBase.setVolume(Double.valueOf(dataStockMap.get("19").toString()).longValue());
+            tongHuaShunStockBase.setLiangBi(Double.valueOf(dataStockMap.get("19").toString()));
+            tongHuaShunStockBase.setToltalHands(Double.valueOf(dataStockMap.get("13").toString()).longValue() / 100);
+            tongHuaShunStockBase.setStockCode(stockCode);
+            return tongHuaShunStockBase;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 360kdj
      **/
     public static String getKdjData(String stockCode, KLineTypeEnum kLineTypeEnum, int count) throws IOException {
@@ -191,7 +235,9 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-        System.out.println(getTencentKlineInfo("sz000430",10));
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(getTongHuaShenBaseInfo("sz000430"));
+        }
     }
 
 
