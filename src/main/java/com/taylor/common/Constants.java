@@ -7,6 +7,8 @@ package com.taylor.common;
  */
 public class Constants {
 
+    public static final String TENCENT_PREFIX="http://web.sqt.gtimg.cn/";
+
     /***查询股票基本信息**/
     public static final String METHOD_URL_STOCK_BASE_INFO = "https://gupiao.baidu.com/api/rails/stockbasicbatch";
 
