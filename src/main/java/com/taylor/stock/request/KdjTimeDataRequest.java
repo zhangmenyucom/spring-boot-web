@@ -1,11 +1,11 @@
 package com.taylor.stock.request;
 
+import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.entity.stock.kdj.CheckResultBean;
 import com.taylor.entity.stock.kdj.KdjTimeBean;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 import java.io.BufferedReader;
@@ -32,11 +32,17 @@ public class KdjTimeDataRequest {
             // method使用表单阈值
             method.setRequestBody(data);
             method.setRequestHeader("Referer", "https://gupiao.nicaifu.com");
-            method.setContentChunked(true);
-            method.getParams().setParameter("http.protocol.cookie-policy", CookiePolicy.BROWSER_COMPATIBILITY);
+            //method.setContentChunked(true);
+            //method.getParams().setParameter("http.protocol.cookie-policy", CookiePolicy.BROWSER_COMPATIBILITY);
             // 提交表单
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(JsonUtil.transfer2JsonString(method.getParameters()));
+            System.out.println(JsonUtil.transfer2JsonString(method.getPath()));
+            System.out.println(JsonUtil.transfer2JsonString(method.getRequestEntity()));
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
             client.executeMethod(method);
             // 字符流转字节流 循环输出，同get解释
+
             InputStream inputStream = method.getResponseBodyAsStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             stringBuffer = new StringBuilder();

@@ -1,6 +1,7 @@
 package com.taylor.api;
 
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
+import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
 import com.taylor.entity.StockBaseInfo;
@@ -8,6 +9,7 @@ import com.taylor.entity.stock.*;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import static com.taylor.common.Constants.*;
@@ -23,6 +25,9 @@ public class ApiClient {
     public static final Retrofit retrofitTencent = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
             .baseUrl(TENCENT_PREFIX).build();
 
+    public static final Retrofit retrofit360 = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
+            .baseUrl(NICAIFU_PREFIX).build();
+
     public static final Retrofit retrofitBaidu = new Retrofit.Builder().addConverterFactory(new Retrofit2ConverterFactory())
             .baseUrl(BAIDU_PREFIX).build();
 
@@ -34,6 +39,8 @@ public class ApiClient {
     public static Api apiBaidu = retrofitBaidu.create(Api.class);
 
     public static Api apiSina = retrofitSina.create(Api.class);
+
+    public static Api api360 = retrofit360.create(Api.class);
 
 
     /**
@@ -92,7 +99,7 @@ public class ApiClient {
     }
 
     /**
-     * 最近日K
+     * 基本信息
      **/
     public static StockBaseInfo getBaseStockInfo(String stockCode) {
         try {
@@ -128,8 +135,17 @@ public class ApiClient {
         return null;
     }
 
-    public static void main(String... args) {
-        System.out.println(getTimeDataInfo("sz000430"));
+    /**
+     * 360kdj
+     **/
+    public static String getKdjData(String stockCode, KLineTypeEnum kLineTypeEnum, int count) throws IOException {
+        String code = stockCode.substring(2, stockCode.length()) + "." + stockCode.substring(0, 2).toUpperCase();
+        return api360.getKdjData("/stock/stock/k_line", code, kLineTypeEnum.getKey(), "1", count, "kdj", new Date().getTime()).execute().body();
+    }
+
+
+    public static void main(String... args) throws IOException {
+        System.out.println(getKdjData("sz000430",KLineTypeEnum.FIVE_MINI,10));
     }
 
 

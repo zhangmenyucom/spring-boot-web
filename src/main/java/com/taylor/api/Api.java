@@ -8,6 +8,8 @@ import com.taylor.entity.stock.StockBaseInfoResponse;
 import com.taylor.entity.stock.TimeStockDataResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 import java.io.IOException;
@@ -19,8 +21,6 @@ import java.util.List;
  * @since 2018/8/29 8:49
  */
 public interface Api {
-
-
     /**
      * 腾讯盘口数据
      **/
@@ -69,4 +69,21 @@ public interface Api {
      **/
     @GET("/quotes_service/api/json_v2.php/CN_MarketData.getKLineData")
     Call<List<HistoryData>> getHistoryData(@Query("symbol") String symbol, @Query("scale") int scale, @Query("datalen") int datalen);
+
+
+    /**
+     * 360kdj数据
+     **/
+    @Headers({
+            "Referer:https://gupiao.nicaifu.com"
+    })
+    @POST("/Stock_router.php")
+    Call<String> getKdjData(@Query("path") String path,
+                                @Query("data[prod_code]") String code,
+                                @Query("data[candle_period]") int candle,
+                                @Query("data[candle_mode]")String candleMode,
+                                @Query("data[data_count]")int count,
+                                @Query("data[exFieldArr]")String field,
+                                @Query("ts") long ts
+                                );
 }
