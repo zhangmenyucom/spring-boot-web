@@ -1,5 +1,6 @@
 package com.taylor.stock.strategy;
 
+import com.taylor.api.ApiClient;
 import com.taylor.entity.stock.HistoryData;
 import com.taylor.stock.common.StrategyEnum;
 
@@ -21,7 +22,7 @@ public class LongHuBang extends IStrategy {
         if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        if ((historyData.get(historyData.size()-1).getClose()-historyData.get(historyData.size()-2).getClose())/ historyData.get(historyData.size()-2).getClose()> 0.09d) {
+        if (ApiClient.getPanKouData(stockCode).getUpDownMountPercent() > 9.0d) {
             return 1;
         }
         return 0;

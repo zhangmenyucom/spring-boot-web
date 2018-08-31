@@ -5,10 +5,12 @@ import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.*;
+import com.taylor.entity.stock.HistoryData;
+import com.taylor.entity.stock.StockFundInOut;
+import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.entity.stock.TencentDayData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -253,7 +255,7 @@ public class ApiClient {
 
     public static void main(String... args) {
         for (int i = 0; i < 1000; i++) {
-            System.out.println(getTencentKlineInfo("SZ000430",10));
+            System.out.println(getPanKouData("SZ002922"));
         }
     }
 }
