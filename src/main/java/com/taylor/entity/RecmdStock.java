@@ -1,6 +1,8 @@
 package com.taylor.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.AccessType;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * @date: 2018/1/6 2:53
  */
 @Data
+@Accessors(chain = true)
 public class RecmdStock {
 
     /**

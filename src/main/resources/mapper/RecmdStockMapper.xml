@@ -178,19 +178,12 @@
         WHERE id = #{entity.id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateGuZhenScore">
-        UPDATE recmd_stock
-        SET
-        score=#{entity.score,jdbcType=DOUBLE}
-        WHERE stock_code = #{entity.stockCode,jdbcType=VARCHAR}
-    </update>
-
     <update id="updateRecmdTodayUpDownRatio">
         UPDATE recmd_stock
         SET
-        change_ratio_today=#{stockBaseInfo.upDownPercent,jdbcType=DOUBLE},
-        liang_bi_today=#{stockBaseInfo.liangbi,jdbcType=DOUBLE},
-        current_price=#{stockBaseInfo.close,jdbcType=DOUBLE}
+        change_ratio_today=#{stockBaseInfo.upDownMountPercent,jdbcType=DOUBLE},
+        liang_bi_today=#{stockBaseInfo.liangBi,jdbcType=DOUBLE},
+        current_price=#{stockBaseInfo.currentPrice,jdbcType=DOUBLE}
         WHERE stock_code = #{stockBaseInfo.stockCode,jdbcType=VARCHAR}
     </update>
 

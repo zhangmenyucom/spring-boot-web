@@ -2,7 +2,6 @@ package com.taylor.controller;
 
 import com.taylor.api.ApiClient;
 import com.taylor.common.ApiResponse;
-import com.taylor.common.CommonRequest;
 import com.taylor.common.ErrorCode;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
@@ -12,7 +11,10 @@ import com.taylor.service.StockOnShelfService;
 import com.taylor.service.impl.RedisServiceImpl;
 import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.request.QueryStockDayDataRequest;
-import com.taylor.stock.strategy.*;
+import com.taylor.stock.strategy.BigYinLineStrategy;
+import com.taylor.stock.strategy.IStrategy;
+import com.taylor.stock.strategy.LongHuBang;
+import com.taylor.stock.strategy.ShiZiStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,7 +111,7 @@ public class StockApi extends BaseAction {
         QueryStockDayDataRequest.run_flag = 0;
         ShiZiStrategy shiZiMacdStrategy = new ShiZiStrategy();
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
-        LongHuBang longHuBang=new LongHuBang();
+        LongHuBang longHuBang = new LongHuBang();
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
         IStrategy iStrategy = bigYinLineStrategy;
@@ -123,11 +125,17 @@ public class StockApi extends BaseAction {
         return result;
     }
 
-    /**单个选股器启动**/
+    /**
+     * 单个选股器启动
+     **/
     @ResponseBody
     @RequestMapping("/start_choose_by_type")
     public ApiResponse<Boolean> startChooseByType(@RequestParam("type") Integer type) throws InterruptedException {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+        if (type.equals(StrategyEnum.TYPE28.getCode())) {
+            result.setErrorMsg("异动股票不支持实时查询");
+            return result;
+        }
         QueryStockDayDataRequest.run_flag = 0;
 
         List<Integer> strategyTypeList = new ArrayList<>();

@@ -8,14 +8,20 @@ import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
+import com.taylor.stock.common.OperatorEnum;
+import com.taylor.stock.common.StrategyEnum;
 import com.taylor.stock.strategy.*;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -23,6 +29,7 @@ import java.util.List;
  */
 @Component
 @Slf4j
+@Data
 public class ScheduledTasks {
 
     @Autowired
@@ -35,18 +42,38 @@ public class ScheduledTasks {
     private StockOnShelfService stockOnShelfService;
 
     /**
-     * 每分钟刷新推荐数据
+     * 每2分钟刷新推荐数据
      */
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 */2 * * * *")
     public void updateRecmdData() {
+        RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
+        val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
+
         if (!StockUtils.noNeedMonotorTime()) {
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
-            for (RecmdStock recmdStock : recmdStocks) {
-                StockPanKouData stckTodayBaseInfo = ApiClient.getPanKouData(recmdStock.getStockCode().toLowerCase());
-                if (stckTodayBaseInfo != null) {
-                    stckTodayBaseInfo.setStockCode(recmdStock.getStockCode());
-                    recmdStockService.updateUpDownRatio(stckTodayBaseInfo);
+            for (RecmdStock rcmd : recmdStocks) {
+                StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
+                /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
+                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.02d && !stockIdList.contains(rcmd.getStockCode())) {
+                    RecmdStock recmdStockNew = new RecmdStock()
+                            .setStockCode(rcmd.getStockCode())
+                            .setTurnoverRatio(panKouData.getExchangeRatio())
+                            .setStockName(panKouData.getStockName())
+                            .setRecordPrice(panKouData.getCurrentPrice())
+                            .setCurrentPrice(panKouData.getCurrentPrice())
+                            .setStrategy(StrategyEnum.TYPE28.getDesc())
+                            .setStrategyType(StrategyEnum.TYPE28.getCode())
+                            .setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(1))
+                            .setLiangbi(panKouData.getLiangBi())
+                            .setChangeRatioYestoday(panKouData.getUpDownMountPercent())
+                            .setOuterPan(panKouData.getOuter())
+                            .setInnerPan(panKouData.getInner());
+                    recmdStockService.save(recmdStock);
+                }
+                if (panKouData != null) {
+                    panKouData.setStockCode(rcmd.getStockCode());
+                    recmdStockService.updateUpDownRatio(panKouData);
                 }
             }
         }
@@ -59,8 +86,7 @@ public class ScheduledTasks {
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
-            StockOnShelf stockOnShelfUpdate = new StockOnShelf();
-            stockOnShelfService.updateSelf(stockOnShelfUpdate);
+            stockOnShelfService.updateSelf(new StockOnShelf());
         }
     }
 
@@ -71,18 +97,18 @@ public class ScheduledTasks {
     public void fetchBigYinData() {
         RecmdStock recmdStockDel = new RecmdStock();
         /**放量大阴**/
-        BigYinLineStrategy bigYinLineStrategy=new BigYinLineStrategy();
+        BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         /**龙虎榜**/
-        LongHuBang longHuBang=new LongHuBang();
+        LongHuBang longHuBang = new LongHuBang();
         bigYinLineStrategy.setNext(longHuBang);
         /**缩量洗盘**/
-        SuoLiangXipanStrategy suoLiangXipanStrategy=new SuoLiangXipanStrategy();
+        SuoLiangXipanStrategy suoLiangXipanStrategy = new SuoLiangXipanStrategy();
         longHuBang.setNext(suoLiangXipanStrategy);
         /**底部十字或T型结构**/
-        ShiZiStrategy shiZiStrategy=new ShiZiStrategy();
+        ShiZiStrategy shiZiStrategy = new ShiZiStrategy();
         suoLiangXipanStrategy.setNext(shiZiStrategy);
         /**天鹅拳形态**/
-        TianEQuanStrategy tianEQuan=new TianEQuanStrategy();
+        TianEQuanStrategy tianEQuan = new TianEQuanStrategy();
         shiZiStrategy.setNext(tianEQuan);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();

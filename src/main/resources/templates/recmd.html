@@ -100,7 +100,9 @@
             <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
                 <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}" th:text="${queryDate}" style="font-size:16px;"></a>
             </li>
-            <li  style="margin-right: 10px;float:right;"><button class="start_choose_by_type" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">策略选股</button></li>
+            <li style="margin-right: 10px;float:right;">
+                <button class="start_choose_by_type" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">策略选股</button>
+            </li>
         </ol>
     </div>
     <div style="margin-bottom: 10px;">策略名称：<span style="color:red;" th:text="${strategyName}"></span></div>
@@ -160,12 +162,14 @@
     $(".start_choose_by_type").click(function () {
         var temp = $(this);
         $.ajax({
-            url: "/stock/api/start_choose_by_type?type="+temp.data("type"),
+            url: "/stock/api/start_choose_by_type?type=" + temp.data("type"),
             type: 'get',
             dataType: "json",
             success: function (result) {
                 if (result.errorNo == 0) {
                     alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
                 }
             }
         });
