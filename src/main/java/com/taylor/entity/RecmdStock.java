@@ -2,10 +2,8 @@ package com.taylor.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.AccessType;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author xiaolu.zhang
@@ -68,7 +66,9 @@ public class RecmdStock {
      **/
     private Double liangbiToday;
 
-    /**所属行业**/
+    /**
+     * 所属行业
+     **/
     private String industry;
 
     /**

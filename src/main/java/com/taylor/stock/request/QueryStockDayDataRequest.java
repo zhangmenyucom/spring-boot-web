@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -90,9 +89,5 @@ public class QueryStockDayDataRequest extends Thread {
         }
         System.out.println("##############################线程：" + Thread.currentThread().getName() + "已执行完毕###############################");
 
-    }
-
-    public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getLatestResult(10, "sz300615")));
     }
 }
