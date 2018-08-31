@@ -17,22 +17,6 @@ import java.util.List;
  */
 @Service
 public class StockOnShelfServiceImpl extends AbstractCrudService<StockOnShelf, StockOnShelf, StockOnShelfDao> implements StockOnShelfService {
-    @Override
-    public void listen() {
-        StockOnShelf stockOnShelf = new StockOnShelf();
-        stockOnShelf.setStatus(1);
-        List<StockOnShelf> stockOnShelves = this.find(stockOnShelf);
-        for (StockOnShelf onShelf : stockOnShelves) {
-            TimeStockDataResponse timeStockDataResponse = ApiClient.getTimeDataInfo(onShelf.getStockCode().toLowerCase());
-            if (timeStockDataResponse != null) {
-                List<TimeLineBean> timeLines = timeStockDataResponse.getTimeLine();
-                StockOnShelf updateBean = new StockOnShelf();
-                updateBean.setId(onShelf.getId());
-                onShelf.setCurrentPrice(timeLines.get(timeLines.size() - 1).getPrice());
-                this.update(onShelf);
-            }
-        }
-    }
 
     @Override
     public void updateSelf(StockOnShelf stockOnShelfQuery) {

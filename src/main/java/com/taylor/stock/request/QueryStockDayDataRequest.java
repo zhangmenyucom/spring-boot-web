@@ -94,6 +94,6 @@ public class QueryStockDayDataRequest extends Thread {
     }
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getLatestResult(10,"sz300615")));
+        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getPanKouData("")));
     }
 }

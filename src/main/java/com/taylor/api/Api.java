@@ -3,11 +3,13 @@ package com.taylor.api;/**
  */
 
 import com.taylor.entity.StockBusinessinfo;
-import com.taylor.entity.stock.*;
+import com.taylor.entity.stock.HistoryData;
+import com.taylor.entity.stock.MashDataResponse;
+import com.taylor.entity.stock.StockBaseInfoResponse;
+import com.taylor.entity.stock.TimeStockDataResponse;
 import retrofit2.Call;
 import retrofit2.http.*;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
