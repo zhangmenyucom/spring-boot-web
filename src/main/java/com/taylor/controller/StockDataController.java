@@ -66,13 +66,6 @@ public class StockDataController extends BaseAction {
         return "正在提取数据，请耐心等待";
     }
 
-    @ResponseBody
-    @RequestMapping("/listen_shelf")
-    public String listenShelf(HttpServletRequest request, HttpServletResponse response) {
-        stockOnShelfService.listen();
-        return "监听中。。。。";
-    }
-
     public void catchStock(List<StockData> result) {
         for (StockData stockData : result) {
             System.out.println(stockData.getStockCode());

@@ -5,11 +5,12 @@ import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
-import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.*;
-import retrofit2.Retrofit;
+import com.taylor.entity.stock.HistoryData;
+import com.taylor.entity.stock.StockFundInOut;
+import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.entity.stock.TencentDayData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,35 +28,17 @@ import static com.taylor.common.Constants.*;
  */
 public class ApiClient {
 
-    public static final Retrofit retrofitTencent = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
-            .baseUrl(TENCENT_PREFIX).build();
+    public static Api apiTencent = ApiFactory.create(TENCENT_PREFIX,StringConverterFactory.create());
 
-    public static final Retrofit retrofitTongHuaShun = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
-            .baseUrl(TONGHUASHUN_PREFIX).build();
+    public static Api apiTencentKline = ApiFactory.create(TENCENT_KLINE_PREFIX,StringConverterFactory.create());
 
-    public static final Retrofit retrofitTencentKline = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
-            .baseUrl(TENCENT_KLINE_PREFIX).build();
+    public static Api apiBaidu = ApiFactory.create(BAIDU_PREFIX,new Retrofit2ConverterFactory());
 
-    public static final Retrofit retrofit360 = new Retrofit.Builder().addConverterFactory(StringConverterFactory.create())
-            .baseUrl(NICAIFU_PREFIX).build();
+    public static Api apiSina = ApiFactory.create(SINA_PREFIX,new Retrofit2ConverterFactory());
 
-    public static final Retrofit retrofitBaidu = new Retrofit.Builder().addConverterFactory(new Retrofit2ConverterFactory())
-            .baseUrl(BAIDU_PREFIX).build();
+    public static Api api360 = ApiFactory.create(NICAIFU_PREFIX,StringConverterFactory.create());
 
-    public static final Retrofit retrofitSina = new Retrofit.Builder().addConverterFactory(new Retrofit2ConverterFactory())
-            .baseUrl(SINA_PREFIX).build();
-
-    public static Api apiTencent = retrofitTencent.create(Api.class);
-
-    public static Api apiTencentKline = retrofitTencentKline.create(Api.class);
-
-    public static Api apiBaidu = retrofitBaidu.create(Api.class);
-
-    public static Api apiSina = retrofitSina.create(Api.class);
-
-    public static Api api360 = retrofit360.create(Api.class);
-
-    public static Api apiTongHuaShun = retrofitTongHuaShun.create(Api.class);
+    public static Api apiTongHuaShun = ApiFactory.create(TONGHUASHUN_PREFIX,StringConverterFactory.create());
 
 
     /**
@@ -139,7 +122,7 @@ public class ApiClient {
      **/
     public static List<TencentDayData> getTencentKlineInfo(String stockCode, int count) {
         try {
-            String apiresult = Retrofits.execute(apiTencentKline.getTencentKlineInfo(stockCode));
+            String apiresult = Retrofits.execute(apiTencentKline.getTencentKlineInfo(stockCode.toLowerCase()));
             String[] result = apiresult.replace("\\", "").split("n");
             List<TencentDayData> list = new ArrayList<>(1);
             for (int i = 0; i < count; i++) {
@@ -161,9 +144,9 @@ public class ApiClient {
     }
 
 
-    /**
+/*    *//**
      * 最近日K
-     **/
+     **//*
     public static List<MashData> getLatestResult(int count, String stockCode) {
         try {
             MashDataResponse execute = Retrofits.execute(apiBaidu.getLatestResult(1, count, "no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
@@ -174,11 +157,11 @@ public class ApiClient {
         return null;
 
 
-    }
+    }*/
 
-    /**
+/*    *//**
      * 基本信息
-     **/
+     **//*
     public static StockBaseInfo getBaseStockInfo(String stockCode) {
         try {
             StockBaseInfoResponse execute = Retrofits.execute(apiBaidu.getBaseStockInfo("no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
@@ -187,11 +170,11 @@ public class ApiClient {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
-    /**
+/*    *//**
      * 分时数据
-     **/
+     **//*
     public static TimeStockDataResponse getTimeDataInfo(String stockCode) {
         try {
             return Retrofits.execute(apiBaidu.getTimeDataInfo("no", "pc", 1, "xxx", "100", stockCode.toLowerCase(), "json"));
@@ -199,7 +182,7 @@ public class ApiClient {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
     /**
      * 分时数据
@@ -272,9 +255,7 @@ public class ApiClient {
 
     public static void main(String... args) {
         for (int i = 0; i < 1000; i++) {
-            System.out.println(queryStockBasicBussinessInfo("SZ000430"));
+            System.out.println(getPanKouData("SZ002922"));
         }
     }
-
-
 }
