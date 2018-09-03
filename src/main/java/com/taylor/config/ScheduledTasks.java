@@ -46,16 +46,16 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 */2 * * * *")
     public void updateRecmdData() {
-        RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
-        val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
-
         if (!StockUtils.noNeedMonotorTime()) {
+            RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
+            val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
             for (RecmdStock rcmd : recmdStocks) {
                 StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
                 /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
-                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.01d && !stockIdList.contains(rcmd.getStockCode())) {
+                System.out.println((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice());
+                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.015d && !stockIdList.contains(rcmd.getStockCode())) {
                     RecmdStock recmdStockNew = new RecmdStock()
                             .setStockCode(rcmd.getStockCode())
                             .setTurnoverRatio(panKouData.getExchangeRatio())
