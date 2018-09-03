@@ -55,7 +55,7 @@ public class ScheduledTasks {
             for (RecmdStock rcmd : recmdStocks) {
                 StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
                 /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
-                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.02d && !stockIdList.contains(rcmd.getStockCode())) {
+                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.01d && !stockIdList.contains(rcmd.getStockCode())) {
                     RecmdStock recmdStockNew = new RecmdStock()
                             .setStockCode(rcmd.getStockCode())
                             .setTurnoverRatio(panKouData.getExchangeRatio())
