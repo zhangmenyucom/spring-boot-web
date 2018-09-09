@@ -42,7 +42,7 @@ public class ScheduledTasks {
     private StockOnShelfService stockOnShelfService;
 
     /**
-     * 每2分钟刷新推荐数据
+     * 每2分钟刷新推荐数据,并监测异动股票
      */
     @Scheduled(cron = "0 */2 * * * *")
     public void updateRecmdData() {
@@ -52,25 +52,26 @@ public class ScheduledTasks {
             for (RecmdStock rcmd : recmdStocks) {
                 StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
                 /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
-                System.out.println((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice());
-                if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.015d) {
-                    RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
-                    val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
-                    if (!stockIdList.contains(rcmd.getStockCode())) {
-                        RecmdStock recmdStockNew = new RecmdStock()
-                                .setStockCode(rcmd.getStockCode())
-                                .setTurnoverRatio(panKouData.getExchangeRatio())
-                                .setStockName(panKouData.getStockName())
-                                .setRecordPrice(panKouData.getCurrentPrice())
-                                .setCurrentPrice(panKouData.getCurrentPrice())
-                                .setStrategy(StrategyEnum.TYPE28.getDesc())
-                                .setStrategyType(StrategyEnum.TYPE28.getCode())
-                                .setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(1))
-                                .setLiangbi(panKouData.getLiangBi())
-                                .setChangeRatioYestoday(panKouData.getUpDownMountPercent())
-                                .setOuterPan(panKouData.getOuter())
-                                .setInnerPan(panKouData.getInner());
-                        recmdStockService.save(recmdStockNew);
+                if (!StockUtils.noNeedMonotorForYiDongTime()) {
+                    if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.015d) {
+                        RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
+                        val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
+                        if (!stockIdList.contains(rcmd.getStockCode())) {
+                            RecmdStock recmdStockNew = new RecmdStock()
+                                    .setStockCode(rcmd.getStockCode())
+                                    .setTurnoverRatio(panKouData.getExchangeRatio())
+                                    .setStockName(panKouData.getStockName())
+                                    .setRecordPrice(panKouData.getCurrentPrice())
+                                    .setCurrentPrice(panKouData.getCurrentPrice())
+                                    .setStrategy(StrategyEnum.TYPE28.getDesc())
+                                    .setStrategyType(StrategyEnum.TYPE28.getCode())
+                                    .setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(1))
+                                    .setLiangbi(panKouData.getLiangBi())
+                                    .setChangeRatioYestoday(panKouData.getUpDownMountPercent())
+                                    .setOuterPan(panKouData.getOuter())
+                                    .setInnerPan(panKouData.getInner());
+                            recmdStockService.save(recmdStockNew);
+                        }
                     }
                 }
                 if (panKouData != null) {
