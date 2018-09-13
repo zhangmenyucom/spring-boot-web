@@ -65,7 +65,7 @@ public class HttpRequestUtils {
                     /** 把json字符串转换成json对象 **/
                     jsonResult = JSONObject.fromObject(str);
                 } catch (Exception e) {
-                    logger.error("post请求提交失败:" + url, e);
+                    logger.error("post请求提交失败:{}", url, e);
                 }
             }
         } catch (IOException e) {
