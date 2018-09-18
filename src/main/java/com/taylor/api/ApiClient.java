@@ -254,8 +254,8 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(getPanKouData("SZ002922"));
+        for (int i = 0; i < 100; i++) {
+            System.out.println(getPanKouData("0000011"));
         }
     }
 }

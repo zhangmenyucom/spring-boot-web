@@ -80,10 +80,11 @@
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td>
                 <button class="del-choose">删除</button>
+                <button class="alter-comment">修评</button>
                 <button th:if="${stock.status==0}" class="update_btn" data-status="1">监控</button>
                 <button th:if="${stock.status==1}" class="update_btn" data-status="0">停止</button>
             </td>
-            <td th:text="${stock.reason}"></td>
+            <td class="comment" th:text="${stock.reason}"></td>
         </tr>
     </table>
     <div style="height: 300px;"></div>
@@ -114,6 +115,29 @@
                         temp.parent().parent().hide();
                     }
                 }
+            });
+        });
+        $(".alter-comment").click(function () {
+            var temp = $(this);
+            $.ligerDialog.prompt('提示内容', true, function (yes, value) {
+                $.ajax({
+                    url: "/stock/api/alter_comment",
+                    type: 'POST',
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        "stockCode": $(this).parent().parent().find("td").first().html(),
+                        "reason": value
+                    }),
+                    success: function (result) {
+                        if (result.errorNo == 0) {
+                            $.ligerDialog.success("sucess");
+                            temp.parent().parent().find(".comment").html(value);
+                        } else {
+                            $.ligerDialog.success(result.errorMsg);
+                        }
+                    }
+                });
             });
         });
         $(".update_btn").on("click", function () {

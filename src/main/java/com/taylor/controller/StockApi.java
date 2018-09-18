@@ -103,6 +103,14 @@ public class StockApi extends BaseAction {
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }
+    @ResponseBody
+    @RequestMapping("/alter_comment")
+    public ApiResponse<Boolean> alterComment(@RequestBody StockOnShelf stockOnShelf, HttpServletRequest request, HttpServletResponse response) {
+        ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+        stockOnShelfService.update(stockOnShelf);
+        result.setErrorNo(ErrorCode.SUCCESS);
+        return result;
+    }
 
     @ResponseBody
     @RequestMapping("/start_choose")
