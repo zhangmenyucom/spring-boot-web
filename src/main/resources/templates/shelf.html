@@ -5,7 +5,17 @@
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/message-box.js"></script>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/base.js"></script>
+    <script type="text/javascript" src="/js/ligerDialog.js"></script>
+    <link href="/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 14px;
+        }
+
         body {
             text-align: center;
         }
@@ -80,9 +90,9 @@
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button class="alter-comment">修评</button>
-                <button th:if="${stock.status==0}" class="update_btn" data-status="1">监控</button>
-                <button th:if="${stock.status==1}" class="update_btn" data-status="0">停止</button>
+                <button th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="alter-comment">修评</button>
+<!--                <button th:if="${stock.status==0}" class="update_btn" data-status="1">监控</button>
+                <button th:if="${stock.status==1}" class="update_btn" data-status="0">停止</button>-->
             </td>
             <td class="comment" th:text="${stock.reason}"></td>
         </tr>
@@ -126,7 +136,7 @@
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
                     data: JSON.stringify({
-                        "stockCode": $(this).parent().parent().find("td").first().html(),
+                        "stockCode": temp.parent().parent().find("td").first().html(),
                         "reason": value
                     }),
                     success: function (result) {

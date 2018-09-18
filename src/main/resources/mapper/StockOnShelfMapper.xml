@@ -157,6 +157,9 @@
             <if test="entity.status!=null">
                 status=#{entity.status},
             </if>
+            <if test="entity.reason!=null">
+                reason=#{entity.reason},
+            </if>
         </set>
         <where>
             <if test="entity.id!=null">
