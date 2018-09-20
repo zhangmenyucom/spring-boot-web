@@ -27,7 +27,7 @@ public class StockUtils {
      */
     public static boolean noNeedMonotorTime() {
         boolean over15_00 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "15:00", "HH:mm") >= 0;
-        boolean before9_30 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "9:30", "HH:mm") <= 0;
+        boolean before9_30 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "9:25", "HH:mm") <= 0;
         boolean duringBreakTime = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "11:30", "HH:mm") > 0 && DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "13:00", "HH:mm") <= 0;
         return over15_00 || before9_30 || duringBreakTime;
     }
