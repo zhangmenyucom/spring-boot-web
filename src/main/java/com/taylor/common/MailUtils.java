@@ -169,7 +169,7 @@ public class MailUtils {
         }
     }
 
-    public static void sendMail(String subject,String content) {
+    public static void sendQQMail(String subject, String content) {
         MailUtils mail = new MailUtils();
         mail.setSubject(subject);
         mail.setContent(content);
@@ -185,7 +185,23 @@ public class MailUtils {
         }
     }
 
+    public static void send139Mail(String subject, String content) {
+        MailUtils mail = new MailUtils();
+        mail.setSubject(subject);
+        mail.setContent(content);
+        /**收件人 可以发给其他邮箱(163等) 下同**/
+        mail.setTo(new String[]{"15921624157@139.com"});
+        /**发送邮件**/
+        try {
+            mail.sendMessage();
+            System.out.println("发送邮件成功！");
+        } catch (Exception e) {
+            System.out.println("发送邮件失败！");
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        sendMail("test","test");
+        send139Mail("test", "test");
     }
 }

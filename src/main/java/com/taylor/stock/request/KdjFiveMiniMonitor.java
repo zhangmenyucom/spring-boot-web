@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
-import static com.taylor.common.MailUtils.sendMail;
-import static com.taylor.common.SoundUtil.paly;
 import static com.taylor.common.StockUtils.processStock;
 
 /**

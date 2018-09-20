@@ -1,6 +1,7 @@
 package com.taylor.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @date: 2018/1/12 11:44
  */
 @Data
+@Accessors(chain = true)
 public class StockOnShelf implements Serializable{
 
     private static final long serialVersionUID = 3043197316971800509L;

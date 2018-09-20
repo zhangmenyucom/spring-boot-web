@@ -1,6 +1,7 @@
 package com.taylor.config;
 
 import com.taylor.api.ApiClient;
+import com.taylor.common.MailUtils;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +55,7 @@ public class ScheduledTasks {
                 StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
                 /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
                 if (!StockUtils.noNeedMonotorForYiDongTime()) {
-                    if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.015d) {
+                    if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.02d) {
                         RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
                         val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
                         if (!stockIdList.contains(rcmd.getStockCode())) {
@@ -73,10 +75,10 @@ public class ScheduledTasks {
                             recmdStockService.save(recmdStockNew);
                         }
                     }
-                }
-                if (panKouData != null) {
-                    panKouData.setStockCode(rcmd.getStockCode());
-                    recmdStockService.updateUpDownRatio(panKouData);
+                    if (panKouData != null) {
+                        panKouData.setStockCode(rcmd.getStockCode());
+                        recmdStockService.updateUpDownRatio(panKouData);
+                    }
                 }
             }
         }
@@ -89,7 +91,33 @@ public class ScheduledTasks {
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
-            stockOnShelfService.updateSelf(new StockOnShelf());
+            stockOnShelfService.updateSelf(new StockOnShelf().setStatus(0));
+        }
+    }
+
+    /**
+     * 每1分钟刷新持仓数据
+     */
+    @Scheduled(cron = "0 * * * * *")
+    public void updateStoreData() {
+        if (!StockUtils.noNeedMonotorTime()) {
+            DecimalFormat df = new DecimalFormat("0.00");
+            List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf().setStatus(1));
+            log.info("正在刷新推荐股票数据...........");
+            for (StockOnShelf onShelf : stockOnShelves) {
+                StockPanKouData panKouData = ApiClient.getPanKouData(onShelf.getStockCode().toLowerCase());
+                /**一分钟内如果涨幅超过1%**/
+                if (!StockUtils.noNeedMonotorForYiDongTime()) {
+                    double discount = (panKouData.getCurrentPrice() - onShelf.getCurrentPrice()) / panKouData.getOpenPrice();
+                    if (Math.abs(discount) >= 0.01d) {
+                        MailUtils.send139Mail(panKouData.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" + df.format(panKouData.getUpDownMountPercent()) + "%", "");
+                    }
+                }
+                if (panKouData != null) {
+                    onShelf.setCurrentPrice(panKouData.getCurrentPrice());
+                    stockOnShelfService.update(onShelf);
+                }
+            }
         }
     }
 

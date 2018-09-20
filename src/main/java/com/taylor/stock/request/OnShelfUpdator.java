@@ -1,7 +1,6 @@
 package com.taylor.stock.request;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.CommonRequest;
 import com.taylor.common.MailUtils;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
@@ -40,7 +39,7 @@ public class OnShelfUpdator extends Thread {
             StockPanKouData stockPanKouData = ApiClient.getPanKouData(stockOnShelf.getStockCode());
             Double discount = (stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice();
             if (YIDONG_MONITOR == 1 && Math.abs(discount) > 0.01) {
-                MailUtils.sendMail(stockOnShelf.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" +df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
+                MailUtils.sendQQMail(stockOnShelf.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" +df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
             }
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
