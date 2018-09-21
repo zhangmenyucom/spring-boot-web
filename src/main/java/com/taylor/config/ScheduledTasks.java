@@ -91,14 +91,14 @@ public class ScheduledTasks {
     public void updateShelfData() {
         if (!StockUtils.noNeedMonotorTime()) {
             log.info("正在刷新股架数据...........");
-            stockOnShelfService.updateSelf(new StockOnShelf().setStatus(0));
+            stockOnShelfService.updateSelf(new StockOnShelf());
         }
     }
 
     /**
      * 每1分钟刷新持仓数据
      */
-    @Scheduled(cron = "0 * * * * *")
+    //@Scheduled(cron = "0 * * * * *")
     public void updateStoreData() {
         if (!StockUtils.noNeedMonotorTime()) {
             DecimalFormat df = new DecimalFormat("0.00");
