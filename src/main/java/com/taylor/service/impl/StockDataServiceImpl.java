@@ -37,6 +37,7 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
         recmdStockService.del(recmdStock);
         for (int i = 0; i < THREAD_HOLD; i++) {
             new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_CHUANGYE.subList(i * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
+            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_ZHONGXIAO.subList(i * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
         }
     }
 }
