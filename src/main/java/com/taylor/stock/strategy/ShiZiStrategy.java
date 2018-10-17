@@ -28,13 +28,17 @@ public class ShiZiStrategy extends IStrategy {
         if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        HistoryData today = historyData.get(historyData.size()-1);
+        HistoryData today = historyData.get(historyData.size() - 1);
         if (today.getClose() > Constants.CURRENT_PRICE_LIMIT) {
             return 0;
         }
-        HistoryData yestoday = historyData.get(historyData.size()-2);
-        if (Math.abs((today.getClose()-today.getOpen())/yestoday.getClose()) <= 0.01 && Math.abs(today.getClose() - today.getLow()) / yestoday.getClose() > 0.02) {
-            return 1;
+        HistoryData yestoday = historyData.get(historyData.size() - 2);
+        HistoryData theDayBeforeYes = historyData.get(historyData.size() - 3);
+
+        if (Math.abs((today.getClose() - today.getOpen()) / yestoday.getClose()) <= 0.01 && Math.abs(today.getClose() - today.getLow()) / yestoday.getClose() > 0.02) {
+            if (Math.abs((yestoday.getClose() - yestoday.getOpen()) / theDayBeforeYes.getClose()) <= 0.01 && Math.abs(yestoday.getClose() - yestoday.getLow()) / theDayBeforeYes.getClose() > 0.02) {
+                return 1;
+            }
         }
         return 0;
     }

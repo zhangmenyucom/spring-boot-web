@@ -22,7 +22,10 @@ public class SuoLiangXipanStrategy extends IStrategy {
         if (historyData == null || historyData.size() < 10) {
             return 0;
         }
-        if (historyData.get(historyData.size() - 2).getVolume() / historyData.get(historyData.size() - 1).getVolume()> 1.5) {
+        HistoryData yestoday = historyData.get(historyData.size() - 2);
+        HistoryData today = historyData.get(historyData.size() - 1);
+        HistoryData theDaybefore = historyData.get(historyData.size() - 3);
+        if ((yestoday.getClose() - theDaybefore.getClose() > 0) && (yestoday.getHigh() - yestoday.getClose()) / theDaybefore.getClose() <= 0.02 && yestoday.getVolume() / today.getVolume() > 1.2) {
             return 1;
         }
         return 0;
