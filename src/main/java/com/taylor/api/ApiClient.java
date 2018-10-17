@@ -254,6 +254,6 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-            System.out.println(getPanKouData("sz002606"));
+            System.out.println(getHistoryData("sz002735",10));
     }
 }

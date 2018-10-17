@@ -1,9 +1,7 @@
 package com.taylor.stock.request;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.JsonUtil;
 import com.taylor.entity.RecmdStock;
-import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
@@ -59,7 +57,7 @@ public class QueryStockDayDataRequest extends Thread {
                 continue;
             }
             StockFundInOut stockFundInOutData = ApiClient.getStockFundInOutData(stockCode);
-            StockBusinessinfo stockBusinessinfo = ApiClient.queryStockBasicBussinessInfo(stockCode);
+            //StockBusinessinfo stockBusinessinfo = ApiClient.queryStockBasicBussinessInfo(stockCode);
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(historyData, stockCode.toLowerCase());
                 if (checkResult == 1 && panKouData != null) {
@@ -77,9 +75,9 @@ public class QueryStockDayDataRequest extends Thread {
                             .setLiangbi(panKouData.getLiangBi())
                             .setChangeRatioYestoday((today.getClose() - yestoday.getClose()) / yestoday.getClose() * 100)
                             .setOuterPan(panKouData.getOuter())
-                            .setInnerPan(panKouData.getInner())
-                            .setMajoGrow(stockBusinessinfo.getMajoGrow())
-                            .setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
+                            .setInnerPan(panKouData.getInner());
+                            //.setMajoGrow(stockBusinessinfo.getMajoGrow())
+                            //.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
                     recmdStockService.save(recmdStock);
                     log.info("股票代码：{}中标策略:{}", stockCode, strategy.getStrategyEnum().getDesc());
                 }

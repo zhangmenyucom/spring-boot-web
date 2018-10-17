@@ -23,7 +23,7 @@ public class BigYinLineStrategy extends IStrategy {
             return 0;
         }
         HistoryData today = historyData.get(historyData.size() - 1);
-        if ((today.getOpen() >= today.getClose()) && today.getVolume() / historyData.get(historyData.size() - 2).getVolume() >= 1.5) {
+        if (today.getVolume() / historyData.get(historyData.size() - 2).getVolume() >= 1.5) {
             for (int i = 0; i < historyData.size() - 1; i++) {
                 if (today.getVolume() / historyData.get(i).getVolume() > 1.5) {
                     continue;

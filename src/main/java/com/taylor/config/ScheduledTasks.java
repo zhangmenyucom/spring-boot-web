@@ -151,4 +151,14 @@ public class ScheduledTasks {
         recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(bigYinLineStrategy);
     }
+
+    /**
+     * 清除5日外异动股票
+     **/
+    @Scheduled(cron = "0 0 21 * * *")
+    public void clearOldData() {
+        List<Integer> strategyTypeList = new ArrayList<>();
+        strategyTypeList.add(StrategyEnum.TYPE28.getCode());
+        recmdStockService.delByStrategyList(strategyTypeList);
+    }
 }
