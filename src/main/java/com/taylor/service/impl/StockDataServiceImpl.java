@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_CHUANGYE;
+import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_MAIN;
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_ZHONGXIAO;
 
 /**
@@ -29,15 +30,22 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
 
 
     @Override
-    public void processData(IStrategy strategy) {
+    public void processData(IStrategy strategy,Integer pan) {
         QueryStockDayDataRequest.run_flag = 1;
         RecmdStock recmdStock = new RecmdStock();
         recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
         recmdStockService.del(recmdStock);
-        for (int i = 0; i < THREAD_HOLD; i++) {
-            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_CHUANGYE.subList(i * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
-            new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_ZHONGXIAO.subList(i * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
+        if(pan==0) {
+            for (int i = 0; i < THREAD_HOLD; i++) {
+                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_CHUANGYE.subList(i * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
+                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_ZHONGXIAO.subList(i * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
+            }
+        }
+        if(pan==1){
+            for (int i = 0; i < THREAD_HOLD; i++) {
+                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_MAIN.subList(i * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
+            }
         }
     }
 }

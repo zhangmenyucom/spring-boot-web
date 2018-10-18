@@ -154,7 +154,7 @@ public class ScheduledTasks {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy);
+        stockDataService.processData(bigYinLineStrategy,0);
     }
 
     /**

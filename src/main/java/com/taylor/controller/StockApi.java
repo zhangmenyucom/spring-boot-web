@@ -128,7 +128,7 @@ public class StockApi extends BaseAction {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy);
+        stockDataService.processData(bigYinLineStrategy,0);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }
@@ -138,7 +138,7 @@ public class StockApi extends BaseAction {
      **/
     @ResponseBody
     @RequestMapping("/start_choose_by_type")
-    public ApiResponse<Boolean> startChooseByType(@RequestParam("type") Integer type) throws InterruptedException {
+    public ApiResponse<Boolean> startChooseByType(@RequestParam("type") Integer type,@RequestParam("pan") Integer pan) throws InterruptedException {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
         if (type.equals(StrategyEnum.TYPE28.getCode())) {
             result.setErrorMsg("异动股票不支持实时查询");
@@ -154,7 +154,7 @@ public class StockApi extends BaseAction {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(StrategyEnum.STRATEGY_MAP.get(type));
+        stockDataService.processData(StrategyEnum.STRATEGY_MAP.get(type),pan);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }

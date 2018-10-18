@@ -98,10 +98,14 @@
     <div>
         <ol style="list-style: none;display: inline;float: left;-webkit-padding-start: 5px;">
             <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
-                <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}" th:text="${queryDate}" style="font-size:16px;"></a>
+                <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}"
+                   th:text="${queryDate}" style="font-size:16px;"></a>
             </li>
             <li style="margin-right: 10px;float:right;">
-                <button class="start_choose_by_type" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">策略选股</button>
+                <button class="start_choose_by_type_s" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">选股(中小盘)</button>
+            </li>
+            <li style="margin-right: 10px;float:right;">
+                <button class="start_choose_by_type_m" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">选股(大盘)</button>
             </li>
         </ol>
     </div>
@@ -128,14 +132,18 @@
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
-            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:style="${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}" class="show_time"></td>
-            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline stock_name" th:style="'font-weight:bold !important;'+${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}"></td>
+            <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}"
+                th:style="${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}" class="show_time"></td>
+            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline stock_name"
+                th:style="'font-weight:bold !important;'+${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}"></td>
             <td>
-                <button th:class="${onshelfMap.get(stock.stockCode)==null?'add_choose':''}" th:text="${onshelfMap.get(stock.stockCode)==null?'自选':'已选'}">自选</button>
+                <button th:class="${onshelfMap.get(stock.stockCode)==null?'add_choose':''}" th:text="${onshelfMap.get(stock.stockCode)==null?'自选':'已选'}">自选
+                </button>
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
-            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
+                th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text="${stock.industry}"></td>
             <td th:text="${stock.majoGrow}+'%'" th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
             <td th:text="${stock.netIncreaseRate}+'%'" th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
@@ -144,8 +152,10 @@
             <td th:text="${stock.mainInBi}"></td>
             <td th:text="${stock.liangbi}"></td>
             <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>
-            <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
-            <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
+            <td th:text="${stock.changeRatioYestoday!=null?#numbers.formatDecimal(stock.changeRatioYestoday, 1, 2)+'%':'未更新'}"
+                th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
+            <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
+                th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/concept/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>
@@ -159,11 +169,34 @@
 </div>
 <script type="text/javascript" src="/js/xui.js"></script>
 <script language="javascript">
-    $(".start_choose_by_type").click(function () {
+    $(".start_choose_by_type_s").click(function () {
         var temp = $(this);
         $.ajax({
-            url: "/stock/api/start_choose_by_type?type=" + temp.data("type"),
+            url: "/stock/api/start_choose_by_type",
             type: 'get',
+            dataType: "json",
+            data: {
+                "pan": 0,
+                "type": temp.data("type")
+            },
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
+    });
+    $(".start_choose_by_type_m").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/start_choose_by_type",
+            type: 'get',
+            data: {
+                "pan": 1,
+                "type": temp.data("type")
+            },
             dataType: "json",
             success: function (result) {
                 if (result.errorNo == 0) {
