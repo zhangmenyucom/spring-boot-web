@@ -17,11 +17,11 @@ public class Demo {
         if (n == 3) {
             return 3;
         }
-        return getCount(n-3)+getCount(n - 2) + getCount(n - 1);
+        return 3*getCount(n-3)+2*getCount(n - 2) + getCount(n - 1);
     }
 
     public static void main(String[] args) {
-        System.out.println(getCount(20));
+        System.out.println(getCount(4));
     }
 }
 
