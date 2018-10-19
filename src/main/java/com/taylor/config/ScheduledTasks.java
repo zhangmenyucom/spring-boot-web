@@ -20,9 +20,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -48,10 +46,15 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 */2 * * * *")
     public void updateRecmdData() {
+        Set<String> stockCodeSets = new HashSet<>();
         if (!StockUtils.noNeedMonotorTime()) {
             List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
             log.info("正在刷新推荐股票数据...........");
             for (RecmdStock rcmd : recmdStocks) {
+                if (stockCodeSets.contains(rcmd.getStockCode())) {
+                    continue;
+                }
+                stockCodeSets.add(rcmd.getStockCode());
                 StockPanKouData panKouData = ApiClient.getPanKouData(rcmd.getStockCode().toLowerCase());
 
                 if (!StockUtils.noNeedMonotorForYiDongTime()) {
@@ -87,6 +90,7 @@ public class ScheduledTasks {
                 }
             }
         }
+        stockCodeSets.clear();
     }
 
     /**
@@ -154,7 +158,7 @@ public class ScheduledTasks {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy,0);
+        stockDataService.processData(bigYinLineStrategy, 0);
     }
 
     /**
