@@ -59,9 +59,9 @@ public class ScheduledTasks {
 
                 if (!StockUtils.noNeedMonotorForYiDongTime()) {
                     /**涨停开板的**/
-                    if ((panKouData.getCurrentPrice() < rcmd.getCurrentPrice()) && ((rcmd.getCurrentPrice() - panKouData.getYesPrice()) / panKouData.getYesPrice() >= 0.095d)) {
+/*                    if ((panKouData.getCurrentPrice() < rcmd.getCurrentPrice()) && ((rcmd.getCurrentPrice() - panKouData.getOpenPrice()) / panKouData.getYesPrice() >= 0.095d)) {
                         MailUtils.sendQQMail(panKouData.getStockName() + "开板了，请关注", "");
-                    }
+                    }*/
                     /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
                     if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.02d) {
                         RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
