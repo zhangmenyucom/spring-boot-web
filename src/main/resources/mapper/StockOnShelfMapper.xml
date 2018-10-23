@@ -54,6 +54,7 @@
                 and t.status=#{query.status,jdbcType=TINYINT}
             </if>
         </where>
+        order by status desc
     </select>
     <insert id="saveSelective" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
         INSERT INTO stock_on_shelf
