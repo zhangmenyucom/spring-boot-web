@@ -21,7 +21,8 @@ public enum StrategyEnum {
     TYPE22(22, "短期内突破压力位"),
     TYPE28(28, "异动股票"),
     TYPE29(29, "龙虎榜"),
-    TYPE30(30, "缩量洗盘");
+    TYPE30(30, "缩量洗盘"),
+    TYPE31(31, "介于3与5之间");
 
     public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
 
@@ -31,6 +32,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(20, new BigYinLineStrategy());
         STRATEGY_MAP.put(29, new LongHuBang());
         STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
+        STRATEGY_MAP.put(31, new Between3and5());
     }
 
     private Integer code;
@@ -41,6 +43,7 @@ public enum StrategyEnum {
         this.code = code;
         this.desc = desc;
     }
+
     public static final Map<Integer, String> map = new HashMap<>();
 
     static {
