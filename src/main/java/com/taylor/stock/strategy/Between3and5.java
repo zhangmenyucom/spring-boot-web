@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Between3and5 extends IStrategy {
     public Between3and5() {
-        super(StrategyEnum.TYPE29);
+        super(StrategyEnum.TYPE31);
     }
 
     @Override
@@ -32,9 +32,10 @@ public class Between3and5 extends IStrategy {
         HistoryData theDayBeforeYes = historyData.get(historyData.size() - 3);
         StockPanKouData panKouData = ApiClient.getPanKouData(stockCode);
         if (panKouData.getUpDownMountPercent() >= 3.0d && panKouData.getUpDownMountPercent() <= 5.0d) {
-            if (theDayBeforeYes.getClose() > yestoday.getClose() && theDayBeforeYes.getClose() > today.getClose() && today.getClose() > yestoday.getClose()) {
+            return 1;
+            /*if (theDayBeforeYes.getClose() > yestoday.getClose() && theDayBeforeYes.getClose() > today.getClose() && today.getClose() > yestoday.getClose()) {
                 return 1;
-            }
+            }*/
         }
         return 0;
     }
