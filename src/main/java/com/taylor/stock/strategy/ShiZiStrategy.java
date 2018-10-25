@@ -43,6 +43,7 @@ public class ShiZiStrategy extends IStrategy {
                 return 1;
             }
         }
+
         return 0;
     }
 }
