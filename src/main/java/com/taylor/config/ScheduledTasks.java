@@ -124,6 +124,9 @@ public class ScheduledTasks {
         /**天鹅拳形态**/
         TianEQuanStrategy tianEQuan = new TianEQuanStrategy();
         shiZiStrategy.setNext(tianEQuan);
+        /**3与5之间**/
+        Between3and5 between3and5 = new Between3and5();
+        tianEQuan.setNext(between3and5);
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
