@@ -104,33 +104,7 @@ public class ScheduledTasks {
         }
     }
 
-    /**
-     * 每1分钟刷新持仓数据
-     */
-    //@Scheduled(cron = "0 * * * * *")
-    public void updateStoreData() {
-        if (!StockUtils.noNeedMonotorTime()) {
-            DecimalFormat df = new DecimalFormat("0.00");
-            List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf().setStatus(1));
-            log.info("正在刷新推荐股票数据...........");
-            for (StockOnShelf onShelf : stockOnShelves) {
-                StockPanKouData panKouData = ApiClient.getPanKouData(onShelf.getStockCode().toLowerCase());
-                /**一分钟内如果涨幅超过1%**/
-                if (!StockUtils.noNeedMonotorForYiDongTime()) {
-                    double discount = (panKouData.getCurrentPrice() - onShelf.getCurrentPrice()) / panKouData.getOpenPrice();
-                    if (Math.abs(discount) >= 0.01d) {
-                        MailUtils.send139Mail(panKouData.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" + df.format(panKouData.getUpDownMountPercent()) + "%", "");
-                    }
-                }
-                if (panKouData != null) {
-                    onShelf.setCurrentPrice(panKouData.getCurrentPrice());
-                    stockOnShelfService.update(onShelf);
-                }
-            }
-        }
-    }
-
-    /**
+     /**
      * 尾盘推荐股票
      **/
     @Scheduled(cron = "0 0 22 * * *")
@@ -164,7 +138,7 @@ public class ScheduledTasks {
     /**
      * 清除5日外异动股票
      **/
-    @Scheduled(cron = "0 0 21 * * *")
+    @Scheduled(cron = "0 0 08 * * *")
     public void clearOldData() {
         List<Integer> strategyTypeList = new ArrayList<>();
         strategyTypeList.add(StrategyEnum.TYPE28.getCode());
