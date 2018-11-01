@@ -1,6 +1,6 @@
 package com.taylor.lock;
 
-public class ThreadA extends Thread {
+public  class ThreadA extends Thread {
     private Service service;
 
     public ThreadA(Service service) {
@@ -8,7 +8,7 @@ public class ThreadA extends Thread {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         service.seckill();
     }
 }
