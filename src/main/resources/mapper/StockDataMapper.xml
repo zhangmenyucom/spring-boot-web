@@ -6,11 +6,13 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
+        <result column="industry" property="industry" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         t.id,
         t.stock_code,
-        t.stock_name
+        t.stock_name,
+        t.industry
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
@@ -27,6 +29,15 @@
                 and name=#{query.stockName,jdbcType=VARCHAR}
             </if>
         </where>
+    </select>
+    <select id="findDataByCodeType" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_data t
+        where industry=
+        (
+        select industry from stock_data where stock_code=#{stockCode}
+        )
     </select>
 
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">

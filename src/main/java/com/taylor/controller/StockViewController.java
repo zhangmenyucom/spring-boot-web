@@ -1,8 +1,11 @@
 package com.taylor.controller;
 
+import com.taylor.api.ApiClient;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
+import com.taylor.entity.StockData;
 import com.taylor.entity.StockOnShelf;
+import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author xiaolu.zhang
@@ -105,5 +109,61 @@ public class StockViewController {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         map.put("stockOnShelves", stockOnShelves);
         return "/shelf";
+    }
+
+    @RequestMapping("/related/{code}")
+    public String related(@PathVariable("code") String code, Map<String, Object> map, @RequestParam(defaultValue = "", name = "recordTime") String recordTime, HttpServletRequest request) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        HttpSession session = request.getSession();
+        List<String> listDate = new ArrayList<>();
+        Date now = new Date();
+        for (int i = 5; i >= 0; i--) {
+            listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
+        }
+        RecmdStock recmdStock = new RecmdStock();
+        if ("".equals(recordTime) && session.getAttribute("recordTime") == null) {
+            recmdStock.setRecordTime(new Date());
+        } else if (!"".equals(recordTime)) {
+            recmdStock.setRecordTime(sdf.parse(recordTime));
+        } else {
+            recmdStock.setRecordTime((Date) session.getAttribute("recordTime"));
+        }
+        session.setAttribute("recordTime", recmdStock.getRecordTime());
+
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
+        Map<String, Object> onshelfMap = new HashMap<>();
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+        }
+
+        List<StockData> stockDataList = stockDataService.findDataByCodeType(code);
+        List<RecmdStock> recmdStocksList = stockDataList.stream().map(this::getRecmdStock).collect(Collectors.toList());
+        onshelfMap.put(code, "");
+        Collections.sort(recmdStocksList, (o1, o2) -> o1.getChangeRatioToday() < o2.getChangeRatioToday() ? 1 : -1);
+        map.put("recordTime", sdf.format(recmdStock.getRecordTime()));
+        map.put("type", 1);
+        map.put("recmdList", recmdStocksList);
+        map.put("strategyName", "同行比较");
+        map.put("listDate", listDate);
+        map.put("onshelfMap", onshelfMap);
+        return "/compare";
+    }
+
+    private RecmdStock getRecmdStock(StockData stockData) {
+        StockPanKouData panKouData = ApiClient.getPanKouData(stockData.getStockCode());
+        RecmdStock recmdStockTemp = new RecmdStock();
+        recmdStockTemp.setStockCode(stockData.getStockCode())
+                .setAuthorOpinion("-")
+                .setChangeRatioToday(panKouData.getUpDownMountPercent())
+                .setCurrentPrice(panKouData.getCurrentPrice())
+                .setIndustry(stockData.getIndustry())
+                .setRecordPrice(panKouData.getCurrentPrice())
+                .setTurnoverRatio(panKouData.getExchangeRatio())
+                .setStockName(panKouData.getStockName())
+                .setLiangbi(panKouData.getLiangBi())
+                .setLiangbiToday(panKouData.getLiangBi())
+                .setId(stockData.getId());
+        return recmdStockTemp;
     }
 }

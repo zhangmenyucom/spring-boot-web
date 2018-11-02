@@ -4,6 +4,8 @@ import com.taylor.common.CrudService;
 import com.taylor.entity.StockData;
 import com.taylor.stock.strategy.IStrategy;
 
+import java.util.List;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -12,4 +14,6 @@ import com.taylor.stock.strategy.IStrategy;
 public interface StockDataService extends CrudService<StockData, StockData> {
 
     void processData(IStrategy strategy,Integer pan);
+
+    List<StockData> findDataByCodeType(String  stockCode);
 }

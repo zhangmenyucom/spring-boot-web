@@ -11,6 +11,8 @@ import com.taylor.stock.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_CHUANGYE;
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_MAIN;
 import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_ZHONGXIAO;
@@ -47,5 +49,10 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
                 new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_MAIN.subList(i * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
             }
         }
+    }
+
+    @Override
+    public List<StockData> findDataByCodeType(String stockCode) {
+        return this.getDao().findDataByCodeType(stockCode);
     }
 }
