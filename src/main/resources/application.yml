@@ -25,7 +25,7 @@ spring:
           max-total: 20
   redis:
     database: 0
-    host: 139.196.79.91
+    host: 127.0.0.1
     port: 6379
     pool:
       max-active: 8
@@ -52,3 +52,9 @@ logging:
     root: info
     com.taylor.dao: debug
 
+example:
+    service:
+      enabled: true
+      config:  abc-des-dde,SSS-DRS-RE,SDR-SDFR-XXX
+config: 12313
+name: hello world

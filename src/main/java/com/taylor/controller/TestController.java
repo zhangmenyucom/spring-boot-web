@@ -1,5 +1,6 @@
 package com.taylor.controller;
 
+import com.taylor.config.TestBean;
 import com.taylor.entity.TestEntity;
 import com.taylor.service.RedisService;
 import com.taylor.service.TestService;
@@ -25,6 +26,9 @@ public class TestController extends BaseAction {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private TestBean testBean;
+
     @ResponseBody
     @RequestMapping("/query")
     public List<TestEntity> queryTest(TestEntity test, HttpServletRequest request, HttpServletResponse response) {
@@ -35,7 +39,7 @@ public class TestController extends BaseAction {
     @GetMapping("get")
     @ResponseBody
     public String getRedis() {
-
+        System.out.println(testBean.getConfig() + testBean.getName());
         return (String) redisService.get("name");
     }
 }
