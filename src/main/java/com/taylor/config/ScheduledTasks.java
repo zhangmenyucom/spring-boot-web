@@ -104,7 +104,7 @@ public class ScheduledTasks {
         }
     }
 
-     /**
+    /**
      * 尾盘推荐股票
      **/
     @Scheduled(cron = "0 0 22 * * *")
@@ -127,6 +127,11 @@ public class ScheduledTasks {
         /**3与5之间**/
         Between3and5 between3and5 = new Between3and5();
         tianEQuan.setNext(between3and5);
+        /**连续两天涨停**/
+        TwoDayStopStrategy twoDayStopStrategy = new TwoDayStopStrategy();
+        between3and5.setNext(twoDayStopStrategy);
+
+
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
         /**清除当天及5天以外的数据**/
