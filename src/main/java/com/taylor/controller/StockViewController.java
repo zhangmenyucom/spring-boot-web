@@ -80,6 +80,7 @@ public class StockViewController {
         map.put("strategyName", StrategyEnum.getEnumValue(type));
         map.put("listDate", listDate);
         map.put("onshelfMap", onshelfMap);
+        map.put("bigDataList", ApiClient.getBigDataList());
         return "/recmd";
     }
 
@@ -96,6 +97,7 @@ public class StockViewController {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         map.put("stockOnShelves", stockOnShelves);
+        map.put("bigDataList", ApiClient.getBigDataList());
         return "/shelf";
     }
 
@@ -108,6 +110,7 @@ public class StockViewController {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
         map.put("stockOnShelves", stockOnShelves);
+        map.put("bigDataList", ApiClient.getBigDataList());
         return "/shelf";
     }
 
@@ -147,6 +150,7 @@ public class StockViewController {
         map.put("strategyName", "同行比较");
         map.put("listDate", listDate);
         map.put("onshelfMap", onshelfMap);
+        map.put("bigDataList", ApiClient.getBigDataList());
         return "/compare";
     }
 

@@ -96,7 +96,16 @@
 <div id="container">
     <div id="mouseover-showchart"></div>
     <div>
-        <ol style="list-style: none;display: inline;float: left;-webkit-padding-start: 5px;">
+        <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
+            <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
+                <span th:text="@{${data.stockName}+':'+ ${data.netChangeRatio}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+            </li>
+        </ol>
+    </div>
+    <br/>
+    <br/>
+    <div>
+        <ol style="list-style: none;display: block;float: left;-webkit-padding-start: 5px;">
             <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
                 <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}"
                    th:text="${queryDate}" style="font-size:16px;"></a>

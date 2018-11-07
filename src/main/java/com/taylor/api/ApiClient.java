@@ -5,18 +5,14 @@ import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
+import com.taylor.entity.StockBaseInfo;
 import com.taylor.entity.StockBusinessinfo;
 import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.HistoryData;
-import com.taylor.entity.stock.StockFundInOut;
-import com.taylor.entity.stock.StockPanKouData;
-import com.taylor.entity.stock.TencentDayData;
+import com.taylor.entity.stock.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 import static com.taylor.common.Constants.*;
 
@@ -28,17 +24,17 @@ import static com.taylor.common.Constants.*;
  */
 public class ApiClient {
 
-    public static Api apiTencent = ApiFactory.create(TENCENT_PREFIX,StringConverterFactory.create());
+    public static Api apiTencent = ApiFactory.create(TENCENT_PREFIX, StringConverterFactory.create());
 
-    public static Api apiTencentKline = ApiFactory.create(TENCENT_KLINE_PREFIX,StringConverterFactory.create());
+    public static Api apiTencentKline = ApiFactory.create(TENCENT_KLINE_PREFIX, StringConverterFactory.create());
 
-    public static Api apiBaidu = ApiFactory.create(BAIDU_PREFIX,new Retrofit2ConverterFactory());
+    public static Api apiBaidu = ApiFactory.create(BAIDU_PREFIX, new Retrofit2ConverterFactory());
 
-    public static Api apiSina = ApiFactory.create(SINA_PREFIX,new Retrofit2ConverterFactory());
+    public static Api apiSina = ApiFactory.create(SINA_PREFIX, new Retrofit2ConverterFactory());
 
-    public static Api api360 = ApiFactory.create(NICAIFU_PREFIX,StringConverterFactory.create());
+    public static Api api360 = ApiFactory.create(NICAIFU_PREFIX, StringConverterFactory.create());
 
-    public static Api apiTongHuaShun = ApiFactory.create(TONGHUASHUN_PREFIX,StringConverterFactory.create());
+    public static Api apiTongHuaShun = ApiFactory.create(TONGHUASHUN_PREFIX, StringConverterFactory.create());
 
 
     /**
@@ -81,7 +77,6 @@ public class ApiClient {
     }
 
 
-
     /**
      * 获取资金流向
      **/
@@ -89,7 +84,7 @@ public class ApiClient {
         StockFundInOut stockFundInOut = new StockFundInOut();
         String result = null;
         try {
-            result = Retrofits.execute(apiTencent.getStockFundInOutData("ff_"+q.toLowerCase()));
+            result = Retrofits.execute(apiTencent.getStockFundInOutData("ff_" + q.toLowerCase()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,7 +109,6 @@ public class ApiClient {
         stockFundInOut.setStockName(datas[12]);
         return stockFundInOut;
     }
-
 
 
     /**
@@ -252,8 +246,61 @@ public class ApiClient {
         return api360.getKdjData("/stock/stock/k_line", code, kLineTypeEnum.getKey(), "1", count, "kdj", new Date().getTime()).execute().body();
     }
 
+    /**
+     * 国内大盘指数
+     **/
+    private static String getBigData(String stockCode) {
+        String result = null;
+        try {
+            result = Retrofits.execute(apiTencent.getStackBaseInfo(stockCode));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static List<StockBaseInfo> getBigDataList() {
+        StockBaseInfo shangzhi = new StockBaseInfo();
+        shangzhi.setStockName("上指");
+        shangzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sh000001").split("~")[5])));
+
+        StockBaseInfo shenzhi = new StockBaseInfo();
+        shenzhi.setStockName("深指");
+        shenzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399001").split("~")[5])));
+
+        StockBaseInfo chuangzhi = new StockBaseInfo();
+        chuangzhi.setStockName("创指");
+        chuangzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399006").split("~")[5])));
+
+        StockBaseInfo hengzhi = new StockBaseInfo();
+        hengzhi.setStockName("恒指");
+        hengzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("r_hkHSI").split("~")[32])));
+
+        StockBaseInfo nazhi = new StockBaseInfo();
+        nazhi.setStockName("纳指");
+        nazhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usIXIC").split("~")[32])));
+
+        StockBaseInfo daozhi = new StockBaseInfo();
+        daozhi.setStockName("道指");
+        daozhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usDJI").split("~")[32])));
+
+        StockBaseInfo biaozhi = new StockBaseInfo();
+        biaozhi.setStockName("标指");
+        biaozhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usINX").split("~")[32])));
+        List<StockBaseInfo> stockBigDataList = new ArrayList<>();
+        stockBigDataList.add(shangzhi);
+        stockBigDataList.add(shenzhi);
+        stockBigDataList.add(chuangzhi);
+        stockBigDataList.add(hengzhi);
+        stockBigDataList.add(nazhi);
+        stockBigDataList.add(daozhi);
+        stockBigDataList.add(biaozhi);
+        return stockBigDataList;
+
+    }
+
 
     public static void main(String... args) {
-            System.out.println(getPanKouData("SH600584"));
+        System.out.println(getBigDataList());
     }
 }
