@@ -66,10 +66,12 @@
 <body>
 <div id="mouseover-showchart"></div>
 <div id="container">
+    <br/>
     <div>
         <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
+            <li style="margin-right: 10px;float:left;">实时大盘指数：</li>
             <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:text="@{${data.stockName}+':'+ ${data.netChangeRatio}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
         </ol>
     </div>
