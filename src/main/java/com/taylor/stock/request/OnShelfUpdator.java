@@ -10,6 +10,7 @@ import lombok.Data;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import static com.taylor.common.ConstantsInits.COST_MONITOR;
 import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
 
 /**
@@ -39,7 +40,15 @@ public class OnShelfUpdator extends Thread {
             StockPanKouData stockPanKouData = ApiClient.getPanKouData(stockOnShelf.getStockCode());
             Double discount = (stockPanKouData.getCurrentPrice() - stockOnShelf.getCurrentPrice()) / stockOnShelf.getCurrentPrice();
             if (YIDONG_MONITOR == 1 && Math.abs(discount) > 0.01) {
-                MailUtils.sendQQMail(stockOnShelf.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" +df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
+                MailUtils.sendQQMail(stockOnShelf.getStockName() + (discount > 0.0d ? "拉升" : "抛盘") + df.format(discount * 100) + "%现涨" + df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
+            }
+            if (COST_MONITOR == 1) {
+                if (stockPanKouData.getCurrentPrice() <= stockOnShelf.getCostPrice()) {
+                    MailUtils.sendQQMail(stockOnShelf.getStockName() + "越过成本价，现价：" + df.format(stockPanKouData.getCurrentPrice()) + "%现涨" + df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
+                }
+                if (Math.abs((stockPanKouData.getCurrentPrice() - stockOnShelf.getCostPrice()) / stockOnShelf.getCostPrice()) <= 0.005) {
+                    MailUtils.sendQQMail(stockOnShelf.getStockName() + "在成本价附近，现价：" + df.format(stockPanKouData.getCurrentPrice()) + "%现涨" + df.format(stockPanKouData.getUpDownMountPercent()) + "%", "");
+                }
             }
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());

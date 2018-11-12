@@ -9,6 +9,7 @@
         <result column="amount" property="amount" jdbcType="INTEGER"/>
         <result column="buy_price" property="buyPrice" jdbcType="DOUBLE"/>
         <result column="focus_price" property="focusPrice" jdbcType="DOUBLE"/>
+        <result column="cost_price" property="costPrice" jdbcType="DOUBLE"/>
         <result column="current_price" property="currentPrice" jdbcType="DOUBLE"/>
         <result column="net_ratio" property="netRatio" jdbcType="DOUBLE"/>
         <result column="five_mini_ratio" property="fiveMiniRatio" jdbcType="DOUBLE"/>
@@ -24,6 +25,7 @@
         t.amount,
         t.stock_name,
         t.buy_price,
+        t.cost_price,
         t.focus_price,
         t.current_price,
         t.sold_price,
@@ -148,6 +150,9 @@
             </if>
             <if test="entity.currentPrice!=null">
                 current_price=#{entity.currentPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.costPrice!=null">
+                cost_price=#{entity.costPrice,jdbcType=DOUBLE},
             </if>
             <if test="entity.netRatio!=null">
                 net_ratio=#{entity.netRatio,jdbcType=DOUBLE},

@@ -30,4 +30,9 @@ public class ConstantsInits {
      * 异动监控
      **/
     public static int YIDONG_MONITOR = 1;
+
+    /**
+     * 成本监控
+     **/
+    public static int COST_MONITOR = 1;
 }

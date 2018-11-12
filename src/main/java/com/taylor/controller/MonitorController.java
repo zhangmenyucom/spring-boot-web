@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_LIST;
-import static com.taylor.common.ConstantsInits.STOCK_ON_MONITOR_MAP;
-import static com.taylor.common.ConstantsInits.YIDONG_MONITOR;
+import static com.taylor.common.ConstantsInits.*;
 
 /**
  * 测试
@@ -47,6 +45,23 @@ public class MonitorController {
         }
         YIDONG_MONITOR = 0;
         return "已经关闭异动监控";
+    }
+    @RequestMapping("/start_cost")
+    public String startCostMonitor() {
+        if (COST_MONITOR == 1) {
+            return "已经成本监控，无需再次开启监控";
+        }
+        COST_MONITOR = 1;
+        return "已经成本监控";
+    }
+
+    @RequestMapping("/stop_cost")
+    public String stopCostMonitor() {
+        if (COST_MONITOR == 0) {
+            return "已经关闭成本监控，无需再次关闭监控";
+        }
+        COST_MONITOR = 0;
+        return "已经关闭成本监控";
     }
 
 

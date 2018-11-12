@@ -71,7 +71,8 @@
         <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
             <li style="margin-right: 10px;float:left;">实时大盘指数：</li>
             <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}"
+                      th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
         </ol>
     </div>
@@ -88,14 +89,18 @@
             <th>操作</th>
             <th>关注价</th>
             <th>当前价</th>
+            <th>成本价</th>
             <th>入选理由</th>
         </tr>
         <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}">
             <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
-            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
+            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline"
+                style="font-weight:bold !important;"></td>
             <td><a target="_self" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
-            <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}" th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
-            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}" th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
+            <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}"
+                th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
+                th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td>
                 <button class="del-choose">删除</button>
@@ -105,6 +110,7 @@
             </td>
             <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
+            <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
             <td class="comment" th:text="${stock.reason}"></td>
         </tr>
     </table>
@@ -142,7 +148,7 @@
             var temp = $(this);
             $.ligerDialog.prompt('提示内容', true, function (yes, value) {
                 $.ajax({
-                    url: "/stock/api/alter_comment",
+                    url: "/stock/api/alter",
                     type: 'POST',
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
@@ -154,6 +160,29 @@
                         if (result.errorNo == 0) {
                             $.ligerDialog.success("sucess");
                             temp.parent().parent().find(".comment").html(value);
+                        } else {
+                            $.ligerDialog.success(result.errorMsg);
+                        }
+                    }
+                });
+            });
+        });
+        $(".alter_cost_price").click(function () {
+            var temp = $(this);
+            $.ligerDialog.prompt('输入成本价', true, function (yes, value) {
+                $.ajax({
+                    url: "/stock/api/alter",
+                    type: 'POST',
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        "stockCode": temp.parent().find("td").first().html(),
+                        "costPrice": value
+                    }),
+                    success: function (result) {
+                        if (result.errorNo == 0) {
+                            $.ligerDialog.success("sucess");
+                            temp.text(value);
                         } else {
                             $.ligerDialog.success(result.errorMsg);
                         }

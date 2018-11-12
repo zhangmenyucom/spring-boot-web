@@ -33,6 +33,9 @@ public class StockOnShelf implements Serializable{
     /**关注时价**/
     private Double focusPrice;
 
+    /**成本价**/
+    private Double costPrice;
+
     /**当前价**/
     private Double currentPrice;
 
