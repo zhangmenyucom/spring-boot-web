@@ -158,7 +158,7 @@
                     success: function (result) {
                         if (result.errorNo == 0) {
                             $.ligerDialog.success("sucess");
-                            temp.parent().parent().find(".comment").html(value);
+                            temp.html(value);
                         } else {
                             $.ligerDialog.success(result.errorMsg);
                         }
