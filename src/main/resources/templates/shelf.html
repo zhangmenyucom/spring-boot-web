@@ -104,14 +104,13 @@
             <td><a th:href="@{'http://quote.eastmoney.com/'+${stock.stockCode}+'.html'}">K线</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="alter-comment">修评</button>
                 <button th:if="${stock.status==0}" class="update_btn" data-status="1">置顶</button>
                 <button th:if="${stock.status==1}" class="update_btn" data-status="0"><img src="/images/common/top.gif"/></button>
             </td>
             <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
             <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
-            <td class="comment" th:text="${stock.reason}"></td>
+            <td class="comment alter-comment" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.reason}"></td>
         </tr>
     </table>
     <div style="height: 300px;"></div>
@@ -153,7 +152,7 @@
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
                     data: JSON.stringify({
-                        "stockCode": temp.parent().parent().find("td").first().html(),
+                        "stockCode": temp.parent().find("td").first().html(),
                         "reason": value
                     }),
                     success: function (result) {
