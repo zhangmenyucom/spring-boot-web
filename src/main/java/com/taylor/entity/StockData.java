@@ -15,4 +15,6 @@ public class StockData {
     private String stockCode;
     private String stockName;
     private String industry;
+    private String district;
+    private Integer type;
 }

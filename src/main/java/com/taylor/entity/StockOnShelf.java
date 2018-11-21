@@ -59,4 +59,7 @@ public class StockOnShelf implements Serializable{
 
     /**获取行业类型**/
     private String industry;
+
+    /**地区**/
+    private String district;
 }

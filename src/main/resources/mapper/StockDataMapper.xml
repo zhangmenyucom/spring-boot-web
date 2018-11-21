@@ -7,12 +7,16 @@
         <result column="stock_code" property="stockCode" jdbcType="VARCHAR"/>
         <result column="stock_name" property="stockName" jdbcType="VARCHAR"/>
         <result column="industry" property="industry" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
         t.id,
         t.stock_code,
         t.stock_name,
-        t.industry
+        t.industry,
+        t.district,
+        t.type
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
@@ -27,6 +31,12 @@
             </if>
             <if test="query.stockName !=null">
                 and name=#{query.stockName,jdbcType=VARCHAR}
+            </if>
+            <if test="query.district !=null">
+                and name=#{query.district,jdbcType=VARCHAR}
+            </if>
+            <if test="query.type !=null and query.type!=0">
+                and name=#{query.type,jdbcType=INTEGER}
             </if>
         </where>
     </select>

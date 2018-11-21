@@ -37,7 +37,7 @@
     </sql>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>,z.industry
+        <include refid="Base_Column_List"/>,z.industry,z.district
         FROM stock_on_shelf t LEFT JOIN stock_data z ON t.stock_code=z.stock_code
         <where>
             <if test="query.id !=null">

@@ -142,4 +142,7 @@ public class RecmdStock {
      **/
     private Date updateTime;
 
+
+    /**地区**/
+    private String district;
 }

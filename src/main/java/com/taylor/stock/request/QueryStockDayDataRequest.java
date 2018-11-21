@@ -2,6 +2,7 @@ package com.taylor.stock.request;
 
 import com.taylor.api.ApiClient;
 import com.taylor.entity.RecmdStock;
+import com.taylor.entity.StockData;
 import com.taylor.entity.stock.HistoryData;
 import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
@@ -24,31 +25,31 @@ public class QueryStockDayDataRequest extends Thread {
 
     private RecmdStockService recmdStockService;
 
-    private List<String> stockCodeList;
+    private List<StockData> stockDataList;
 
     private IStrategy strategy;
 
 
     public static int run_flag = 1;
 
-    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<String> stockCodeList, String taskName) {
+    public QueryStockDayDataRequest(IStrategy strategy, RecmdStockService recmdStockService, List<StockData> stockDataList, String taskName) {
         super(taskName);
         this.recmdStockService = recmdStockService;
-        this.stockCodeList = stockCodeList;
+        this.stockDataList = stockDataList;
         this.strategy = strategy;
     }
 
     @Override
     public void run() {
         DecimalFormat df = new DecimalFormat("######0.000");
-        for (String stockCode : stockCodeList) {
+        for (StockData stockData : stockDataList) {
             if (run_flag == 0) {
                 break;
             }
 
-            log.info("正在检测股票代码：{}", stockCode);
-            StockPanKouData panKouData = ApiClient.getPanKouData(stockCode);
-            List<HistoryData> historyData = ApiClient.getHistoryData(stockCode.toLowerCase(), 10);
+            log.info("正在检测股票：{}", stockData.getStockName());
+            StockPanKouData panKouData = ApiClient.getPanKouData(stockData.getStockCode());
+            List<HistoryData> historyData = ApiClient.getHistoryData(stockData.getStockCode().toLowerCase(), 10);
             HistoryData today = historyData.get(historyData.size() - 1);
             HistoryData yestoday = historyData.get(historyData.size() - 2);
             IStrategy temp = strategy;
@@ -56,13 +57,12 @@ public class QueryStockDayDataRequest extends Thread {
             if (panKouData.getLiangBi() == 0) {
                 continue;
             }
-            StockFundInOut stockFundInOutData = ApiClient.getStockFundInOutData(stockCode);
-            //StockBusinessinfo stockBusinessinfo = ApiClient.queryStockBasicBussinessInfo(stockCode);
+            StockFundInOut stockFundInOutData = ApiClient.getStockFundInOutData(stockData.getStockCode());
             while (strategy != null && run_flag == 1) {
-                int checkResult = strategy.doCheck(historyData, stockCode.toLowerCase());
+                int checkResult = strategy.doCheck(historyData, stockData.getStockCode().toLowerCase());
                 if (checkResult == 1 && panKouData != null) {
                     RecmdStock recmdStock = new RecmdStock()
-                            .setStockCode(stockCode)
+                            .setStockCode(stockData.getStockCode())
                             .setTurnoverRatio(panKouData.getExchangeRatio())
                             .setStockName(panKouData.getStockName())
                             .setRecordPrice(today.getClose())
@@ -76,10 +76,8 @@ public class QueryStockDayDataRequest extends Thread {
                             .setChangeRatioYestoday((today.getClose() - yestoday.getClose()) / yestoday.getClose() * 100)
                             .setOuterPan(panKouData.getOuter())
                             .setInnerPan(panKouData.getInner());
-                            //.setMajoGrow(stockBusinessinfo.getMajoGrow())
-                            //.setNetIncreaseRate(stockBusinessinfo.getNetIncreaseRate());
                     recmdStockService.save(recmdStock);
-                    log.info("股票代码：{}中标策略:{}", stockCode, strategy.getStrategyEnum().getDesc());
+                    log.info("股票代码：{}中标策略:{}", stockData.getStockCode(), strategy.getStrategyEnum().getDesc());
                 }
                 strategy = strategy.getNext();
             }

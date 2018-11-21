@@ -26,28 +26,24 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
     @Autowired
     private RecmdStockService recmdStockService;
 
+    @Autowired
+    private StockDataService stockDataService;
+
     private static final int DEFALUT_COUNT = 5;
 
     private static final int THREAD_HOLD = 4;
 
 
     @Override
-    public void processData(IStrategy strategy,Integer pan) {
+    public void processData(IStrategy strategy, Integer pan) {
         QueryStockDayDataRequest.run_flag = 1;
         RecmdStock recmdStock = new RecmdStock();
         recmdStock.setStrategyType(strategy.getStrategyEnum().getCode());
         /**清空数据**/
         recmdStockService.del(recmdStock);
-        if(pan==0) {
-            for (int i = 0; i < THREAD_HOLD; i++) {
-                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_CHUANGYE.subList(i * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_CHUANGYE.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
-                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_ZHONGXIAO.subList(i * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_ZHONGXIAO.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
-            }
-        }
-        if(pan==1){
-            for (int i = 0; i < THREAD_HOLD; i++) {
-                new QueryStockDayDataRequest(strategy, recmdStockService, STOCK_CODE_LIST_MAIN.subList(i * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD, (i + 1) * STOCK_CODE_LIST_MAIN.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
-            }
+        List<StockData> stockDataList = stockDataService.find(new StockData().setType(pan + 1));
+        for (int i = 0; i < THREAD_HOLD; i++) {
+            new QueryStockDayDataRequest(strategy, recmdStockService, stockDataList.subList(i * stockDataList.size() / THREAD_HOLD, (i + 1) * stockDataList.size() / THREAD_HOLD - 1), "stock_sh_" + THREAD_HOLD + "-" + i).start();
         }
     }
 

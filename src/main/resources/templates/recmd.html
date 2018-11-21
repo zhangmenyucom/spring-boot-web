@@ -129,7 +129,8 @@
             <th>记录价</th>
             <th>当前价</th>
             <th>累计涨跌</th>
-            <th>所属行业</th>
+            <th>行业</th>
+            <th>地区</th>
             <th>营收(%)</th>
             <th>净利(%)</th>
             <th>换手率</th>
@@ -156,6 +157,7 @@
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
+            <td><span th:text="${stock.district}"></span></td>
             <td th:text="${stock.majoGrow}+'%'" th:style="'color:'+${stock.majoGrow>0?'red':'green'}">></td>
             <td th:text="${stock.netIncreaseRate}+'%'" th:style="'color:'+${stock.netIncreaseRate>0?'red':'green'}">></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
