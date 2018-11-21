@@ -128,7 +128,7 @@ public class StockApi extends BaseAction {
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
         recmdStockService.delByStrategyList(strategyTypeList);
-        stockDataService.processData(bigYinLineStrategy,0);
+        stockDataService.processData(bigYinLineStrategy,-1);
         result.setErrorNo(ErrorCode.SUCCESS);
         return result;
     }
