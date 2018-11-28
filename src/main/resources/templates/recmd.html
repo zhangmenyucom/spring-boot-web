@@ -98,9 +98,10 @@
     <br/>
     <div>
         <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
-            <li style="margin-right: 10px;float:left;">实时大盘指数：</li>
+            <li style="margin-right: 10px;float:left;">指数：</li>
             <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time" th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
         </ol>
     </div>

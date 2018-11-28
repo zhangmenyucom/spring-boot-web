@@ -263,14 +263,17 @@ public class ApiClient {
         StockBaseInfo shangzhi = new StockBaseInfo();
         shangzhi.setStockName("上指");
         shangzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sh000001").split("~")[5])));
+        shangzhi.setStockCode("sh000001");
 
         StockBaseInfo shenzhi = new StockBaseInfo();
         shenzhi.setStockName("深指");
         shenzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399001").split("~")[5])));
+        shenzhi.setStockCode("sz399001");
 
         StockBaseInfo chuangzhi = new StockBaseInfo();
         chuangzhi.setStockName("创指");
         chuangzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399006").split("~")[5])));
+        chuangzhi.setStockCode("sz399006");
 
         StockBaseInfo hengzhi = new StockBaseInfo();
         hengzhi.setStockName("恒指");
@@ -292,16 +295,19 @@ public class ApiClient {
         pinan.setStockName("中国平安");
         StockPanKouData sh601318 = getPanKouData("sh601318");
         pinan.setNetChangeRatio(BigDecimal.valueOf(sh601318.getUpDownMountPercent()));
+        pinan.setStockCode("sh601318");
 
         StockBaseInfo maotai = new StockBaseInfo();
         maotai.setStockName("贵州茅台");
         StockPanKouData sh600519 = getPanKouData("sh600519");
         maotai.setNetChangeRatio(BigDecimal.valueOf(sh600519.getUpDownMountPercent()));
+        maotai.setStockCode("sh600519");
 
         StockBaseInfo shiyou = new StockBaseInfo();
         shiyou.setStockName("中国石油");
         StockPanKouData sh601857 = getPanKouData("sh601857");
         shiyou.setNetChangeRatio(BigDecimal.valueOf(sh601857.getUpDownMountPercent()));
+        shiyou.setStockCode("sh601857");
 
 
 
