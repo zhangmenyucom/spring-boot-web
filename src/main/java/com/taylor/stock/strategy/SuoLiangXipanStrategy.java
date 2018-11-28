@@ -25,7 +25,7 @@ public class SuoLiangXipanStrategy extends IStrategy {
         HistoryData yestoday = historyData.get(historyData.size() - 2);
         HistoryData today = historyData.get(historyData.size() - 1);
         HistoryData theDaybefore = historyData.get(historyData.size() - 3);
-        if ((yestoday.getClose() - theDaybefore.getClose() > 0) && (yestoday.getHigh() - yestoday.getClose()) / theDaybefore.getClose() <= 0.02 && yestoday.getVolume() / today.getVolume() > 1.2) {
+        if (((yestoday.getClose() - theDaybefore.getClose()) / theDaybefore.getClose() >= 0.03 || (yestoday.getClose() - yestoday.getOpen()) / yestoday.getOpen() >= 0.03) && yestoday.getVolume().floatValue() / today.getVolume().floatValue() > 1.2 && ((today.getClose()-yestoday.getClose())/yestoday.getClose())>-0.06&& ((today.getClose()-yestoday.getClose())/yestoday.getClose())<0.02) {
             return 1;
         }
         return 0;

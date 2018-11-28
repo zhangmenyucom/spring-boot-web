@@ -328,6 +328,6 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-        System.out.println(getBigDataList());
+        System.out.println(getHistoryData("SZ000586",10));
     }
 }
