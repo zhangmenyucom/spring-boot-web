@@ -33,13 +33,13 @@ public class TianEQuanStrategy extends IStrategy {
             if ((historyData.get(i).getClose() - historyData.get(i - 1).getClose()) / historyData.get(i - 1).getClose() > 0.05f) {
                 //前期不能大于这个涨停价
                 for (int k = i - 1; k >= 0; k--) {
-                    if (historyData.get(k).getHigh() > historyData.get(i).getClose()) {
+                    if (historyData.get(k).getHigh() > historyData.get(i).getHigh()) {
                         return 0;
                     }
                 }
                 //后期必须小于前者
                 for (int j = i + 1; j <= historyData.size() - 1; j++) {
-                    if (historyData.get(j).getHigh() > historyData.get(i).getClose()) {
+                    if (historyData.get(j).getHigh() > historyData.get(i).getHigh()) {
                         return 0;
                     }
                 }
