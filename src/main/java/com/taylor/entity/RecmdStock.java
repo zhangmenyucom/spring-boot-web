@@ -40,6 +40,11 @@ public class RecmdStock {
     private Double recordPrice;
 
     /**
+     * 成本价
+     **/
+    private Double costPrice;
+
+    /**
      * 当前价
      **/
     private Double currentPrice;

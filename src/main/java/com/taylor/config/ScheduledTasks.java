@@ -62,8 +62,8 @@ public class ScheduledTasks {
 /*                    if ((panKouData.getCurrentPrice() < rcmd.getCurrentPrice()) && ((rcmd.getCurrentPrice() - panKouData.getOpenPrice()) / panKouData.getYesPrice() >= 0.095d)) {
                         MailUtils.sendQQMail(panKouData.getStockName() + "开板了，请关注", "");
                     }*/
-                    /**两分钟内如果涨幅超过2%,添加到异动股票数据**/
-                    if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.02d) {
+                    /**两分钟内如果涨幅超过3%,添加到异动股票数据**/
+                    if ((panKouData.getCurrentPrice() - rcmd.getCurrentPrice()) / panKouData.getOpenPrice() >= 0.03d) {
                         RecmdStock recmdStock = new RecmdStock().setRecordTime(new Date()).setStrategyType(StrategyEnum.TYPE28.getCode());
                         val stockIdList = recmdStockService.find(recmdStock).stream().map(RecmdStock::getStockCode).collect(Collectors.toList());
                         if (!stockIdList.contains(rcmd.getStockCode())) {
@@ -77,6 +77,7 @@ public class ScheduledTasks {
                                     .setStrategyType(StrategyEnum.TYPE28.getCode())
                                     .setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(1))
                                     .setLiangbi(panKouData.getLiangBi())
+                                    .setCostPrice(rcmd.getCurrentPrice())
                                     .setChangeRatioYestoday(panKouData.getUpDownMountPercent())
                                     .setOuterPan(panKouData.getOuter())
                                     .setInnerPan(panKouData.getInner());

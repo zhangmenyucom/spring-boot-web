@@ -98,10 +98,9 @@
     <br/>
     <div>
         <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
-            <li style="margin-right: 10px;float:left;">指数：</li>
+            <li style="margin-right: 10px;float:left;">实时大盘指数：</li>
             <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time" th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
-                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
         </ol>
     </div>
@@ -132,6 +131,7 @@
             <th>自选</th>
             <th>记录价</th>
             <th>当前价</th>
+            <th th:if="${type==28}">成本价</th>
             <th>累计涨跌</th>
             <th>行业</th>
             <th>地区</th>
@@ -157,7 +157,8 @@
                 </button>
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
-            <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
+            <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}+';font-weight:bold;'"></td>
+            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}" th:style="'color:'+${stock.costPrice>stock.recordPrice?'red':'green'}+';font-weight:bold;'"></span></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
