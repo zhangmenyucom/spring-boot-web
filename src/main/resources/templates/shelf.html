@@ -113,6 +113,11 @@
             <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
             <td class="comment alter-comment" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.reason}"></td>
         </tr>
+        <tr>
+            <td colspan="18" cols="18">
+                <div style="float: right;">共 <span th:text="${#lists.size(stockOnShelves)}"></span> 条数据</div>
+            </td>
+        </tr>
     </table>
     <div style="height: 300px;"></div>
 </div>

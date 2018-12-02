@@ -14,4 +14,9 @@ import java.util.List;
 public interface StockDataDao extends BaseDao<StockData,StockData> {
 
     List<StockData> findDataByCodeType(@RequestParam String stockCode);
+
+    List<String> getIndustryList();
+
+    List<StockData> findDataByIndustryName(@RequestParam("name") String name);
 }
+

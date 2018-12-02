@@ -84,12 +84,11 @@ public class StockViewController {
         return "/recmd";
     }
 
-    @RequestMapping("/check_result")
-    public String checkResult(Map<String, Object> map) {
-        recmdStockService.checkResult();
-        List<RecmdStock> recmdStocks = recmdStockService.find(new RecmdStock());
-        map.put("recmdList", recmdStocks);
-        return "/recmd";
+    @RequestMapping("/industry/list")
+    public String industryList(Map<String, Object> map) {
+        List<String> industryList=stockDataService.getIndustryList();
+        map.put("industryList", industryList);
+        return "/industrys";
     }
 
     @RequestMapping("/shelf")
@@ -151,6 +150,24 @@ public class StockViewController {
         map.put("listDate", listDate);
         map.put("onshelfMap", onshelfMap);
         map.put("bigDataList", ApiClient.getBigDataList());
+        return "/compare";
+    }
+
+    @RequestMapping("/related/name/{name}")
+    public String related(@PathVariable("name") String name, Map<String, Object> map) throws ParseException {
+
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
+        Map<String, Object> onshelfMap = new HashMap<>();
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+        }
+
+        List<StockData> stockDataList = stockDataService.findDataByIndustryName(name);
+        List<RecmdStock> recmdStocksList = stockDataList.stream().map(this::getRecmdStock).collect(Collectors.toList());
+        Collections.sort(recmdStocksList, (o1, o2) -> o1.getChangeRatioToday() < o2.getChangeRatioToday() ? 1 : -1);
+        map.put("recmdList", recmdStocksList);
+        map.put("strategyName", "同行比较");
+        map.put("onshelfMap", onshelfMap);
         return "/compare";
     }
 

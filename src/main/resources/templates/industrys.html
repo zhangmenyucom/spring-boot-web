@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>行业列表</title>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/message-box.js"></script>
+    <script type="text/javascript" src="/js/base.js"></script>
+    <script type="text/javascript" src="/js/ligerDialog.js"></script>
+    <link href="/css/css.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12px;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: separate;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        table tr {
+            word-break: keep-all; /*缩小不换行*/
+        }
+
+        table td, table th {
+            border: 1px solid #cad9ea;
+            color: black;
+            /*height: 30px;*/
+        }
+
+        table thead th {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+        table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        table tr:nth-child(even) {
+            background: #F5FAFA;
+        }
+
+        .divOver {
+            background: burlywood !important;
+            border: solid 1px #d2dce3 !important;
+        }
+
+        .sel_btn {
+            height: 21px;
+            line-height: 21px;
+            padding: 0 11px;
+            background: #e4e4e4;
+            border: 2px #26bbdb solid;
+            border-radius: 3px;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .ch_cls {
+            background: #02bafa;
+        }
+
+        #box {
+            display: none;
+            width: 315px;
+            height: 180px;
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+            line-height: 175%;
+            text-indent: 2em;
+            position: absolute;
+        }
+
+        #mouseover-showchart {
+            float: left;
+            display: none;
+            position: fixed;
+            background: lightgray;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+<div id="container" style="float: left;">
+    <table>
+        <tr>
+            <th>行业名称</th>
+        </tr>
+        <tr th:each="industry: ${industryList}">
+            <td><a target="_self" th:href="@{'/stock/view/related/name/'+${industry}}"> <span th:text="${industry}"></span></a></td>
+        </tr>
+        <tr>
+            <td colspan="18" cols="18">
+                <div style="float: right;">共 <span th:text="${#lists.size(industryList)}"></span> 条数据</div>
+            </td>
+        </tr>
+    </table>
+    <div style="height: 300px;"></div>
+</div>
+<script type="text/javascript" src="/js/xui.js"></script>
+<script language="javascript">
+    $(".start_choose_by_type_s").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/start_choose_by_type",
+            type: 'get',
+            dataType: "json",
+            data: {
+                "pan": 0,
+                "type": temp.data("type")
+            },
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
+    });
+    $(".start_choose_by_type_m").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/start_choose_by_type",
+            type: 'get',
+            data: {
+                "pan": 1,
+                "type": temp.data("type")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
+    });
+    $(function () {
+        //当鼠标滑入时将div的class换成divOver
+        $('tr').hover(function () {
+                $(this).addClass('divOver');
+            }, function () {
+                //鼠标离开时移除divOver样式
+                $(this).removeClass('divOver');
+            }
+        );
+    });
+    $(".add_choose").click(function () {
+        var temp = $(this);
+        $.ligerDialog.prompt('提示内容', true, function (yes, value) {
+            $.ajax({
+                url: "/stock/api/add_choose",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": temp.parent().parent().find("td").first().html(),
+                    "reason": value
+                }),
+                success: function (result) {
+                    if (result.errorNo == 0) {
+                        $.ligerDialog.success("sucess");
+                        temp.html("已选");
+                        temp.css("color", "red");
+                        temp.parent().parent().find(".stock_name").css("color", "red");
+                    } else {
+                        $.ligerDialog.success(result.errorMsg);
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

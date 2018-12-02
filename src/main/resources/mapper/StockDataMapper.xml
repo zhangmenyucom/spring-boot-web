@@ -49,6 +49,19 @@
         select industry from stock_data where stock_code=#{stockCode}
         )
     </select>
+    <select id="findDataByIndustryName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM stock_data t
+        where industry=#{name}
+    </select>
+
+    <select id="getIndustryList" resultType="java.lang.String">
+        SELECT
+            DISTINCT (industry) AS industry
+        FROM
+            stock_data
+    </select>
 
     <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
         INSERT INTO stock_data(stock_code,stock_name)

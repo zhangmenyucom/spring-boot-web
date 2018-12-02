@@ -16,4 +16,8 @@ public interface StockDataService extends CrudService<StockData, StockData> {
     void processData(IStrategy strategy,Integer pan);
 
     List<StockData> findDataByCodeType(String  stockCode);
+
+    List<String> getIndustryList();
+
+    List<StockData> findDataByIndustryName(String name);
 }

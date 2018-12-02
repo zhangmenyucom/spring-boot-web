@@ -51,4 +51,14 @@ public class StockDataServiceImpl extends AbstractCrudService<StockData, StockDa
     public List<StockData> findDataByCodeType(String stockCode) {
         return this.getDao().findDataByCodeType(stockCode);
     }
+
+    @Override
+    public List<String> getIndustryList() {
+        return this.getDao().getIndustryList();
+    }
+
+    @Override
+    public List<StockData> findDataByIndustryName(String name) {
+        return this.getDao().findDataByIndustryName(name);
+    }
 }
