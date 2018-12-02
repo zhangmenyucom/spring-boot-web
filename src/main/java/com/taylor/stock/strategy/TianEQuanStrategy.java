@@ -30,7 +30,7 @@ public class TianEQuanStrategy extends IStrategy {
         /**近十个交易日内有涨停**/
         for (int i = historyData.size() - 9; i < historyData.size() - 1; i++) {
             //涨幅大于9%
-            if ((historyData.get(i).getClose() - historyData.get(i - 1).getClose()) / historyData.get(i - 1).getClose() > 0.05f) {
+            if ((historyData.get(i).getHigh() - historyData.get(i - 1).getClose()) / historyData.get(i - 1).getClose() > 0.07f) {
                 //前期不能大于这个涨停价
                 for (int k = i - 1; k >= 0; k--) {
                     if (historyData.get(k).getHigh() > historyData.get(i).getHigh()) {
