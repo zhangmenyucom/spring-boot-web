@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_CHUANGYE;
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_MAIN;
-import static com.taylor.common.ConstantsInits.STOCK_CODE_LIST_ZHONGXIAO;
 
 /**
  * @author Administrator
