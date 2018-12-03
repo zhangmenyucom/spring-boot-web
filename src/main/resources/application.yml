@@ -14,7 +14,7 @@ spring:
         url: jdbc:mysql://111.231.140.42:3306/stock_analysis?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=utf8
         username: root
         password: ilovemysql^^^
-        type: com.alibaba.druid.pool.DruidDataSource
+        type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.jdbc.Driver
         dbcp2:
           pool-prepared-statements: true
