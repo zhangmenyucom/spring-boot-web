@@ -34,7 +34,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(29, new LongHuBang());
         STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
         STRATEGY_MAP.put(31, new Between3and5());
-        STRATEGY_MAP.put(32, new TwoDayStopStrategy());
+        STRATEGY_MAP.put(32, new TwoDaysTopStrategy());
     }
 
     private Integer code;
