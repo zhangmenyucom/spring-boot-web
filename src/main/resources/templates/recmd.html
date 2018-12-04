@@ -156,9 +156,9 @@
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}"></td>
-            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}+';font-weight:bold;'"></span></td>
+            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}"></span></td>
             <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice),1,2)}"></span></td>
-            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice,1,2)+'%'}"></span></td>
+            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice,1,2)+'%'}" th:style="'color:'+${stock.costPrice>=stock.currentPrice?'red':'green'}+';font-weight:bold;'"></span></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>

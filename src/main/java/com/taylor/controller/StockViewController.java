@@ -48,7 +48,7 @@ public class StockViewController {
         HttpSession session = request.getSession();
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
-        for (int i = 5; i >= 0; i--) {
+        for (int i = 10; i >= 0; i--) {
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
@@ -120,7 +120,7 @@ public class StockViewController {
         HttpSession session = request.getSession();
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
-        for (int i = 5; i >= 0; i--) {
+        for (int i = 10; i >= 0; i--) {
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
