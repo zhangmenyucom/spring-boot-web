@@ -10,9 +10,9 @@ import java.util.List;
  * @desc:
  * @date: 2018/1/9 0:18
  */
-public class TwoDayStopStrategy extends IStrategy {
+public class TwoDaysTopStrategy extends IStrategy {
 
-    public TwoDayStopStrategy() {
+    public TwoDaysTopStrategy() {
         super(StrategyEnum.TYPE32);
     }
 

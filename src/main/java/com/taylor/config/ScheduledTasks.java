@@ -1,7 +1,6 @@
 package com.taylor.config;
 
 import com.taylor.api.ApiClient;
-import com.taylor.common.MailUtils;
 import com.taylor.common.StockUtils;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockOnShelf;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -125,8 +123,8 @@ public class ScheduledTasks {
         Between3and5 between3and5 = new Between3and5();
         tianEQuan.setNext(between3and5);
         /**连续两天涨停**/
-        TwoDayStopStrategy twoDayStopStrategy = new TwoDayStopStrategy();
-        between3and5.setNext(twoDayStopStrategy);
+        TwoDaysTopStrategy twoDaysTopStrategy = new TwoDaysTopStrategy();
+        between3and5.setNext(twoDaysTopStrategy);
 
 
         IStrategy iStrategy = bigYinLineStrategy;
