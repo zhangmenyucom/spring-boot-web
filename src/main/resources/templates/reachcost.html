@@ -95,36 +95,6 @@
 <body>
 <div id="container" style="float: left;">
     <div id="mouseover-showchart"></div>
-    <br/>
-    <div>
-        <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
-            <li style="margin-right: 10px;float:left;">实时大盘指数：</li>
-            <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}"
-                      th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
-            </li>
-        </ol>
-    </div>
-    <br/>
-    <br/>
-    <div>
-        <ol style="list-style: none;display: block;float: left;-webkit-padding-start: 5px;">
-            <li th:each="queryDate: ${listDate}" style="margin-right: 10px;float:left;">
-                <a th:class="'sel_btn'+ ${queryDate == recordTime ? 'ch_cls':''}" th:href="@{'/stock/view/recmd/'+${type}+'?recordTime='+${queryDate}}"
-                   th:text="${queryDate}" style="font-size:16px;"></a>
-            </li>
-            <li style="margin-right: 10px;float:right;">
-                <button class="start_choose_by_type_s" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">小盘</button>
-            </li>
-            <li style="margin-right: 10px;float:right;">
-                <button class="start_choose_by_type_m" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">大盘</button>
-            </li>
-            <li style="margin-right: 10px;float:right;">
-                <button class="start_choose_by_type_all" style="color:red;" th:attr="data-type=${type}" onFocus="this.blur()">全部</button>
-            </li>
-        </ol>
-    </div>
-    <div style="margin-bottom: 10px;">策略名称：<span style="color:red;" th:text="${strategyName}"></span></div>
     <table>
         <tr>
             <th>股票代码</th>
@@ -132,9 +102,9 @@
             <th>操作</th>
             <th>记录价</th>
             <th>当前价</th>
-            <th th:if="${type==28}">成本价</th>
-            <th th:if="${type==28}">成本差</th>
-            <th th:if="${type==28}">差比</th>
+            <th>成本价</th>
+            <th>成本差</th>
+            <th>差比</th>
             <th>累计涨跌</th>
             <th>行业</th>
             <th>地区</th>
@@ -143,8 +113,8 @@
             <th>今日量比</th>
             <th>记录涨幅</th>
             <th>今日涨幅</th>
-            <th>K线</th>
-            <th th:if="${type==15}">策略</th>
+            <th>消息</th>
+            <th>记录日期</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
             <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}"
@@ -157,9 +127,9 @@
             </td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}"></td>
-            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}"></span></td>
-            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice),1,2)}"></span></td>
-            <td th:if="${type==28}"><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice,1,2)+'%'}"
+            <td><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}"></span></td>
+            <td><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice),1,2)}"></span></td>
+            <td ><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice,1,2)+'%'}"
                                           th:style="'color:'+${((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice>-1 and 1>(stock.currentPrice - stock.costPrice) * 100/stock.recordPrice)?'red':'green'}+';font-weight:bold;'"></span>
             </td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
@@ -174,7 +144,7 @@
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">K线</a></td>
-            <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
+            <td th:text="${#dates.format(stock.recordTime, 'yyyy-MM-dd')}"></td>
         </tr>
         <tr>
             <td colspan="18" cols="18">

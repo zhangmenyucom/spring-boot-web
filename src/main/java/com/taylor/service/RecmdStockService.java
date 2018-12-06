@@ -26,4 +26,6 @@ public interface RecmdStockService extends CrudService<RecmdStock,RecmdStock> {
     int updateGuZhenScore(RecmdStock recmdStockUpdate);
 
     int delByStrategyList(@Param("strategyTypeList") List<Integer> strategyTypeList);
+
+    List<RecmdStock> reachcost();
 }

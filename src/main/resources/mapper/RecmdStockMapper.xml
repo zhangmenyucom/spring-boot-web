@@ -63,6 +63,25 @@
         t.record_time,
         t.update_time
     </sql>
+
+    <select id="reachcost" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>,d.district
+        FROM recmd_stock t,stock_data d left join ( SELECT
+        z.industry,count(z.industry) as in_num
+        FROM recmd_stock s,stock_data z where s.strategy_type=28
+        and s.stock_code=z.stock_code
+        and (s.current_price-s.cost_price)/s.current_price>-0.01
+        and 0.01>(s.current_price-s.cost_price)/s.current_price
+        GROUP BY z.industry
+        ) o on d.industry=o.industry
+        where t.stock_code=d.stock_code
+        and t.strategy_type=28
+        and (t.current_price-t.cost_price)/t.current_price>-0.01
+        and 0.01>(t.current_price-t.cost_price)/t.current_price
+        order by o.in_num desc,industry desc,t.change_ratio_yestoday desc
+
+    </select>
     <select id="findByCondition" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>,d.district

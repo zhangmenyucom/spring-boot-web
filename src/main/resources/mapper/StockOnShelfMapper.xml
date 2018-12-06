@@ -79,6 +79,9 @@
             <if test="entity.currentPrice != null">
                 current_price,
             </if>
+            <if test="entity.costPrice != null">
+                cost_price,
+            </if>
             <if test="entity.soldPrice != null">
                 sold_price,
             </if>
@@ -117,6 +120,9 @@
             </if>
             <if test="entity.currentPrice != null">
                 #{entity.currentPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="entity.costPrice != null">
+                #{entity.costPrice,jdbcType=DOUBLE},
             </if>
             <if test="entity.soldPrice != null">
                 #{entity.soldPrice,jdbcType=DOUBLE},

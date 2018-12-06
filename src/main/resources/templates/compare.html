@@ -200,6 +200,7 @@
                 dataType: "json",
                 data: JSON.stringify({
                     "stockCode": temp.parent().parent().find("td").first().html(),
+                    "costPrice":isNaN(value)? null:value,
                     "reason": value
                 }),
                 success: function (result) {

@@ -97,6 +97,7 @@ public class StockApi extends BaseAction {
             stockOnShelf.setFocusPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setCurrentPrice(stockPanKouData.getCurrentPrice());
             stockOnShelf.setNetRatio(stockPanKouData.getUpDownMountPercent());
+            stockOnShelf.setCostPrice(stockOnShelf.getCostPrice());
             stockOnShelf.setStatus(0);
         }
         stockOnShelfService.saveSelective(stockOnShelf);

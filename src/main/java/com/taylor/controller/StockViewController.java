@@ -91,6 +91,19 @@ public class StockViewController {
         return "/industrys";
     }
 
+    @RequestMapping("/reachcost")
+    public String reachcost(Map<String, Object> map) {
+        List<RecmdStock> recmdStocks=recmdStockService.reachcost();
+        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
+        Map<String, Object> onshelfMap = new HashMap<>();
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+        }
+        map.put("recmdList", recmdStocks);
+        map.put("onshelfMap", onshelfMap);
+        return "/reachcost";
+    }
+
     @RequestMapping("/shelf")
     public String shlef(Map<String, Object> map) {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();

@@ -44,4 +44,9 @@ public class RecmdStockServiceImpl extends AbstractCrudService<RecmdStock, Recmd
     public int delByStrategyList(List<Integer> strategyTypeList) {
         return this.getDao().delByStrategyList(strategyTypeList);
     }
+
+    @Override
+    public List<RecmdStock> reachcost() {
+        return this.getDao().reachcost();
+    }
 }
