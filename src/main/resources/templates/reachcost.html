@@ -130,7 +130,7 @@
             <td><span th:text="${#numbers.formatDecimal(stock.costPrice, 1, 2)}"></span></td>
             <td><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice),1,2)}"></span></td>
             <td ><span th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice,1,2)+'%'}"
-                                          th:style="'color:'+${((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice>-1 and 1>(stock.currentPrice - stock.costPrice) * 100/stock.recordPrice)?'red':'green'}+';font-weight:bold;'"></span>
+                                          th:style="'color:'+${((stock.currentPrice - stock.costPrice) * 100/stock.recordPrice>0 and 1.5>(stock.currentPrice - stock.costPrice) * 100/stock.recordPrice)?'red':'green'}+';font-weight:bold;'"></span>
             </td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>

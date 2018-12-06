@@ -71,8 +71,8 @@
         z.industry,count(z.industry) as in_num
         FROM recmd_stock s,stock_data z where s.strategy_type=28
         and s.stock_code=z.stock_code
-        and (s.current_price-s.cost_price)/s.current_price>-0.01
-        and 0.01>(s.current_price-s.cost_price)/s.current_price
+        and (s.current_price-s.cost_price)/s.current_price>0
+        and 0.015>(s.current_price-s.cost_price)/s.current_price
         GROUP BY z.industry
         ) o on d.industry=o.industry
         where t.stock_code=d.stock_code
