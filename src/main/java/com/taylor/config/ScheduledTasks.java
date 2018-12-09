@@ -120,11 +120,11 @@ public class ScheduledTasks {
         TianEQuanStrategy tianEQuan = new TianEQuanStrategy();
         shiZiStrategy.setNext(tianEQuan);
         /**3与5之间**/
-        Between3and5 between3and5 = new Between3and5();
-        tianEQuan.setNext(between3and5);
+        Between5and8 between5And8 = new Between5and8();
+        tianEQuan.setNext(between5And8);
         /**连续两天涨停**/
         TwoDaysTopStrategy twoDaysTopStrategy = new TwoDaysTopStrategy();
-        between3and5.setNext(twoDaysTopStrategy);
+        between5And8.setNext(twoDaysTopStrategy);
 
 
         IStrategy iStrategy = bigYinLineStrategy;

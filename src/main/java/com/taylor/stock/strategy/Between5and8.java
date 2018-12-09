@@ -13,8 +13,8 @@ import java.util.List;
  * @desc:
  * @date: 2018/1/9 0:18
  */
-public class Between3and5 extends IStrategy {
-    public Between3and5() {
+public class Between5and8 extends IStrategy {
+    public Between5and8() {
         super(StrategyEnum.TYPE31);
     }
 
@@ -31,7 +31,7 @@ public class Between3and5 extends IStrategy {
         HistoryData yestoday = historyData.get(historyData.size() - 2);
         HistoryData theDayBeforeYes = historyData.get(historyData.size() - 3);
         StockPanKouData panKouData = ApiClient.getPanKouData(stockCode);
-        if (panKouData.getUpDownMountPercent() >= 3.0d && panKouData.getUpDownMountPercent() <= 5.0d) {
+        if (panKouData.getUpDownMountPercent() >= 5.0d && panKouData.getUpDownMountPercent() <= 8.0d) {
             return 1;
             /*if (theDayBeforeYes.getClose() > yestoday.getClose() && theDayBeforeYes.getClose() > today.getClose() && today.getClose() > yestoday.getClose()) {
                 return 1;
