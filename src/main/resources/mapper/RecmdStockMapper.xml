@@ -71,13 +71,13 @@
         z.industry,count(z.industry) as in_num
         FROM recmd_stock s,stock_data z where s.strategy_type=28
         and s.stock_code=z.stock_code
-        and (s.current_price-s.cost_price)/s.current_price>=0
+        and (s.current_price-s.cost_price)/s.current_price>=-0.005
         and 0.015>=(s.current_price-s.cost_price)/s.current_price
         GROUP BY z.industry
         ) o on d.industry=o.industry
         where t.stock_code=d.stock_code
         and t.strategy_type=28
-        and (t.current_price-t.cost_price)/t.current_price>=0
+        and (t.current_price-t.cost_price)/t.current_price>=-0.005
         and 0.015>(t.current_price-t.cost_price)/t.current_price
         order by o.in_num desc,industry desc,t.change_ratio_yestoday desc
 
