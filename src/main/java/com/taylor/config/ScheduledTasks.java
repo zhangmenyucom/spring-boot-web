@@ -119,7 +119,7 @@ public class ScheduledTasks {
         /**天鹅拳形态**/
         TianEQuanStrategy tianEQuan = new TianEQuanStrategy();
         shiZiStrategy.setNext(tianEQuan);
-        /**3与5之间**/
+        /**5与8之间**/
         Between5and8 between5And8 = new Between5and8();
         tianEQuan.setNext(between5And8);
         /**连续两天涨停**/
@@ -129,7 +129,7 @@ public class ScheduledTasks {
 
         IStrategy iStrategy = bigYinLineStrategy;
         List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
+        /**清除当天及12天以外的数据**/
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();

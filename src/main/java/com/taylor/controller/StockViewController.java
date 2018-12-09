@@ -48,7 +48,12 @@ public class StockViewController {
         HttpSession session = request.getSession();
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
-        for (int i = 10; i >= 0; i--) {
+        for (int i = 12; i >= 0; i--) {
+            Calendar cl=Calendar.getInstance();
+            cl.setTime(StockUtils.getDateAfter(now, -i));
+            if(isWeekend(cl)){
+                continue;
+            }
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
@@ -133,7 +138,12 @@ public class StockViewController {
         HttpSession session = request.getSession();
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
-        for (int i = 10; i >= 0; i--) {
+        for (int i = 12; i >= 0; i--) {
+            Calendar cl=Calendar.getInstance();
+            cl.setTime(StockUtils.getDateAfter(now, -i));
+            if(isWeekend(cl)){
+                continue;
+            }
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
         }
         RecmdStock recmdStock = new RecmdStock();
@@ -199,5 +209,12 @@ public class StockViewController {
                 .setLiangbiToday(panKouData.getLiangBi())
                 .setId(stockData.getId());
         return recmdStockTemp;
+    }
+    private boolean isWeekend(Calendar cal){
+        int week=cal.get(Calendar.DAY_OF_WEEK)-1;
+        if(week ==6 || week==0){//0代表周日，6代表周六
+            return true;
+        }
+        return false;
     }
 }
