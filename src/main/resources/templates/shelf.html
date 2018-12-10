@@ -103,7 +103,7 @@
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
-            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">K线</a></td>
+            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0}" class="update_btn" data-status="1">置顶</button>

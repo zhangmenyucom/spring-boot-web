@@ -143,7 +143,7 @@
                 th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
-            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">K线</a></td>
+            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td th:text="${#dates.format(stock.recordTime, 'yyyy-MM-dd')}"></td>
         </tr>
         <tr>

@@ -129,7 +129,7 @@
             <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
-            <td><a th:href="@{'http://quote.eastmoney.com/concept/'+${stock.stockCode}+'.html'}">K线</a></td>
+            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>
         <tr>
