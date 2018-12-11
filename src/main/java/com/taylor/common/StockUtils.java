@@ -26,6 +26,11 @@ public class StockUtils {
      * 不需要监控时间
      */
     public static boolean noNeedMonotorTime() {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        if (isWeekend(cl)) {
+            return true;
+        }
         boolean over15_00 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "15:00", "HH:mm") >= 0;
         boolean before9_30 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "9:15", "HH:mm") <= 0;
         boolean duringBreakTime = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "11:30", "HH:mm") > 0 && DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "13:00", "HH:mm") <= 0;
@@ -33,6 +38,11 @@ public class StockUtils {
     }
 
     public static boolean noNeedMonotorForYiDongTime() {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        if (isWeekend(cl)) {
+            return true;
+        }
         boolean over15_00 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "15:35", "HH:mm") >= 0;
         boolean before9_30 = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "9:35", "HH:mm") <= 0;
         boolean duringBreakTime = DateCompare(new SimpleDateFormat("HH:mm").format(new Date()), "11:30", "HH:mm") > 0 && DateCompare(new SimpleDateFormat("HH:MM").format(new Date()), "13:00", "HH:mm") <= 0;
@@ -53,6 +63,14 @@ public class StockUtils {
             e.printStackTrace();
         }
         return ret;
+    }
+
+    private static boolean isWeekend(Calendar cal) {
+        int week = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (week == 6 || week == 0) {//0代表周日，6代表周六
+            return true;
+        }
+        return false;
     }
 
     /**

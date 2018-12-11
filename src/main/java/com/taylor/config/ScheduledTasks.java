@@ -104,6 +104,11 @@ public class ScheduledTasks {
      **/
     @Scheduled(cron = "0 0 22 * * *")
     public void fetchBigYinData() {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(new Date());
+        if (isWeekend(cl)) {
+            return;
+        }
         RecmdStock recmdStockDel = new RecmdStock();
         /**放量大阴**/
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
@@ -146,5 +151,13 @@ public class ScheduledTasks {
         List<Integer> strategyTypeList = new ArrayList<>();
         strategyTypeList.add(StrategyEnum.TYPE28.getCode());
         recmdStockService.delByStrategyList(strategyTypeList);
+    }
+
+    private static boolean isWeekend(Calendar cal) {
+        int week = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (week == 6 || week == 0) {//0代表周日，6代表周六
+            return true;
+        }
+        return false;
     }
 }

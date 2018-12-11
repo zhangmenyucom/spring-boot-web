@@ -122,7 +122,7 @@ public class StockApi extends BaseAction {
         BigYinLineStrategy bigYinLineStrategy = new BigYinLineStrategy();
         LongHuBang longHuBang = new LongHuBang();
         List<Integer> strategyTypeList = new ArrayList<>();
-        /**清除当天及5天以外的数据**/
+        /**清除当天及13天以外的数据**/
         IStrategy iStrategy = bigYinLineStrategy;
         do {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
