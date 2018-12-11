@@ -292,36 +292,34 @@ public class ApiClient {
         biaozhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usINX").split("~")[32])));
 
         StockBaseInfo pinan = new StockBaseInfo();
-        pinan.setStockName("中国平安");
+        pinan.setStockName("平安");
         StockPanKouData sh601318 = getPanKouData("sh601318");
         pinan.setNetChangeRatio(BigDecimal.valueOf(sh601318.getUpDownMountPercent()));
         pinan.setStockCode("sh601318");
 
         StockBaseInfo maotai = new StockBaseInfo();
-        maotai.setStockName("贵州茅台");
+        maotai.setStockName("茅台");
         StockPanKouData sh600519 = getPanKouData("sh600519");
         maotai.setNetChangeRatio(BigDecimal.valueOf(sh600519.getUpDownMountPercent()));
         maotai.setStockCode("sh600519");
 
         StockBaseInfo shiyou = new StockBaseInfo();
-        shiyou.setStockName("中国石油");
+        shiyou.setStockName("石油");
         StockPanKouData sh601857 = getPanKouData("sh601857");
         shiyou.setNetChangeRatio(BigDecimal.valueOf(sh601857.getUpDownMountPercent()));
         shiyou.setStockCode("sh601857");
-
-
 
         List<StockBaseInfo> stockBigDataList = new ArrayList<>();
         stockBigDataList.add(shangzhi);
         stockBigDataList.add(shenzhi);
         stockBigDataList.add(chuangzhi);
         stockBigDataList.add(hengzhi);
-        stockBigDataList.add(nazhi);
-        stockBigDataList.add(daozhi);
-        stockBigDataList.add(biaozhi);
         stockBigDataList.add(pinan);
         stockBigDataList.add(maotai);
         stockBigDataList.add(shiyou);
+        stockBigDataList.add(nazhi);
+        stockBigDataList.add(daozhi);
+        stockBigDataList.add(biaozhi);
         return stockBigDataList;
 
     }
