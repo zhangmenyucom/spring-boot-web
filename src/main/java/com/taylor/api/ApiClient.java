@@ -1,18 +1,23 @@
 package com.taylor.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
 import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
 import com.taylor.common.StringConverterFactory;
-import com.taylor.entity.StockBaseInfo;
-import com.taylor.entity.StockBusinessinfo;
-import com.taylor.entity.TongHuaShunStockBase;
-import com.taylor.entity.stock.*;
+import com.taylor.entity.*;
+import com.taylor.entity.stock.HistoryData;
+import com.taylor.entity.stock.StockFundInOut;
+import com.taylor.entity.stock.StockPanKouData;
+import com.taylor.entity.stock.TencentDayData;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static com.taylor.common.Constants.*;
 
@@ -35,6 +40,8 @@ public class ApiClient {
     public static Api api360 = ApiFactory.create(NICAIFU_PREFIX, StringConverterFactory.create());
 
     public static Api apiTongHuaShun = ApiFactory.create(TONGHUASHUN_PREFIX, StringConverterFactory.create());
+
+    public static Api apiTongHuaShun2 = ApiFactory.create(TONGHUASHUN_PREFIX2, StringConverterFactory.create());
 
 
     /**
@@ -239,6 +246,22 @@ public class ApiClient {
     }
 
     /**
+     * 同花顺数据
+     **/
+    public static FoundInOutEntity getTongHuashunFoundInOut(String stockCode) {
+        try {
+            String result = Retrofits.execute(apiTongHuaShun2.getFundInOut(stockCode.substring(2).toLowerCase()));
+            List<DanInOutEntity> flash = JSON.parseArray(result.substring(result.indexOf("flash") + 7, result.indexOf("]") + 1), DanInOutEntity.class);
+            FoundInOutEntity title = JsonUtil.transferToObj(result.substring(result.indexOf("title") + 7, result.length() - 1), FoundInOutEntity.class);
+            title.setDanList(flash);
+            return title;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 360kdj
      **/
     public static String getKdjData(String stockCode, KLineTypeEnum kLineTypeEnum, int count) throws IOException {
@@ -326,6 +349,6 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-        System.out.println(getPanKouData("SZ002466"));
+        System.out.println(JsonUtil.transfer2JsonString(getTongHuashunFoundInOut("SZ300068")));
     }
 }

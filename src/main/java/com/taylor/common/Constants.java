@@ -19,6 +19,8 @@ public class Constants {
 
     public static final String TONGHUASHUN_PREFIX="http://qd.10jqka.com.cn/";
 
+    public static final String TONGHUASHUN_PREFIX2="http://stockpage.10jqka.com.cn/";
+
     /***查询股票资金流入情况信息**/
     public static final String METHOD_URL_STOCK_FOUNDS_IN_OUT = "https://gupiao.baidu.com/api/stocks/stockfunds";
 

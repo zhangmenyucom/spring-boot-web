@@ -65,6 +65,6 @@ public class StockFundInOut {
     private String dateTime;
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getStockFundInOutData("SH603188")));
+        System.out.println(JsonUtil.transfer2JsonString(ApiClient.getStockFundInOutData("SH603177")));
     }
 }

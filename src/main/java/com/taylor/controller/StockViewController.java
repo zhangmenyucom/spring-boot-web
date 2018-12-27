@@ -49,9 +49,9 @@ public class StockViewController {
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
         for (int i = 12; i >= 0; i--) {
-            Calendar cl=Calendar.getInstance();
+            Calendar cl = Calendar.getInstance();
             cl.setTime(StockUtils.getDateAfter(now, -i));
-            if(isWeekend(cl)){
+            if (isWeekend(cl)) {
                 continue;
             }
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
@@ -91,14 +91,14 @@ public class StockViewController {
 
     @RequestMapping("/industry/list")
     public String industryList(Map<String, Object> map) {
-        List<String> industryList=stockDataService.getIndustryList();
+        List<String> industryList = stockDataService.getIndustryList();
         map.put("industryList", industryList);
         return "/industrys";
     }
 
     @RequestMapping("/reachcost")
     public String reachcost(Map<String, Object> map) {
-        List<RecmdStock> recmdStocks=recmdStockService.reachcost();
+        List<RecmdStock> recmdStocks = recmdStockService.reachcost();
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
         Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
@@ -139,9 +139,9 @@ public class StockViewController {
         List<String> listDate = new ArrayList<>();
         Date now = new Date();
         for (int i = 12; i >= 0; i--) {
-            Calendar cl=Calendar.getInstance();
+            Calendar cl = Calendar.getInstance();
             cl.setTime(StockUtils.getDateAfter(now, -i));
-            if(isWeekend(cl)){
+            if (isWeekend(cl)) {
                 continue;
             }
             listDate.add(sdf.format(StockUtils.getDateAfter(now, -i)));
@@ -210,9 +210,10 @@ public class StockViewController {
                 .setId(stockData.getId());
         return recmdStockTemp;
     }
-    private boolean isWeekend(Calendar cal){
-        int week=cal.get(Calendar.DAY_OF_WEEK)-1;
-        if(week ==6 || week==0){//0代表周日，6代表周六
+
+    private boolean isWeekend(Calendar cal) {
+        int week = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (week == 6 || week == 0) {//0代表周日，6代表周六
             return true;
         }
         return false;

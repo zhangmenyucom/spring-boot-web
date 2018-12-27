@@ -37,6 +37,12 @@ public interface Api {
     Call<String> getTencentKlineInfo(@Path("stockCode") String stockCode);
 
     /**
+     * 同花顺资金流入流出
+     **/
+    @GET("/spService/{stockCode}/Funds/realFunds")
+    Call<String> getFundInOut(@Path("stockCode") String stockCode);
+
+    /**
      * 百度日K数据
      **/
     @GET("/api/stocks/stockdaybar")

@@ -86,6 +86,9 @@
             <th>地区</th>
             <th>当日涨幅</th>
             <th>累计涨幅</th>
+            <th>资金流入</th>
+            <th>资金流出</th>
+            <th>总流入</th>
             <th>K线</th>
             <th>操作</th>
             <th>关注价</th>
@@ -105,6 +108,7 @@
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
+            <td><a target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0 or stock.status==2}" class="update_btn" data-status="1">置顶</button>
