@@ -4,7 +4,6 @@
     <title>同行比较</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/message-box.js"></script>
-    <script type="text/javascript" src="/js/ligerDialog.js"></script>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
     <link href="/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
@@ -108,7 +107,6 @@
             <th>今日量比</th>
             <th>今日涨幅</th>
             <th>K线</th>
-            <th>资金流向</th>
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
@@ -143,5 +141,82 @@
 </div>
 <script type="text/javascript" src="/js/xui.js"></script>
 <script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/ligerDialog.js"></script>
+<script language="javascript">
+    $(".start_choose_by_type_s").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/start_choose_by_type",
+            type: 'get',
+            dataType: "json",
+            data: {
+                "pan": 0,
+                "type": temp.data("type")
+            },
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
+    });
+    $(".start_choose_by_type_m").click(function () {
+        var temp = $(this);
+        $.ajax({
+            url: "/stock/api/start_choose_by_type",
+            type: 'get',
+            data: {
+                "pan": 1,
+                "type": temp.data("type")
+            },
+            dataType: "json",
+            success: function (result) {
+                if (result.errorNo == 0) {
+                    alert("正在筛选股票......");
+                } else {
+                    alert(result.errorMsg);
+                }
+            }
+        });
+    });
+    $(function () {
+        //当鼠标滑入时将div的class换成divOver
+        $('tr').hover(function () {
+                $(this).addClass('divOver');
+            }, function () {
+                //鼠标离开时移除divOver样式
+                $(this).removeClass('divOver');
+            }
+        );
+    });
+    $(".add_choose").click(function () {
+        var temp = $(this);
+        $.ligerDialog.prompt('提示内容', true, function (yes, value) {
+            $.ajax({
+                url: "/stock/api/add_choose",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": temp.parent().parent().find("td").first().html(),
+                    "costPrice":isNaN(value)? null:value,
+                    "reason": value
+                }),
+                success: function (result) {
+                    if (result.errorNo == 0) {
+                        $.ligerDialog.success("sucess");
+                        temp.html("已选");
+                        temp.css("color", "red");
+                        temp.parent().parent().find(".stock_name").css("color", "red");
+                    } else {
+                        $.ligerDialog.success(result.errorMsg);
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

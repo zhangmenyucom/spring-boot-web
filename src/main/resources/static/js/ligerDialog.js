@@ -12,17 +12,17 @@
     var l = $.ligerui;
 
     //全局事件
-    $(".l-dialog-btn").live('mouseover', function ()
+    $(".l-dialog-btn").on('mouseover', function ()
     {
         $(this).addClass("l-dialog-btn-over");
-    }).live('mouseout', function ()
+    }).on('mouseout', function ()
     {
         $(this).removeClass("l-dialog-btn-over");
     });
-    $(".l-dialog-tc .l-dialog-close").live('mouseover', function ()
+    $(".l-dialog-tc .l-dialog-close").on('mouseover', function ()
     {
         $(this).addClass("l-dialog-close-over");
-    }).live('mouseout', function ()
+    }).on('mouseout', function ()
     {
         $(this).removeClass("l-dialog-close-over");
     });
@@ -34,15 +34,15 @@
     };
 
     //dialog 图片文件夹的路径 预加载
-    $.ligerui.DialogImagePath = "../../lib/ligerUI/skins/Aqua/images/win/";
-
+   // $.ligerui.DialogImagePath = "../../lib/ligerUI/skins/Aqua/images/win/";
+/*
     function prevImage(paths)
     {
         for (var i in paths)
         {
             $('<img />').attr('src', l.DialogImagePath + paths[i]);
         }
-    }
+    }*/
     //prevImage(['dialog.gif', 'dialog-winbtns.gif', 'dialog-bc.gif', 'dialog-tc.gif']);
 
     $.ligerDefaults.Dialog = {
