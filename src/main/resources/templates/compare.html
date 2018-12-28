@@ -109,6 +109,7 @@
             <th>今日量比</th>
             <th>今日涨幅</th>
             <th>K线</th>
+            <th>资金流向</th>
             <th th:if="${type==15}">策略</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
@@ -130,6 +131,7 @@
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
             <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
+            <td><a target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>
         <tr>
