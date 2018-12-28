@@ -5,7 +5,6 @@
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/message-box.js"></script>
     <link href="/css/css.css" type="text/css" rel="stylesheet"/>
-    <script type="text/javascript" src="/js/base.js"></script>
     <script type="text/javascript" src="/js/ligerDialog.js"></script>
     <link href="/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
@@ -99,14 +98,14 @@
         <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}">
             <td th:text="${stock.stockCode}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
             <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
-            <td><a target="_self" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
+            <td><a class="dialog"  th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
-            <td><a target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
-            <td><a target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0 or stock.status==2}" class="update_btn" data-status="1">置顶</button>
@@ -130,6 +129,7 @@
     <div style="height: 300px;"></div>
 </div>
 <script type="text/javascript" src="/js/xui.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
 <script language="javascript">
     $(function () {
         //当鼠标滑入时将div的class换成divOver
