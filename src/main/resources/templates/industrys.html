@@ -97,7 +97,7 @@
             <th>行业名称</th>
         </tr>
         <tr th:each="industry: ${industryList}">
-            <td><a  class="dialog" target="_self" th:href="@{'/stock/view/related/name/'+${industry}}"> <span th:text="${industry}"></span></a></td>
+            <td><a  class="dialog" target="_blank" th:href="@{'/stock/view/related/name/'+${industry}}"> <span th:text="${industry}"></span></a></td>
         </tr>
         <tr>
             <td colspan="18" cols="18">
