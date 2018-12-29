@@ -100,6 +100,26 @@ public class ScheduledTasks {
     }
 
     /**
+     * 尾盘拉资金股
+     */
+    @Scheduled(cron = "0 20 14 * * *")
+    public void fetchFoundStock() {
+        if (!StockUtils.noNeedMonotorTime()) {
+            /**连续两天涨停**/
+            XiPanStrategy xiPanStrategy = new XiPanStrategy();
+            IStrategy iStrategy = xiPanStrategy;
+            List<Integer> strategyTypeList = new ArrayList<>();
+            /**清除当天及12天以外的数据**/
+            do {
+                strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
+                iStrategy = iStrategy.getNext();
+            } while (iStrategy != null);
+            recmdStockService.delByStrategyList(strategyTypeList);
+            stockDataService.processData(xiPanStrategy, -1);
+        }
+    }
+
+    /**
      * 尾盘推荐股票
      **/
     @Scheduled(cron = "0 0 22 * * *")
