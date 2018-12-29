@@ -39,7 +39,7 @@ public class XiPanStrategy extends IStrategy {
         double daDan = danList.get(5).getSr() - danList.get(0).getSr();
         double ZhongDan = danList.get(4).getSr() - danList.get(1).getSr();
         double xiaoDan = danList.get(3).getSr() - danList.get(2).getSr();
-        if (daDan > 0 && ZhongDan > 0 && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose())/historyData.get(historyData.size() - 2).getClose()<=0.03) {
+        if (daDan > 0 && daDan > 300 && ZhongDan > 0 && (daDan > xiaoDan || ZhongDan > xiaoDan) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.03) {
             return 1;
         }
         return 0;
