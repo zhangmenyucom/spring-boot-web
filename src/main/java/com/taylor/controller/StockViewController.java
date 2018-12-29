@@ -24,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.taylor.common.ConstantsInits.FOUND_VIEW;
+
 /**
  * @author xiaolu.zhang
  * @desc:
@@ -79,11 +81,14 @@ public class StockViewController {
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
         }
-        for (RecmdStock stock : recmdStocks) {
-            stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+        if (FOUND_VIEW == 1) {
+            for (RecmdStock stock : recmdStocks) {
+                stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+            }
         }
         map.put("recordTime", sdf.format(recmdStock.getRecordTime()));
         map.put("type", type);
+        map.put("found_view", FOUND_VIEW);
         map.put("recmdList", recmdStocks);
         map.put("strategyName", StrategyEnum.getEnumValue(type));
         map.put("listDate", listDate);
@@ -116,10 +121,13 @@ public class StockViewController {
     public String shlef(Map<String, Object> map) {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
-        for (StockOnShelf stockOnShelf : stockOnShelves) {
-            stockOnShelf.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stockOnShelf.getStockCode()));
+        if (FOUND_VIEW == 1) {
+            for (StockOnShelf stockOnShelf : stockOnShelves) {
+                stockOnShelf.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stockOnShelf.getStockCode()));
+            }
         }
         map.put("stockOnShelves", stockOnShelves);
+        map.put("found_view", FOUND_VIEW);
         map.put("bigDataList", ApiClient.getBigDataList());
         return "/shelf";
     }

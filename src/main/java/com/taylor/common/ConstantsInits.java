@@ -25,4 +25,9 @@ public class ConstantsInits {
      * 成本监控
      **/
     public static int COST_MONITOR = 0;
+
+    /**
+     * 资金监控
+     **/
+    public static int FOUND_VIEW = 0;
 }

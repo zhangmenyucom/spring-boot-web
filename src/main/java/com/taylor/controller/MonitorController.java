@@ -1,6 +1,7 @@
 package com.taylor.controller;
 
 import com.taylor.common.KLineTypeEnum;
+import com.taylor.entity.FoundInOutEntity;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.request.KdjFiveMiniMonitor;
@@ -63,7 +64,23 @@ public class MonitorController {
         COST_MONITOR = 0;
         return "已经关闭成本监控";
     }
+    @RequestMapping("/start_found_view")
+    public String startFoundView() {
+        if (FOUND_VIEW == 1) {
+            return "已经开启资金视图，无需再次开启";
+        }
+        FOUND_VIEW = 1;
+        return "已经打开资金视图";
+    }
 
+    @RequestMapping("/stop_found_view")
+    public String stopFoundView() {
+        if (FOUND_VIEW == 0) {
+            return "已经关闭资金视图，无需再次关闭";
+        }
+        FOUND_VIEW = 0;
+        return "已经关闭资金视图";
+    }
 
     @RequestMapping("/start")
     public String startMonitor() {
