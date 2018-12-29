@@ -22,7 +22,7 @@ public class XiPanStrategy extends IStrategy {
     @Override
     public int doCheck(List<HistoryData> historyData, String stockCode) {
         try {
-            Thread.sleep(400);
+            Thread.sleep(600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
