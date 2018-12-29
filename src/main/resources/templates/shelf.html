@@ -83,6 +83,9 @@
             <th>股票名称</th>
             <th>行业</th>
             <th>地区</th>
+            <th>资金流入</th>
+            <th>资金流出</th>
+            <th>资金总入</th>
             <th>当日涨幅</th>
             <th>累计涨幅</th>
             <th>K线</th>
@@ -100,6 +103,9 @@
             <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
             <td><a class="dialog"  th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.zlr}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.zlc}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.je}" th:style="'color:'+${stock.foundInOutEntity.je>0?'red':'green'}"></span></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"

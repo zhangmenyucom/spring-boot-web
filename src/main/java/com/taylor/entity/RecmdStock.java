@@ -3,6 +3,7 @@ package com.taylor.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -150,4 +151,7 @@ public class RecmdStock {
 
     /**地区**/
     private String district;
+
+    @Transient
+    private FoundInOutEntity foundInOutEntity;
 }

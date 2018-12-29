@@ -79,6 +79,9 @@ public class StockViewController {
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
         }
+        for (RecmdStock stock : recmdStocks) {
+            stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+        }
         map.put("recordTime", sdf.format(recmdStock.getRecordTime()));
         map.put("type", type);
         map.put("recmdList", recmdStocks);
@@ -113,6 +116,9 @@ public class StockViewController {
     public String shlef(Map<String, Object> map) {
         StockOnShelf stockOnShelfQuery = new StockOnShelf();
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
+        for (StockOnShelf stockOnShelf : stockOnShelves) {
+            stockOnShelf.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stockOnShelf.getStockCode()));
+        }
         map.put("stockOnShelves", stockOnShelves);
         map.put("bigDataList", ApiClient.getBigDataList());
         return "/shelf";

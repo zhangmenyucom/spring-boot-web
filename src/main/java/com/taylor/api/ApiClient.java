@@ -344,11 +344,10 @@ public class ApiClient {
         stockBigDataList.add(daozhi);
         stockBigDataList.add(biaozhi);
         return stockBigDataList;
-
     }
 
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getTongHuashunFoundInOut("SZ300068")));
+        System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ300068")));
     }
 }

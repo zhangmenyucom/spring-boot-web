@@ -136,6 +136,9 @@
             <th>累计涨跌</th>
             <th>行业</th>
             <th>地区</th>
+            <th>资金流入</th>
+            <th>资金流出</th>
+            <th>资金总入</th>
             <th>换手率</th>
             <th>记录量比</th>
             <th>今日量比</th>
@@ -165,6 +168,9 @@
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td><a class="dialog" target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.zlr}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.zlc}"></span></td>
+            <td><span th:text="${stock.foundInOutEntity.je}" th:style="'color:'+${stock.foundInOutEntity.je>0?'red':'green'}"></span></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.liangbi}"></td>
             <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>
