@@ -161,8 +161,6 @@ public class ScheduledTasks {
             strategyTypeList.add(iStrategy.getStrategyEnum().getCode());
             iStrategy = iStrategy.getNext();
         } while (iStrategy != null);
-        strategyTypeList.add(StrategyEnum.TYPE33.getCode());
-        strategyTypeList.add(StrategyEnum.TYPE34.getCode());
         recmdStockService.delByStrategyList(strategyTypeList);
         stockDataService.processData(bigYinLineStrategy, -1);
     }

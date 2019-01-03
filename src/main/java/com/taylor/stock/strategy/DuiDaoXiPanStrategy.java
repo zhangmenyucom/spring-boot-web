@@ -31,7 +31,9 @@ public class DuiDaoXiPanStrategy extends IStrategy {
             return 0;
         }
         HistoryData today = historyData.get(historyData.size() - 1);
-        if (today.getClose() > Constants.CURRENT_PRICE_LIMIT) {
+        HistoryData yestoday = historyData.get(historyData.size() - 2);
+        HistoryData dayBeforeYestoday = historyData.get(historyData.size() - 3);
+        if (today.getClose() > Constants.CURRENT_PRICE_LIMIT || (yestoday.getClose() - dayBeforeYestoday.getClose()) / dayBeforeYestoday.getClose() < 0.02) {
             return 0;
         }
         FoundInOutEntity tongHuashunFoundInOut = ApiClient.getTongHuashunFoundInOut(stockCode);
@@ -39,7 +41,7 @@ public class DuiDaoXiPanStrategy extends IStrategy {
         double daDan = danList.get(5).getSr() - danList.get(0).getSr();
         double ZhongDan = danList.get(4).getSr() - danList.get(1).getSr();
         double xiaoDan = danList.get(3).getSr() - danList.get(2).getSr();
-        if (daDan < -300 && ZhongDan < -300 && xiaoDan < 0 && (Math.abs(daDan / xiaoDan) >= 3 && Math.abs(ZhongDan / xiaoDan) >= 3) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.01) {
+        if (daDan < 0 && ZhongDan < 0 && (Math.abs(daDan / xiaoDan) >= 3 && Math.abs(ZhongDan / xiaoDan) >= 3) && (today.getClose() - historyData.get(historyData.size() - 2).getClose()) / yestoday.getClose() <= 0.01) {
             return 1;
         }
         return 0;
