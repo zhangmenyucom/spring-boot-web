@@ -137,9 +137,9 @@
             <th>累计涨跌</th>
             <th>行业</th>
             <th>地区</th>
-            <th th:if="${found_view==1}">资金流入</th>
-            <th th:if="${found_view==1}">资金流出</th>
-            <th th:if="${found_view==1}">资金总入</th>
+            <th th:if="${found_view==1}">大单流入</th>
+            <th th:if="${found_view==1}">中单流入</th>
+            <th th:if="${found_view==1}">小单流入</th>
             <th>换手率</th>
             <th>记录量比</th>
             <th>今日量比</th>
@@ -169,9 +169,9 @@
                 th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td><a class="dialog" target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${stock.foundInOutEntity.zlr}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${stock.foundInOutEntity.zlc}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${stock.foundInOutEntity.je}" th:style="'color:'+${stock.foundInOutEntity.je>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
             <td th:text="${#numbers.formatDecimal(stock.turnoverRatio, 1, 2)}+'%'"></td>
             <td th:text="${stock.liangbi}"></td>
             <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>

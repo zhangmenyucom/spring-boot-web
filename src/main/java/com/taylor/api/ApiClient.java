@@ -326,12 +326,6 @@ public class ApiClient {
         maotai.setNetChangeRatio(BigDecimal.valueOf(sh600519.getUpDownMountPercent()));
         maotai.setStockCode("sh600519");
 
-        StockBaseInfo shiyou = new StockBaseInfo();
-        shiyou.setStockName("石油");
-        StockPanKouData sh601857 = getPanKouData("sh601857");
-        shiyou.setNetChangeRatio(BigDecimal.valueOf(sh601857.getUpDownMountPercent()));
-        shiyou.setStockCode("sh601857");
-
         List<StockBaseInfo> stockBigDataList = new ArrayList<>();
         stockBigDataList.add(shangzhi);
         stockBigDataList.add(shenzhi);
@@ -339,7 +333,6 @@ public class ApiClient {
         stockBigDataList.add(hengzhi);
         stockBigDataList.add(pinan);
         stockBigDataList.add(maotai);
-        stockBigDataList.add(shiyou);
         stockBigDataList.add(nazhi);
         stockBigDataList.add(daozhi);
         stockBigDataList.add(biaozhi);

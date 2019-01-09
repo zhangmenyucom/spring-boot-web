@@ -99,6 +99,10 @@
             <th>股票代码</th>
             <th>股票名称</th>
             <th>自选</th>
+            <th>资金流向</th>
+            <th th:if="${found_view==1}">大单流入</th>
+            <th th:if="${found_view==1}">中单流入</th>
+            <th th:if="${found_view==1}">小单流入</th>
             <th>记录价</th>
             <th>当前价</th>
             <th>累计涨跌</th>
@@ -118,6 +122,10 @@
                 <button th:class="${onshelfMap.get(stock.stockCode)==null?'add_choose':''}" th:text="${onshelfMap.get(stock.stockCode)==null?'自选':'已选'}">自选
                 </button>
             </td>
+            <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
             <td th:text="${#numbers.formatDecimal(stock.recordPrice, 1, 2)}"></td>
             <td th:text="${#numbers.formatDecimal(stock.currentPrice, 1, 2)}" th:style="'color:'+${stock.currentPrice>stock.recordPrice?'red':'green'}"></td>
             <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.recordPrice) * 100/stock.recordPrice,1,2)+'%'}"

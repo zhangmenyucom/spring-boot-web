@@ -10,7 +10,6 @@ import com.taylor.service.RecmdStockService;
 import com.taylor.service.StockDataService;
 import com.taylor.service.StockOnShelfService;
 import com.taylor.stock.common.StrategyEnum;
-import com.taylor.stock.request.OnShelfUpdator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -112,6 +111,12 @@ public class StockViewController {
         for (StockOnShelf stockOnShelf : stockOnShelves) {
             onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
         }
+        if (FOUND_VIEW == 1) {
+            for (RecmdStock stock : recmdStocks) {
+                stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+            }
+        }
+        map.put("found_view", FOUND_VIEW);
         map.put("recmdList", recmdStocks);
         map.put("onshelfMap", onshelfMap);
         return "/reachcost";
@@ -128,19 +133,6 @@ public class StockViewController {
         }
         map.put("stockOnShelves", stockOnShelves);
         map.put("found_view", FOUND_VIEW);
-        map.put("bigDataList", ApiClient.getBigDataList());
-        return "/shelf";
-    }
-
-    @RequestMapping("/updateShelf")
-    public String updateShlef(Map<String, Object> map) {
-        if (OnShelfUpdator.FLAG == 0) {
-            StockOnShelf stockOnShelfUpdate = new StockOnShelf();
-            stockOnShelfService.updateSelf(stockOnShelfUpdate);
-        }
-        StockOnShelf stockOnShelfQuery = new StockOnShelf();
-        List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelfQuery);
-        map.put("stockOnShelves", stockOnShelves);
         map.put("bigDataList", ApiClient.getBigDataList());
         return "/shelf";
     }
@@ -180,8 +172,14 @@ public class StockViewController {
         List<RecmdStock> recmdStocksList = stockDataList.stream().map(this::getRecmdStock).collect(Collectors.toList());
         onshelfMap.put(code, "");
         Collections.sort(recmdStocksList, (o1, o2) -> o1.getChangeRatioToday() < o2.getChangeRatioToday() ? 1 : -1);
+        if (FOUND_VIEW == 1) {
+            for (RecmdStock stock : recmdStocksList) {
+                stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+            }
+        }
         map.put("recordTime", sdf.format(recmdStock.getRecordTime()));
         map.put("type", 1);
+        map.put("found_view", FOUND_VIEW);
         map.put("recmdList", recmdStocksList);
         map.put("strategyName", "同行比较");
         map.put("listDate", listDate);
@@ -202,9 +200,15 @@ public class StockViewController {
         List<StockData> stockDataList = stockDataService.findDataByIndustryName(name);
         List<RecmdStock> recmdStocksList = stockDataList.stream().map(this::getRecmdStock).collect(Collectors.toList());
         Collections.sort(recmdStocksList, (o1, o2) -> o1.getChangeRatioToday() < o2.getChangeRatioToday() ? 1 : -1);
+        if (FOUND_VIEW == 1) {
+            for (RecmdStock stock : recmdStocksList) {
+                stock.setFoundInOutEntity(ApiClient.getTongHuashunFoundInOut(stock.getStockCode()));
+            }
+        }
         map.put("recmdList", recmdStocksList);
         map.put("strategyName", "同行比较");
         map.put("onshelfMap", onshelfMap);
+        map.put("found_view", FOUND_VIEW);
         return "/compare";
     }
 
