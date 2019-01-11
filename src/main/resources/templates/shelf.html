@@ -72,6 +72,7 @@
                 <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time" th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
                 <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
+            <li><input type="text" id="searchStock" placeholder="股票代码"/><input type="button" id="add" value="添加自选"/></li>
         </ol>
     </div>
     <br/>
@@ -258,6 +259,31 @@
                     $.MsgBox.Alert("消息", "已取消标记!");
                 }
             }
+        });
+    });
+    $("#add").click(function () {
+        var temp = $(this);
+        var stockCode=$("#searchStock").val();
+        $.ligerDialog.prompt('提示内容', true, function (yes, value) {
+            $.ajax({
+                url: "/stock/api/add_choose",
+                type: 'POST',
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify({
+                    "stockCode": stockCode[0]=="6"?("SH"+stockCode):("SZ"+stockCode),
+                    "costPrice": isNaN(value) ? null : value,
+                    "reason": value
+                }),
+                success: function (result) {
+                    if (result.errorNo == 0) {
+                        $("#searchStock").val("");
+                        $.ligerDialog.success("添加成功，查询请刷新");
+                    } else {
+                        $.ligerDialog.success(result.errorMsg);
+                    }
+                }
+            });
         });
     });
 </script>
