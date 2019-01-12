@@ -106,10 +106,10 @@ public class ScheduledTasks {
     public void fetchFoundStock() {
         if (!StockUtils.noNeedMonotorTime()) {
             /**连续两天涨停**/
-            XiPanStrategy xiPanStrategy = new XiPanStrategy();
+            FoundInStrategy foundInStrategy = new FoundInStrategy();
             DuiDaoXiPanStrategy duiDaoXiPanStrategy=new DuiDaoXiPanStrategy();
-            xiPanStrategy.setNext(duiDaoXiPanStrategy);
-            IStrategy iStrategy = xiPanStrategy;
+            foundInStrategy.setNext(duiDaoXiPanStrategy);
+            IStrategy iStrategy = foundInStrategy;
             List<Integer> strategyTypeList = new ArrayList<>();
             /**清除当天及12天以外的数据**/
             do {
@@ -117,7 +117,7 @@ public class ScheduledTasks {
                 iStrategy = iStrategy.getNext();
             } while (iStrategy != null);
             recmdStockService.delByStrategyList(strategyTypeList);
-            stockDataService.processData(xiPanStrategy, -1);
+            stockDataService.processData(foundInStrategy, -1);
         }
     }
 

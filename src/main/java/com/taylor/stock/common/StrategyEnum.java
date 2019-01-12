@@ -24,7 +24,7 @@ public enum StrategyEnum {
     TYPE30(30, "缩量洗盘"),
     TYPE31(31, "介于5与8之间"),
     TYPE32(32, "最近十日有连续两天涨停"),
-    TYPE33(33, "只有大单买卖"),
+    TYPE33(33, "交流流入盘"),
     TYPE34(34, "对倒洗盘");
 
     public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
@@ -37,7 +37,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(30, new SuoLiangXipanStrategy());
         STRATEGY_MAP.put(31, new Between5and8());
         STRATEGY_MAP.put(32, new TwoDaysTopStrategy());
-        STRATEGY_MAP.put(33, new XiPanStrategy());
+        STRATEGY_MAP.put(33, new FoundInStrategy());
         STRATEGY_MAP.put(34, new DuiDaoXiPanStrategy());
     }
 

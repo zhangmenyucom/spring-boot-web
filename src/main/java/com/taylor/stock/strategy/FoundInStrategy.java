@@ -14,8 +14,8 @@ import java.util.List;
  * @desc:
  * @date: 2018/1/9 0:18
  */
-public class XiPanStrategy extends IStrategy {
-    public XiPanStrategy() {
+public class FoundInStrategy extends IStrategy {
+    public FoundInStrategy() {
         super(StrategyEnum.TYPE33);
     }
 
@@ -39,7 +39,7 @@ public class XiPanStrategy extends IStrategy {
         double daDan = danList.get(5).getSr() - danList.get(0).getSr();
         double ZhongDan = danList.get(4).getSr() - danList.get(1).getSr();
         double xiaoDan = danList.get(3).getSr() - danList.get(2).getSr();
-        if (daDan > 300 && ZhongDan > 300 && (daDan > xiaoDan && ZhongDan > xiaoDan) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.08) {
+        if (daDan > 200 &&danList.get(5).getSr()/danList.get(0).getSr()>=2 && ZhongDan > 200 && (daDan > xiaoDan && daDan > ZhongDan && ZhongDan > xiaoDan) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.05) {
             return 1;
         }
         return 0;
