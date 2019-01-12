@@ -39,7 +39,7 @@ public class FoundInStrategy extends IStrategy {
         double daDan = danList.get(5).getSr() - danList.get(0).getSr();
         double ZhongDan = danList.get(4).getSr() - danList.get(1).getSr();
         double xiaoDan = danList.get(3).getSr() - danList.get(2).getSr();
-        if (daDan > 200 &&danList.get(5).getSr()/danList.get(0).getSr()>=2 && ZhongDan > 200 && (daDan > xiaoDan && daDan > ZhongDan && ZhongDan > xiaoDan) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.05) {
+        if (daDan > 200 &&danList.get(5).getSr()/danList.get(0).getSr()>=2 && ZhongDan > 200 &&danList.get(4).getSr()/danList.get(1).getSr()>2 (daDan > xiaoDan && daDan > ZhongDan && ZhongDan > xiaoDan) && (historyData.get(historyData.size() - 1).getClose() - historyData.get(historyData.size() - 2).getClose()) / historyData.get(historyData.size() - 2).getClose() <= 0.05) {
             return 1;
         }
         return 0;
