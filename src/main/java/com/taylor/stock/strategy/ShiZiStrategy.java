@@ -35,15 +35,13 @@ public class ShiZiStrategy extends IStrategy {
         HistoryData yestoday = historyData.get(historyData.size() - 2);
         HistoryData theDayBeforeYes = historyData.get(historyData.size() - 3);
 
-        if (Math.abs((today.getClose() - yestoday.getClose()) / yestoday.getClose()) <= 0.015 && Math.abs(today.getClose() - today.getLow()) / yestoday.getClose() > 0.025) {
-            if (Math.abs((yestoday.getClose() - theDayBeforeYes.getClose()) / theDayBeforeYes.getClose()) <= 0.015 && Math.abs(yestoday.getClose() - yestoday.getLow()) / theDayBeforeYes.getClose() > 0.025) {
-                return 1;
-            }
-            if (Math.abs((today.getClose() - today.getOpen()) / today.getOpen()) <= 0.02 && Math.abs(today.getClose() - today.getLow()) / today.getOpen() > 0.035) {
-                return 1;
+        if (Math.abs((today.getClose() - yestoday.getClose()) / yestoday.getClose()) <= 0.015 && Math.abs(today.getHigh() - today.getLow()) / yestoday.getClose() > 0.02) {
+            for (int i = 0; i < 3; i++) {
+                if ((historyData.get(historyData.size() - i - 2).getClose() - historyData.get(historyData.size() - i - 3).getClose()) / historyData.get(historyData.size() - i - 3).getClose() > 0.06) {
+                    return 1;
+                }
             }
         }
-
         return 0;
     }
 }
