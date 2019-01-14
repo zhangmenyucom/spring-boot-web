@@ -89,10 +89,14 @@
             <th th:if="${found_view==1}">中单流入</th>
             <th th:if="${found_view==1}">小单流入</th>
             <th>当日涨幅</th>
+<!--
             <th>累计涨幅</th>
+-->
             <th>F5</th>
             <th>操作</th>
+<!--
             <th>关注价</th>
+-->
             <th>当前价</th>
             <th>成本价</th>
             <th>差比</th>
@@ -111,8 +115,8 @@
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
-            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
-                th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>
+<!--            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
+                th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>-->
             <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td>
                 <button class="del-choose">删除</button>
@@ -121,7 +125,9 @@
                 <button th:if="${stock.status==0 or stock.status==2}" class="star_btn" data-status="1">星标</button>
                 <button th:if="${stock.status==1}" class="star_btn" data-status="0">已标</button>
             </td>
+<!--
             <td th:text="${stock.focusPrice}"></td>
+-->
             <td th:text="${stock.currentPrice}"></td>
             <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
             <td><span th:if="${stock.costPrice!=null and stock.costPrice!=0}" th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice,1,2)+'%'}" th:style="'color:'+${(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0?'red':'green'}+';font-weight:'+${((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0 and 1.5>=(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice)? 'bold':'none;'}"></span></td>
