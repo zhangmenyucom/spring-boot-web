@@ -116,17 +116,17 @@
             <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td>
                 <button class="del-choose">删除</button>
-                <button th:if="${stock.status==0 or stock.status==2}" class="update_btn" data-status="1">置顶</button>
-                <button th:if="${stock.status==1}" class="update_btn" data-status="0"><img src="/images/common/top.gif"/></button>
-                <button th:if="${stock.status==0 or stock.status==1}" class="star_btn" data-status="2">星标</button>
-                <button th:if="${stock.status==2}" class="star_btn" data-status="0">已标</button>
+                <button th:if="${stock.status==0 or stock.status==1}" class="update_btn" data-status="2">置顶</button>
+                <button th:if="${stock.status==2}" class="update_btn" data-status="0"><img src="/images/common/top.gif"/></button>
+                <button th:if="${stock.status==0 or stock.status==2}" class="star_btn" data-status="1">星标</button>
+                <button th:if="${stock.status==1}" class="star_btn" data-status="0">已标</button>
             </td>
             <td th:text="${stock.focusPrice}"></td>
             <td th:text="${stock.currentPrice}"></td>
             <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
             <td><span th:if="${stock.costPrice!=null and stock.costPrice!=0}" th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice,1,2)+'%'}" th:style="'color:'+${(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0?'red':'green'}+';font-weight:'+${((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0 and 1.5>=(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice)? 'bold':'none;'}"></span></td>
             <td class="comment alter-comment" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.reason}"></td>
-            <td class="star"><img th:if="${stock.status==2}" src="/images/icon/star.png"/></td>
+            <td class="star"><img th:if="${stock.status==1}" src="/images/icon/star.png"/></td>
         </tr>
         <tr>
             <td colspan="18" cols="18">
@@ -224,12 +224,12 @@
                     "status": $(this).data("status")
                 }),
                 success: function () {
-                    if (temp.data("status") == "1") {
+                    if (temp.data("status") == "2") {
                         temp.data("status", "0");
                         temp.text("取消");
                         $.MsgBox.Alert("消息", "已置顶!");
                     } else {
-                        temp.data("status", "1");
+                        temp.data("status", "2");
                         temp.text("置顶");
                         $.MsgBox.Alert("消息", "已取消!");
                     }
@@ -249,8 +249,8 @@
                 "status": $(this).data("status")
             }),
             success: function () {
-                if (temp.data("status") == "2") {
-                    temp.data("status", "2");
+                if (temp.data("status") == "1") {
+                    temp.data("status", "1");
                     temp.text("已标");
                     $.MsgBox.Alert("消息", "已标记!");
                 } else {
@@ -262,7 +262,6 @@
         });
     });
     $("#add").click(function () {
-        var temp = $(this);
         var stockCode=$("#searchStock").val();
         $.ligerDialog.prompt('提示内容', true, function (yes, value) {
             $.ajax({
@@ -271,8 +270,9 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 data: JSON.stringify({
-                    "stockCode": stockCode[0]=="6"?("SH"+stockCode):("SZ"+stockCode),
+                    "stockCode": stockCode[0]=="6"?("sh"+stockCode):("sz"+stockCode),
                     "costPrice": isNaN(value) ? null : value,
+                    "status":2,
                     "reason": value
                 }),
                 success: function (result) {

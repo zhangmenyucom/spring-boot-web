@@ -78,7 +78,7 @@ public class StockViewController {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
         Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+            onshelfMap.put(stockOnShelf.getStockCode().toLowerCase(), stockOnShelf);
         }
         if (FOUND_VIEW == 1) {
             for (RecmdStock stock : recmdStocks) {
@@ -109,7 +109,7 @@ public class StockViewController {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
         Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+            onshelfMap.put(stockOnShelf.getStockCode().toLowerCase(), stockOnShelf);
         }
         if (FOUND_VIEW == 1) {
             for (RecmdStock stock : recmdStocks) {
@@ -165,7 +165,7 @@ public class StockViewController {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
         Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+            onshelfMap.put(stockOnShelf.getStockCode().toLowerCase().toLowerCase(), stockOnShelf);
         }
 
         List<StockData> stockDataList = stockDataService.findDataByCodeType(code);
@@ -194,7 +194,7 @@ public class StockViewController {
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(new StockOnShelf());
         Map<String, Object> onshelfMap = new HashMap<>();
         for (StockOnShelf stockOnShelf : stockOnShelves) {
-            onshelfMap.put(stockOnShelf.getStockCode(), stockOnShelf);
+            onshelfMap.put(stockOnShelf.getStockCode().toLowerCase().toLowerCase(), stockOnShelf);
         }
 
         List<StockData> stockDataList = stockDataService.findDataByIndustryName(name);

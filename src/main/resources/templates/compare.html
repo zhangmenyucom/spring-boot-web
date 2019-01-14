@@ -116,9 +116,9 @@
         </tr>
         <tr th:each="stock: ${recmdList}">
             <td th:text="${#strings.substring(stock.stockCode,2)}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}"
-                th:style="${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}" class="show_time"></td>
+                th:style="${onshelfMap.get(#strings.toLowerCase(stock.stockCode))==null?'':'color:red;'}" class="show_time"></td>
             <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline stock_name"
-                th:style="'font-weight:bold !important;'+${onshelfMap.get(stock.stockCode)==null?'':'color:red;'}"></td>
+                th:style="'font-weight:bold !important;'+${onshelfMap.get(#strings.toLowerCase(stock.stockCode))==null?'':'color:red;'}"></td>
             <td>
                 <button th:class="${onshelfMap.get(stock.stockCode)==null?'add_choose':''}" th:text="${onshelfMap.get(stock.stockCode)==null?'自选':'已选'}">自选
                 </button>
