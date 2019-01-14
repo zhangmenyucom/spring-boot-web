@@ -289,29 +289,29 @@ public class ApiClient {
         shangzhi.setStockCode("sh000001");
 
         StockBaseInfo shenzhi = new StockBaseInfo();
-        shenzhi.setStockName("深指");
+        shenzhi.setStockName("深");
         shenzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399001").split("~")[5])));
         shenzhi.setStockCode("sz399001");
 
         StockBaseInfo chuangzhi = new StockBaseInfo();
-        chuangzhi.setStockName("创指");
+        chuangzhi.setStockName("创");
         chuangzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("s_sz399006").split("~")[5])));
         chuangzhi.setStockCode("sz399006");
 
         StockBaseInfo hengzhi = new StockBaseInfo();
-        hengzhi.setStockName("恒指");
+        hengzhi.setStockName("恒");
         hengzhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("r_hkHSI").split("~")[32])));
 
         StockBaseInfo nazhi = new StockBaseInfo();
-        nazhi.setStockName("纳指");
+        nazhi.setStockName("纳");
         nazhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usIXIC").split("~")[32])));
 
         StockBaseInfo daozhi = new StockBaseInfo();
-        daozhi.setStockName("道指");
+        daozhi.setStockName("道");
         daozhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usDJI").split("~")[32])));
 
         StockBaseInfo biaozhi = new StockBaseInfo();
-        biaozhi.setStockName("标指");
+        biaozhi.setStockName("标");
         biaozhi.setNetChangeRatio(BigDecimal.valueOf(Double.parseDouble(getBigData("usINX").split("~")[32])));
 
         StockBaseInfo pinan = new StockBaseInfo();
