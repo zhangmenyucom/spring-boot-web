@@ -101,6 +101,7 @@
             <th>自选</th>
             <th>资金流向</th>
             <th>公司业绩</th>
+            <th>新闻热点</th>
             <th th:if="${found_view==1}">大单流入</th>
             <th th:if="${found_view==1}">中单流入</th>
             <th th:if="${found_view==1}">小单流入</th>
@@ -125,6 +126,7 @@
             </td>
             <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://basic.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}}">公司业绩</a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">新闻热点</a></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
@@ -137,7 +139,6 @@
             <td th:text="${stock.liangbiToday!=null?stock.liangbiToday:'未更新'}" th:style="'color:'+${stock.liangbiToday>stock.liangbi?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
-            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td th:if="${type==15}"><span th:text="${stock.strategy}"></span></td>
         </tr>

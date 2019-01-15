@@ -83,6 +83,7 @@
             <th>股票名称</th>
             <th>资金流向</th>
             <th>公司业绩</th>
+            <th>新闻热点</th>
             <th>行业</th>
             <th>地区</th>
             <th th:if="${found_view==1}">大单流入</th>
@@ -92,7 +93,6 @@
 <!--
             <th>累计涨幅</th>
 -->
-            <th>F5</th>
             <th>操作</th>
 <!--
             <th>关注价</th>
@@ -108,6 +108,7 @@
             <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
             <td><a class="dialog" target="_blank"  th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://basic.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}}">公司业绩</a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">新闻热点</a></td>
             <td><a class="dialog" target="_blank"  th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
@@ -117,7 +118,6 @@
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
 <!--            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
                 th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>-->
-            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0 or stock.status==1}" class="update_btn" data-status="2">置顶</button>

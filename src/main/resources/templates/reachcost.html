@@ -98,7 +98,8 @@
             <th>股票代码</th>
             <th>股票名称</th>
             <th>资金流向</th>
-            <th>公司业绩</th>
+            <th>公司业绩</th>、
+            <th>新闻热点</th>
             <th th:if="${found_view==1}">大单流入</th>
             <th th:if="${found_view==1}">中单流入</th>
             <th th:if="${found_view==1}">小单流入</th>
@@ -116,7 +117,6 @@
             <th>今日量比</th>
             <th>记录涨幅</th>
             <th>今日涨幅</th>
-            <th>消息</th>
             <th>记录日期</th>
         </tr>
         <tr th:each="stock: ${recmdList}">
@@ -126,6 +126,7 @@
                 th:style="'font-weight:bold !important;'+${onshelfMap.get(#strings.toLowerCase(stock.stockCode))==null?'':'color:red;'}"></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://basic.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}}">公司业绩</a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">新闻热点</a></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
             <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
@@ -151,7 +152,6 @@
                 th:style="'color:'+${stock.changeRatioYestoday>0?'red':'green'}"></td>
             <td th:text="${stock.changeRatioToday!=null?#numbers.formatDecimal(stock.changeRatioToday, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.changeRatioToday>0?'red':'green'}"></td>
-            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">F5</a></td>
             <td th:text="${#dates.format(stock.recordTime, 'yyyy-MM-dd')}"></td>
         </tr>
         <tr>
