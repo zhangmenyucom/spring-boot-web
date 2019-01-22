@@ -43,6 +43,7 @@ public class QueryStockDayDataRequest extends Thread {
     @Override
     public void run() {
         DecimalFormat df = new DecimalFormat("######0.000");
+        String formatToday = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         for (StockData stockData : stockDataList) {
             if (run_flag == 0) {
                 break;
@@ -53,7 +54,7 @@ public class QueryStockDayDataRequest extends Thread {
             List<HistoryData> historyData = ApiClient.getHistoryData(stockData.getStockCode().toLowerCase(), 12);
 
             /**获取数据不是当天数据的，将今天的数据补上去**/
-            if (!historyData.get(historyData.size() - 1).getDay().equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
+            if (!historyData.get(historyData.size() - 1).getDay().equals(formatToday)) {
                 HistoryData historyToday = new HistoryData();
                 historyToday.setClose(panKouData.getCurrentPrice());
                 historyToday.setHigh(panKouData.getTopPrice());
