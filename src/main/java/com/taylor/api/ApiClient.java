@@ -2,6 +2,7 @@ package com.taylor.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.retrofit.Retrofit2ConverterFactory;
+import com.sun.jmx.snmp.SnmpOidDatabaseSupport;
 import com.taylor.common.JsonUtil;
 import com.taylor.common.KLineTypeEnum;
 import com.taylor.common.Retrofits;
@@ -14,6 +15,7 @@ import com.taylor.entity.stock.TencentDayData;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -200,9 +202,9 @@ public class ApiClient {
     /**
      * 新浪历史数据
      **/
-    public static List<HistoryData> getHistoryData(String symbol, int datalen) {
+    public static List<HistoryData> getHistoryData(String stockCode, int datalen) {
         try {
-            return Retrofits.execute(apiSina.getHistoryData(symbol, 240, datalen));
+            return Retrofits.execute(apiSina.getHistoryData(stockCode, 240, datalen));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -341,6 +343,7 @@ public class ApiClient {
 
 
     public static void main(String... args) {
-        System.out.println(JsonUtil.transfer2JsonString(getStockFundInOutData("SZ300068")));
+        System.out.println(JsonUtil.transfer2JsonString(getPanKouData("SZ300068")));
+        System.out.println(JsonUtil.transfer2JsonString(getHistoryData("SZ300068",10)));
     }
 }

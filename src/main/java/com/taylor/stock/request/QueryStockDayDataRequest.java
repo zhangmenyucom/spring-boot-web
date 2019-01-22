@@ -4,7 +4,6 @@ import com.taylor.api.ApiClient;
 import com.taylor.entity.RecmdStock;
 import com.taylor.entity.StockData;
 import com.taylor.entity.stock.HistoryData;
-import com.taylor.entity.stock.StockFundInOut;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
 import com.taylor.stock.common.OperatorEnum;
@@ -12,6 +11,8 @@ import com.taylor.stock.strategy.IStrategy;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,7 +50,18 @@ public class QueryStockDayDataRequest extends Thread {
 
             log.info("正在检测股票：{}", stockData.getStockName());
             StockPanKouData panKouData = ApiClient.getPanKouData(stockData.getStockCode());
-            List<HistoryData> historyData = ApiClient.getHistoryData(stockData.getStockCode().toLowerCase(), 10);
+            List<HistoryData> historyData = ApiClient.getHistoryData(stockData.getStockCode().toLowerCase(), 12);
+
+            /**获取数据不是当天数据的，将今天的数据补上去**/
+            if (!historyData.get(historyData.size() - 1).getDay().equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
+                HistoryData historyToday = new HistoryData();
+                historyToday.setClose(panKouData.getCurrentPrice());
+                historyToday.setHigh(panKouData.getTopPrice());
+                historyToday.setLow(panKouData.getBowtomPrice());
+                historyToday.setOpen(panKouData.getOpenPrice());
+                historyToday.setVolume(panKouData.getExchangeValue().longValue() * 100);
+                historyData.add(historyToday);
+            }
             HistoryData today = historyData.get(historyData.size() - 1);
             HistoryData yestoday = historyData.get(historyData.size() - 2);
             IStrategy temp = strategy;
@@ -57,7 +69,7 @@ public class QueryStockDayDataRequest extends Thread {
             if (panKouData.getLiangBi() == 0) {
                 continue;
             }
-            StockFundInOut stockFundInOutData = ApiClient.getStockFundInOutData(stockData.getStockCode());
+            //StockFundInOut stockFundInOutData = ApiClient.getStockFundInOutData(stockData.getStockCode());
             while (strategy != null && run_flag == 1) {
                 int checkResult = strategy.doCheck(historyData, stockData.getStockCode().toLowerCase());
                 if (checkResult == 1 && panKouData != null) {
@@ -69,8 +81,8 @@ public class QueryStockDayDataRequest extends Thread {
                             .setCurrentPrice(today.getClose())
                             .setStrategy(strategy.getStrategyEnum().getDesc())
                             .setStrategyType(strategy.getStrategyEnum().getCode())
-                            .setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn())
-                            .setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi())
+                           /* .setMainIn(stockFundInOutData == null ? null : stockFundInOutData.getMainTotalIn())
+                            .setMainInBi(stockFundInOutData == null ? null : stockFundInOutData.getMainInBi())*/
                             .setRecmdOperate(OperatorEnum.OPERATOR_ENUM_MAP.get(checkResult))
                             .setLiangbi(panKouData.getLiangBi())
                             .setChangeRatioYestoday((today.getClose() - yestoday.getClose()) / yestoday.getClose() * 100)
