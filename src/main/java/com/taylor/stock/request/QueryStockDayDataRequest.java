@@ -61,6 +61,7 @@ public class QueryStockDayDataRequest extends Thread {
                 historyToday.setLow(panKouData.getBowtomPrice());
                 historyToday.setOpen(panKouData.getOpenPrice());
                 historyToday.setVolume(panKouData.getExchangeValue().longValue() * 100);
+                historyToday.setDay(formatToday);
                 historyData.add(historyToday);
             }
             HistoryData today = historyData.get(historyData.size() - 1);
