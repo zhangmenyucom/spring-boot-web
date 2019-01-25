@@ -3,6 +3,7 @@ package com.taylor.controller;
 import com.taylor.api.ApiClient;
 import com.taylor.common.ApiResponse;
 import com.taylor.common.ErrorCode;
+import com.taylor.entity.StockData;
 import com.taylor.entity.StockOnShelf;
 import com.taylor.entity.stock.StockPanKouData;
 import com.taylor.service.RecmdStockService;
@@ -86,6 +87,18 @@ public class StockApi extends BaseAction {
     @RequestMapping("/add_choose")
     public ApiResponse<Boolean> addStockOnShelf(@RequestBody StockOnShelf stockOnShelf, HttpServletRequest request, HttpServletResponse response) {
         ApiResponse<Boolean> result = new ApiResponse<>(ErrorCode.FAILED);
+
+        if(stockOnShelf.getStockName()!=null){
+            StockData stockData=new StockData();
+            stockData.setStockName(stockOnShelf.getStockName().trim());
+            List<StockData> stockDataList = stockDataService.find(stockData);
+            if(stockDataList.isEmpty()){
+                result.setErrorMsg("不存在名称为"+stockOnShelf.getStockName()+"的股票");
+                return result;
+            }
+            stockOnShelf.setStockCode(stockDataList.get(0).getStockCode());
+
+        }
         List<StockOnShelf> stockOnShelves = stockOnShelfService.find(stockOnShelf);
         if (stockOnShelves != null && !stockOnShelves.isEmpty()) {
             result.setErrorMsg("该股票已经存在自选中");

@@ -72,7 +72,7 @@
                 <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time" th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
                 <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
-            <li><input type="text" id="searchStock" placeholder="股票代码"/><input type="button" id="add" value="添加自选"/></li>
+            <li><input type="text" id="searchStock" placeholder="股票代码或名称"/><input type="button" id="add" value="添加自选"/></li>
         </ol>
     </div>
     <br/>
@@ -267,8 +267,20 @@
             }
         });
     });
+
+    function isChinese(temp) {
+        var re = /.*[\u4e00-\u9fa5]+.*$/;
+        return re.test(temp);
+    }
     $("#add").click(function () {
         var stockCode=$("#searchStock").val();
+        var stockName;
+         if(isChinese(stockCode)){
+             stockName=stockCode;
+             stockCode=null;
+         }else{
+             stockCode=(stockCode[0]=="6"?("sh"+stockCode):("sz"+stockCode));
+         }
         $.ligerDialog.prompt('提示内容', true, function (yes, value) {
             $.ajax({
                 url: "/stock/api/add_choose",
@@ -276,7 +288,8 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 data: JSON.stringify({
-                    "stockCode": stockCode[0]=="6"?("sh"+stockCode):("sz"+stockCode),
+                    "stockCode":stockCode,
+                    "stockName":stockName,
                     "costPrice": isNaN(value) ? null : value,
                     "status":2,
                     "reason": value
