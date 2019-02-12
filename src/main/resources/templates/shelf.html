@@ -69,8 +69,11 @@
         <ol style="list-style: none;display: block;float: none;-webkit-padding-start: 5px;">
             <li style="margin-right: 10px;float:left;">指数：</li>
             <li th:each="data: ${bigDataList}" style="margin-right: 10px;float:left;">
-                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time" th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
-                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k" th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_time"
+                      th:text="@{${data.stockName}+':'+ ${#numbers.formatDecimal(data.netChangeRatio, 1, 2)+'%'}}"
+                      th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
+                <span th:attr="data-code=${#strings.toLowerCase(data.stockCode)}" class="show_kline" th:text="k"
+                      th:style="'color:'+${data.netChangeRatio>0?'red':'green'}"></span>
             </li>
             <li><input type="text" id="searchStock" placeholder="股票代码或名称"/><input type="button" id="add" value="添加自选"/></li>
         </ol>
@@ -90,13 +93,13 @@
             <th th:if="${found_view==1}">中单流入</th>
             <th th:if="${found_view==1}">小单流入</th>
             <th>当日涨幅</th>
-<!--
-            <th>累计涨幅</th>
--->
+            <!--
+                        <th>累计涨幅</th>
+            -->
             <th>操作</th>
-<!--
-            <th>关注价</th>
--->
+            <!--
+                        <th>关注价</th>
+            -->
             <th>当前价</th>
             <th>成本价</th>
             <th>差比</th>
@@ -105,19 +108,24 @@
         </tr>
         <tr th:each="stock: ${stockOnShelves}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}">
             <td th:text="${#strings.substring(stock.stockCode,2)}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_time"></td>
-            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline" style="font-weight:bold !important;"></td>
-            <td><a class="dialog" target="_blank"  th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
+            <td th:text="${stock.stockName}" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" class="show_kline"
+                style="font-weight:bold !important;"></td>
+            <td><a class="dialog" target="_blank" th:href="@{'http://stockpage.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}+'/funds'}">资金流向</a></td>
             <td><a class="dialog" target="_blank" th:href="@{'http://basic.10jqka.com.cn/'+${#strings.substring(stock.stockCode,2)}}">公司业绩</a></td>
-            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">新闻热点</a></td>
-            <td><a class="dialog" target="_blank"  th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
+            <td><a class="dialog" target="_blank" th:href="@{'https://www.yuncaijing.com/quote/'+${#strings.toLowerCase(stock.stockCode)}+'.html'}">新闻热点</a>
+            </td>
+            <td><a class="dialog" target="_blank" th:href="@{'/stock/view/related/'+${stock.stockCode}}"> <span th:text="${stock.industry}"></span></a></td>
             <td><span th:text="${stock.district}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
-            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}" th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.daDan,1,2)}"
+                                               th:style="'color:'+${stock.foundInOutEntity.daDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.zhongDan,1,2)}"
+                                               th:style="'color:'+${stock.foundInOutEntity.zhongDan>0?'red':'green'}"></span></td>
+            <td th:if="${found_view==1}"><span th:text="${#numbers.formatDecimal(stock.foundInOutEntity.xiaoDan,1,2)}"
+                                               th:style="'color:'+${stock.foundInOutEntity.xiaoDan>0?'red':'green'}"></span></td>
             <td th:text="${stock.netRatio!=null?#numbers.formatDecimal(stock.netRatio, 1, 2)+'%':'未更新'}"
                 th:style="'color:'+${stock.netRatio>0?'red':'green'}"></td>
-<!--            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
-                th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>-->
+            <!--            <td th:text="${#numbers.formatDecimal((stock.currentPrice - stock.focusPrice) * 100/stock.focusPrice,1,2)+'%'}"
+                            th:style="'color:'+${stock.currentPrice>stock.focusPrice?'red':'green'}"></td>-->
             <td>
                 <button class="del-choose">删除</button>
                 <button th:if="${stock.status==0 or stock.status==1}" class="update_btn" data-status="2">置顶</button>
@@ -125,12 +133,16 @@
                 <button th:if="${stock.status==0 or stock.status==2}" class="star_btn" data-status="1">星标</button>
                 <button th:if="${stock.status==1}" class="star_btn" data-status="0">已标</button>
             </td>
-<!--
-            <td th:text="${stock.focusPrice}"></td>
--->
+            <!--
+                        <td th:text="${stock.focusPrice}"></td>
+            -->
             <td th:text="${stock.currentPrice}"></td>
-            <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}" th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
-            <td><span th:if="${stock.costPrice!=null and stock.costPrice!=0}" th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice,1,2)+'%'}" th:style="'color:'+${(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0?'red':'green'}+';font-weight:'+${((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0 and 1.5>=(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice)? 'bold':'none;'}"></span></td>
+            <td class="alter_cost_price" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.costPrice}"
+                th:style="'color:'+${stock.costPrice>stock.currentPrice?'red':'green'}"></td>
+            <td><span th:if="${stock.costPrice!=null and stock.costPrice!=0}"
+                      th:text="${#numbers.formatDecimal((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice,1,2)+'%'}"
+                      th:style="'color:'+${(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0?'red':'green'}+';font-weight:'+${((stock.currentPrice - stock.costPrice) * 100/stock.currentPrice>=0 and 1.5>=(stock.currentPrice - stock.costPrice) * 100/stock.currentPrice)? 'bold':'none;'}"></span>
+            </td>
             <td class="comment alter-comment" th:attr="data-code=${#strings.toLowerCase(stock.stockCode)}" th:text="${stock.reason}"></td>
             <td class="star"><img th:if="${stock.status==1}" src="/images/icon/star.png"/></td>
         </tr>
@@ -273,14 +285,14 @@
         return re.test(temp);
     }
     $("#add").click(function () {
-        var stockCode=$("#searchStock").val();
+        var stockCode = $("#searchStock").val();
         var stockName;
-         if(isChinese(stockCode)){
-             stockName=stockCode;
-             stockCode=null;
-         }else{
-             stockCode=(stockCode[0]=="6"?("sh"+stockCode):("sz"+stockCode));
-         }
+        if (isChinese(stockCode)) {
+            stockName = stockCode;
+            stockCode = null;
+        } else {
+            stockCode = (stockCode[0] == "6" ? ("sh" + stockCode) : ("sz" + stockCode));
+        }
         $.ligerDialog.prompt('提示内容', true, function (yes, value) {
             $.ajax({
                 url: "/stock/api/add_choose",
@@ -288,16 +300,17 @@
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
                 data: JSON.stringify({
-                    "stockCode":stockCode,
-                    "stockName":stockName,
+                    "stockCode": stockCode,
+                    "stockName": stockName,
                     "costPrice": isNaN(value) ? null : value,
-                    "status":2,
+                    "status": 2,
                     "reason": value
                 }),
                 success: function (result) {
                     if (result.errorNo == 0) {
                         $("#searchStock").val("");
-                        $.ligerDialog.success("添加成功，查询请刷新");
+                        $.ligerDialog.success("添加成功");
+                        window.location.reload();
                     } else {
                         $.ligerDialog.success(result.errorMsg);
                     }
