@@ -1,16 +1,31 @@
-package com.taylor.common;
+package com.taylor.common; /**
+ * ${author} on 2018/9/19.
+ */
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Map;
 
-public abstract class BaseService<Entity, Query, Dao extends BaseDao<Entity, Query>> {
-    
-    @Autowired
-    private Dao dao;
+/**
+ * @author zhangxiaolu
+ * @描述 通用服务接口
+ * @since 2018/9/19 11:36
+ */
+public interface BaseService<T> {
+    T queryObject(Long id);
 
-    public Dao getDao() {
-        return dao;
-    }
-    public void setDao(Dao dao) {
-        this.dao = dao;
-    }
+    List<T> queryList(Map<String, Object> map);
+
+    List<T> queryList(Map<String, Object> map,Long merchantId);
+
+    int queryTotal(Map<String, Object> map);
+
+    int queryTotal(Map<String, Object> map,Long merchantId);
+
+    int save(T t);
+
+    int update(T t);
+
+    int delete(Long id);
+
+    int deleteBatch(Long[] ids);
 }

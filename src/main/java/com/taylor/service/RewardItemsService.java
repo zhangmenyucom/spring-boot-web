@@ -1,9 +1,8 @@
 package com.taylor.service;
 
-
 import com.taylor.common.BaseServiceImpl;
-import com.taylor.dao.UserDao;
-import com.taylor.entity.UserEntity;
+import com.taylor.dao.RewardItemsDao;
+import com.taylor.entity.RewardItemsEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @date 2019-02-13 18:52:15
  */
 @Service
-public class UserService extends BaseServiceImpl<UserEntity, UserDao> {
+public class RewardItemsService extends BaseServiceImpl<RewardItemsEntity, RewardItemsDao> {
 
 }

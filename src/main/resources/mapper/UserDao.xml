@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taylor.dao.UserDao">
+
+    <resultMap type="com.taylor.entity.UserEntity" id="userMap">
+        <result property="id" column="id"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="userLevelId" column="user_level_id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="mobile" column="mobile"/>
+        <result property="avatar" column="avatar"/>
+        <result property="point" column="point"/>
+        <result property="weixinOpenid" column="weixin_openid"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.taylor.entity.UserEntity">
+		select
+			`id`,
+			`gender`,
+			`birthday`,
+			`user_level_id`,
+			`nickname`,
+			`mobile`,
+			`avatar`,
+			`point`,
+			`weixin_openid`,
+			`register_time`,
+			`last_login_time`
+		from user
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.taylor.entity.UserEntity">
+		select
+    		`id`,
+    		`gender`,
+    		`birthday`,
+    		`user_level_id`,
+    		`nickname`,
+    		`mobile`,
+    		`avatar`,
+    		`point`,
+    		`weixin_openid`,
+    		`register_time`,
+    		`last_login_time`
+		from user
+		WHERE 1=1
+        <if test="merchantId!=null">
+            and merchant_id=#{merchantId}
+        </if>
+		<if test="name != null and name.trim() != ''">
+			AND name LIKE concat('%',#{name},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from user
+		WHERE 1=1
+        <if test="merchantId!=null">
+            and merchant_id=#{merchantId}
+        </if>
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.taylor.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into user(
+			`gender`,
+			`birthday`,
+			`user_level_id`,
+			`nickname`,
+			`mobile`,
+			`avatar`,
+			`point`,
+			`weixin_openid`,
+			`register_time`,
+			`last_login_time`)
+		values(
+			#{gender},
+			#{birthday},
+			#{userLevelId},
+			#{nickname},
+			#{mobile},
+			#{avatar},
+			#{point},
+			#{weixinOpenid},
+			#{registerTime},
+			#{lastLoginTime})
+	</insert>
+	 
+	<update id="update" parameterType="com.taylor.entity.UserEntity">
+		update user 
+		<set>
+			<if test="gender != null">`gender` = #{gender}, </if>
+			<if test="birthday != null">`birthday` = #{birthday}, </if>
+			<if test="userLevelId != null">`user_level_id` = #{userLevelId}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="avatar != null">`avatar` = #{avatar}, </if>
+			<if test="point != null">`point` = #{point}, </if>
+			<if test="weixinOpenid != null">`weixin_openid` = #{weixinOpenid}, </if>
+			<if test="registerTime != null">`register_time` = #{registerTime}, </if>
+			<if test="lastLoginTime != null">`last_login_time` = #{lastLoginTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from user where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

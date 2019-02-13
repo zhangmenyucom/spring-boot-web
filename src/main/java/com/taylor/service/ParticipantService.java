@@ -2,8 +2,8 @@ package com.taylor.service;
 
 
 import com.taylor.common.BaseServiceImpl;
-import com.taylor.dao.UserDao;
-import com.taylor.entity.UserEntity;
+import com.taylor.dao.ParticipantDao;
+import com.taylor.entity.ParticipantEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Service;
  * @date 2019-02-13 18:52:15
  */
 @Service
-public class UserService extends BaseServiceImpl<UserEntity, UserDao> {
+public class ParticipantService extends BaseServiceImpl<ParticipantEntity, ParticipantDao> {
 
 }

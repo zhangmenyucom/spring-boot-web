@@ -1,30 +1,35 @@
 package com.taylor.common;
-
-import org.apache.ibatis.annotations.Param;
-import tk.mybatis.mapper.common.Mapper;
-
 import java.util.List;
+import java.util.Map;
 
 /**
- * DAO类,其它DAO类都要继承该类
- * 
- * @param <Entity>
+ * 基础Dao(还需在XML文件里，有对应的SQL语句)
+ *
+ * @author taylor
+ * @email 516195940@qq.com
+ * @date 2016年9月18日 上午9:31:36
  */
-public interface BaseDao<Entity, Query> extends Mapper<Entity> {
+public interface BaseDao<T> {
 
-    Entity get(@Param("com/taylor/entity") Entity entity);
+    int save(T t);
 
-    Entity getByPrimaryKey(@Param("id") Object id);
+    void save(Map<String, Object> map);
 
-    List<Entity> findByCondition(@Param("query") Query query);
+    void saveBatch(List<T> list);
 
-    Integer findTotalCount(@Param("query") Query query);
+    int update(T t);
 
-    int save(@Param("entity") Entity entity);
+    int update(Map<String, Object> map);
 
-    int update(@Param("entity") Entity entity);
+    int delete(Long id);
 
-    int del(@Param("entity") Entity entity);
+    int delete(Map<String, Object> map);
 
-    int delByPrimaryKey(@Param("id") Object id);
+    int deleteBatch(Long[] id);
+
+    T queryObject(Long id);
+
+    List<T> queryList(Map<String, Object> map);
+
+    int queryTotal(Map<String, Object> map);
 }

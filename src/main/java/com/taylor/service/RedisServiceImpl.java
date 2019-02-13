@@ -1,4 +1,4 @@
-package com.taylor.service.impl;
+package com.taylor.service;
 
 import com.taylor.service.RedisService;
 import org.springframework.stereotype.Component;
