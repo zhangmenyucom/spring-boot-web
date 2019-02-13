@@ -77,7 +77,6 @@ public class MyBatisConfigProperties {
                     Resource[] mappers = resourceResolver.getResources(mapperLocation);
                     resources.addAll(Arrays.asList(mappers));
                 } catch (IOException e) {
-                    // ignore
                 }
             }
         }

@@ -87,7 +87,7 @@ public abstract class AbstractCrudService<Entity, Query, Dao extends BaseDao<Ent
     @Override
     public int findTotalCount(Query query) {
         if (query == null) {
-            throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), "鏌ヨ鏉′欢瀵硅薄涓虹┖");
+            throw new ManagerException(RETURN_CODE.ARGS_EMPTY.getCode(), "参数为空");
         }
         Integer total = this.getDao().findTotalCount(query);
         return total == null ? 0 : total;
