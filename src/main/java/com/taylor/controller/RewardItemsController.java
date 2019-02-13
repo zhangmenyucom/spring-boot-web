@@ -2,6 +2,12 @@ package com.taylor.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import com.taylor.common.Query;
+import com.taylor.common.R;
+import com.taylor.entity.RewardItemsEntity;
+import com.taylor.service.RewardItemsService;
+import com.taylor.utils.PageUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platform.entity.RewardItemsEntity;
-import com.platform.service.RewardItemsService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
-import com.platform.utils.R;
 
 /**
  * Controller
@@ -78,7 +79,7 @@ public class RewardItemsController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("rewarditems:delete")
-    public R delete(@RequestBody Long[] ids) {
+    public R delete(@RequestBody Long... ids) {
         rewardItemsService.deleteBatch(ids);
         return R.ok();
     }

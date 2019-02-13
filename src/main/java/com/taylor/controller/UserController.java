@@ -2,6 +2,12 @@ package com.taylor.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import com.taylor.common.Query;
+import com.taylor.common.R;
+import com.taylor.entity.UserEntity;
+import com.taylor.service.UserService;
+import com.taylor.utils.PageUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platform.entity.UserEntity;
-import com.platform.service.UserService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
-import com.platform.utils.R;
 
 /**
  * Controller
@@ -48,7 +49,7 @@ public class UserController {
      */
     @RequestMapping("/info/{id}")
     @RequiresPermissions("user:info")
-    public R info(@PathVariable("id") Integer id) {
+    public R info(@PathVariable("id") Long id) {
         UserEntity user = userService.queryObject(id);
         return R.ok().put("user", user);
     }
@@ -78,7 +79,7 @@ public class UserController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("user:delete")
-    public R delete(@RequestBody Integer[] ids) {
+    public R delete(@RequestBody Long... ids) {
         userService.deleteBatch(ids);
         return R.ok();
     }
