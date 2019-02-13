@@ -25,7 +25,8 @@ public enum StrategyEnum {
     TYPE31(31, "介于5与8之间"),
     TYPE32(32, "最近十日有连续两天涨停"),
     TYPE33(33, "交流流入盘"),
-    TYPE34(34, "对倒洗盘");
+    TYPE34(34, "对倒洗盘"),
+    TYPE35(35, "V型或倒V型底");
 
     public static final Map<Integer, IStrategy> STRATEGY_MAP = new HashMap<>();
 
@@ -39,6 +40,7 @@ public enum StrategyEnum {
         STRATEGY_MAP.put(32, new TwoDaysTopStrategy());
         STRATEGY_MAP.put(33, new FoundInStrategy());
         STRATEGY_MAP.put(34, new DuiDaoXiPanStrategy());
+        STRATEGY_MAP.put(35, new VXinDiStrategy());
     }
 
     private Integer code;
