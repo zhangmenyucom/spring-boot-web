@@ -1,6 +1,7 @@
 package com.taylor.common;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 自定义异常
@@ -10,6 +11,7 @@ import lombok.Data;
  * @date 2016年10月27日 下午10:11:27
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ApiException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

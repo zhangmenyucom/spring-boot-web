@@ -3,6 +3,7 @@ package com.taylor.dao;
 
 import com.taylor.common.BaseDao;
 import com.taylor.entity.TokenEntity;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户TokenDao
@@ -14,4 +15,6 @@ import com.taylor.entity.TokenEntity;
 public interface TokenDao extends BaseDao<TokenEntity> {
 
     TokenEntity queryByToken(String token);
+
+    TokenEntity queryByUserId(@Param("userId") Long userId);
 }

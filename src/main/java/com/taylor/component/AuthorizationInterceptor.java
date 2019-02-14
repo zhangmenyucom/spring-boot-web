@@ -1,9 +1,13 @@
 package com.taylor.component;
 
-import com.taylor.common.ApiException;
 import com.taylor.annotation.IgnoreAuth;
+import com.taylor.annotation.Permission;
+import com.taylor.common.ApiException;
 import com.taylor.entity.TokenEntity;
+import com.taylor.entity.UserEntity;
 import com.taylor.service.TokenService;
+import com.taylor.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +16,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+
+import static com.taylor.common.UserLevelEnum.LEVEL_MAP;
 
 /**
  * 权限(Token)验证
@@ -20,13 +27,17 @@ import javax.servlet.http.HttpServletResponse;
  * @email 516195940@qq.com
  * @date 2017-03-23 15:38
  */
+@Slf4j
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private UserService userService;
+
     public static final String LOGIN_USER_KEY = "LOGIN_USER_KEY";
-    public static final String LOGIN_TOKEN_KEY = "X-Nideshop-Token";
+    public static final String LOGIN_TOKEN_KEY = "token";
 
 
     @Override
@@ -66,7 +77,16 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         //查询token信息
         TokenEntity tokenEntity = tokenService.queryByToken(token);
         if (tokenEntity == null) {
-            throw new ApiException("token失效，请重新登录", 401);
+            throw new ApiException("请先登录", 401);
+        }
+
+        if (handler instanceof HandlerMethod) {
+            Permission permissionAnnotation = ((HandlerMethod) handler).getMethodAnnotation(Permission.class);
+            UserEntity userEntity = userService.queryObject(tokenEntity.getUserId());
+            if (!Arrays.asList(permissionAnnotation.value()).contains(LEVEL_MAP.get(userEntity.getUserLevelId()))) {
+                log.info("user{}非法访问接口{}", userEntity.getNickname(), ((HandlerMethod) handler).getMethod().getName());
+                throw new ApiException("无权访问", 401);
+            }
         }
 
         //设置userId到request里，后续根据userId，获取用户信息

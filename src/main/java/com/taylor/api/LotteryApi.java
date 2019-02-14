@@ -5,10 +5,9 @@ import java.util.Map;
 
 import com.taylor.common.Query;
 import com.taylor.common.R;
-import com.taylor.entity.ParticipantEntity;
-import com.taylor.service.ParticipantService;
+import com.taylor.entity.LotteryEntity;
+import com.taylor.service.LotteryService;
 import com.taylor.utils.PageUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,22 +23,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019-02-13 18:52:15
  */
 @RestController
-@RequestMapping("participant")
-public class ParticipantController {
+@RequestMapping("lottery")
+public class LotteryApi  extends BaseApi{
     @Autowired
-    private ParticipantService participantService;
+    private LotteryService lotteryService;
 
     /**
      * 查看列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("participant:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<ParticipantEntity> participantList = participantService.queryList(query);
-        int total = participantService.queryTotal(query);
-        PageUtils pageUtil = new PageUtils(participantList, total, query.getLimit(), query.getPage());
+        List<LotteryEntity> lotteryList = lotteryService.queryList(query);
+        int total = lotteryService.queryTotal(query);
+        PageUtils pageUtil = new PageUtils(lotteryList, total, query.getLimit(), query.getPage());
         return R.ok().put("page", pageUtil);
     }
 
@@ -47,19 +45,17 @@ public class ParticipantController {
      * 查看信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("participant:info")
     public R info(@PathVariable("id") Long id) {
-        ParticipantEntity participant = participantService.queryObject(id);
-        return R.ok().put("participant", participant);
+        LotteryEntity lottery = lotteryService.queryObject(id);
+        return R.ok().put("lottery", lottery);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("participant:save")
-    public R save(@RequestBody ParticipantEntity participant) {
-        participantService.save(participant);
+    public R save(@RequestBody LotteryEntity lottery) {
+        lotteryService.save(lottery);
         return R.ok();
     }
 
@@ -67,9 +63,8 @@ public class ParticipantController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("participant:update")
-    public R update(@RequestBody ParticipantEntity participant) {
-        participantService.update(participant);
+    public R update(@RequestBody LotteryEntity lottery) {
+        lotteryService.update(lottery);
         return R.ok();
     }
 
@@ -77,9 +72,8 @@ public class ParticipantController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("participant:delete")
     public R delete(@RequestBody Long... ids) {
-        participantService.deleteBatch(ids);
+        lotteryService.deleteBatch(ids);
         return R.ok();
     }
 
@@ -88,7 +82,7 @@ public class ParticipantController {
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
-        List<ParticipantEntity> list = participantService.queryList(params);
+        List<LotteryEntity> list = lotteryService.queryList(params);
         return R.ok().put("list", list);
     }
 }

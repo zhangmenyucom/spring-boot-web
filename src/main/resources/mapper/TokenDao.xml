@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.platform.dao.TokenDao">
+<mapper namespace="com.taylor.dao.TokenDao">
 
-    <resultMap type="com.platform.entity.TokenEntity" id="tokenMap">
+    <resultMap type="com.taylor.entity.TokenEntity" id="tokenMap">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="token" column="token"/>
@@ -12,7 +12,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="queryObject" resultType="com.platform.entity.TokenEntity">
+    <select id="queryObject" resultType="com.taylor.entity.TokenEntity">
 		select
 			`id`,
 			`user_id`,
@@ -24,7 +24,7 @@
 		where id = #{id}
 	</select>
 
-    <select id="queryList" resultType="com.platform.entity.TokenEntity">
+    <select id="queryList" resultType="com.taylor.entity.TokenEntity">
         select
         `id`,
         `user_id`,
@@ -64,7 +64,7 @@
         </if>
     </select>
 
-    <insert id="save" parameterType="com.platform.entity.TokenEntity">
+    <insert id="save" parameterType="com.taylor.entity.TokenEntity">
 		insert into token(
 			`id`,
 			`user_id`,
@@ -81,7 +81,7 @@
 			#{updateTime})
 	</insert>
 
-    <update id="update" parameterType="com.platform.entity.TokenEntity">
+    <update id="update" parameterType="com.taylor.entity.TokenEntity">
         update token
         <set>
             <if test="userId != null">`user_id` = #{userId},</if>

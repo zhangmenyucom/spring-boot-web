@@ -8,7 +8,6 @@ import com.taylor.common.R;
 import com.taylor.entity.LotteryItemsEntity;
 import com.taylor.service.LotteryItemsService;
 import com.taylor.utils.PageUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("lotteryitems")
-public class LotteryItemsController {
+public class LotteryItemsApi  extends BaseApi {
     @Autowired
     private LotteryItemsService lotteryItemsService;
 
@@ -34,7 +33,6 @@ public class LotteryItemsController {
      * 查看列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("lotteryitems:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -48,7 +46,6 @@ public class LotteryItemsController {
      * 查看信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("lotteryitems:info")
     public R info(@PathVariable("id") Long id) {
         LotteryItemsEntity lotteryItems = lotteryItemsService.queryObject(id);
         return R.ok().put("lotteryItems", lotteryItems);
@@ -58,7 +55,6 @@ public class LotteryItemsController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("lotteryitems:save")
     public R save(@RequestBody LotteryItemsEntity lotteryItems) {
         lotteryItemsService.save(lotteryItems);
         return R.ok();
@@ -68,7 +64,6 @@ public class LotteryItemsController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("lotteryitems:update")
     public R update(@RequestBody LotteryItemsEntity lotteryItems) {
         lotteryItemsService.update(lotteryItems);
         return R.ok();
@@ -78,7 +73,6 @@ public class LotteryItemsController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("lotteryitems:delete")
     public R delete(@RequestBody Long[] ids) {
         lotteryItemsService.deleteBatch(ids);
         return R.ok();

@@ -5,10 +5,9 @@ import java.util.Map;
 
 import com.taylor.common.Query;
 import com.taylor.common.R;
-import com.taylor.entity.RewardItemsEntity;
-import com.taylor.service.RewardItemsService;
+import com.taylor.entity.LotteryRewardEntity;
+import com.taylor.service.LotteryRewardService;
 import com.taylor.utils.PageUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,22 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019-02-13 18:52:15
  */
 @RestController
-@RequestMapping("rewarditems")
-public class RewardItemsController {
+@RequestMapping("lotteryreward")
+public class LotteryRewardApi  extends BaseApi {
     @Autowired
-    private RewardItemsService rewardItemsService;
+    private LotteryRewardService lotteryRewardService;
 
     /**
      * 查看列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("rewarditems:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<RewardItemsEntity> rewardItemsList = rewardItemsService.queryList(query);
-        int total = rewardItemsService.queryTotal(query);
-        PageUtils pageUtil = new PageUtils(rewardItemsList, total, query.getLimit(), query.getPage());
+        List<LotteryRewardEntity> lotteryRewardList = lotteryRewardService.queryList(query);
+        int total = lotteryRewardService.queryTotal(query);
+        PageUtils pageUtil = new PageUtils(lotteryRewardList, total, query.getLimit(), query.getPage());
         return R.ok().put("page", pageUtil);
     }
 
@@ -48,19 +46,17 @@ public class RewardItemsController {
      * 查看信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("rewarditems:info")
     public R info(@PathVariable("id") Long id) {
-        RewardItemsEntity rewardItems = rewardItemsService.queryObject(id);
-        return R.ok().put("rewardItems", rewardItems);
+        LotteryRewardEntity lotteryReward = lotteryRewardService.queryObject(id);
+        return R.ok().put("lotteryReward", lotteryReward);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("rewarditems:save")
-    public R save(@RequestBody RewardItemsEntity rewardItems) {
-        rewardItemsService.save(rewardItems);
+    public R save(@RequestBody LotteryRewardEntity lotteryReward) {
+        lotteryRewardService.save(lotteryReward);
         return R.ok();
     }
 
@@ -68,9 +64,8 @@ public class RewardItemsController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("rewarditems:update")
-    public R update(@RequestBody RewardItemsEntity rewardItems) {
-        rewardItemsService.update(rewardItems);
+    public R update(@RequestBody LotteryRewardEntity lotteryReward) {
+        lotteryRewardService.update(lotteryReward);
         return R.ok();
     }
 
@@ -78,9 +73,8 @@ public class RewardItemsController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("rewarditems:delete")
     public R delete(@RequestBody Long... ids) {
-        rewardItemsService.deleteBatch(ids);
+        lotteryRewardService.deleteBatch(ids);
         return R.ok();
     }
 
@@ -89,7 +83,7 @@ public class RewardItemsController {
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
-        List<RewardItemsEntity> list = rewardItemsService.queryList(params);
+        List<LotteryRewardEntity> list = lotteryRewardService.queryList(params);
         return R.ok().put("list", list);
     }
 }
