@@ -1,12 +1,12 @@
-package com.taylor.controller;
+package com.taylor.api;
 
 import java.util.List;
 import java.util.Map;
 
 import com.taylor.common.Query;
 import com.taylor.common.R;
-import com.taylor.entity.ParticipantEntity;
-import com.taylor.service.ParticipantService;
+import com.taylor.entity.LotteryItemsEntity;
+import com.taylor.service.LotteryItemsService;
 import com.taylor.utils.PageUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
  * Controller
  *
@@ -24,22 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019-02-13 18:52:15
  */
 @RestController
-@RequestMapping("participant")
-public class ParticipantController {
+@RequestMapping("lotteryitems")
+public class LotteryItemsController {
     @Autowired
-    private ParticipantService participantService;
+    private LotteryItemsService lotteryItemsService;
 
     /**
      * 查看列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("participant:list")
+    @RequiresPermissions("lotteryitems:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<ParticipantEntity> participantList = participantService.queryList(query);
-        int total = participantService.queryTotal(query);
-        PageUtils pageUtil = new PageUtils(participantList, total, query.getLimit(), query.getPage());
+        List<LotteryItemsEntity> lotteryItemsList = lotteryItemsService.queryList(query);
+        int total = lotteryItemsService.queryTotal(query);
+        PageUtils pageUtil = new PageUtils(lotteryItemsList, total, query.getLimit(), query.getPage());
         return R.ok().put("page", pageUtil);
     }
 
@@ -47,19 +48,19 @@ public class ParticipantController {
      * 查看信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("participant:info")
+    @RequiresPermissions("lotteryitems:info")
     public R info(@PathVariable("id") Long id) {
-        ParticipantEntity participant = participantService.queryObject(id);
-        return R.ok().put("participant", participant);
+        LotteryItemsEntity lotteryItems = lotteryItemsService.queryObject(id);
+        return R.ok().put("lotteryItems", lotteryItems);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("participant:save")
-    public R save(@RequestBody ParticipantEntity participant) {
-        participantService.save(participant);
+    @RequiresPermissions("lotteryitems:save")
+    public R save(@RequestBody LotteryItemsEntity lotteryItems) {
+        lotteryItemsService.save(lotteryItems);
         return R.ok();
     }
 
@@ -67,9 +68,9 @@ public class ParticipantController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("participant:update")
-    public R update(@RequestBody ParticipantEntity participant) {
-        participantService.update(participant);
+    @RequiresPermissions("lotteryitems:update")
+    public R update(@RequestBody LotteryItemsEntity lotteryItems) {
+        lotteryItemsService.update(lotteryItems);
         return R.ok();
     }
 
@@ -77,9 +78,9 @@ public class ParticipantController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("participant:delete")
-    public R delete(@RequestBody Long... ids) {
-        participantService.deleteBatch(ids);
+    @RequiresPermissions("lotteryitems:delete")
+    public R delete(@RequestBody Long[] ids) {
+        lotteryItemsService.deleteBatch(ids);
         return R.ok();
     }
 
@@ -88,7 +89,7 @@ public class ParticipantController {
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
-        List<ParticipantEntity> list = participantService.queryList(params);
+        List<LotteryItemsEntity> list = lotteryItemsService.queryList(params);
         return R.ok().put("list", list);
     }
 }

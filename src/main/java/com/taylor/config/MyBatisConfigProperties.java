@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author Taylor
+ */
 @Data
 @ConfigurationProperties(prefix = MybatisProperties.MYBATIS_PREFIX)
 public class MyBatisConfigProperties {

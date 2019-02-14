@@ -14,7 +14,6 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 @Configuration
 @AutoConfigureAfter(MyBatisConfig.class)
 public class MyBatisMapperScannerConfig {
-
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
@@ -22,5 +21,4 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setBasePackage("com.taylor.dao");
         return mapperScannerConfigurer;
     }
-
 }

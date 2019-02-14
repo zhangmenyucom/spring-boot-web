@@ -19,15 +19,6 @@ public class BaseEntity {
      * 主键id
      **/
     private Long id;
-    /**
-     * 商户id
-     **/
-    private Long merchantId;
-
-    /**
-     * 门店id
-     **/
-    private Long storeId;
 
     /**
      * 创建时间
