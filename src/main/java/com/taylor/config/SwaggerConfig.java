@@ -24,7 +24,7 @@ public class SwaggerConfig {
 
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("二朗金金有限责任公司")
+                .title("二郎金金有限责任公司")
                 .description("抽奖小程序")
                 .contact(new Contact("Taylor",null,null))
                 .version("版本号:1.0")

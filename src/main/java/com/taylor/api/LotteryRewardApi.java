@@ -3,6 +3,7 @@ package com.taylor.api;
 import java.util.List;
 import java.util.Map;
 
+import com.taylor.annotation.IgnoreAuth;
 import com.taylor.common.Query;
 import com.taylor.common.R;
 import com.taylor.entity.LotteryRewardEntity;
@@ -81,6 +82,7 @@ public class LotteryRewardApi  extends BaseApi {
     /**
      * 查看所有列表
      */
+    @IgnoreAuth
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
         List<LotteryRewardEntity> list = lotteryRewardService.queryList(params);

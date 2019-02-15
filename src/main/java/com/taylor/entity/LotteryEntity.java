@@ -31,6 +31,10 @@ public class LotteryEntity extends BaseEntity implements Serializable {
      **/
     private String title;
     /**
+     * 图片
+     **/
+    private String picUrl;
+    /**
      * 活动描述
      **/
     private String description;
