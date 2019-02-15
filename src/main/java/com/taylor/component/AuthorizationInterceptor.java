@@ -82,10 +82,12 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         if (handler instanceof HandlerMethod) {
             Permission permissionAnnotation = ((HandlerMethod) handler).getMethodAnnotation(Permission.class);
-            UserEntity userEntity = userService.queryObject(tokenEntity.getUserId());
-            if (!Arrays.asList(permissionAnnotation.value()).contains(LEVEL_MAP.get(userEntity.getUserLevelId()))) {
-                log.info("user{}非法访问接口{}", userEntity.getNickname(), ((HandlerMethod) handler).getMethod().getName());
-                throw new ApiException("无权访问", 401);
+            if (permissionAnnotation != null) {
+                UserEntity userEntity = userService.queryObject(tokenEntity.getUserId());
+                if (!Arrays.asList(permissionAnnotation.value()).contains(LEVEL_MAP.get(userEntity.getUserLevelId()))) {
+                    log.info("user{}非法访问接口{}", userEntity.getNickname(), ((HandlerMethod) handler).getMethod().getName());
+                    throw new ApiException("无权访问", 401);
+                }
             }
         }
 

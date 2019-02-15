@@ -81,6 +81,11 @@
 			#{updateTime})
 	</insert>
 
+    <select id="queryByToken" resultType="com.taylor.entity.TokenEntity">
+        select * from token
+        where  token = #{token}
+    </select>
+
     <update id="update" parameterType="com.taylor.entity.TokenEntity">
         update token
         <set>

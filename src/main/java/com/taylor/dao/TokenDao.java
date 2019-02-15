@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TokenDao extends BaseDao<TokenEntity> {
 
-    TokenEntity queryByToken(String token);
+    TokenEntity queryByToken(@Param("token") String token);
 
     TokenEntity queryByUserId(@Param("userId") Long userId);
 }
